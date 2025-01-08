@@ -31,10 +31,19 @@
         <!-- Header -->
         <div class="row">
             <div class="col-12 header">
-                <%@ include file="../common/smallheader.jsp" %>
+                <%@ include file="../common/header.jsp" %>
             </div>
         </div>
         <div class="row">
+            <div class="col-15 header">
+                <%@ include file="../common/headermenu.jsp" %>
+            </div>
+        </div>
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 sidebar">
+                <%@ include file="side.jsp" %>
+            </div>
             <!-- Main Content -->
             <div class="col-md-9 content">
                 <jsp:include page="${body}" />
@@ -43,7 +52,7 @@
         <!-- Footer -->
         <div class="row">
             <div class="col-12 footer">
-                <%@ include file="../common/smallfooter.jsp" %>
+                <%@ include file="../common/footer.jsp" %>
             </div>
         </div>
     </div>
