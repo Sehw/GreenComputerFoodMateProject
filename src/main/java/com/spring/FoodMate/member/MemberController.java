@@ -1,4 +1,4 @@
-package com.spring.FoodMate.mypage;
+package com.spring.FoodMate.member;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,10 +14,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
-public class MypageController {
-	private static final Logger logger = LoggerFactory.getLogger(MypageController.class);
-	
-	@RequestMapping(value="/mypage/*Form.do", method=RequestMethod.GET)
+public class MemberController {
+	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
+
+	@RequestMapping(value="/member/*Form.do", method=RequestMethod.GET)
 	private ModelAndView form(@RequestParam(value="result", required=false) String result, @RequestParam(value="action",required=false) String action, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = getViewName(request);
 		HttpSession session = request.getSession();
@@ -25,9 +25,8 @@ public class MypageController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("result",result);
 		mav.setViewName("common/layout");
-		mav.addObject("showHeadermenu", true);
-		mav.addObject("showSidebar",true);
-		mav.addObject("sidebar","/WEB-INF/views/mypage/side.jsp");
+		mav.addObject("smallHeader", true);
+		mav.addObject("smallFooter", true);
 		mav.addObject("title", "푸드 메이트");
 		mav.addObject("body", "/WEB-INF/views" + viewName + ".jsp");
 		return mav;
@@ -62,5 +61,4 @@ public class MypageController {
 		}
 		return fileName;
 	}
-
 }

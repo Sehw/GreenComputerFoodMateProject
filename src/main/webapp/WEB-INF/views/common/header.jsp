@@ -44,7 +44,7 @@
         		</c:when>
         		<c:otherwise>
         			<a href="${contextPath}/member/loginForm.do" class="btn"><i class="fas fa-user"></i></a>
-        			<a href="${contextPath}/member/loginForm.do" class="btn"><i class="fas fa-pen"></i></a>
+        			<a href="${contextPath}/mypage/mypageForm.do" class="btn"><i class="fas fa-pen"></i></a>
         			<a href="${contextPath}/member/loginForm.do" class="btn"><i class="fas fa-cart-shopping"></i></a>
         		</c:otherwise>
         	</c:choose>
