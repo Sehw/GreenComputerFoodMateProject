@@ -23,7 +23,7 @@
 </head>
 <div class="container-fluid bg-green2 text-white py-3 d-flex align-items-center justify-content-between shadow-sm">
     <div class="d-flex justify-content-center gap-5 flex-grow-1">
-        <h3><a href="#">추천</a></h3>
+        <h3><a href="${contextPath}/main.do">추천</a></h3>
         <h3><a href="#">분류</a></h3>
         <h3><a href="#">상품 구매</a></h3>
         <h3><a href="#">커뮤니티</a></h3>

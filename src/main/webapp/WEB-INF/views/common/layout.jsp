@@ -61,7 +61,7 @@
         <div class="row">
             <c:if test="${showSidebar}">
             	<!-- Sidebar -->
-	            <div class="col-md-3 sidebar">
+	            <div class="col-md-2 sidebar">
 	            	<jsp:include page="${sidebar}" />
 	            </div>
             </c:if>

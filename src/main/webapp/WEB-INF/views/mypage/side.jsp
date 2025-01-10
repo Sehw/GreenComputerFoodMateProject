@@ -18,27 +18,60 @@
             border-right: 1px solid #ddd;
         }
         .sidebar h3 {
-            color: #007bff;
+            color: #74b243;
             font-weight: bold;
             margin-bottom: 20px;
         }
         .sidebar a {
             display: block;
             margin: 10px 0;
-            color: #007bff;
+            color: #87c058;
             text-decoration: none;
         }
         .sidebar a:hover {
-            color: #0056b3;
+            color: #87c058;
             text-decoration: underline;
         }
     </style>
 <body>
     <div class="sidebar">
-        <h3>사이드 메뉴</h3>
-        <a href="${contextPath}/member/listMembers.do">회원 관리</a>
-        <a href="${contextPath}/board/listArticles.do">게시판 관리</a>
-        <a href="#">상품 관리</a>
+        <h3>마이페이지</h3>
+        <hr>
+        <h5>메이트관리</h5>
+        <ul>
+	        <li><a href="#">내 레시피</a></li>
+	        <li><a href="#">레시피 리뷰</a></li>
+	        <li><a href="#">내 게시글</a></li>
+	        <li><a href="#">내 댓글</a></li>
+	        <li><a href="#">쇼핑 리뷰</a></li>
+        </ul>
+        <hr>
+        <h5>내 정보관리</h5>
+        <ul>
+	        <li><a href="#">프로필 수정</a></li>
+	        <li><a href="#">회원정보 수정</a></li>
+	        <li><a href="#">배송지 관리</a>
+        </ul>
+        <hr>
+        <h5>쇼핑 관리</h5>
+        <ul>
+	        <li><a href="#">주문목록/배송조회</a></li>
+	        <li><a href="#">취소/반품/교환 내역</a></li>
+	        <li><a href="#">환불/입금 내역</a></li>
+	        <li><a href="#">찜리스트</a></li>
+        </ul>
+        <hr>
+        <h5>혜택관리</h5>
+        <ul>
+	        <li><a href="#">쿠폰</a></li>
+	        <li><a href="#">포인트</a></li>
+        </ul>
+        <hr>
+        <h5>고객센터</h5>
+        <ul>
+	        <li><a href="#">1:1 문의</a></li>
+	        <li><a href="#">회원 탈퇴</a></li>
+        </ul>
     </div>
 </body>
 </html>
