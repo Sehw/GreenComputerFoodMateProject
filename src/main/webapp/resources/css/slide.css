@@ -43,3 +43,15 @@
     box-sizing: border-box;
     padding: 5px 10px; /* 내부 여백 추가 */
 }
+
+.grid_container {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	gap: 30px;
+}
+
+.grid-item img {
+	width: 100%;
+	height: 350px;
+	object-fit: cover;
+}

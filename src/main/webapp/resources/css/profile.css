@@ -1,0 +1,63 @@
+@charset "UTF-8";
+.mainbox {
+  background-color: #ecf0f3;
+  width: 100%;
+  text-align: center;
+  padding: 3rem 1.5rem;
+  margin: auto;
+  border-radius: 10%;
+}
+.subbox {
+  background-color: #ecf0f3;
+  border-radius: 1rem;
+  width: 13.5rem;
+  border: 2px solid none;
+  margin: 0 auto;
+  padding: 1.5rem;
+  box-shadow: 2px 3px 5px 0px rgba(126, 125, 125, 0.8);
+}
+
+.header-left {
+  text-align: start;
+  display: flex;
+  justify-content: space-between;
+}
+.header-right {
+  text-align: end;
+}
+
+.name_icon_btn img {
+  margin-top: -1.3rem;
+  width: 5em;
+  height: 5em;
+  border-radius: 50%;
+  border: 10px solid #e5edede1;
+  box-shadow: 2px 3px 5px 0px rgba(126, 125, 125, 0.8);
+}
+
+.name_icon_btn p {
+  margin: 5px;
+}
+.name_icon_btn p:nth-child(2) {
+  font-weight: bold;
+}
+.name_icon_btn i {
+  font-size: 1.2rem;
+  box-shadow: 2px 3px 5px 0px rgba(126, 125, 125, 0.8);
+  border: 3px solid none;
+  margin: 0.3rem;
+  border-radius: 50%;
+  padding: 0.7rem;
+  text-align: center;
+}
+
+.name_icon_btn button {
+  background-color: #ecf0f3;
+  padding: 0.8rem 1rem;
+  margin: 1rem 0.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  box-shadow: 2px 3px 5px 0px rgba(126, 125, 125, 0.8);
+}
+
+

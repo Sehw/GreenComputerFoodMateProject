@@ -22,6 +22,10 @@
             font-weight: bold;
             margin-bottom: 20px;
         }
+        .sidebar h3 a {
+		    color: #74b243; /* 기본 텍스트 색상 */
+		    text-decoration: none; /* 링크의 밑줄 제거 */
+		}
         .sidebar a {
             display: block;
             margin: 10px 0;
@@ -35,13 +39,12 @@
     </style>
 <body>
     <div class="sidebar">
-        <h3>마이페이지</h3>
+        <h3><a href="${contextPath}/mypage/mypageForm.do">마이페이지</a></h3>
         <hr>
         <h5>메이트관리</h5>
         <ul>
-	        <li><a href="#">내 레시피</a></li>
+	        <li><a href="${contextPath}/mypage/myrecipeForm.do">내 레시피</a></li>
 	        <li><a href="#">레시피 리뷰</a></li>
-	        <li><a href="#">내 게시글</a></li>
 	        <li><a href="#">내 댓글</a></li>
 	        <li><a href="#">쇼핑 리뷰</a></li>
         </ul>
