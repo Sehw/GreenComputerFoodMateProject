@@ -43,37 +43,37 @@
         <hr>
         <h5>메이트관리</h5>
         <ul>
-	        <li><a href="${contextPath}/mypage/myrecipeForm.do">내 레시피</a></li>
-	        <li><a href="#">레시피 리뷰</a></li>
-	        <li><a href="#">내 댓글</a></li>
-	        <li><a href="#">쇼핑 리뷰</a></li>
+	        <li><a href="${contextPath}/mypage/mateManage/myrecipeForm.do">내 레시피</a></li>
+	        <li><a href="${contextPath}/mypage/mateManage/myrecipereviewForm.do">레시피 리뷰</a></li>
+	        <li><a href="${contextPath}/mypage/mateManage/mycommentForm.do">내 댓글</a></li>
+	        <li><a href="${contextPath}/mypage/mateManage/myrShoppingReviewForm.do">쇼핑 리뷰</a></li>
         </ul>
         <hr>
         <h5>내 정보관리</h5>
         <ul>
-	        <li><a href="#">프로필 수정</a></li>
-	        <li><a href="#">회원정보 수정</a></li>
-	        <li><a href="#">배송지 관리</a>
+	        <li><a href="${contextPath}/mypage/myInfoManage/profileEditForm.do">프로필 수정</a></li>
+	        <li><a href="${contextPath}/mypage/myInfoManage/memberEditForm.do">회원정보 수정</a></li>
+	        <li><a href="${contextPath}/mypage/myInfoManage/deliveryManageForm.do">배송지 관리</a>
         </ul>
         <hr>
         <h5>쇼핑 관리</h5>
         <ul>
-	        <li><a href="#">주문목록/배송조회</a></li>
-	        <li><a href="#">취소/반품/교환 내역</a></li>
-	        <li><a href="#">환불/입금 내역</a></li>
-	        <li><a href="#">찜리스트</a></li>
+	        <li><a href="${contextPath}/mypage/ShoppingManage/orderdeliverylistMangeForm.do">주문목록/배송조회</a></li>
+	        <li><a href="${contextPath}/mypage/ShoppingManage/canclelistManageForm.do">취소/반품/교환 내역</a></li>
+	        <li><a href="${contextPath}/mypage/ShoppingManage/refundManageForm.do">환불/입금 내역</a></li>
+	        <li><a href="${contextPath}/mypage/ShoppingManage/favoriteManageForm.do">찜리스트</a></li>
         </ul>
         <hr>
         <h5>혜택관리</h5>
         <ul>
-	        <li><a href="#">쿠폰</a></li>
-	        <li><a href="#">포인트</a></li>
+	        <li><a href="${contextPath}/mypage/pointManage/couponeManageForm.do">쿠폰</a></li>
+	        <li><a href="${contextPath}/mypage/pointManage/pointManageForm.do">포인트</a></li>
         </ul>
         <hr>
         <h5>고객센터</h5>
         <ul>
-	        <li><a href="#">1:1 문의</a></li>
-	        <li><a href="#">회원 탈퇴</a></li>
+	        <li><a href="${contextPath}/mypage/customerManage/inquiryListForm.do">1:1 문의</a></li>
+	        <li><a href="${contextPath}/mypage/customerManage/cancleAccountForm.do">회원 탈퇴</a></li>
         </ul>
     </div>
 </body>

@@ -11,7 +11,7 @@
 <body>
 <div class="container mt-1">
 	<div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
-      		<h5 class="mb-0 fw-bold">내 레시피</h5>
+      		<h5 class="mb-0 fw-bold">프로필 수정</h5>
     </div>
 </div>
 </body>

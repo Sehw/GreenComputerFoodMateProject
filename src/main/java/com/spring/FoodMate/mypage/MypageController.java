@@ -17,8 +17,88 @@ import org.springframework.web.servlet.ModelAndView;
 public class MypageController {
 	private static final Logger logger = LoggerFactory.getLogger(MypageController.class);
 	
-	@RequestMapping(value="/mypage/*Form.do", method=RequestMethod.GET)
-	private ModelAndView form(@RequestParam(value="result", required=false) String result, @RequestParam(value="action",required=false) String action, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	@RequestMapping(value="/mypage/mypageForm.do", method=RequestMethod.GET)
+	private ModelAndView mypageform(@RequestParam(value="result", required=false) String result, @RequestParam(value="action",required=false) String action, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = getViewName(request);
+		HttpSession session = request.getSession();
+		session.setAttribute("action", action);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("result",result);
+		mav.setViewName("common/layout");
+		mav.addObject("showHeadermenu", true);
+		mav.addObject("showSidebar",true);
+		mav.addObject("sidebar","/WEB-INF/views/mypage/side.jsp");
+		mav.addObject("title", "푸드 메이트");
+		mav.addObject("body", "/WEB-INF/views" + viewName + ".jsp");
+		return mav;
+	}
+	
+	@RequestMapping(value="/mypage/mateManage/*Form.do", method=RequestMethod.GET)
+	private ModelAndView mateManageform(@RequestParam(value="result", required=false) String result, @RequestParam(value="action",required=false) String action, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = getViewName(request);
+		HttpSession session = request.getSession();
+		session.setAttribute("action", action);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("result",result);
+		mav.setViewName("common/layout");
+		mav.addObject("showHeadermenu", true);
+		mav.addObject("showSidebar",true);
+		mav.addObject("sidebar","/WEB-INF/views/mypage/side.jsp");
+		mav.addObject("title", "푸드 메이트");
+		mav.addObject("body", "/WEB-INF/views" + viewName + ".jsp");
+		return mav;
+	}
+	
+	@RequestMapping(value="/mypage/myInfoManage/*Form.do", method=RequestMethod.GET)
+	private ModelAndView myInfoManageform(@RequestParam(value="result", required=false) String result, @RequestParam(value="action",required=false) String action, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = getViewName(request);
+		HttpSession session = request.getSession();
+		session.setAttribute("action", action);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("result",result);
+		mav.setViewName("common/layout");
+		mav.addObject("showHeadermenu", true);
+		mav.addObject("showSidebar",true);
+		mav.addObject("sidebar","/WEB-INF/views/mypage/side.jsp");
+		mav.addObject("title", "푸드 메이트");
+		mav.addObject("body", "/WEB-INF/views" + viewName + ".jsp");
+		return mav;
+	}
+	
+	@RequestMapping(value="/mypage/pointManage/*Form.do", method=RequestMethod.GET)
+	private ModelAndView pointManageform(@RequestParam(value="result", required=false) String result, @RequestParam(value="action",required=false) String action, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = getViewName(request);
+		HttpSession session = request.getSession();
+		session.setAttribute("action", action);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("result",result);
+		mav.setViewName("common/layout");
+		mav.addObject("showHeadermenu", true);
+		mav.addObject("showSidebar",true);
+		mav.addObject("sidebar","/WEB-INF/views/mypage/side.jsp");
+		mav.addObject("title", "푸드 메이트");
+		mav.addObject("body", "/WEB-INF/views" + viewName + ".jsp");
+		return mav;
+	}
+	
+	@RequestMapping(value="/mypage/ShoppingManage/*Form.do", method=RequestMethod.GET)
+	private ModelAndView ShoppingManageform(@RequestParam(value="result", required=false) String result, @RequestParam(value="action",required=false) String action, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = getViewName(request);
+		HttpSession session = request.getSession();
+		session.setAttribute("action", action);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("result",result);
+		mav.setViewName("common/layout");
+		mav.addObject("showHeadermenu", true);
+		mav.addObject("showSidebar",true);
+		mav.addObject("sidebar","/WEB-INF/views/mypage/side.jsp");
+		mav.addObject("title", "푸드 메이트");
+		mav.addObject("body", "/WEB-INF/views" + viewName + ".jsp");
+		return mav;
+	}
+	
+	@RequestMapping(value="/mypage/customerManage/*Form.do", method=RequestMethod.GET)
+	private ModelAndView customerManageform(@RequestParam(value="result", required=false) String result, @RequestParam(value="action",required=false) String action, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = getViewName(request);
 		HttpSession session = request.getSession();
 		session.setAttribute("action", action);
