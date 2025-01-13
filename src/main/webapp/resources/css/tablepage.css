@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+.pagination .page-item .page-link {
+	color: black; /* 기본 글자 색상 */
+	border: 1px solid #ddd; /* 기본 테두리 */
+}
+		
+.pagination .page-item.active .page-link {
+	color: red; /* 활성화된 페이지 색상 */
+	background-color: #fff; /* 배경색 */
+	border-color: red; /* 활성화된 테두리 색상 */
+}
+		
+.pagination .page-item .page-link:hover {
+	background-color: #f8f9fa; /* 마우스 오버 배경색 */
+	color: red; /* 마우스 오버 글자 색상 */
+}
+
+.text-truncate-multiline {
+	display: -webkit-box; /* Flexbox로 텍스트 블록 설정 */
+	-webkit-line-clamp: 2; /* 최대 두 줄까지 표시 */
+	-webkit-box-orient: vertical; /* 수직 방향 박스 설정 */
+	overflow: hidden; /* 넘치는 텍스트 숨기기 */
+	text-overflow: ellipsis; /* 말줄임표 표시 */
+	max-height: 3em; /* 최대 높이 (2줄 기준, line-height와 조정) */
+	line-height: 1.5em; /* 줄 간격 */
+}
+		
+.review-cell {
+	position: relative;
+}
+		
+.review-cell img {
+	float: left; /* 이미지를 왼쪽으로 정렬 */
+	margin-right: 10px; /* 텍스트와 이미지 간의 간격 */
+	width: 50px;
+	height: 50px;
+	object-fit: cover;
+	border-radius: 5px;
+}
+		
+.review-cell {
+	overflow: hidden; /* 셀 높이를 텍스트와 이미지에 맞게 조정 */
+}

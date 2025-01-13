@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>주문목록/배송조회</title>
+<title>취소/반품/교환 신청</title>
 <link href="<c:url value="/resources/css/tablepage.css" />" rel="stylesheet">
 <style>
 		.table-custom {
@@ -36,10 +36,10 @@
 </head>
 <body>
 <div class="container mt-1">
-	<div class="d-flex align-items-center border-bottom pb-2 mb-3">
-      		<h5 class="mb-0 fw-bold">주문목록/배송조회</h5>
+	<div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
+      		<h5 class="mb-0 fw-bold">취소/반품/교환 신청</h5>
     </div>
-    <div class="border p-4 rounded mb-3" style="margin: 0 auto;">
+        <div class="border p-4 rounded mb-3" style="margin: 0 auto;">
     	<div class="d-flex align-items-center gap-3 flex-wrap">
     		<p class="mb-0 align-self-center">조회기간</p>
     		<div class="btn-group" role="group" aria-label="data filter buttons">
@@ -68,7 +68,7 @@
 				<td>상품명/옵션</td>
 				<td>상품금액/수량</td>
 				<td>주문상태</td>
-				<td>확인/리뷰</td>
+				<td>신청하기</td>
 			</tr>
 		</thead>
       	<tbody>
@@ -83,8 +83,9 @@
           <td>상품 준비중</td>
           <td>
             <div class="d-flex flex-column gap-1">
-		    	<button class="btn btn-outline-secondary btn-sm" disabled>배송조회</button>
-		    	<button class="btn btn-outline-success btn-sm" disabled>리뷰하기</button>
+		    	<button class="btn btn-outline-secondary btn-sm" disabled>취소하기</button>
+		    	<button class="btn btn-outline-secondary btn-sm" disabled>반품신청</button>
+		    	<button class="btn btn-outline-secondary btn-sm" disabled>교환신청</button>
 		  	</div>
           </td>
         </tr>
@@ -99,13 +100,17 @@
           <td>상품 준비중</td>
           <td>
             <div class="d-flex flex-column gap-1">
-		    	<button class="btn btn-outline-secondary btn-sm" disabled>배송조회</button>
-		    	<button class="btn btn-outline-success btn-sm" disabled>리뷰하기</button>
+		    	<button class="btn btn-outline-secondary btn-sm" disabled>취소하기</button>
+		    	<button class="btn btn-outline-secondary btn-sm" disabled>반품신청</button>
+		    	<button class="btn btn-outline-secondary btn-sm" disabled>교환신청</button>
 		  	</div>
           </td>
         </tr>
 		</tbody>
 	</table>
+	<div class="text-end">
+	  <a href="${contextPath}/mypage/ShoppingManage/canclelistManageForm.do" class="btn btn-dark">내역보기</a>
+	</div>
 	<nav aria-label="Page navigation">
 	  <ul class="pagination justify-content-center">
 	    <li class="page-item">

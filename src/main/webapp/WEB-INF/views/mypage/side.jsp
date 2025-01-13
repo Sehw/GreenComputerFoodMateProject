@@ -46,7 +46,7 @@
 	        <li><a href="${contextPath}/mypage/mateManage/myrecipeForm.do">내 레시피</a></li>
 	        <li><a href="${contextPath}/mypage/mateManage/myrecipereviewForm.do">레시피 리뷰</a></li>
 	        <li><a href="${contextPath}/mypage/mateManage/mycommentForm.do">내 댓글</a></li>
-	        <li><a href="${contextPath}/mypage/mateManage/myrShoppingReviewForm.do">쇼핑 리뷰</a></li>
+	        <li><a href="${contextPath}/mypage/mateManage/myShoppingReviewForm.do">쇼핑 리뷰</a></li>
         </ul>
         <hr>
         <h5>내 정보관리</h5>
@@ -61,7 +61,7 @@
 	        <li><a href="${contextPath}/mypage/ShoppingManage/orderdeliverylistMangeForm.do">주문목록/배송조회</a></li>
 	        <li><a href="${contextPath}/mypage/ShoppingManage/canclelistManageForm.do">취소/반품/교환 내역</a></li>
 	        <li><a href="${contextPath}/mypage/ShoppingManage/refundManageForm.do">환불/입금 내역</a></li>
-	        <li><a href="${contextPath}/mypage/ShoppingManage/favoriteManageForm.do">찜리스트</a></li>
+	        <li><a href="${contextPath}/mypage/ShoppingManage/favoriteManageForm.do">찜 리스트</a></li>
         </ul>
         <hr>
         <h5>혜택관리</h5>

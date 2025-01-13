@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>내 댓글</title>
+<title>내 레시피</title>
 <link href="<c:url value="/resources/css/tablepage.css" />" rel="stylesheet">
 <style>
 		.table-custom {
@@ -28,46 +28,44 @@
 	      vertical-align: middle;
 	      text-align: center;
 	    }
-	    
-	    th:first-child, td:first-child {
-		    width: 10%; /* 첫 번째 열의 폭을 10%로 설정 */
-		}
 </style>
 </head>
 <body>
 <div class="container mt-1">
 	<div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
-      		<h5 class="mb-0 fw-bold">내 댓글</h5>
+      		<h5 class="mb-0 fw-bold">쇼핑 리뷰</h5>
     </div>
 	<table class="table table-hover table-custom">
 		<thead class="table-header table-secondary">
 			<tr>
-				<td>게시글</td>
-				<td>댓글</td>
+				<td>리뷰</td>
+				<td>별점</td>
 				<td>작성날짜</td>
 				<td>바로가기</td>
 			</tr>
 		</thead>
       	<tbody>
       	<tr>
-      	  <td>바질 파스타</td>
           <td class="review-cell">
+          	<img src="${contextPath}/resources/images/Shopping/shoppingpot.jpg" alt="냄비" class="img-fluid rounded" style="width: 50px; height: 50px; object-fit: cover;">
           	<span class="text-truncate-multiline">
-          		맛있는 레시피 공유해줘서 감사해요.
+          		큰 기대를 가지고 샀는데, 처음 몇 번은 정말 재미있고 편리하게 사용했어요. 하지만 시간이 지나면서 모든 요리에 적용하기에는 약간 한계가 느껴졌습니다. 그래도 요리를 자주 하고 다양한 메뉴를 시도하는 분들에겐 괜찮은 선택이 될 것 같아요.
           	</span>
           </td>
+          <td>⭐⭐⭐</td>
           <td>2024-12-24 16:16:13</td>
           <td>
             <button class="btn btn-outline-secondary btn-sm" disabled>바로가기</button>
           </td>
         </tr>
         <tr>
-          <td>만두</td>
           <td class="review-cell">
+          	<img src="${contextPath}/resources/images/Shopping/shoppingflipper.jpg" alt="뒤집개" class="img-fluid rounded" style="width: 50px; height: 50px; object-fit: cover;">
           	<span class="text-truncate-multiline">
-          		만두가 너무어렵긴하네요 고생하셨습니다.
+          		트루쿡 자이언트 계란말이팬과 뒤집개는 대용량 요리나 특별한 요리를 자주 하는 분들에겐 유용한 제품이지만, 일상적인 소량 요리에 사용하기엔 조금 부담스럽습니다. 팬의 크기와 뒤집개의 활용성은 분명 장점이지만, 크기와 보관의 불편함이 단점으로 다가올 수 있습니다.
           	</span>
           </td>
+          <td>⭐⭐⭐⭐</td>
           <td>2024-12-24 16:16:13</td>
           <td>
             <button class="btn btn-outline-secondary btn-sm" disabled>바로가기</button>

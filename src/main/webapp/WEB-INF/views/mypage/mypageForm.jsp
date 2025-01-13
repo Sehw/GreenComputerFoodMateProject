@@ -32,19 +32,20 @@
 			right: 40px;
 		    z-index: 1;
 		}
-	/* 헤더 배경색 */
-    .table-header {
-      background-color: #33ff00; /* 밝은 녹색 */
-      color: #000; /* 텍스트 색상 */
-    }
-    .table-header th {
-      text-align: center;
-    }
-    /* 내용 텍스트 정렬 */
-    .table tbody td {
-      vertical-align: middle;
-      text-align: center;
-    }
+		.table-custom {
+		    border-top: 2px solid #000 !important;
+	 	 }
+		/* 헤더 배경색 */
+	    .table-header {
+		  background-color: #f8f9fa;
+	      text-align: center;
+	      font-weight: bold;
+	    }
+	    /* 내용 텍스트 정렬 */
+	    .table tbody td {
+	      vertical-align: middle;
+	      text-align: center;
+	    }
 </style>
 <script>
         $(document).ready(function() {
@@ -62,7 +63,7 @@
 <body>
 	<div class="container mt-2">
 		<div class="row">
-			<div class="col-md-3">
+			<div class="col-md-3 mt-3">
 				<div class="mainbox">
 					<div class="name_icon_btn">
 						<img src="${contextPath}/resources/images/profile_09.png" alt="" />
@@ -145,11 +146,12 @@
 				</div>
 			</div>
 		</div>
-	  <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
-      		<h5 class="mb-0 fw-bold">최근 주문 내역</h5>
+	  <div class="d-flex justify-content-between align-items-center mt-2 mb-2">
+	  		<h5 class="mb-0 fw-bold">최근 주문 내역</h5>
+	  		<p class="mb-0">더보기
       </div>
-      <table class="table table-bordered">
-		<thead class="table-header">
+      <table class="table table-hover table-custom">
+		<thead class="table-header table-secondary">
 			<tr>
 				<td>주문번호</td>
 				<td>주문일자</td>
@@ -162,39 +164,85 @@
       	<tr>
           <td>400</td>
           <td>2024-12-24 16:16:13</td>
-          <td>초보자를 위한 자바 프로그래밍 / 1개</td>
-          <td>주문취소</td>
+          <td>돼지고기 뒷다리살</td>
+          <td>상품준비중</td>
           <td>
             <button class="btn btn-outline-secondary btn-sm" disabled>주문 취소</button>
           </td>
-          </tr>
+        </tr>
+        <tr>
+          <td>401</td>
+          <td>2024-12-24 16:16:13</td>
+          <td>돼지고기 앞다리살</td>
+          <td>상품준비중</td>
+          <td>
+            <button class="btn btn-outline-secondary btn-sm" disabled>주문 취소</button>
+          </td>
+        </tr>
 		</tbody>
 	</table>
-	<div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
+	<div class="d-flex justify-content-between align-items-center mb-2">
       		<h5 class="mb-0 fw-bold">찜 목록</h5>
+      		<p class="mb-0">더보기
       </div>
-      <table class="table table-bordered">
-		<thead class="table-header">
+      <table class="table table-hover table-custom">
+		<thead class="table-header table-primary">
 			<tr>
-				<td>주문번호</td>
-				<td>주문일자</td>
-				<td>주문상품</td>
-				<td>주문상태</td>
-				<td>주문취소</td>
+				<td><input type="checkbox" id="checkAll"></td>
+				<td>상품명/옵션</td>
+				<td>상품금액/수량</td>
+				<td>혜택</td>
+				<td>주문</td>
 			</tr>
 		</thead>
       	<tbody>
       	<tr>
-          <td>400</td>
-          <td>2024-12-24 16:16:13</td>
-          <td>초보자를 위한 자바 프로그래밍 / 1개</td>
-          <td>주문취소</td>
+          <td><input type="checkbox" id="check1"></td>
           <td>
-            <button class="btn btn-outline-secondary btn-sm" disabled>주문 취소</button>
+          <img src="${contextPath}/resources/images/Shopping/pig.jpg" alt="돼지고기" class="img-fluid rounded" style="width: 50px; height: 50px; object-fit: cover;">
+          돼지고기 뒷다리살 400g
           </td>
-          </tr>
+          <td>
+            <div class="d-flex flex-column gap-1 align-items-center">
+		    	<span>10,900 / 1개</span>
+		    	<button class="btn btn-outline-secondary btn-sm " style="width:120px;" disabled>옵션/수량변경</button>
+		  	</div>
+          </td>
+          <td>적립<br>
+          상품 + 199원</td>
+          <td>
+          <div class="d-flex flex-column gap-1 align-items-center">
+            <button class="btn btn-outline-success btn-sm" disabled>장바구니</button>
+            <button class="btn btn-outline-secondary btn-sm" disabled>삭제하기</button>
+           </div>
+          </td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" id="check2"></td>
+          <td>
+          <img src="${contextPath}/resources/images/Shopping/cow.jpg" alt="소고기" class="img-fluid rounded" style="width: 50px; height: 50px; object-fit: cover;">
+          소고기 국거리 400g
+          </td>
+          <td>
+            <div class="d-flex flex-column gap-1 align-items-center">
+		    	<span>13,900 / 1개</span>
+		    	<button class="btn btn-outline-secondary btn-sm " style="width:120px;" disabled>옵션/수량변경</button>
+		  	</div>
+          </td>
+          <td>적립<br>
+          상품 + 199원</td>
+          <td>
+            <div class="d-flex flex-column gap-1 align-items-center">
+            	<button class="btn btn-outline-success btn-sm" disabled>장바구니</button>
+            	<button class="btn btn-outline-secondary btn-sm" disabled>삭제하기</button>
+           </div>
+          </td>
+        </tr>
 		</tbody>
 	</table>
+		<div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
+	      		<h5 class="mb-0 fw-bold">최근 본 상품</h5>
+	    </div>
 	</div>
 	
 </body>

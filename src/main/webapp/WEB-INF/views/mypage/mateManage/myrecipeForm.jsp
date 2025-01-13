@@ -6,6 +6,13 @@
 <html>
 <head>
 <link href="<c:url value="/resources/css/slide.css" />" rel="stylesheet">
+<style>
+	.item-img img{
+		width: 100%;
+		height: 350px;
+		object-fit: cover;
+	}
+</style>
 <meta charset="UTF-8">
 <title>내 레시피</title>
 </head>
@@ -80,6 +87,10 @@
             	</div>
 	        </div>
 	    </div>
+	</div>
+	<div class="slider-controls">
+    	<button type="button" class="btn btn-dark" id="prev">이전</button>
+    	<button type="button" class="btn btn-dark" id="next">다음</button>
 	</div>
 </div>
 </body>
