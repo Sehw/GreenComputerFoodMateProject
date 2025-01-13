@@ -48,7 +48,7 @@
                             / 
                 <a href="#" class="link_find">비밀번호 찾기</a>
                         	/
-                <a href="${contextPath}/member/signUpForm.do" class="link_find">회원가입</a>
+                <a href="${contextPath}/member/signUpSelectForm.do" class="link_find">회원가입</a>
             </span>
             <div class="container mt-2 d-inline-block">
 			    <div class="row">
