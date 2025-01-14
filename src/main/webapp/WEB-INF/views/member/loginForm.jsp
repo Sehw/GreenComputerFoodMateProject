@@ -44,11 +44,11 @@
                 <button type="submit" class="btn btn-success">로그인</button>
             </div>
             <span class="mt-3 d-inline-block">
-            	<a href="#" class="link_find">아이디</a>
+            	<a href="${contextPath}/member/idFindForm.do" class="link_find">아이디</a>
                             / 
-                <a href="#" class="link_find">비밀번호 찾기</a>
+                <a href="${contextPath}/member/passwdFindForm.do" class="link_find">비밀번호 찾기</a>
                         	/
-                <a href="${contextPath}/member/signUpSelectForm.do" class="link_find">회원가입</a>
+                <a href="${contextPath}/member/signUpContactForm.do" class="link_find">회원가입</a>
             </span>
             <div class="container mt-2 d-inline-block">
 			    <div class="row">

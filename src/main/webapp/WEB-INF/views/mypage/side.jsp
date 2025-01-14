@@ -54,6 +54,7 @@
 	        <li><a href="${contextPath}/mypage/myInfoManage/profileEditForm.do">프로필 수정</a></li>
 	        <li><a href="${contextPath}/mypage/myInfoManage/memberEditForm.do">회원정보 수정</a></li>
 	        <li><a href="${contextPath}/mypage/myInfoManage/deliveryManageForm.do">배송지 관리</a>
+	        <li><a href="${contextPath}/mypage/myInfoManage/paymentManageForm.do">결제수단 관리</a>
         </ul>
         <hr>
         <h5>쇼핑 관리</h5>

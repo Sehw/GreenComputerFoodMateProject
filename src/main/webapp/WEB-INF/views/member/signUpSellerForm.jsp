@@ -76,12 +76,12 @@
 	<div class="signUp-container">
 	    <div class="row justify-content-center">
 	        <div class="col-md-8">
-	            <h1 class="mb-4 text-center">일반 회원 가입</h1>
+	            <h1 class="mb-4 text-center">판매자 회원 가입</h1>
 	            <form name="newMember" action="processAddMember.jsp" method="post" onsubmit="return prepareFormSubmission()">
 	                <div class="mb-3 row">
 	                    <label class="col-sm-3 col-form-label text-end">아이디</label>
 	                    <div class="col-sm-6">
-	                    	<div class="d-flex align-items-center">
+	                        <div class="d-flex align-items-center">
 		                        <input name="id" type="text" class="form-control me-2" placeholder="id">
 		                        <input type="reset" class="btn btn-secondary" value="중복확인">
 		                    </div>
@@ -106,39 +106,29 @@
 	                    </div>
 	                </div>
 	                <div class="mb-3 row">
-	                    <label class="col-sm-3 col-form-label text-end">성별</label>
-	                    <div class="col-sm-6 d-flex align-items-center">
-	                        <input name="gender" type="radio" value="남" class="me-2"> 남
-	                        <input name="gender" type="radio" value="여" class="ms-4 me-2"> 여
+	                    <label class="col-sm-3 col-form-label text-end">업체명</label>
+	                    <div class="col-sm-5">
+	                        <input name="name" type="text" class="form-control" placeholder="companyname">
 	                    </div>
 	                </div>
 	                <div class="mb-3 row">
-	                    <label class="col-sm-3 col-form-label text-end">생일</label>
+	                    <label class="col-sm-3 col-form-label text-end">사업자번호</label>
 	                    <div class="col-sm-7">
 	                        <div class="row">
-	                            <div class="col-sm-4">
-	                                <input type="text" name="birthyy" maxlength="4" class="form-control" placeholder="년(4자)">
-	                            </div>
-	                            <div class="col-sm-4">
-	                                <select name="birthmm" class="form-select">
-	                                    <option value="">월</option>
-	                                    <option value="01">1</option>
-	                                    <option value="02">2</option>
-	                                    <option value="03">3</option>
-	                                    <option value="04">4</option>
-	                                    <option value="05">5</option>
-	                                    <option value="06">6</option>
-	                                    <option value="07">7</option>
-	                                    <option value="08">8</option>
-	                                    <option value="09">9</option>
-	                                    <option value="10">10</option>
-	                                    <option value="11">11</option>
-	                                    <option value="12">12</option>
-	                                </select>
-	                            </div>
-	                            <div class="col-sm-3">
-	                                <input type="text" name="birthdd" maxlength="2" class="form-control" placeholder="일">
-	                            </div>
+	                            <div class="col-sm-12">
+							        <div class="d-flex align-items-center">
+							            <!-- 이메일 입력 -->
+							            <input type="text" id="comnum1" name="comnum1" maxlength="50" class="form-control me-2" placeholder="">
+							            <div class="col-sm-1 d-flex justify-content-center align-items-center me-2" style="width: auto; padding: 0 5px;">
+		            							<span>-</span>
+		        						</div>
+		        						<input type="text" id="comnum2" name="comnum2" maxlength="50" class="form-control me-2" placeholder="">
+		        						<div class="col-sm-1 d-flex justify-content-center align-items-center me-2" style="width: auto; padding: 0 5px;">
+		            							<span>-</span>
+		        						</div>
+		        						<input type="text" id="comnum3" name="comnum3" maxlength="50" class="form-control me-2" placeholder="">
+		        					</div>
+							    </div>
 	                        </div>
 	                    </div>
 	                </div>

@@ -37,7 +37,7 @@
       		<h5 class="mb-0 fw-bold">1:1 문의</h5>
     </div>
        <div class="text-end mb-1">
-	  <a href="#" class="btn btn-dark">1:1 문의</a>
+	  <a href="${contextPath}/mypage/customerManage/inquiryForm.do" class="btn btn-dark">1:1 문의</a>
 	</div>
     	<table class="table table-hover table-custom">
 		<thead class="table-header table-secondary">

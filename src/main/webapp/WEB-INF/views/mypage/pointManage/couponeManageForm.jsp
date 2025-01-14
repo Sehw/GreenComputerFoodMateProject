@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>쿠폰</title>
 <link href="<c:url value="/resources/css/tablepage.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/modal.css" />" rel="stylesheet">
 <style>
 		.table-custom {
 		    border-top: 2px solid #b5b6b7 !important;
@@ -35,7 +36,26 @@
 		  background-color: transparent; /* 배경색 없음 */
 		  font-size: 14px; /* 글자 크기 */
 		}
+		.bodal_body{
+			width:400px;
+			height:600px;
+		}
 </style>
+<script>
+	document.addEventListener("DOMContentLoaded", () => {
+	    const modal = document.querySelector('.modal');
+	    const btnOpenModal = document.querySelector('.btn-open-modal');
+	    const btnCloseModal = document.querySelector('.btn-close-modal');
+	
+	    btnOpenModal.addEventListener("click", () => {
+	        modal.style.display = "flex";
+	    });
+	    
+	    btnCloseModal.addEventListener("click", () => {
+	        modal.style.display = "none";
+	    });
+	});
+</script>
 </head>
 <body>
 <div class="container mt-1">
@@ -43,7 +63,7 @@
       		<h5 class="mb-0 fw-bold">쿠폰</h5>
     </div>
     <div class="text-end mb-1">
-	  <a href="#" class="btn btn-dark">쿠폰등록</a>
+      <button class="btn btn-dark btn-open-modal">쿠폰등록</button>
 	</div>
     	<table class="table table-hover table-custom">
 		<thead class="table-header table-secondary">
@@ -116,6 +136,23 @@
 	    </li>
 	  </ul>
 	</nav>
+	<div class="modal">
+		<div class="modal_body">
+			<div class="container mt-1">
+				<div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
+			      		<h5 class="mb-0 fw-bold">쿠폰등록</h5>
+			    </div>
+			  	<p class="mb-3">발급 받으신 쿠폰 인증 번호를 아래에 입력해주세요. <span class="text-muted">(8자리 ~ 최대 12자리)</span></p>
+			  	<div class="mb-3">
+			  		<input type="text" class="form-control" placeholder="쿠폰 인증 번호를 입력하세요" maxlength="12" required>
+			  	</div>
+			  	<div class="d-flex justify-content-center gap-2">
+			  		<button type="submit" class="btn btn-success">등록</button>
+	                <button type="reset" class="btn btn-outline-secondary btn-close-modal">취소</button>
+	            </div>
+			</div>
+		</div>
+	</div>
 </div>
 </body>
 </html>

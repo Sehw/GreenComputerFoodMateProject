@@ -1,15 +1,12 @@
 
-
-프로필 수정 -> ppt대로 따라가기
-회원정보 수정 -> 회원가입+ppt대로 따라가기
-
-
-1:1문의 -> 오늘뭐먹지 기반 + 만개스토어
-회원탈퇴 -> 스토리보드 따라가기
+회원탈퇴 -> 회원탈퇴 메시지 꾸미기
 
 회원가입
-아이디중복검사, 판매자or일반회원 선택
-판매자 가입 양식
+판매자 가입 양식 성별, 생년뺴고 업체명, 사업자등록번호 받기
+
+id/pw 찾기
+
+결제수단 추가(기존 회원가입폼), 배송조회팝업
 
 <img src="${contextPath}/resources/images/Shopping/myungran.jpg" alt="명란 젓" class="img-fluid rounded" style="width: 50px; height: 50px; object-fit: cover;">
 <img src="${contextPath}/resources/images/Shopping/doma.jpg" alt="향균도마" class="img-fluid rounded" style="width: 50px; height: 50px; object-fit: cover;">
