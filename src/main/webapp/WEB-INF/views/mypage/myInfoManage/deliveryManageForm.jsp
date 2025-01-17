@@ -29,10 +29,7 @@
 	      vertical-align: middle;
 	      text-align: center;
 	    }
-		.bodal_body{
-			width:400px;
-			height:600px;
-		}
+
 			table.table2 {
 			    border-collapse: collapse;
 			    width: 100%;

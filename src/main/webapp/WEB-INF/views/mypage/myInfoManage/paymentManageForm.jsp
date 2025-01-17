@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>결제수단 관리</title>
 <link href="<c:url value="/resources/css/tablepage.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/modal.css" />" rel="stylesheet">
 <style>
 		.table-custom {
 		    border-top: 2px solid #b5b6b7 !important;
@@ -28,8 +29,45 @@
 	      vertical-align: middle;
 	      text-align: center;
 	    }
+	    	table.table2 {
+			    border-collapse: collapse;
+			    width: 100%;
+			    text-align: left;
+			    line-height: 1.5;
+			    margin: 20px 0;
+			    border-top: 2px solid #333;
+			    border-bottom: 2px solid #ccc;
+			}
+			
+			table.table2 tr {
+			    border-bottom: 1px solid #ccc;
+			}
+			
+			table.table2 td {
+			    padding: 10px;
+			    vertical-align: middle;
+			    font-size: 14px;
+			}
+		.modal_body{
+			width:600px;
+		}
 	    
 </style>
+<script>
+	document.addEventListener("DOMContentLoaded", () => {
+	    const modal = document.querySelector('.modal');
+	    const btnOpenModal = document.querySelector('.btn-open-modal');
+	    const btnCloseModal = document.querySelector('.btn-close-modal');
+	
+	    btnOpenModal.addEventListener("click", () => {
+	        modal.style.display = "flex";
+	    });
+	    
+	    btnCloseModal.addEventListener("click", () => {
+	        modal.style.display = "none";
+	    });
+	});
+</script>
 </head>
 <body>
 <div class="container mt-1">
@@ -61,7 +99,66 @@
 		</tbody>
 	</table>
 	<div class="text-start mb-1">
-		<button class="btn btn-outline-secondary btn-sm" disabled>결제수단 추가</button>
+		<button class="btn btn-outline-secondary btn-sm btn-open-modal">결제수단 추가</button>
+	</div>
+	<div class="modal">
+		<div class="modal_body">
+			<div class="container mt-1">
+				<div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
+			      		<h5 class="mb-0 fw-bold">결제 수단 관리</h5>
+			    </div>
+			  	<p class="mb-3">결제수단 추가</p>
+			  	<table class="table2">
+					<tr>
+				        <td>카드 이름</td>
+				        <td>
+				        	<div class="col-sm-3 mb-1">
+				        		<input type="text" class="form-control" name="cardname" size="10" required>
+				        	</div>
+				        </td>
+				    </tr>
+				    <tr>
+				        <td>카드 번호</td>
+				        <td>
+				        	<div class="row">
+					        	<div class="col-sm-3 mb-1">
+					        		<input type="text" class="form-control" name="cardNumber" maxlength="4" size="10" required>
+					        	</div>
+					        	<div class="col-sm-3 mb-1">
+					        		<input type="text" class="form-control" name="cardNumber" maxlength="4" size="10" required>
+					        	</div>
+					        	<div class="col-sm-3 mb-1">
+					        		<input type="text" class="form-control" name="cardNumber" maxlength="4" size="10" required>
+					        	</div>
+					        	<div class="col-sm-3 mb-1">
+					        		<input type="text" class="form-control" name="cardNumber" maxlength="4" size="10" required>
+					        	</div>
+					        </div>
+				        </td>
+				    </tr>
+				    <tr>
+				        <td>유효기간 (MM/YY)</td>
+				        <td>
+				        	<div class="col-sm-3 mb-1">
+				        		<input type="text" class="form-control" name="phone" size="40">
+				        	</div>
+				        </td>
+				    </tr>
+				    <tr>
+				        <td>CVV</td>
+				        <td>
+				        	<div class="col-sm-3 mb-1">
+				        		<input type="text" class="form-control" name="iphone" size="40">
+				        	</div>
+				        </td>
+				    </tr>
+				</table>
+			  	<div class="d-flex justify-content-center gap-2">
+			  		<button type="submit" class="btn btn-success">저장</button>
+	                <button type="reset" class="btn btn-outline-secondary btn-close-modal">취소</button>
+	            </div>
+			</div>
+		</div>
 	</div>
 </div>
 </body>
