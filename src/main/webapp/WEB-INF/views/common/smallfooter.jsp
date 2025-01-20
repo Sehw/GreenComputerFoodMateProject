@@ -9,7 +9,7 @@
 <title>하단부</title>
    <style>
         .footer {
-            background-color: #74b243; /* 어두운 배경색 */
+            background-color: #fa9820;
             color: white; /* 흰색 텍스트 */
             padding: 20px 0;
             text-align: center;
@@ -29,7 +29,7 @@
         <div class="row align-items-center">
             <!-- 왼쪽: 로고와 설명 (내부 중앙 정렬) -->
             <div class="col-md-2 d-flex flex-column align-items-center text-center">
-                <img src="${contextPath}/resources/images/logo.png" alt="Logo" class="mb-2" style="width: 80px; height: auto;">
+                <img src="${contextPath}/resources/images/foodmatelogo.png" alt="Logo" class="mb-2" style="width: 160px; height: auto;">
                 <p class="mb-0">
                     <strong>FoodMate</strong><br>
                     레시피 공유 및 식재료<br>

@@ -50,9 +50,7 @@
         </div>
         <c:if test="${showHeadermenu}">
 	        <div class="row">
-	            <div class="col-15 header">
-	                <%@ include file="navbar.jsp" %>
-	            </div>
+	           <%@ include file="navbar.jsp" %>
 	        </div>
 	    </c:if>
 </header>

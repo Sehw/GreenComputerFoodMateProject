@@ -74,7 +74,7 @@
 </head>
 <body>
 <div class="container1">
-    <a href="${contextPath}/main.do"><img id="sitelogo" src="${contextPath}/resources/images/foodmatelogo.png" alt="푸드메이트로고"></a>
+    <a href="${contextPath}/main"><img id="sitelogo" src="${contextPath}/resources/images/foodmatelogo.png" alt="푸드메이트로고"></a>
 
     <div class="search-bar">
         <input type="text" placeholder="레시피나 재료를 검색해 보세요.">
@@ -82,10 +82,10 @@
     </div>
 
     <div class="action-buttons">
-        <a href="${contextPath}/member/loginForm.do" title="로그인 및 마이페이지">
+        <a href="${contextPath}/member/loginForm" title="로그인 및 마이페이지">
             <i class="fas fa-user"></i>
         </a>
-        <a href="${contextPath}/product_add" title="레시피 작성">
+        <a href="${contextPath}/recipe/recipe_Add" title="레시피 작성">
             <i class="fas fa-pen"></i>
         </a>
         <a href="${contextPath}/cart" title="장바구니">

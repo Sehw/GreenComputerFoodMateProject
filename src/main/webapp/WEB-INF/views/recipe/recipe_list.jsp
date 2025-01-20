@@ -366,7 +366,7 @@
 		<div class="row">
 			<div class="col-md-3 col-sm-6">
 			    <!-- a 태그를 div 태그 바깥으로 위치시킵니다. -->
-			    <a href="${contextPath}/main3.do" class="text-decoration-none">
+			    <a href="${contextPath}/recipe/recipe_Detail" class="text-decoration-none">
 			        <div class="card recipe-card">
 			            <div class="recipe-image"><img src="${pageContext.request.contextPath}/resources/images/pasta.PNG" alt="Recipe Image"></div>
 			            <div class="card-body">

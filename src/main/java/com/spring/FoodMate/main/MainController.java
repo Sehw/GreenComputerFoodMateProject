@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class MainController {
 	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 	
-	@RequestMapping("/main.do")
+	@RequestMapping("/main")
 	public ModelAndView mainPage() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("common/layout");

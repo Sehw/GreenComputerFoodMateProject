@@ -51,13 +51,13 @@
             <a class="nav-link active" aria-current="page" href="${contextPath}/main">메인</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">레시피</a>
+            <a class="nav-link" href="${contextPath}/recipe/recipe_list">레시피</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="${contextPath}/product_list">식재료</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">고객센터</a>
+            <a class="nav-link" href="${contextPath}/support/inquiryList">고객센터</a>
           </li>
           
           <li class="nav-item dropdown">
@@ -67,9 +67,9 @@
 			  <ul class="dropdown-menu">
 			    <li><a class="dropdown-item" href="${contextPath}/product_compare">상품비교</a></li>
 			    <li><hr class="dropdown-divider"></li>
-			    <li><a class="dropdown-item" href="${contextPath}/mypage/mypageForm.do">마이페이지 구매자</a></li>
+			    <li><a class="dropdown-item" href="${contextPath}/mypage/mypageForm">마이페이지 구매자</a></li>
 			    <li><a class="dropdown-item" href="${contextPath}/mypage_sell_main">마이페이지 판매자</a></li>
-			    <li><a class="dropdown-item" href="#">마이페이지 관리자</a></li>
+			    <li><a class="dropdown-item" href="${contextPath}/support/inquiryList">마이페이지 관리자</a></li>
 			  </ul>
 			</li>
           

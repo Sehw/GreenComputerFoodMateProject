@@ -28,7 +28,7 @@
 <div class="d-flex justify-content-center align-items-center">
     <div class="login-container ">
         <h2 style="color:#87c058">로그인</h2>
-        <form name="frmLogin" method="post" action="${contextPath}/member/login.do">
+        <form name="frmLogin" method="post" action="${contextPath}/member/login">
             <!-- 아이디 입력 필드 -->
             <div class="mb-3">
                 <label for="userID" class="form-label">아이디</label>
@@ -44,11 +44,11 @@
                 <button type="submit" class="btn btn-success">로그인</button>
             </div>
             <span class="mt-3 d-inline-block">
-            	<a href="${contextPath}/member/idFindForm.do" class="link_find">아이디</a>
+            	<a href="${contextPath}/member/idFindForm" class="link_find">아이디</a>
                             / 
-                <a href="${contextPath}/member/passwdFindForm.do" class="link_find">비밀번호 찾기</a>
+                <a href="${contextPath}/member/passwdFindForm" class="link_find">비밀번호 찾기</a>
                         	/
-                <a href="${contextPath}/member/signUpContactForm.do" class="link_find">회원가입</a>
+                <a href="${contextPath}/member/signUpContactForm" class="link_find">회원가입</a>
             </span>
             <div class="container mt-2 d-inline-block">
 			    <div class="row">
