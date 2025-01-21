@@ -5,7 +5,5 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.spring.FoodMate.member.vo.MemberVO" alias="memberVO"/>
-		<typeAlias type="com.spring.FoodMate.Article.vo.ArticleVO" alias="articleVO"/>
-		<typeAlias type="com.spring.FoodMate.Article.vo.ImageVO" alias="ImageVO"/>
 	</typeAliases>
 </configuration>

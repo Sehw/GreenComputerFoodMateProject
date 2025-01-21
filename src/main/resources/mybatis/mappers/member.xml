@@ -5,22 +5,53 @@
 
 	<mapper namespace="mapper.member">
 		<resultMap id="memResult" type="memberVO">
-			<result property="id" column="id" />
-			<result property="pwd" column="pwd" />
-			<result property="name" column="name" />
-			<result property="email" column="email" />
-			<result property="joinDate" column="joinDate" />
+			<result property="member_id" column="member_id" />
+		    <result property="member_password" column="member_password" />
+		    <result property="name" column="name" />
+		    <result property="ssn6" column="ssn6" />
+		    <result property="gender" column="gender" />
+		    <result property="email" column="email" />
+		    <result property="email_domain" column="email_domain" />
+		    <result property="phone" column="phone" />
 		</resultMap>
 		
-		<!--
-	<resultMap id="memResult" type="java.util.HashMap">
-		<result property="id" column="id" />
-		<result property="pwd" column="pwd" />
-		<result property="name" column="name" />
-		<result property="email" column="email" />
-		<result property="joinDate" column="joinDate" />
-	</resultMap>
-	-->
+		
+	<select id="login" resultType="memberVO"  parameterType="java.util.Map"  >
+	    <![CDATA[
+			select * from foodmate_customer 
+			 where id=#{member_id}
+			 and password=#{member_password}
+		]]>
+	</select>
+		
+	<insert id="insertNewCustomer" parameterType="memberVO">
+		<![CDATA[
+			insert into foodmate_customer(
+					id, 
+			        password, 
+			        name, 
+			        ssn, 
+			        gender, 
+			        email,
+			        email_domain,
+			        phone, 
+			        reg_date, 
+			        delete_id_status
+		        )values(
+			        #{member_id}, 
+			        #{member_password}, 
+			        #{name}, 
+			        #{ssn6}, 
+			        #{gender}, 
+			        #{email}, 
+			        #{email_domain},
+			        #{phone}, 
+			        DEFAULT,   -- reg_date는 기본값 SYSDATE로 설정
+			        'N'  -- 회원탈퇴 신청여부 초기값은 무조건 'N'으로 설정 
+		        )
+		]]>
+	</insert>
+	
 	<select id="selectAllMemberList" resultMap="memResult">
 		<![CDATA[
 			select * from t_member order by joinDate desc
@@ -51,19 +82,14 @@
 		]]>
 	</select>
 	
-	<insert id="insertMember" parameterType="memberVO">
-		<![CDATA[
-			insert into t_member(id,pwd,name,email) values(#{id}, #{pwd}, #{name}, #{email})
-		]]>
-	</insert>
 	
-	<update id="updateMember" parameterType="memberVO">
+	<update id="updateCustomer" parameterType="memberVO">
 		<![CDATA[
 			update t_member set pwd=#{pwd}, name=#{name}, email=#{email} where id=#{id}
 		]]>
 	</update>
 	
-	<delete id="deleteMember" parameterType="String">
+	<delete id="deleteCustomer" parameterType="String">
 	<![CDATA[
 		delete from t_member where id=#{id}
 	]]>

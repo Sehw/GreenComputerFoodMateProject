@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="contextPath" value="${pageContext.request.contextPath }"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,12 +78,12 @@
 	    <div class="row justify-content-center">
 	        <div class="col-md-8">
 	            <h1 class="mb-4 text-center">일반 회원 가입</h1>
-	            <form name="newMember" action="processAddMember.jsp" method="post" onsubmit="return prepareFormSubmission()">
+	            <form name="newMember" action="${contextPath}/member/addCustomer" method="post" enctype="multipart/form-data">
 	                <div class="mb-3 row">
 	                    <label class="col-sm-3 col-form-label text-end">아이디</label>
 	                    <div class="col-sm-6">
 	                    	<div class="d-flex align-items-center">
-		                        <input name="id" type="text" class="form-control me-2" placeholder="id">
+		                        <input name="member_id" id="member_id" type="text" class="form-control me-2" placeholder="id">
 		                        <input type="reset" class="btn btn-secondary" value="중복확인">
 		                    </div>
 	                    </div>
@@ -90,55 +91,36 @@
 	                <div class="mb-3 row">
 	                    <label class="col-sm-3 col-form-label text-end">비밀번호</label>
 	                    <div class="col-sm-5">
-	                        <input name="password" type="password" class="form-control" placeholder="password">
+	                        <input name="member_password" id="member_password" type="password" class="form-control" placeholder="password">
 	                    </div>
 	                </div>
 	                <div class="mb-3 row">
 	                    <label class="col-sm-3 col-form-label text-end">비밀번호 확인</label>
 	                    <div class="col-sm-5">
-	                        <input name="password_confirm" type="password" class="form-control" placeholder="password confirm">
+	                        <input name="password_confirm" id="password_confirm" type="password" class="form-control" placeholder="password confirm">
 	                    </div>
 	                </div>
 	                <div class="mb-3 row">
 	                    <label class="col-sm-3 col-form-label text-end">성명</label>
 	                    <div class="col-sm-5">
-	                        <input name="name" type="text" class="form-control" placeholder="name">
+	                        <input name="name" id="name" type="text" class="form-control" placeholder="name">
 	                    </div>
 	                </div>
 	                <div class="mb-3 row">
-	                    <label class="col-sm-3 col-form-label text-end">성별</label>
-	                    <div class="col-sm-6 d-flex align-items-center">
-	                        <input name="gender" type="radio" value="남" class="me-2"> 남
-	                        <input name="gender" type="radio" value="여" class="ms-4 me-2"> 여
-	                    </div>
-	                </div>
-	                <div class="mb-3 row">
-	                    <label class="col-sm-3 col-form-label text-end">생일</label>
+	                    <label class="col-sm-3 col-form-label text-end">주민등록번호</label>
 	                    <div class="col-sm-7">
 	                        <div class="row">
-	                            <div class="col-sm-4">
-	                                <input type="text" name="birthyy" maxlength="4" class="form-control" placeholder="년(4자)">
-	                            </div>
-	                            <div class="col-sm-4">
-	                                <select name="birthmm" class="form-select">
-	                                    <option value="">월</option>
-	                                    <option value="01">1</option>
-	                                    <option value="02">2</option>
-	                                    <option value="03">3</option>
-	                                    <option value="04">4</option>
-	                                    <option value="05">5</option>
-	                                    <option value="06">6</option>
-	                                    <option value="07">7</option>
-	                                    <option value="08">8</option>
-	                                    <option value="09">9</option>
-	                                    <option value="10">10</option>
-	                                    <option value="11">11</option>
-	                                    <option value="12">12</option>
-	                                </select>
-	                            </div>
-	                            <div class="col-sm-3">
-	                                <input type="text" name="birthdd" maxlength="2" class="form-control" placeholder="일">
-	                            </div>
+	                        	<div class="d-flex align-items-center">
+		                            <div class="col-sm-4">
+		                                <input type="text" name="ssn6" id="ssn6" maxlength="6" class="form-control" placeholder="앞 6자리"">
+		                            </div>
+		                            	<div class="col-sm-1 d-flex justify-content-center align-items-center" style="width: auto; padding: 0 5px;">
+            								<span>-</span>
+		        						</div>
+		                            <div class="col-sm-2">
+		                                <input type="text" name="ssn1" id="ssn1" maxlength="1" class="form-control" placeholder="1자리">
+		                            </div>
+		                         </div>
 	                        </div>
 	                    </div>
 	                </div>
@@ -147,12 +129,12 @@
 					    <div class="col-sm-8">
 					        <div class="d-flex align-items-center">
 					            <!-- 이메일 입력 -->
-					            <input type="text" id="mail1" name="mail1" maxlength="50" class="form-control me-2" placeholder="email">
+					            <input type="text" id="email" name="email" maxlength="50" class="form-control me-2" placeholder="email">
 					            <div class="col-sm-1 d-flex justify-content-center align-items-center me-2" style="width: auto; padding: 0 5px;">
             							<span>@</span>
         						</div>
 					            <!-- 이메일 선택 -->
-					            <select id="mail2" name="mail2" class="form-select me-2" style="max-width: 200px;" onchange="toggleCustomInput()">
+					            <select id="email_domain" name="email_domain" class="form-select me-2" style="max-width: 200px;" onchange="toggleCustomInput()">
 					                <option value="naver.com">naver.com</option>
 					                <option value="daum.net">daum.net</option>
 					                <option value="gmail.com">gmail.com</option>
@@ -168,7 +150,7 @@
 	                <div class="mb-3 row">
 	                    <label class="col-sm-3 col-form-label text-end">전화번호</label>
 	                    <div class="col-sm-5">
-	                        <input name="phone" type="text" class="form-control" placeholder="phone">
+	                        <input name="phone" id="phone" type="text" class="form-control" placeholder="phone">
 	                    </div>
 	                </div>
 	                <div class="mb-3 row">
@@ -190,6 +172,12 @@
 	                    <label class="col-sm-3 col-form-label text-end">나머지 주소</label>
 	                    <div class="col-sm-9">
 	                        <input name="remainaddress" id="remainaddress" type="text" class="form-control" placeholder="address">
+	                    </div>
+	                </div>
+	                <div class="mb-3 row">
+	                    <label class="col-sm-3 col-form-label text-end">프로필 사진 [삭제예정]</label>
+	                    <div class="col-sm-9">
+	                        <input type="file" id="profileImage" name="profileImage" class="upload-btn">
 	                    </div>
 	                </div>
 						<div class="mb-3 row">

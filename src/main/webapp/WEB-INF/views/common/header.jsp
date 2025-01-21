@@ -88,7 +88,7 @@
         <a href="${contextPath}/recipe/recipe_Add" title="레시피 작성">
             <i class="fas fa-pen"></i>
         </a>
-        <a href="${contextPath}/cart" title="장바구니">
+        <a href="${contextPath}/cart/cartForm" title="장바구니">
             <i class="fas fa-shopping-cart"></i>
         </a>
     </div>

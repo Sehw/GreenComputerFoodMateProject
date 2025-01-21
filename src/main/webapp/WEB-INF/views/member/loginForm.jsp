@@ -32,12 +32,12 @@
             <!-- 아이디 입력 필드 -->
             <div class="mb-3">
                 <label for="userID" class="form-label">아이디</label>
-                <input type="text" class="form-control" id="id" name="id" placeholder="아이디를 입력하세요" required>
+                <input type="text" class="form-control" id="member_id" name="member_id" placeholder="아이디를 입력하세요" required>
             </div>
             <!-- 비밀번호 입력 필드 -->
             <div class="mb-3">
                 <label for="passwd" class="form-label">비밀번호</label>
-                <input type="password" class="form-control" id="pwd" name="pwd" placeholder="비밀번호를 입력하세요" required>
+                <input type="password" class="form-control" id="member_password" name="member_password" placeholder="비밀번호를 입력하세요" required>
             </div>
             <!-- 로그인 버튼 -->
             <div class="d-grid">

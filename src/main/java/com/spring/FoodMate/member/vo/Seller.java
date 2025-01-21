@@ -4,8 +4,8 @@ package com.spring.FoodMate.member.vo;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-@Component("memberVO")
-public class MemberVO {
+@Component("sellerVO")
+public class Seller {
 	private String member_id;
 	private String member_password;
 	private String password_confirm;
@@ -13,17 +13,14 @@ public class MemberVO {
 	private String ssn6;
 	private String ssn1;
 	private String gender;
-	private String email;
-	private String email_domain;
+	private String mail1;
+	private String mail2;
 	private String customMail;
 	private String phone;
 	private String zipcode;
 	private String roadAddress;
 	private String remainaddress;
-	private String deleteidstatus;
-
 	private MultipartFile profileImage;
-	
 	
 	public String getMember_id() {
 		return member_id;
@@ -61,18 +58,17 @@ public class MemberVO {
 	public void setSsn1(String ssn1) {
 		this.ssn1 = ssn1;
 	}
-
-	public String getEmail() {
-		return email;
+	public String getMail1() {
+		return mail1;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setMail1(String mail1) {
+		this.mail1 = mail1;
 	}
-	public String getEmail_domain() {
-		return email_domain;
+	public String getMail2() {
+		return mail2;
 	}
-	public void setEmail_domain(String email_domain) {
-		this.email_domain = email_domain;
+	public void setMail2(String mail2) {
+		this.mail2 = mail2;
 	}
 	public String getCustomMail() {
 		return customMail;
@@ -115,12 +111,6 @@ public class MemberVO {
 	}
 	public void setGender(String gender) {
 		this.gender = gender;
-	}
-	public String getDeleteidstatus() {
-		return deleteidstatus;
-	}
-	public void setDeleteidstatus(String deleteidstatus) {
-		this.deleteidstatus = deleteidstatus;
 	}
 }
 

@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class CartController {
 	private static final Logger logger = LoggerFactory.getLogger(CartController.class);
 	
-	@RequestMapping(value="/cart/*Form.do", method=RequestMethod.GET)
+	@RequestMapping(value="/cart/*Form", method=RequestMethod.GET)
 	private ModelAndView mypageform(@RequestParam(value="result", required=false) String result, @RequestParam(value="action",required=false) String action, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = getViewName(request);
 		HttpSession session = request.getSession();
