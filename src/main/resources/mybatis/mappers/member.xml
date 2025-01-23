@@ -5,8 +5,8 @@
 
 	<mapper namespace="mapper.member">
 		<resultMap id="memResult" type="memberVO">
-			<result property="member_id" column="member_id" />
-		    <result property="member_password" column="member_password" />
+			<result property="id" column="id" />
+		    <result property="password" column="password" />
 		    <result property="name" column="name" />
 		    <result property="ssn6" column="ssn6" />
 		    <result property="gender" column="gender" />
@@ -19,8 +19,8 @@
 	<select id="login" resultType="memberVO"  parameterType="java.util.Map"  >
 	    <![CDATA[
 			select * from foodmate_customer 
-			 where id=#{member_id}
-			 and password=#{member_password}
+			 where id=#{id}
+			 and password=#{password}
 		]]>
 	</select>
 		
@@ -38,8 +38,8 @@
 			        reg_date, 
 			        delete_id_status
 		        )values(
-			        #{member_id}, 
-			        #{member_password}, 
+			        #{id}, 
+			        #{password}, 
 			        #{name}, 
 			        #{ssn6}, 
 			        #{gender}, 

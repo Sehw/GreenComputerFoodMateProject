@@ -6,8 +6,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Component("memberVO")
 public class MemberVO {
-	private String member_id;
-	private String member_password;
+	private String id;
+	private String password;
 	private String password_confirm;
 	private String name;
 	private String ssn6;
@@ -24,18 +24,17 @@ public class MemberVO {
 
 	private MultipartFile profileImage;
 	
-	
-	public String getMember_id() {
-		return member_id;
+	public String getId() {
+		return id;
 	}
-	public void setMember_id(String member_id) {
-		this.member_id = member_id;
+	public void setId(String id) {
+		this.id = id;
 	}
-	public String getMember_password() {
-		return member_password;
+	public String getPassword() {
+		return password;
 	}
-	public void setMember_password(String member_password) {
-		this.member_password = member_password;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	public String getPassword_confirm() {
 		return password_confirm;

@@ -83,7 +83,7 @@
 	                    <label class="col-sm-3 col-form-label text-end">아이디</label>
 	                    <div class="col-sm-6">
 	                    	<div class="d-flex align-items-center">
-		                        <input name="member_id" id="member_id" type="text" class="form-control me-2" placeholder="id">
+		                        <input name="id" id="id" type="text" class="form-control me-2" placeholder="id">
 		                        <input type="reset" class="btn btn-secondary" value="중복확인">
 		                    </div>
 	                    </div>
@@ -91,7 +91,7 @@
 	                <div class="mb-3 row">
 	                    <label class="col-sm-3 col-form-label text-end">비밀번호</label>
 	                    <div class="col-sm-5">
-	                        <input name="member_password" id="member_password" type="password" class="form-control" placeholder="password">
+	                        <input name="password" id="password" type="password" class="form-control" placeholder="password">
 	                    </div>
 	                </div>
 	                <div class="mb-3 row">

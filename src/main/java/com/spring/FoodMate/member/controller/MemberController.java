@@ -57,8 +57,7 @@ public class MemberController {
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		 memberVO=memberService.login(loginMap);
-		 System.out.println(memberVO.getMember_id());
-		if(memberVO!= null && memberVO.getMember_id()!=null){
+		if(memberVO!= null && memberVO.getId()!=null){
 			
 //			if(memberVO.getDel_yn().equals("Y")) {
 //				String message="회원 탈퇴가 진행중인 아이디입니다.\\n관리자에게 문의해 주세요.\\nEmail : hong@gil.dong";
