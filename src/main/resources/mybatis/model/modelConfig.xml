@@ -5,6 +5,5 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.spring.FoodMate.member.vo.MemberVO" alias="memberVO"/>
-		<typeAlias type="com.spring.FoodMate.post.vo.postVO" alias="postVO"/>
 	</typeAliases>
 </configuration>
