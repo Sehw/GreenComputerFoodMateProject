@@ -68,8 +68,8 @@
 			    <li><a class="dropdown-item" href="${contextPath}/product_compare">상품비교</a></li>
 			    <li><hr class="dropdown-divider"></li>
 			    <li><a class="dropdown-item" href="${contextPath}/mypage/mypageForm">마이페이지 구매자</a></li>
-			    <li><a class="dropdown-item" href="${contextPath}/mypage_sell_main">마이페이지 판매자</a></li>
-			    <li><a class="dropdown-item" href="${contextPath}/support/inquiryList">마이페이지 관리자</a></li>
+			    <li><a class="dropdown-item" href="${contextPath}/mypage_seller/mypage_sell_main">마이페이지 판매자</a></li>
+			    <li><a class="dropdown-item" href="${contextPath}/admin/adminMain">마이페이지 관리자</a></li>
 			  </ul>
 			</li>
           

@@ -98,7 +98,7 @@
         <strong>Q: 포인트 사용 내역을 확인하려면 어떻게 하나요?</strong>
         <p>A: '마이페이지' -> '내 포인트' 메뉴에서 포인트 사용 내역을 확인할 수 있습니다.</p>
       </div>
-      <div class="contact-btn"><a href="${contextPath}/main10.do">1:1 문의</a></div>
+      <div class="contact-btn"><a href="${contextPath}/support/inquiryWrite">1:1 문의</a></div>
     </div>
   </div>
 

@@ -96,7 +96,7 @@
                         <%@ include file="smallheader.jsp" %>
                     </c:when>
                     <c:otherwise>
-                        <%@ include file="header.jsp" %>
+                        <%@ include file="adminheader.jsp" %>
                     </c:otherwise>
                 </c:choose>
             </div>
@@ -104,7 +104,7 @@
         <c:if test="${showHeadermenu}">
             <div class="row">
                 <div class="col-15 header">
-                    <%@ include file="headermenu.jsp" %>
+                    <%@ include file="adminheadermenu.jsp" %>
                 </div>
             </div>
         </c:if>
@@ -135,7 +135,7 @@
                         <%@ include file="smallfooter.jsp" %>
                     </c:when>
                     <c:otherwise>
-                        <%@ include file="footer.jsp" %>
+                        <%@ include file="adminfooter.jsp" %>
                     </c:otherwise>
                 </c:choose>
             </div>

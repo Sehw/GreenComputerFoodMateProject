@@ -16,21 +16,38 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class AdminController {
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
-
-	@RequestMapping(value="/admin/*.do", method=RequestMethod.GET)
+	
+	@RequestMapping(value="/admin/adminMain", method=RequestMethod.GET)
+	private ModelAndView main(@RequestParam(value="result", required=false) String result, @RequestParam(value="action",required=false) String action, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = getViewName(request);
+		HttpSession session = request.getSession();
+		session.setAttribute("action", action);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("result",result);
+		mav.setViewName("common/layoutAdmin");
+		mav.addObject("showHeadermenu", true);
+		mav.addObject("smallFooter", true);
+		mav.addObject("title", "푸드 메이트");
+		mav.addObject("body", "/WEB-INF/views" + viewName + ".jsp");
+		mav.addObject("showSidebar", false); // 사이드바 표시 여부
+        mav.addObject("sidebar", "/WEB-INF/views/admin/sidebar.jsp"); // 사이드바 포함 페이지 지정
+		return mav;
+	}
+	
+	@RequestMapping(value="/admin/*", method=RequestMethod.GET)
 	private ModelAndView form(@RequestParam(value="result", required=false) String result, @RequestParam(value="action",required=false) String action, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = getViewName(request);
 		HttpSession session = request.getSession();
 		session.setAttribute("action", action);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("result",result);
-		mav.setViewName("admin/layout");
+		mav.setViewName("common/layoutAdmin");
 		mav.addObject("showHeadermenu", true);
 		mav.addObject("smallFooter", true);
 		mav.addObject("title", "푸드 메이트");
 		mav.addObject("body", "/WEB-INF/views" + viewName + ".jsp");
 		mav.addObject("showSidebar", true); // 사이드바 표시 여부
-        mav.addObject("sidebar", "sidebar.jsp"); // 사이드바 포함 페이지 지정
+        mav.addObject("sidebar", "/WEB-INF/views/admin/sidebar.jsp"); // 사이드바 포함 페이지 지정
 		return mav;
 	}
 

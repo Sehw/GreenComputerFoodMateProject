@@ -112,6 +112,47 @@ public class MypageController {
 		mav.addObject("body", "/WEB-INF/views" + viewName + ".jsp");
 		return mav;
 	}
+	
+	// 여기부터 판매자 마이페이지
+	
+		@RequestMapping(value="/mypage_seller/mypage_sell_main", method=RequestMethod.GET)
+		private ModelAndView seller_Mypage(HttpServletRequest request, HttpServletResponse response) throws Exception {
+			String viewName = getViewName(request);
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("common/layout");
+			mav.addObject("showNavbar", true);
+			mav.addObject("showSidebar",true);
+			mav.addObject("sidebar","/WEB-INF/views/mypage_seller/side_selr.jsp");
+			mav.addObject("title", "판매자 마이페이지");
+			mav.addObject("body", "/WEB-INF/views" + viewName + ".jsp");
+			return mav;
+		}
+		
+		@RequestMapping(value="/mypage_seller/mypage_sell_productlist", method=RequestMethod.GET)
+		private ModelAndView seller_Mypage_productList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+			String viewName = getViewName(request);
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("common/layout");
+			mav.addObject("showNavbar", true);
+			mav.addObject("showSidebar",true);
+			mav.addObject("sidebar","/WEB-INF/views/mypage_seller/side_selr.jsp");
+			mav.addObject("title", "내 상품 목록");
+			mav.addObject("body", "/WEB-INF/views" + viewName + ".jsp");
+			return mav;
+		}
+		
+		@RequestMapping(value="/mypage_seller/mypage_sell_productamount", method=RequestMethod.GET)
+		private ModelAndView seller_Mypage_productAmount(HttpServletRequest request, HttpServletResponse response) throws Exception {
+			String viewName = getViewName(request);
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("common/layout");
+			mav.addObject("showNavbar", true);
+			mav.addObject("showSidebar",true);
+			mav.addObject("sidebar","/WEB-INF/views/mypage_seller/side_selr.jsp");
+			mav.addObject("title", "상품 재고 관리");
+			mav.addObject("body", "/WEB-INF/views" + viewName + ".jsp");
+			return mav;
+		}
 
 	private String getViewName(HttpServletRequest request) throws Exception{
 		String contextPath = request.getContextPath();

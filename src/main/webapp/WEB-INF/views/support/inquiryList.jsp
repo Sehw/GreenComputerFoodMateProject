@@ -112,15 +112,12 @@
             </thead>
             <tbody>
                 <tr>
-                    <td><span><a href="${contextPath}/main11.do">상품 배송 관련</a></span></td>
+                    <td><span><a href="${contextPath}/support/inquiryDetail.do">상품 배송 관련</a></span></td>
                     <td>배송</td>
                     <td>2025-01-10</td>
                     <td>답변 대기</td>
                     <td class="button-container">
-                        <button onclick="window.location.href='main13.do'">수정</button>
-                    </td>
-                    <td class="button-container">
-                        <button onclick="window.location.href='main13.do'">수정</button>
+                        <button onclick="window.location.href='inquiryEdit'">수정</button>
                     </td>
                 </tr>
                 <tr>
@@ -138,7 +135,7 @@
                     <td>2025-01-12</td>
                     <td>답변 대기</td>
                     <td class="button-container">
-                        <button onclick="window.location.href='main13.do'">수정</button>
+                        <button onclick="window.location.href='inquiryEdit'">수정</button>
                     </td>
                 </tr>
                 <tr>
@@ -156,14 +153,14 @@
                     <td>2025-01-09</td>
                     <td>답변 대기</td>
                     <td class="button-container">
-                        <button onclick="window.location.href='main13.do'">수정</button>
+                        <button onclick="window.location.href='inquiryEdit'">수정</button>
                     </td>
                 </tr>
             </tbody>
         </table>
         
         <div class="button-container">
-            <button onclick="window.location.href='main12.do'">글쓰기</button>
+            <button onclick="window.location.href='inquiryWrite'">글쓰기</button>
         </div>
     </div>
 
