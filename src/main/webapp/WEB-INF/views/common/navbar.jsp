@@ -57,7 +57,7 @@
             <a class="nav-link" href="${contextPath}/product_list">식재료</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="${contextPath}/support/inquiryList">고객센터</a>
+            <a class="nav-link" href="${contextPath}/support/Q&A">고객센터</a>
           </li>
           
           <li class="nav-item dropdown">
