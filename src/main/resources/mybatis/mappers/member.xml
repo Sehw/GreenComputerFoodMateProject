@@ -8,46 +8,44 @@
 			<result property="id" column="id" />
 		    <result property="password" column="password" />
 		    <result property="name" column="name" />
-		    <result property="ssn6" column="ssn6" />
-		    <result property="gender" column="gender" />
+		    <result property="birth_6" column="birth_6" />
+		    <result property="sex" column="sex" />
 		    <result property="email" column="email" />
-		    <result property="email_domain" column="email_domain" />
-		    <result property="phone" column="phone" />
+		    <result property="phone_num" column="phone_num" />
 		</resultMap>
 		
 		
 	<select id="login" resultType="memberVO"  parameterType="java.util.Map"  >
 	    <![CDATA[
-			select * from foodmate_customer 
-			 where id=#{id}
-			 and password=#{password}
+			select * from foodmate_buyer 
+			 where byr_id=#{id}
+			 and pw=#{password}
 		]]>
 	</select>
 		
-	<insert id="insertNewCustomer" parameterType="memberVO">
+	<insert id="insertNewBuyer" parameterType="memberVO">
 		<![CDATA[
-			insert into foodmate_customer(
-					id, 
-			        password, 
+			insert into foodmate_buyer(
+					byr_id, 
+			        pw, 
 			        name, 
-			        ssn, 
-			        gender, 
+			        birth_6, 
+			        sex, 
 			        email,
-			        email_domain,
-			        phone, 
-			        reg_date, 
-			        delete_id_status
+			        phone_num, 
+			        join_date, 
+			        status
 		        )values(
 			        #{id}, 
 			        #{password}, 
 			        #{name}, 
-			        #{ssn6}, 
-			        #{gender}, 
+			        #{birth_6}, 
+			        #{sex}, 
 			        #{email}, 
-			        #{email_domain},
-			        #{phone}, 
-			        DEFAULT,   -- reg_date는 기본값 SYSDATE로 설정
-			        'N'  -- 회원탈퇴 신청여부 초기값은 무조건 'N'으로 설정 
+			        #{phone_num}, 
+			        DEFAULT,   -- join_date는 기본값 SYSDATE로 설정
+			        'ACTIVE'  -- 등록상태는 무조건 기본값으로는 ACTIVE로 설정
+			        
 		        )
 		]]>
 	</insert>

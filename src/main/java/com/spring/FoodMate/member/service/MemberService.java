@@ -24,13 +24,16 @@ public class MemberService {
 		
 		String ssn1 = memberVO.getSsn1();
 		if (ssn1 != null && (ssn1.equals("1") || ssn1.equals("3"))) {
-            memberVO.setGender("M");
+            memberVO.setSex("M");
         } else if (ssn1 != null && (ssn1.equals("2") || ssn1.equals("4"))) {
-            memberVO.setGender("F");
+            memberVO.setSex("F");
         } else {
-            memberVO.setGender("N");
+            memberVO.setSex("N");
         }
 		
-		memberDAO.insertNewCustomer(memberVO);
+		String email = memberVO.getEmail_id() + "@" + memberVO.getEmail_domain();
+		memberVO.setEmail(email);
+		
+		memberDAO.insertNewBuyer(memberVO);
 	}
 }

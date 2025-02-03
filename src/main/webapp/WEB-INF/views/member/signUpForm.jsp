@@ -78,7 +78,7 @@
 	    <div class="row justify-content-center">
 	        <div class="col-md-8">
 	            <h1 class="mb-4 text-center">일반 회원 가입</h1>
-	            <form name="newMember" action="${contextPath}/member/addCustomer" method="post" enctype="multipart/form-data">
+	            <form name="newMember" action="${contextPath}/member/addBuyer" method="post" enctype="multipart/form-data">
 	                <div class="mb-3 row">
 	                    <label class="col-sm-3 col-form-label text-end">아이디</label>
 	                    <div class="col-sm-6">
@@ -112,7 +112,7 @@
 	                        <div class="row">
 	                        	<div class="d-flex align-items-center">
 		                            <div class="col-sm-4">
-		                                <input type="text" name="ssn6" id="ssn6" maxlength="6" class="form-control" placeholder="앞 6자리"">
+		                                <input type="text" name="birth_6" id="birth_6" maxlength="6" class="form-control" placeholder="앞 6자리"">
 		                            </div>
 		                            	<div class="col-sm-1 d-flex justify-content-center align-items-center" style="width: auto; padding: 0 5px;">
             								<span>-</span>
@@ -129,7 +129,7 @@
 					    <div class="col-sm-8">
 					        <div class="d-flex align-items-center">
 					            <!-- 이메일 입력 -->
-					            <input type="text" id="email" name="email" maxlength="50" class="form-control me-2" placeholder="email">
+					            <input type="text" id="email_id" name="email_id" maxlength="50" class="form-control me-2" placeholder="email">
 					            <div class="col-sm-1 d-flex justify-content-center align-items-center me-2" style="width: auto; padding: 0 5px;">
             							<span>@</span>
         						</div>
@@ -150,7 +150,7 @@
 	                <div class="mb-3 row">
 	                    <label class="col-sm-3 col-form-label text-end">전화번호</label>
 	                    <div class="col-sm-5">
-	                        <input name="phone" id="phone" type="text" class="form-control" placeholder="phone">
+	                        <input name="phone_num" id="phone_num" type="text" class="form-control" placeholder="phone">
 	                    </div>
 	                </div>
 	                <div class="mb-3 row">
@@ -172,12 +172,6 @@
 	                    <label class="col-sm-3 col-form-label text-end">나머지 주소</label>
 	                    <div class="col-sm-9">
 	                        <input name="remainaddress" id="remainaddress" type="text" class="form-control" placeholder="address">
-	                    </div>
-	                </div>
-	                <div class="mb-3 row">
-	                    <label class="col-sm-3 col-form-label text-end">프로필 사진 [삭제예정]</label>
-	                    <div class="col-sm-9">
-	                        <input type="file" id="profileImage" name="profileImage" class="upload-btn">
 	                    </div>
 	                </div>
 						<div class="mb-3 row">

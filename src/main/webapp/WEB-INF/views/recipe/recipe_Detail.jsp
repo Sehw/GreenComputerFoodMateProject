@@ -541,7 +541,7 @@
 				        </div>
 				    </div>
 				</div>
-				<button type="submit" class="submit-btn">식재료 통합 구매</button>
+				<button type="submit" class="submit-btn" onclick="window.location.href='${contextPath}/product_compare'">식재료 통합 구매</button>
 				
 
                 <!-- 조리법 -->

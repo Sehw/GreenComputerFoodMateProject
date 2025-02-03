@@ -57,7 +57,7 @@ public class MemberController {
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		 memberVO=memberService.login(loginMap);
-		if(memberVO!= null && memberVO.getId()!=null){
+		if(memberVO!= null && memberVO.getByr_id()!=null){
 			
 //			if(memberVO.getDel_yn().equals("Y")) {
 //				String message="회원 탈퇴가 진행중인 아이디입니다.\\n관리자에게 문의해 주세요.\\nEmail : hong@gil.dong";
@@ -84,8 +84,8 @@ public class MemberController {
 		return resEntity;
 	}
 	
-	@RequestMapping(value="/member/addCustomer" ,method = RequestMethod.POST)
-	public ResponseEntity addMember(@ModelAttribute("memberVO") MemberVO _memberVO,
+	@RequestMapping(value="/member/addBuyer" ,method = RequestMethod.POST)
+	public ResponseEntity addBuyer(@ModelAttribute("memberVO") MemberVO _memberVO,
 			                HttpServletRequest request, HttpServletResponse response) throws Exception {
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("utf-8");

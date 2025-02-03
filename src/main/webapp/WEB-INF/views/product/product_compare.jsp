@@ -501,7 +501,7 @@
 				</div>
 				
 			</section>
-			<button class="cart-button">장바구니에 담기</button>
+			<button class="cart-button" onclick="window.location.href='${contextPath}/cart/cartForm'">장바구니에 담기</button>
 		</article>
 	</div>
 </div>

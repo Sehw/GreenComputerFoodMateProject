@@ -20,7 +20,7 @@ public class MemberDAO {
 	   return member;
 	}
 	
-	public void insertNewCustomer(MemberVO memberVO) throws DataAccessException{
-		sqlSession.insert("mapper.member.insertNewCustomer",memberVO);
+	public void insertNewBuyer(MemberVO memberVO) throws DataAccessException{
+		sqlSession.insert("mapper.member.insertNewBuyer",memberVO);
 	}
 }

@@ -448,7 +448,7 @@
 
         <!-- 결제 버튼 -->
         <div class="button-container">
-            <button type="submit" class="submit-btn">결제하기</button>
+            <button type="submit" class="submit-btn" onclick="window.location.href='${contextPath}/order/order2'">결제하기</button>
         </div>
     </div>
 </body>

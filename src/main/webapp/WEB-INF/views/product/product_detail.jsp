@@ -190,8 +190,8 @@
 			<div id="pdt_Amount">수량 : - 2 + 개</div><div id="price_final">총 54,000 원</div>
 		</div>
 		<div class="info5">
-			<button id="btn_buy">바로구매</button>
-			<button id="btn_cart">장바구니 담기</button>
+			<button id="btn_buy" onclick="window.location.href='${contextPath}/order/order1'">바로구매</button>
+			<button id="btn_cart" onclick="window.location.href='${contextPath}/cart/cartForm'">장바구니 담기</button>
 		</div>
 	</div>
 </article>
