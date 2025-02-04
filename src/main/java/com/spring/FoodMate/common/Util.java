@@ -1,28 +1,9 @@
-package com.spring.FoodMate.main;
+package com.spring.FoodMate.common;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
-
-@Controller
-public class MainController {
-	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
-	
-	@RequestMapping("/main")
-	public ModelAndView mainPage() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("common/layout");
-		mav.addObject("showNavbar", true);
-		mav.addObject("title","메인 페이지");
-		mav.addObject("body", "/WEB-INF/views/main/main.jsp");
-		return mav;
-	}
-
-	private String getViewName(HttpServletRequest request) throws Exception{
+public class Util {
+	public static String getViewName(HttpServletRequest request) throws Exception{
 		String contextPath = request.getContextPath();
 		String uri = (String) request.getAttribute("javax.servlet.include.request_uri");
 		if(uri == null || uri.trim().equals("")) {

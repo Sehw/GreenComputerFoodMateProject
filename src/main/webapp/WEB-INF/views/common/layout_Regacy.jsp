@@ -43,14 +43,14 @@
 	            	<%@ include file="header_small.jsp" %>
 	            </c:when>
 	            <c:otherwise>
-                	<%@ include file="adminheader.jsp" %>
+                	<%@ include file="header.jsp" %>
                 </c:otherwise>
             </c:choose>
             </div>
         </div>
         <c:if test="${showHeadermenu}">
 	        <div class="row">
-	           <%@ include file="adminheadermenu.jsp" %>
+	           <%@ include file="navbar.jsp" %>
 	        </div>
 	    </c:if>
 </header>

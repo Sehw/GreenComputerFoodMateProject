@@ -24,7 +24,7 @@ public class RecipeController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("result",result);
 		mav.setViewName("common/layout");
-		mav.addObject("showHeadermenu", true);
+		mav.addObject("showNavbar", true);
 		mav.addObject("title", "푸드 메이트");
 		mav.addObject("body", "/WEB-INF/views" + viewName + ".jsp");
 		return mav;

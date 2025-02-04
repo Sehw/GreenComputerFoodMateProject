@@ -28,6 +28,13 @@
 		    text-align: center; /* 중앙 정렬 */
 		}
 </style>
+<script>
+	document.addEventListener("DOMContentLoaded", function () {
+	    document.getElementById('profileImage').addEventListener('click', function () {
+	        document.getElementById('fileInput').click();
+	    });
+	});
+</script>
 </head>
 <body>
 <div class="container mt-1">
@@ -39,7 +46,8 @@
 				<div class="d-flex flex-column align-items-center mb-3">
 				    <!-- 프로필 사진 -->
 				    <div class="name_icon_btn mb-3">
-				        <img src="${contextPath}/resources/images/profile_09.png" alt="프로필 사진" />
+				    	<input type="file" id="fileInput" name="profileImage" style="display: none;" accept="image/*">
+				        <img id="profileImage" src="${contextPath}/resources/images/profile_09.png" alt="프로필 사진" />
 				    </div>
 				    <!-- 닉네임 입력 -->
 				    <div class="text-center" style="width: 100%; max-width: 300px;">

@@ -25,7 +25,7 @@ public class MypageController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("result",result);
 		mav.setViewName("common/layout");
-		mav.addObject("showHeadermenu", true);
+		mav.addObject("showNavbar", true);
 		mav.addObject("showSidebar",true);
 		mav.addObject("sidebar","/WEB-INF/views/mypage/side.jsp");
 		mav.addObject("title", "푸드 메이트");
@@ -41,7 +41,7 @@ public class MypageController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("result",result);
 		mav.setViewName("common/layout");
-		mav.addObject("showHeadermenu", true);
+		mav.addObject("showNavbar", true);
 		mav.addObject("showSidebar",true);
 		mav.addObject("sidebar","/WEB-INF/views/mypage/side.jsp");
 		mav.addObject("title", "푸드 메이트");
@@ -57,13 +57,14 @@ public class MypageController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("result",result);
 		mav.setViewName("common/layout");
-		mav.addObject("showHeadermenu", true);
+		mav.addObject("showNavbar", true);
 		mav.addObject("showSidebar",true);
 		mav.addObject("sidebar","/WEB-INF/views/mypage/side.jsp");
 		mav.addObject("title", "푸드 메이트");
 		mav.addObject("body", "/WEB-INF/views" + viewName + ".jsp");
 		return mav;
 	}
+	
 	
 	@RequestMapping(value="/mypage/pointManage/*Form", method=RequestMethod.GET)
 	private ModelAndView pointManageform(@RequestParam(value="result", required=false) String result, @RequestParam(value="action",required=false) String action, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -73,7 +74,7 @@ public class MypageController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("result",result);
 		mav.setViewName("common/layout");
-		mav.addObject("showHeadermenu", true);
+		mav.addObject("showNavbar", true);
 		mav.addObject("showSidebar",true);
 		mav.addObject("sidebar","/WEB-INF/views/mypage/side.jsp");
 		mav.addObject("title", "푸드 메이트");
@@ -89,7 +90,7 @@ public class MypageController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("result",result);
 		mav.setViewName("common/layout");
-		mav.addObject("showHeadermenu", true);
+		mav.addObject("showNavbar", true);
 		mav.addObject("showSidebar",true);
 		mav.addObject("sidebar","/WEB-INF/views/mypage/side.jsp");
 		mav.addObject("title", "푸드 메이트");
@@ -105,7 +106,7 @@ public class MypageController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("result",result);
 		mav.setViewName("common/layout");
-		mav.addObject("showHeadermenu", true);
+		mav.addObject("showNavbar", true);
 		mav.addObject("showSidebar",true);
 		mav.addObject("sidebar","/WEB-INF/views/mypage/side.jsp");
 		mav.addObject("title", "푸드 메이트");

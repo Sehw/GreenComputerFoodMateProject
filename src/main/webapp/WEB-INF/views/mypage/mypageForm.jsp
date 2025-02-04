@@ -67,8 +67,10 @@
 			<div class="col-md-3 mt-3">
 				<div class="mainbox">
 					<div class="name_icon_btn">
-						<img src="${contextPath}/resources/images/profile_09.png" alt="" />
-						<p> @@@ 회원님 </p>
+						<a href="${contextPath}/mypage/myInfoManage/profileEditForm">
+							<img src="${contextPath}/resources/images/profile_09.png" alt="" />
+						</a>
+						<p> ${sessionScope.memberInfo.name} 회원님 </p>
 						<p> 보유포인트 </p>
 						<p> 0 포인트 </p>
 						<p> 보유쿠폰 </p>
