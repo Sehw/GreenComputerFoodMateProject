@@ -5,49 +5,65 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <meta charset="UTF-8">
 <title>${title}</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+<header>
+	<div class="row">
+            <div class="col-12 header">
+            <c:choose>
+	            <c:when test="${smallHeader}">
+	            	<%@ include file="header_small.jsp" %>
+	            </c:when>
+	            <c:otherwise>
+                	<%@ include file="header.jsp" %>
+                </c:otherwise>
+            </c:choose>
+            </div>
+     </div>
+</header>
 <body>
 
-<header>
-	<c:choose>
-		<c:when test="${smallHeader}">
-		<%@ include file="header_small.jsp" %>
-		</c:when>
-		<c:otherwise>
-		<%@ include file="header.jsp" %>
-		</c:otherwise>
-	</c:choose>
-</header>
-
-<nav>
-	<c:if test="${showNavbar}">
-		<%@ include file="navbar.jsp" %>
-	</c:if>
-</nav>
-
-<aside>
-	<c:if test="${showSidebar}">
-		<jsp:include page="${sidebar}" />
-	</c:if>
-</aside>
-            
-<main>
-	<jsp:include page="${body}" />            
-</main>
+	<nav>
+		<c:if test="${showNavbar}">
+			<%@ include file="navbar.jsp" %>
+		</c:if>
+	</nav>
+	<div class="row">
+		<aside class="col-md-2">
+			<c:if test="${showSidebar}">
+            	<!-- Sidebar -->
+	            <jsp:include page="${sidebar}" />
+            </c:if>
+		</aside>
+	            
+		<c:choose>
+            <c:when test="${showSidebar}">
+            	<main class="col-md-9 content">
+            		<jsp:include page="${body}" />   
+            	</main>
+            </c:when>
+            <c:otherwise>
+            	<main class="col-md-12 content">
+            		<jsp:include page="${body}" />   
+            	</main>
+            </c:otherwise>
+         </c:choose>
+	</div>
 
 <footer>
-<c:choose>
-	<c:when test="${smallFooter }">
-		<%@ include file="footer_small.jsp" %>
-	</c:when>
-	<c:otherwise>
-		<%@ include file="footer.jsp" %>
-	</c:otherwise>
-</c:choose>
+	<c:choose>
+		<c:when test="${smallFooter }">
+			<%@ include file="footer_small.jsp" %>
+		</c:when>
+		<c:otherwise>
+			<%@ include file="footer.jsp" %>
+		</c:otherwise>
+	</c:choose>
 </footer>
 
 </body>

@@ -73,8 +73,8 @@ public class MemberController {
 //			} else {
 				HttpSession session=request.getSession();
 				session=request.getSession();
-				session.setAttribute("isLogOn", true);
-				session.setAttribute("memberInfo",memberVO);
+				session.setAttribute("isBuyerLogOn", true);
+				session.setAttribute("buyerInfo",memberVO);
 				
 				message  = "<script>";
 			    message += " location.href='"+request.getContextPath()+"/main';";

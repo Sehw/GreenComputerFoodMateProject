@@ -78,13 +78,28 @@
 				        </div>
 				
 				        <!-- 제출 버튼 -->
-				        <div class="text-center">
-				        	<a href="${contextPath}/member/signUpSelectForm.do" class="btn btn-success px-4">가입 하기</a>
-				        </div>
+				        <button type="submit" id="submitButton" disabled>가입 하기</button>
 			    </div>
 	        </div>
 	    </div>
 	</div>
 </div>
+<script>
+	document.getElementById("agreeCheckbox").addEventListener("change", function() {
+	    var submitButton = document.getElementById("submitButton");
+	
+	    if (this.checked) {
+	    	submitButton.disabled = false; // 버튼 활성화
+	    } else {
+	    	submitButton.disabled = true; // 버튼 비활성화
+	    }
+	});
+	
+	document.getElementById("submitButton").addEventListener("click", function() {
+	    if (!this.disabled) {
+	        window.location.href = "${contextPath}/member/signUpSelectForm.do"; // 이동할 페이지
+	    }
+	});
+</script>
 </body>
 </html>

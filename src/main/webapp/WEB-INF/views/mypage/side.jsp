@@ -38,7 +38,7 @@
         }
     </style>
 <body>
-    <div class="sidebar">
+    <div class="col-12 sidebar">
         <h3><a href="${contextPath}/mypage/mypageForm.do">마이페이지</a></h3>
         <hr>
         <h5>메이트관리</h5>

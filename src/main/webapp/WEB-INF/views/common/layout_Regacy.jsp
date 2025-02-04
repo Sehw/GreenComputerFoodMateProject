@@ -48,7 +48,7 @@
             </c:choose>
             </div>
         </div>
-        <c:if test="${showHeadermenu}">
+        <c:if test="${showNavbar}">
 	        <div class="row">
 	           <%@ include file="navbar.jsp" %>
 	        </div>
@@ -76,7 +76,6 @@
                 <jsp:include page="${body}" />
             </div>
         </div>
-    </div>
 </body>
 <footer>
         <!-- Footer -->

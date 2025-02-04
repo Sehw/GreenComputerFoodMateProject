@@ -82,16 +82,23 @@
     </div>
 
     <div class="action-buttons">
-        <a href="${contextPath}/member/loginForm" title="로그인 및 마이페이지">
+        <a id = "myPageLink" href="${contextPath}/member/loginForm" title="로그인 및 마이페이지">
             <i class="fas fa-user"></i>
         </a>
-        <a href="${contextPath}/recipe/recipe_Add" title="레시피 작성">
+        <a id = "recipeLink" href="${contextPath}/member/loginForm" title="레시피 작성">
             <i class="fas fa-pen"></i>
         </a>
-        <a href="${contextPath}/cart/cartForm" title="장바구니">
+        <a id = "cartLink" href="${contextPath}/member/loginForm" title="장바구니">
             <i class="fas fa-shopping-cart"></i>
         </a>
     </div>
 </div>
+<script>
+	if(${sessionScope.isBuyerLogOn ? 'true' : 'false'} == true){
+		document.getElementById('myPageLink').href = "${contextPath}/mypage/mypageForm";
+		document.getElementById('recipeLink').href = "${contextPath}/recipe/recipe_Add";
+		document.getElementById('cartLink').href = "${contextPath}/cart/cartForm";
+	}
+</script>
 </body>
 </html>

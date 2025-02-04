@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.spring.FoodMate.common.Util;
+
 
 @Controller
 public class AdminController {
@@ -19,7 +21,7 @@ public class AdminController {
 	
 	@RequestMapping(value="/admin/adminMain", method=RequestMethod.GET)
 	private ModelAndView main(@RequestParam(value="result", required=false) String result, @RequestParam(value="action",required=false) String action, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = getViewName(request);
+		String viewName = Util.getViewName(request);
 		HttpSession session = request.getSession();
 		session.setAttribute("action", action);
 		ModelAndView mav = new ModelAndView();
@@ -36,7 +38,7 @@ public class AdminController {
 	
 	@RequestMapping(value="/admin/*", method=RequestMethod.GET)
 	private ModelAndView form(@RequestParam(value="result", required=false) String result, @RequestParam(value="action",required=false) String action, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = getViewName(request);
+		String viewName = Util.getViewName(request);
 		HttpSession session = request.getSession();
 		session.setAttribute("action", action);
 		ModelAndView mav = new ModelAndView();
@@ -51,33 +53,4 @@ public class AdminController {
 		return mav;
 	}
 
-	private String getViewName(HttpServletRequest request) throws Exception{
-		String contextPath = request.getContextPath();
-		String uri = (String) request.getAttribute("javax.servlet.include.request_uri");
-		if(uri == null || uri.trim().equals("")) {
-			uri=request.getRequestURI();
-		}
-		int begin = 0;
-		if(!((contextPath==null) || ("".equals(contextPath))))
-		{
-			begin=contextPath.length();
-		}
-		int end;
-		if(uri.indexOf(";")!= -1) {
-			end = uri.indexOf(":");
-		} else if(uri.indexOf("?")!= -1) {
-			end = uri.indexOf("?");
-		} else {
-			end = uri.length();
-		}
-		
-		String fileName = uri.substring(begin, end);
-		if (fileName.indexOf(".")!= -1) {
-			fileName = fileName.substring(0,fileName.lastIndexOf("."));
-		}
-		if (fileName.lastIndexOf("/")!=-1) {
-			fileName = fileName.substring(fileName.lastIndexOf("/",1),fileName.length());
-		}
-		return fileName;
-	}
 }

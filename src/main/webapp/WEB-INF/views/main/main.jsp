@@ -13,6 +13,8 @@
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
 <link href="<c:url value="/resources/css/slide.css" />" rel="stylesheet">
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <style>
 		.bestrecipy{
 			width: 80%;
@@ -46,7 +48,7 @@
         });
 </script>
 <meta charset="UTF-8">
-<title>결과창</title>
+<title>메인화면</title>
 </head>
 <body>
 	<h5><strong>&#x1F44D 베스트 레시피</strong></h5>
