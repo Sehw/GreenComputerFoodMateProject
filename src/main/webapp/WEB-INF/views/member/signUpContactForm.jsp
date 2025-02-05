@@ -78,14 +78,16 @@
 				        </div>
 				
 				        <!-- 제출 버튼 -->
-				        <button type="submit" id="submitButton" disabled>가입 하기</button>
+				        <div class="text-center">
+				        	<button type="submit" id="submitButton" class="btn btn-success px-4" disabled>가입 하기</button>
+				        </div>
 			    </div>
 	        </div>
 	    </div>
 	</div>
 </div>
 <script>
-	document.getElementById("agreeCheckbox").addEventListener("change", function() {
+	document.getElementById("termsCheck").addEventListener("change", function() {
 	    var submitButton = document.getElementById("submitButton");
 	
 	    if (this.checked) {

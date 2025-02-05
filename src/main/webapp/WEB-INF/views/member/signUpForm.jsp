@@ -153,27 +153,7 @@
 	                        <input name="phone_num" id="phone_num" type="text" class="form-control" placeholder="phone">
 	                    </div>
 	                </div>
-	                <div class="mb-3 row">
-	                    <label class="col-sm-3 col-form-label text-end">우편번호</label>
-	                    <div class="col-sm-6">
-	                    	<div class="d-flex align-items-center">
-	                        	<input name="zipcode" id="zipcode" type="text" class="form-control me-2" placeholder="zipcode">
-	                        	<p class="mb-0"><a href="javascript:execDaumPostcode()">우편번호 찾기</a></p>
-	                    	</div>
-	                    </div>
-	                </div>
-	                <div class="mb-3 row">
-	                    <label class="col-sm-3 col-form-label text-end">주소</label>
-	                    <div class="col-sm-9">
-	                        <input name="roadAddress" id="roadAddress" type="text" class="form-control" placeholder="roadAddress">
-	                    </div>
-	                </div>
-	                <div class="mb-3 row">
-	                    <label class="col-sm-3 col-form-label text-end">나머지 주소</label>
-	                    <div class="col-sm-9">
-	                        <input name="remainaddress" id="remainaddress" type="text" class="form-control" placeholder="address">
-	                    </div>
-	                </div>
+
 						<div class="mb-3 row">
 						    <div class="col-12 text-center">
 						        <input type="submit" class="btn btn-success" value="회원가입">
