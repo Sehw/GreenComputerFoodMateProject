@@ -16,6 +16,7 @@
         }
 </style>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
 	function execDaumPostcode() {
 		  new daum.Postcode({
@@ -55,19 +56,89 @@
 	
 	document.addEventListener('DOMContentLoaded', function () {
 		function toggleCustomInput() {
-		    const select = document.getElementById('mail2');
+		    const select = document.getElementById('email_domain');
 		    const customInput = document.getElementById('customMail');
 		    
 		    if (select.value === 'custom') {
 		        customInput.style.display = 'block';
+		        select.style.display='none';
 		        customInput.focus();
 		    } else {
 		        customInput.style.display = 'none';
 		        customInput.value = ''; // 입력 필드 초기화
+		        select.style.display='block';
 		    }
 		}
 		window.toggleCustomInput = toggleCustomInput;
 		});
+	
+	function fn_overlapped(){
+	    var _id=$("#byr_id").val();
+	    if(_id==''){
+	   	 alert("ID를 입력하세요");
+	   	 return;
+	    }
+	    $.ajax({
+	       type:"post",
+	       async:false,  
+	       url:"${contextPath}/member/overlapped.do",
+	       dataType:"text",
+	       data: {id:_id},
+	       success:function (data,textStatus){
+	          if(data=='false'){
+	       	    alert("사용할 수 있는 ID입니다.");
+	       	    $('#byrid_overlapped').prop("disabled", true);
+	       	    $('#byr_id').prop("readonly", true);
+	          }else{
+	        	  alert("중복된 ID입니다.");
+	          }
+	       },
+	       error:function(data,textStatus){
+	          alert("에러가 발생했습니다.");
+	       },
+	       complete:function(data,textStatus){
+	          //alert("작업을완료 했습니다");
+	       }
+	    });  //end ajax	 
+	 }	
+	
+    function prepareFormSubmission() {
+		if(!document.newBuyer.byr_id.value){
+			alert("아이디를 입력하세요.");
+			return false;
+		}
+		
+		if(!document.getElementById("byr_id").readOnly){
+			alert("아이디 중복검사를 진행해 주십시오.");
+			return false;
+		}
+		
+		if(!document.newBuyer.password.value){
+			alert("비밀번호를 입력하세요.");
+			return false;
+		}
+		
+		if(document.newBuyer.password.value != document.newBuyer.password_confirm.value){
+			alert("비밀번호를 동일하게 입력하세요.");
+			return false;
+		}
+		
+		if(!document.newBuyer.name.value){
+			alert("이름를 입력하세요.");
+			return false;
+		}
+		
+		if(!document.newBuyer.birth_6.value || !document.newBuyer.ssn1.value){
+			alert("주민등록 번호를 입력하세요.");
+			return false;
+		}
+		
+		if(!document.newBuyer.email_id.value){
+			alert("이메일을 입력하세요.");
+			return false;
+		}
+        return true;
+    }
 </script>
 <meta charset="UTF-8">
 <title>회원 가입</title>
@@ -78,13 +149,13 @@
 	    <div class="row justify-content-center">
 	        <div class="col-md-8">
 	            <h1 class="mb-4 text-center">일반 회원 가입</h1>
-	            <form name="newMember" action="${contextPath}/member/addBuyer" method="post" enctype="multipart/form-data">
+	            <form name="newBuyer" action="${contextPath}/member/addBuyer" method="post" enctype="multipart/form-data" onsubmit="return prepareFormSubmission()">
 	                <div class="mb-3 row">
 	                    <label class="col-sm-3 col-form-label text-end">아이디</label>
 	                    <div class="col-sm-6">
 	                    	<div class="d-flex align-items-center">
-		                        <input name="id" id="id" type="text" class="form-control me-2" placeholder="id">
-		                        <input type="reset" class="btn btn-secondary" value="중복확인">
+		                        <input name="byr_id" id="byr_id" type="text" class="form-control me-2" placeholder="id">
+		                        <input type="button" id="byrid_overlapped" class="btn btn-secondary" value="중복확인" onClick="fn_overlapped()">
 		                    </div>
 	                    </div>
 	                </div>
@@ -117,9 +188,12 @@
 		                            	<div class="col-sm-1 d-flex justify-content-center align-items-center" style="width: auto; padding: 0 5px;">
             								<span>-</span>
 		        						</div>
-		                            <div class="col-sm-2">
-		                                <input type="text" name="ssn1" id="ssn1" maxlength="1" class="form-control" placeholder="1자리">
+		                            <div style="width:35px;">
+		                                <input type="text" name="ssn1" id="ssn1" maxlength="1" class="form-control" placeholder="">
 		                            </div>
+		                            <div class="col-sm-1 d-flex justify-content-center align-items-center me-2" style="width: auto; padding: 0 5px;">
+            							<span>******</span>
+        							</div>
 		                         </div>
 	                        </div>
 	                    </div>
@@ -133,8 +207,10 @@
 					            <div class="col-sm-1 d-flex justify-content-center align-items-center me-2" style="width: auto; padding: 0 5px;">
             							<span>@</span>
         						</div>
+        						<!-- 직접 입력 필드 -->
+					            <input type="text" name="customMail" id="customMail" class="form-control me-2" placeholder="직접 입력" style="display:none; max-width: 200px;">
 					            <!-- 이메일 선택 -->
-					            <select id="email_domain" name="email_domain" class="form-select me-2" style="max-width: 200px;" onchange="toggleCustomInput()">
+					            <select id="email_domain" name="email_domain" class="form-select" style="max-width: 200px;" onchange="toggleCustomInput()">
 					                <option value="naver.com">naver.com</option>
 					                <option value="daum.net">daum.net</option>
 					                <option value="gmail.com">gmail.com</option>
@@ -142,8 +218,7 @@
 					                <option value="custom">직접 입력</option>
 					            </select>
 					            
-					            <!-- 직접 입력 필드 -->
-					            <input type="text" name="customMail" id="customMail" class="form-control" placeholder="직접 입력" style="display:none; max-width: 200px;">
+					            
 					        </div>
 					    </div>
 					</div>
@@ -157,7 +232,8 @@
 						<div class="mb-3 row">
 						    <div class="col-12 text-center">
 						        <input type="submit" class="btn btn-success" value="회원가입">
-						        <input type="reset" class="btn btn-secondary" value="취소">
+						        <input type="button" class="btn btn-secondary" onclick="location.href='${contextPath}/member/signUpSelectForm'" value="취소">
+						    	<input type="reset" class="btn btn-success" value="다시입력">
 						    </div>
 						</div>
 	            </form>

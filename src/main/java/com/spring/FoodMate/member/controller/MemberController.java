@@ -22,7 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.FoodMate.common.Util;
 import com.spring.FoodMate.member.service.MemberService;
-import com.spring.FoodMate.member.vo.MemberVO;
+import com.spring.FoodMate.member.vo.BuyerVO;
 import com.spring.FoodMate.mypage.service.ProfileService;
 import com.spring.FoodMate.mypage.vo.ProfileVO;
 
@@ -35,7 +35,7 @@ public class MemberController {
 	@Autowired
 	private ProfileService profileService;
 	@Autowired
-	private MemberVO memberVO;
+	private BuyerVO memberVO;
 	@Autowired
 	private ProfileVO profileVO;
 
@@ -91,8 +91,26 @@ public class MemberController {
 		return resEntity;
 	}
 	
+	@RequestMapping(value="/member/logout", method = RequestMethod.GET)
+	public String logout(HttpServletRequest request) throws Exception {
+	    // 세션 삭제
+	    HttpSession session = request.getSession(false);  // 이미 세션이 있으면 가져오기
+	    if (session != null) {
+	        session.invalidate();  // 세션 무효화
+	    }
+	    return "redirect:/main";  // 로그인 페이지로 리다이렉트
+	}
+	
+	@RequestMapping(value="/member/overlapped.do" ,method = RequestMethod.POST)
+	public ResponseEntity buyIDoverlapped(@RequestParam("id") String id,HttpServletRequest request, HttpServletResponse response) throws Exception{
+		ResponseEntity resEntity = null;
+		String result = memberService.buyerIDoverlapped(id);
+		resEntity =new ResponseEntity(result, HttpStatus.OK);
+		return resEntity;
+	}
+	
 	@RequestMapping(value="/member/addBuyer" ,method = RequestMethod.POST)
-	public ResponseEntity addBuyer(@ModelAttribute("memberVO") MemberVO _memberVO,
+	public ResponseEntity addBuyer(@ModelAttribute("memberVO") BuyerVO _memberVO,
 			                HttpServletRequest request, HttpServletResponse response) throws Exception {
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("utf-8");

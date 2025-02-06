@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 @Component("sellerVO")
-public class Seller {
+public class SellerVO {
 	private String member_id;
 	private String member_password;
 	private String password_confirm;

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
-import com.spring.FoodMate.member.vo.MemberVO;
+import com.spring.FoodMate.member.vo.BuyerVO;
 
 @Repository("memberDAO")
 public class MemberDAO {
@@ -15,12 +15,17 @@ public class MemberDAO {
 	private SqlSession sqlSession;	
 	
 	
-	public MemberVO login(Map loginMap) throws DataAccessException{
-		MemberVO member=(MemberVO)sqlSession.selectOne("mapper.member.login",loginMap);
+	public BuyerVO login(Map loginMap) throws DataAccessException{
+		BuyerVO member=(BuyerVO)sqlSession.selectOne("mapper.member.login",loginMap);
 	   return member;
 	}
 	
-	public void insertNewBuyer(MemberVO memberVO) throws DataAccessException{
+	public String selectOverlappedBuyerID(String id) throws DataAccessException {
+		String result =  sqlSession.selectOne("mapper.member.selectOverlappedBuyerID",id);
+		return result;
+	}
+	
+	public void insertNewBuyer(BuyerVO memberVO) throws DataAccessException{
 		sqlSession.insert("mapper.member.insertNewBuyer",memberVO);
 	}
 }

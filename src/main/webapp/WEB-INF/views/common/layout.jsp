@@ -12,6 +12,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+<style>
+		.sidebar {
+            background-color: #f8f9fa;
+            height: 100vh; /* 화면 높이 */
+            padding: 20px;
+        }
+        .content {
+        	flex: 1; /* 남은 공간을 채움 */
+            padding: 20px;
+        }
+        .header, .footer {
+            background-color: #ffffff;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            flex-shrink: 0; /* 푸터 크기가 줄어들지 않음 */
+        }
+</style>
 <header>
 	<div class="row">
             <div class="col-12 header">

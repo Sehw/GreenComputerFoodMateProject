@@ -58,7 +58,7 @@
             <!-- 아이디 입력 필드 -->
             <div class="mb-3">
                 <label for="userID" class="form-label">아이디</label>
-                <input type="text" class="form-control" id="id" name="id" placeholder="아이디를 입력하세요" required>
+                <input type="text" class="form-control" id="byr_id" name="byr_id" placeholder="아이디를 입력하세요" required>
             </div>
             <!-- 비밀번호 입력 필드 -->
             <div class="mb-3">
@@ -100,7 +100,7 @@
             <!-- 아이디 입력 필드 -->
             <div class="mb-3">
                 <label for="userID" class="form-label">아이디</label>
-                <input type="text" class="form-control" id="id" name="id" placeholder="아이디를 입력하세요" required>
+                <input type="text" class="form-control" id="slr_id" name="slr_id" placeholder="아이디를 입력하세요" required>
             </div>
             <!-- 비밀번호 입력 필드 -->
             <div class="mb-3">

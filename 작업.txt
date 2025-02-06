@@ -1,4 +1,8 @@
 
+****** 추가하기
+중복확인
+
+
 판매자 회원가입 -> 주소받기빼기
 
 회원탈퇴 -> 회원탈퇴 메시지 꾸미기
@@ -14,3 +18,52 @@ DB ID,PW 이름통일
 
 <img src="${contextPath}/resources/images/Shopping/myungran.jpg" alt="명란 젓" class="img-fluid rounded" style="width: 50px; height: 50px; object-fit: cover;">
 <img src="${contextPath}/resources/images/Shopping/doma.jpg" alt="향균도마" class="img-fluid rounded" style="width: 50px; height: 50px; object-fit: cover;">
+
+	<select id="selectAllMemberList" resultMap="memResult">
+		<![CDATA[
+			select * from t_member order by joinDate desc
+		]]>
+	</select>
+
+	<select id="selectMemberById" resultType="memberVO" parameterType="String">
+		<![CDATA[
+			select * from t_member where id = #{id}
+		]]>
+	</select>
+	
+	<select id="selectMemberByPwd" resultMap="memResult" parameterType="int">
+		<![CDATA[
+			select * from t_member where pwd = #{pwd}
+		]]>
+	</select>
+	
+	<select id="selectName" resultType="String">
+		<![CDATA[
+			select name from t_member where id = 'hong'
+		]]>
+	</select>
+	
+	<select id="selectPwd" resultType="int">
+		<![CDATA[
+			select pwd from t_member where id = 'hong'
+		]]>
+	</select>
+	
+	
+	<update id="updateCustomer" parameterType="memberVO">
+		<![CDATA[
+			update t_member set pwd=#{pwd}, name=#{name}, email=#{email} where id=#{id}
+		]]>
+	</update>
+	
+	<delete id="deleteCustomer" parameterType="String">
+	<![CDATA[
+		delete from t_member where id=#{id}
+	]]>
+	</delete>
+	
+	<select id="loginById" resultType="buyerVO" parameterType="buyerVO">
+	<![CDATA[
+		select * from t_member where id = #{id} and pwd = #{pwd}
+	]]>
+	</select>

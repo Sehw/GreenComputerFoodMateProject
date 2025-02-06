@@ -4,35 +4,34 @@ package com.spring.FoodMate.member.vo;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-@Component("memberVO")
-public class MemberVO {
-	// 로그인 & 회원가입
-	private String id;
-	private String password;
-	private String password_confirm;
+@Component("buyerVO")
+public class BuyerVO {
+	// 로그인
+	private String byr_id;
+	private String password; // 로그인시에만 사용, 세션 정보 삽입때 사용X
 	private String name;
 	private String birth_6;
-	private String ssn1;
 	private String sex;
 	private String email;
+	private String phone_num;
+	private String deleteidstatus;
+	
+	// 회원가입 요소
+	private String password_confirm;
 	private String email_id;
 	private String email_domain;
 	private String customMail;
-	private String phone_num;
-	private String zipcode;
-	private String roadAddress;
-	private String remainaddress;
-	private String deleteidstatus;
+	private String ssn1;
 	
-	private String byr_id;
+	
 
 	private MultipartFile profileImage;
 	
-	public String getId() {
-		return id;
+	public String getByr_id() {
+		return byr_id;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setByr_id(String byr_id) {
+		this.byr_id = byr_id;
 	}
 	public String getPassword() {
 		return password;
@@ -57,12 +56,6 @@ public class MemberVO {
 	}
 	public void setBirth_6(String birth_6) {
 		this.birth_6 = birth_6;
-	}
-	public String getByr_id() {
-		return byr_id;
-	}
-	public void setByr_id(String byr_id) {
-		this.byr_id = byr_id;
 	}
 	public String getSsn1() {
 		return ssn1;
@@ -99,24 +92,6 @@ public class MemberVO {
 	}
 	public void setPhone_num(String phone_num) {
 		this.phone_num = phone_num;
-	}
-	public String getZipcode() {
-		return zipcode;
-	}
-	public void setZipcode(String zipcode) {
-		this.zipcode = zipcode;
-	}
-	public String getRoadAddress() {
-		return roadAddress;
-	}
-	public void setRoadAddress(String roadAddress) {
-		this.roadAddress = roadAddress;
-	}
-	public String getRemainaddress() {
-		return remainaddress;
-	}
-	public void setRemainaddress(String remainaddress) {
-		this.remainaddress = remainaddress;
 	}
 	public MultipartFile getProfileImage() {
 		return profileImage;

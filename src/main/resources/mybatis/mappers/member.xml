@@ -4,8 +4,8 @@
 	"../mybatis-3-mapper.dtd">
 
 	<mapper namespace="mapper.member">
-		<resultMap id="memResult" type="memberVO">
-			<result property="id" column="id" />
+		<resultMap id="buyResult" type="buyerVO">
+			<result property="byr_id" column="byr_id" />
 		    <result property="password" column="password" />
 		    <result property="name" column="name" />
 		    <result property="birth_6" column="birth_6" />
@@ -15,15 +15,15 @@
 		</resultMap>
 		
 		
-	<select id="login" resultType="memberVO"  parameterType="java.util.Map"  >
+	<select id="login" resultType="buyerVO"  parameterType="java.util.Map"  >
 	    <![CDATA[
 			select * from foodmate_buyer 
-			 where byr_id=#{id}
+			 where byr_id=#{byr_id}
 			 and pw=#{password}
 		]]>
 	</select>
 		
-	<insert id="insertNewBuyer" parameterType="memberVO">
+	<insert id="insertNewBuyer" parameterType="buyerVO">
 		<![CDATA[
 			insert into foodmate_buyer(
 					byr_id, 
@@ -36,7 +36,7 @@
 			        join_date, 
 			        status
 		        )values(
-			        #{id}, 
+			        #{byr_id}, 
 			        #{password}, 
 			        #{name}, 
 			        #{birth_6}, 
@@ -50,52 +50,9 @@
 		]]>
 	</insert>
 	
-	<select id="selectAllMemberList" resultMap="memResult">
-		<![CDATA[
-			select * from t_member order by joinDate desc
-		]]>
-	</select>
-	
-	<select id="selectMemberById" resultType="memberVO" parameterType="String">
-		<![CDATA[
-			select * from t_member where id = #{id}
-		]]>
-	</select>
-	
-	<select id="selectMemberByPwd" resultMap="memResult" parameterType="int">
-		<![CDATA[
-			select * from t_member where pwd = #{pwd}
-		]]>
-	</select>
-	
-	<select id="selectName" resultType="String">
-		<![CDATA[
-			select name from t_member where id = 'hong'
-		]]>
-	</select>
-	
-	<select id="selectPwd" resultType="int">
-		<![CDATA[
-			select pwd from t_member where id = 'hong'
-		]]>
-	</select>
-	
-	
-	<update id="updateCustomer" parameterType="memberVO">
-		<![CDATA[
-			update t_member set pwd=#{pwd}, name=#{name}, email=#{email} where id=#{id}
-		]]>
-	</update>
-	
-	<delete id="deleteCustomer" parameterType="String">
-	<![CDATA[
-		delete from t_member where id=#{id}
-	]]>
-	</delete>
-	
-	<select id="loginById" resultType="memberVO" parameterType="memberVO">
-	<![CDATA[
-		select * from t_member where id = #{id} and pwd = #{pwd}
-	]]>
+	<select id="selectOverlappedBuyerID" parameterType="String" resultType="String">
+	   select decode(count(*),1, 'true', 0, 'false')
+	   from foodmate_buyer
+	   where byr_id = #{byr_id}
 	</select>
 </mapper>

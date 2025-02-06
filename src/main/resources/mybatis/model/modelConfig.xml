@@ -4,7 +4,7 @@
 	"../mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias type="com.spring.FoodMate.member.vo.MemberVO" alias="memberVO"/>
+		<typeAlias type="com.spring.FoodMate.member.vo.BuyerVO" alias="buyerVO"/>
 		<typeAlias type="com.spring.FoodMate.mypage.vo.ProfileVO" alias="profileVO"/>
 	</typeAliases>
 </configuration>

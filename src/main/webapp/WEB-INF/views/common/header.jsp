@@ -70,6 +70,28 @@
     font-size: 18px;
     background-color: #f9f9f9;
 }
+
+/* 새로 추가한 스타일 */
+.welcome-message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fa9820; /* 환영 메시지 색 */
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    gap: 10px;
+}
+
+.welcome-message .username {
+    color: #ff4500; /* 사용자 이름 색 */
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
 </style>
 </head>
 <body>
@@ -82,9 +104,28 @@
     </div>
 
     <div class="action-buttons">
-        <a id = "myPageLink" href="${contextPath}/member/loginForm" title="로그인 및 마이페이지">
-            <i class="fas fa-user"></i>
-        </a>
+    	<!-- 로그인된 사용자 확인 -->
+        <c:if test="${not empty sessionScope.buyerInfo}">
+            <div class="welcome-message">
+                <i class="fas fa-user"></i>
+                <span>환영합니다, <span class="username">${sessionScope.buyerInfo.name}</span>님!</span>
+                <!-- 로그아웃 버튼 추가 -->
+                <a id = "myPageLink" href="${contextPath}/mypage/mypageForm" title="로그인 및 마이페이지">
+            		<i class="fas fa-home"></i>
+       			</a>
+                <a class="logout-button" href="${contextPath}/member/logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                </a>
+            </div>
+        </c:if>
+        <c:if test="${empty sessionScope.buyerInfo}">
+            <a href="${contextPath}/member/loginForm" title="로그인 및 마이페이지">
+                <i class="fas fa-user"></i>
+            </a>
+        </c:if>
+        
+        
+        
         <a id = "recipeLink" href="${contextPath}/member/loginForm" title="레시피 작성">
             <i class="fas fa-pen"></i>
         </a>
@@ -95,7 +136,6 @@
 </div>
 <script>
 	if(${sessionScope.isBuyerLogOn ? 'true' : 'false'} == true){
-		document.getElementById('myPageLink').href = "${contextPath}/mypage/mypageForm";
 		document.getElementById('recipeLink').href = "${contextPath}/recipe/recipe_Add";
 		document.getElementById('cartLink').href = "${contextPath}/cart/cartForm";
 	}
