@@ -5,6 +5,8 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.spring.FoodMate.member.vo.BuyerVO" alias="buyerVO"/>
+		<typeAlias type="com.spring.FoodMate.member.vo.SellerVO" alias="sellerVO"/>
+		<typeAlias type="com.spring.FoodMate.member.vo.AdminVO" alias="adminVO"/>
 		<typeAlias type="com.spring.FoodMate.mypage.vo.ProfileVO" alias="profileVO"/>
 	</typeAliases>
 </configuration>

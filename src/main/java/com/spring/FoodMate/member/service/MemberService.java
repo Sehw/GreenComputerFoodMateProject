@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.FoodMate.member.vo.BuyerVO;
+import com.spring.FoodMate.member.vo.SellerVO;
 import com.spring.FoodMate.member.dao.MemberDAO;
 
 @Service("memberService")
@@ -20,24 +21,42 @@ public class MemberService {
 		return memberDAO.login(loginMap);
 	}
 	
+	public SellerVO loginslr(Map  loginMap) throws Exception{
+		return memberDAO.loginslr(loginMap);
+	}
+	
 	public String buyerIDoverlapped(String id) throws Exception{
 		return memberDAO.selectOverlappedBuyerID(id);
 	}
 	
-	public void addMember(BuyerVO memberVO) throws Exception{
+	public String sellerIDoverlapped(String id) throws Exception{
+		return memberDAO.selectOverlappedSellerID(id);
+	}
+	
+	public void addBuyer(BuyerVO buyerVO) throws Exception{
 		
-		String ssn1 = memberVO.getSsn1();
+		String ssn1 = buyerVO.getSsn1();
 		if (ssn1 != null && (ssn1.equals("1") || ssn1.equals("3"))) {
-            memberVO.setSex("M");
+			buyerVO.setSex("M");
         } else if (ssn1 != null && (ssn1.equals("2") || ssn1.equals("4"))) {
-            memberVO.setSex("F");
+        	buyerVO.setSex("F");
         } else {
-            memberVO.setSex("N");
+        	buyerVO.setSex("N");
         }
 		
-		String email = memberVO.getEmail_id() + "@" + memberVO.getEmail_domain();
-		memberVO.setEmail(email);
+		String email = buyerVO.getEmail_id() + "@" + buyerVO.getEmail_domain();
+		buyerVO.setEmail(email);
 		
-		memberDAO.insertNewBuyer(memberVO);
+		memberDAO.insertNewBuyer(buyerVO);
+	}
+	
+	public void addSeller(SellerVO sellerVO) throws Exception{
+		
+		sellerVO.setBusiness_no(sellerVO.getBsnum1() + sellerVO.getBsnum2() + sellerVO.getBsnum3());
+		
+		String email = sellerVO.getEmail_id() + "@" + sellerVO.getEmail_domain();
+		sellerVO.setEmail(email);
+		
+		memberDAO.insertNewSeller(sellerVO);
 	}
 }

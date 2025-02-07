@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
 <style>
 .container1 {
-    width: 900px;
+    width: 1100px;
     height: 120px;
     margin: 0 auto;
     display: flex;
@@ -23,7 +23,7 @@
 }
 
 .search-bar {
-    flex: 1;
+    flex-grow: 1;
     margin: 0 20px;
     display: flex;
     align-items: center;
@@ -31,7 +31,7 @@
 }
 
 .search-bar input[type="text"] {
-    width: 50%;
+    width: 70%;
     height: 40px;
     padding: 0 10px;
     border: 1px solid #ccc;
@@ -55,6 +55,7 @@
     display: flex;
     gap: 10px;
     align-items: center;
+    margin-left: auto;
 }
 
 .action-buttons a {
@@ -118,7 +119,20 @@
                 </a>
             </div>
         </c:if>
-        <c:if test="${empty sessionScope.buyerInfo}">
+        <c:if test="${not empty sessionScope.sellerInfo}">
+            <div class="welcome-message">
+                <i class="fas fa-shop"></i>
+                <span>환영합니다, <span class="username">${sessionScope.sellerInfo.name}</span>님!</span>
+                <!-- 로그아웃 버튼 추가 -->
+                <a id = "myPageLink" href="${contextPath}/mypage_seller/mypage_sell_main" title="로그인 및 마이페이지">
+            		<i class="fas fa-home"></i>
+       			</a>
+                <a class="logout-button" href="${contextPath}/member/logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                </a>
+            </div>
+        </c:if>
+        <c:if test="${empty sessionScope.buyerInfo and empty sessionScope.sellerInfo}">
             <a href="${contextPath}/member/loginForm" title="로그인 및 마이페이지">
                 <i class="fas fa-user"></i>
             </a>
@@ -137,6 +151,11 @@
 <script>
 	if(${sessionScope.isBuyerLogOn ? 'true' : 'false'} == true){
 		document.getElementById('recipeLink').href = "${contextPath}/recipe/recipe_Add";
+		document.getElementById('cartLink').href = "${contextPath}/cart/cartForm";
+	}
+	
+	if(${sessionScope.isSellerLogOn ? 'true' : 'false'} == true){
+		document.getElementById('recipeLink').href = "${contextPath}/product_add";
 		document.getElementById('cartLink').href = "${contextPath}/cart/cartForm";
 	}
 </script>

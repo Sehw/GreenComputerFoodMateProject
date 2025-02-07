@@ -50,7 +50,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mb-2 mb-lg-0 w-100 d-flex justify-content-between">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="${contextPath}/main">메인</a>
+            <a class="nav-link" aria-current="page" href="${contextPath}/main">메인</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="${contextPath}/recipe/recipe_list">레시피</a>
@@ -81,6 +81,20 @@
     </div>
   </div>
 </nav>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // 현재 페이지 URL 가져오기
+    let currentPage = window.location.pathname;
+
+//    // 레시피 페이지에서 장바구니 버튼 숨김
+//    if (currentPage.includes('/recipe')) {
+//        document.getElementById('cartLink').style.display = 'none';
+//    }
+
+//    // 장바구니 페이지에서 레시피 버튼 숨김
+//    if (currentPage.includes('/cart')) {
+//        document.getElementById('recipeLink').style.display = 'none';
+//    }
+</script>
 </body>
 </html>

@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.spring.FoodMate.common.Util;
 import com.spring.FoodMate.member.service.MemberService;
 import com.spring.FoodMate.member.vo.BuyerVO;
+import com.spring.FoodMate.member.vo.SellerVO;
 import com.spring.FoodMate.mypage.service.ProfileService;
 import com.spring.FoodMate.mypage.vo.ProfileVO;
 
@@ -35,7 +36,9 @@ public class MemberController {
 	@Autowired
 	private ProfileService profileService;
 	@Autowired
-	private BuyerVO memberVO;
+	private BuyerVO buyerVO;
+	@Autowired
+	private SellerVO sellerVO;
 	@Autowired
 	private ProfileVO profileVO;
 
@@ -63,8 +66,8 @@ public class MemberController {
 		ResponseEntity resEntity = null;
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
-		memberVO=memberService.login(loginMap);
-		if(memberVO!= null && memberVO.getByr_id()!=null){
+		buyerVO=memberService.login(loginMap);
+		if(buyerVO!= null && buyerVO.getByr_id()!=null){
 			
 //			if(memberVO.getDel_yn().equals("Y")) {
 //				String message="회원 탈퇴가 진행중인 아이디입니다.\\n관리자에게 문의해 주세요.\\nEmail : hong@gil.dong";
@@ -74,7 +77,44 @@ public class MemberController {
 				HttpSession session=request.getSession();
 				session=request.getSession();
 				session.setAttribute("isBuyerLogOn", true);
-				session.setAttribute("buyerInfo",memberVO);
+				session.setAttribute("buyerInfo",buyerVO);
+				
+				message  = "<script>";
+			    message += " location.href='"+request.getContextPath()+"/main';";
+			    message += " </script>";
+//			}
+			
+		}else{
+		    message  = "<script>";
+		    message +=" alert('아이디나 비밀번호가 잘못되었습니다. 다시 로그인해주세요.');";
+		    message += " location.href='"+request.getContextPath()+"/member/loginForm';";
+		    message += " </script>";
+		}
+		resEntity = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
+		return resEntity;
+	}
+	
+	@RequestMapping(value="/member/loginslr" ,method = RequestMethod.POST)
+	public ResponseEntity loginslr(@RequestParam Map<String, String> loginMap,
+			                  HttpServletRequest request, HttpServletResponse response) throws Exception {
+		response.setContentType("text/html; charset=UTF-8");
+		request.setCharacterEncoding("utf-8");
+		String message = null;
+		ResponseEntity resEntity = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		sellerVO=memberService.loginslr(loginMap);
+		if(sellerVO!= null && sellerVO.getSlr_id()!=null){
+			
+//			if(memberVO.getDel_yn().equals("Y")) {
+//				String message="회원 탈퇴가 진행중인 아이디입니다.\\n관리자에게 문의해 주세요.\\nEmail : hong@gil.dong";
+//				mav.addObject("message", message);
+//				mav.setViewName("/member/loginForm");
+//			} else {
+				HttpSession session=request.getSession();
+				session=request.getSession();
+				session.setAttribute("isSellerLogOn", true);
+				session.setAttribute("sellerInfo",sellerVO);
 				
 				message  = "<script>";
 			    message += " location.href='"+request.getContextPath()+"/main';";
@@ -109,8 +149,16 @@ public class MemberController {
 		return resEntity;
 	}
 	
+	@RequestMapping(value="/member/overlappedseller.do" ,method = RequestMethod.POST)
+	public ResponseEntity sellerIDoverlapped(@RequestParam("id") String id,HttpServletRequest request, HttpServletResponse response) throws Exception{
+		ResponseEntity resEntity = null;
+		String result = memberService.sellerIDoverlapped(id);
+		resEntity =new ResponseEntity(result, HttpStatus.OK);
+		return resEntity;
+	}
+	
 	@RequestMapping(value="/member/addBuyer" ,method = RequestMethod.POST)
-	public ResponseEntity addBuyer(@ModelAttribute("memberVO") BuyerVO _memberVO,
+	public ResponseEntity addBuyer(@ModelAttribute("buyerVO") BuyerVO _buyerVO,
 			                HttpServletRequest request, HttpServletResponse response) throws Exception {
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("utf-8");
@@ -135,7 +183,7 @@ public class MemberController {
 //	            _memberVO.setProfileImagePath(uploadDir + file.getOriginalFilename());
 //	            System.out.println("프로필 이미지 업로드 완료: " + file.getOriginalFilename());
 //	        }
-		    memberService.addMember(_memberVO);
+		    memberService.addBuyer(_buyerVO);
 		    
 		    message  = "<script>";
 		    message +=" alert('회원 가입을 마쳤습니다.로그인창으로 이동합니다.');";
@@ -146,6 +194,50 @@ public class MemberController {
 			message  = "<script>";
 		    message +=" alert('작업 중 오류가 발생했습니다. 다시 시도해 주세요.');";
 		    message += " location.href='"+request.getContextPath()+"/member/signUpForm';";
+		    message += " </script>";
+			e.printStackTrace();
+		}
+		resEntity = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
+		return resEntity;
+	}
+	
+	@RequestMapping(value="/member/addSeller" ,method = RequestMethod.POST)
+	public ResponseEntity addSeller(@ModelAttribute("sellerVO") SellerVO _sellerVO,
+			                HttpServletRequest request, HttpServletResponse response) throws Exception {
+		response.setContentType("text/html; charset=UTF-8");
+		request.setCharacterEncoding("utf-8");
+		String message = null;
+		ResponseEntity resEntity = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		try {
+//			MultipartFile file = _memberVO.getProfileImage();
+//			if (file != null && !file.isEmpty()) {
+//	            String baseDir = "C:/FoodMate/users/";
+//	            
+//	            String userId = _memberVO.getMember_id();
+//	            String uploadDir = baseDir + userId;
+//	            
+//	            File uploadPath = new File(uploadDir);
+//	            if (!uploadPath.exists()) {
+//	                uploadPath.mkdirs();
+//	            }
+//	            // 파일 저장
+//	            file.transferTo(new File(uploadDir + file.getOriginalFilename()));
+//	            _memberVO.setProfileImagePath(uploadDir + file.getOriginalFilename());
+//	            System.out.println("프로필 이미지 업로드 완료: " + file.getOriginalFilename());
+//	        }
+		    memberService.addSeller(_sellerVO);
+		    
+		    message  = "<script>";
+		    message +=" alert('회원 가입을 마쳤습니다.로그인창으로 이동합니다.');";
+		    message += " location.href='"+request.getContextPath()+"/member/loginForm';";
+		    message += " </script>";
+		    
+		}catch(Exception e) {
+			message  = "<script>";
+		    message +=" alert('작업 중 오류가 발생했습니다. 다시 시도해 주세요.');";
+		    message += " location.href='"+request.getContextPath()+"/member/signUpSellerForm';";
 		    message += " </script>";
 			e.printStackTrace();
 		}

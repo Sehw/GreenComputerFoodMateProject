@@ -96,7 +96,7 @@
     </div>
     <div id="sellerTab" class="tab-pane fade">
         <h2 style="color:#87c058">판매자 로그인</h2>
-        <form name="frmLogin" method="post" action="${contextPath}/member/login">
+        <form name="frmLogin" method="post" action="${contextPath}/member/loginslr">
             <!-- 아이디 입력 필드 -->
             <div class="mb-3">
                 <label for="userID" class="form-label">아이디</label>

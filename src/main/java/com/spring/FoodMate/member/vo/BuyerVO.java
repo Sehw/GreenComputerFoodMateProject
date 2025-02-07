@@ -14,7 +14,7 @@ public class BuyerVO {
 	private String sex;
 	private String email;
 	private String phone_num;
-	private String deleteidstatus;
+	private String status;
 	
 	// 회원가입 요소
 	private String password_confirm;
@@ -22,8 +22,6 @@ public class BuyerVO {
 	private String email_domain;
 	private String customMail;
 	private String ssn1;
-	
-	
 
 	private MultipartFile profileImage;
 	
@@ -105,11 +103,11 @@ public class BuyerVO {
 	public void setSex(String sex) {
 		this.sex = sex;
 	}
-	public String getDeleteidstatus() {
-		return deleteidstatus;
+	public String getStatus() {
+		return status;
 	}
-	public void setDeleteidstatus(String deleteidstatus) {
-		this.deleteidstatus = deleteidstatus;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 }
 

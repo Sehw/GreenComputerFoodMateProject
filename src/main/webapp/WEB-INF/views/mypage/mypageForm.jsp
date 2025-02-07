@@ -70,7 +70,7 @@
 						<a href="${contextPath}/mypage/myInfoManage/profileEditForm">
 							<img src="${contextPath}/resources/images/profile_09.png" alt="" />
 						</a>
-						<p> ${sessionScope.memberInfo.name} 회원님 </p>
+						<p> ${sessionScope.buyerInfo.name} 회원님 </p>
 						<p> 보유포인트 </p>
 						<p> 0 포인트 </p>
 						<p> 보유쿠폰 </p>
