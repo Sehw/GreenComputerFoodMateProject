@@ -141,17 +141,24 @@
         
         
         <a id = "recipeLink" href="${contextPath}/member/loginForm" title="레시피 작성">
-            <i class="fas fa-pen"></i>
+            <i id ="write" class="fas fa-pen"></i>
         </a>
         <a id = "cartLink" href="${contextPath}/member/loginForm" title="장바구니">
-            <i class="fas fa-shopping-cart"></i>
+            <i id ="cart" class="fas fa-shopping-cart"></i>
         </a>
     </div>
 </div>
 <script>
+	
+	let currentPage = window.location.pathname;
+	
 	if(${sessionScope.isBuyerLogOn ? 'true' : 'false'} == true){
 		document.getElementById('recipeLink').href = "${contextPath}/recipe/recipe_Add";
 		document.getElementById('cartLink').href = "${contextPath}/cart/cartForm";
+		if (currentPage.includes('/product_list')) {
+	        document.getElementById('write').style.display = 'none';
+	        document.getElementById('recipeLink').style.display = 'none';
+	    }
 	}
 	
 	if(${sessionScope.isSellerLogOn ? 'true' : 'false'} == true){

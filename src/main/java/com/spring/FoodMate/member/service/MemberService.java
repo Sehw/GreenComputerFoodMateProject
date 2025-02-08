@@ -44,6 +44,10 @@ public class MemberService {
         	buyerVO.setSex("N");
         }
 		
+		if(buyerVO.getEmail_domain().equals("custom")) {
+			buyerVO.setEmail_domain(buyerVO.getCustomMail());
+		}
+		
 		String email = buyerVO.getEmail_id() + "@" + buyerVO.getEmail_domain();
 		buyerVO.setEmail(email);
 		
@@ -53,6 +57,10 @@ public class MemberService {
 	public void addSeller(SellerVO sellerVO) throws Exception{
 		
 		sellerVO.setBusiness_no(sellerVO.getBsnum1() + sellerVO.getBsnum2() + sellerVO.getBsnum3());
+		
+		if(sellerVO.getEmail_domain().equals("custom")) {
+			sellerVO.setEmail_domain(sellerVO.getCustomMail());
+		}
 		
 		String email = sellerVO.getEmail_id() + "@" + sellerVO.getEmail_domain();
 		sellerVO.setEmail(email);
