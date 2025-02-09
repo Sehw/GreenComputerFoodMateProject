@@ -40,8 +40,16 @@
 </style>
 <meta charset="UTF-8">
 <title>로그인</title>
+
+<c:if test="${needLogin}">
+    <script>
+        alert("로그인이 필요한 서비스입니다.");
+    </script>
+</c:if>
+
 </head>
 <body>
+<main>
 <div class="d-flex justify-content-center align-items-center">
     <div class="login-container ">
     <ul class="nav nav-tabs mb-3 d-flex" id="loginTab" role="tablist">
@@ -138,5 +146,6 @@
     </div>
     </div>
 </div>
+</main>
 </body>
 </html>

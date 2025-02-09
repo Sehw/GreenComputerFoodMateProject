@@ -1,4 +1,4 @@
-package com.spring.FoodMate.product;
+package com.spring.FoodMate.product.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.FoodMate.common.Util;
 
-
 @Controller
 public class ProductController {
 	private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
@@ -24,7 +23,6 @@ public class ProductController {
 		String viewName = Util.getViewName(request);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("common/layout");
-		mav.addObject("showHeadermenu", true);
 		mav.addObject("showNavbar", true);
 		mav.addObject("title", "상품 검색창");
 		mav.addObject("body", "/WEB-INF/views/product" + viewName + ".jsp");
@@ -36,7 +34,6 @@ public class ProductController {
 		String viewName = Util.getViewName(request);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("common/layout");
-		mav.addObject("showHeadermenu", true);
 		mav.addObject("showNavbar", true);
 		mav.addObject("title", "제품 상세정보");
 		mav.addObject("body", "/WEB-INF/views/product" + viewName + ".jsp");
@@ -66,5 +63,4 @@ public class ProductController {
 		mav.addObject("body", "/WEB-INF/views/product" + viewName + ".jsp");
 		return mav;
 	}
-
 }

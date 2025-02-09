@@ -59,7 +59,7 @@
         <hr>
         <h5>쇼핑 관리</h5>
         <ul>
-	        <li><a href="${contextPath}/mypage/ShoppingManage/orderdeliverylistMangeForm.do">주문목록/배송조회</a></li>
+	        <li><a href="${contextPath}/mypage/ShoppingManage/orderlist">주문목록/배송조회</a></li>
 	        <li><a href="${contextPath}/mypage/ShoppingManage/canclelistManageForm.do">취소/반품/교환 내역</a></li>
 	        <li><a href="${contextPath}/mypage/ShoppingManage/refundManageForm.do">환불/입금 내역</a></li>
 	        <li><a href="${contextPath}/mypage/ShoppingManage/favoriteManageForm.do">찜 리스트</a></li>
