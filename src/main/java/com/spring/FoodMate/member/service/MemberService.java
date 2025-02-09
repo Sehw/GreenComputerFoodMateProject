@@ -33,6 +33,14 @@ public class MemberService {
 		return memberDAO.selectOverlappedSellerID(id);
 	}
 	
+	public String findBuyerId(BuyerVO buyerVO) throws Exception{
+		return memberDAO.selectFindBuyerID(buyerVO);
+	}
+	
+	public String findSellerId(SellerVO sellerVO) throws Exception{
+		return memberDAO.selectFindSellerID(sellerVO);
+	}
+	
 	public void addBuyer(BuyerVO buyerVO) throws Exception{
 		
 		String ssn1 = buyerVO.getSsn1();

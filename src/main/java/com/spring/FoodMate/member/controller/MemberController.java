@@ -244,5 +244,62 @@ public class MemberController {
 		resEntity = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
 		return resEntity;
 	}
+	
+	@RequestMapping(value="/member/byrIdFind", method=RequestMethod.POST)
+	public ModelAndView byrIdFind(@ModelAttribute("buyerVO") BuyerVO _buyerVO,
+	                              HttpServletRequest request, HttpServletResponse response) throws Exception {
+	    request.setCharacterEncoding("utf-8");
+	    
+	    ModelAndView mav = new ModelAndView();
+	    String foundId = null;
+
+	    try {
+	        // 아이디 찾기 로직 (예: memberService.findBuyerId 메서드 호출)
+	        foundId = memberService.findBuyerId(_buyerVO);
+	        
+	        if (foundId != null && !foundId.isEmpty()) {
+	            mav.setViewName("common/layout");  // 공통 레이아웃 적용
+	            mav.addObject("body", "/WEB-INF/views/member/idfindresult.jsp"); // 실제 페이지 경로
+	            mav.addObject("foundId", foundId); // 찾은 아이디를 뷰로 전달
+	            mav.addObject("title", "아이디 찾기 결과");
+	        } else {
+	            // 아이디를 찾지 못했을 경우 메시지 처리
+	            mav.setViewName("redirect:/member/signUpSellerForm");
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        mav.setViewName("redirect:/member/signUpSellerForm");
+	    }
+
+	    return mav;
+	}
+	
+	@RequestMapping(value="/member/ByrPasswordFind.do", method=RequestMethod.POST)
+	public ModelAndView ByrPasswordFind(@ModelAttribute("buyerVO") BuyerVO _buyerVO,
+	                              HttpServletRequest request, HttpServletResponse response) throws Exception {
+	    request.setCharacterEncoding("utf-8");
+	    
+	    ModelAndView mav = new ModelAndView();
+	    String foundId = null;
+
+	    try {
+	        // 아이디 찾기 로직 (예: memberService.findBuyerId 메서드 호출)
+	        foundId = memberService.findBuyerId(_buyerVO);
+	        
+	        if (foundId != null && !foundId.isEmpty()) {
+	            mav.setViewName("common/layout");  // 공통 레이아웃 적용
+	            mav.addObject("body", "/WEB-INF/views/member/buyerpasswdResetForm.jsp"); // 실제 페이지 경로
+	            mav.addObject("title", "비밀번호 재설정");
+	        } else {
+	            // 아이디를 찾지 못했을 경우 메시지 처리
+	            mav.setViewName("redirect:/member/signUpSellerForm");
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        mav.setViewName("redirect:/member/signUpSellerForm");
+	    }
+
+	    return mav;
+	}
 
 }

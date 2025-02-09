@@ -35,8 +35,17 @@ public class MemberDAO {
 		return result;
 	}
 	
-	public void insertNewBuyer(BuyerVO memberVO) throws DataAccessException{
-		sqlSession.insert("mapper.member.insertNewBuyer",memberVO);
+	public String selectFindBuyerID(BuyerVO buyerVO) throws DataAccessException {
+		String result =  sqlSession.selectOne("mapper.member.selectFindBuyerID",buyerVO);
+		return result;
+	}
+	public String selectFindSellerID(SellerVO sellerVO) throws DataAccessException {
+		String result =  sqlSession.selectOne("mapper.member.selectFindSellerID",sellerVO);
+		return result;
+	}
+	
+	public void insertNewBuyer(BuyerVO buyerVO) throws DataAccessException{
+		sqlSession.insert("mapper.member.insertNewBuyer",buyerVO);
 	}
 	
 	public void insertNewSeller(SellerVO sellerVO) throws DataAccessException{

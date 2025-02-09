@@ -104,4 +104,16 @@
 	   where slr_id = #{slr_id}
 	</select>
 	
+	<select id="selectFindBuyerPW" parameterType="java.util.Map" resultType="String">
+	   select decode(count(*),1, 'true', 0, 'false')
+	   from foodmate_buyer
+	   where name = #{name} and email = #{email} and byr_id = #{byr_id}
+	</select>
+	
+	<select id="selectFindSellerPW" parameterType="java.util.Map" resultType="String">
+	   select decode(count(*),1, 'true', 0, 'false')
+	   from foodmate_seller
+	   where name = #{name} and email = #{email} and slr_id = #{slr_id}
+	</select>
+	
 </mapper>

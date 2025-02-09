@@ -28,7 +28,7 @@
 <div class="d-flex justify-content-center align-items-center">
     <div class="login-container ">
         <h2 style="color:#87c058">구매자 아이디 찾기</h2>
-        <form name="frmidFind" method="post" action="${contextPath}/member/IdFind.do">
+        <form name="frmidFind" method="post" action="${contextPath}/member/byrIdFind.do">
         	<p>가입때 사용한 이름과 이메일을 입력해주십시오.</p>
             <!-- 이름 입력 필드 -->
             <div class="mb-3">
