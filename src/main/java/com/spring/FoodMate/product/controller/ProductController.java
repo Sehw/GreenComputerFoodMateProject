@@ -24,6 +24,7 @@ public class ProductController {
 	private ProductVO productVO;
 	@Autowired
 	private ProductService productService;
+	private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 	
 	@RequestMapping(value="/product_list", method=RequestMethod.GET)
 	private ModelAndView list(
@@ -82,5 +83,4 @@ public class ProductController {
 		mav.addObject("body", "/WEB-INF/views/product" + viewName + ".jsp");
 		return mav;
 	}
-
 }

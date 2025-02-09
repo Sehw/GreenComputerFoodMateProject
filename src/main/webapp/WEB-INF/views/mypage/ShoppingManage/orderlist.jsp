@@ -35,6 +35,7 @@
 </style>
 </head>
 <body>
+<main>
 <div class="container mt-1">
 	<div class="d-flex align-items-center border-bottom pb-2 mb-3">
       		<h5 class="mb-0 fw-bold">주문목록/배송조회</h5>
@@ -62,50 +63,47 @@
     	</div>
 	</div>
 	<table class="table table-hover table-custom">
-		<thead class="table-header table-secondary">
-			<tr>
-				<td>날짜/주문번호</td>
-				<td>상품명/옵션</td>
-				<td>상품금액/수량</td>
-				<td>주문상태</td>
-				<td>확인/리뷰</td>
-			</tr>
-		</thead>
-      	<tbody>
-      	<tr>
-      	  <td>2024-07-31
-      	  (20240731852982431)</td>
-          <td>
-          <img src="${contextPath}/resources/images/Shopping/myungran.jpg" alt="명란 젓" class="img-fluid rounded" style="width: 50px; height: 50px; object-fit: cover;">
-          [2025설날] 2025 명란시대 짜지않고 맛있는 명품 선동명란 명란젓 선물세트 350g/800g
-          </td>
-          <td>39,800원 (1개)</td>
-          <td>상품 준비중</td>
-          <td>
-            <div class="d-flex flex-column gap-1">
-		    	<button class="btn btn-outline-secondary btn-sm" disabled>배송조회</button>
-		    	<button class="btn btn-outline-success btn-sm" disabled>리뷰하기</button>
-		  	</div>
-          </td>
-        </tr>
+    <thead class="table-header table-secondary">
         <tr>
-          <td>2024-08-31
-      	  (20240831852982431)</td>
-          <td>
-          <img src="${contextPath}/resources/images/Shopping/doma.jpg" alt="향균도마" class="img-fluid rounded" style="width: 50px; height: 50px; object-fit: cover;">
-          파커아사히 항균도마 셰프 프로 블랙 중/대
-          </td>
-          <td>212,000원 (1개)</td>
-          <td>상품 준비중</td>
-          <td>
-            <div class="d-flex flex-column gap-1">
-		    	<button class="btn btn-outline-secondary btn-sm" disabled>배송조회</button>
-		    	<button class="btn btn-outline-success btn-sm" disabled>리뷰하기</button>
-		  	</div>
-          </td>
+            <td>날짜/주문번호</td>
+            <td>상품명/옵션</td>
+            <td>상품금액/수량</td>
+            <td>주문상태</td>
+            <td>확인/리뷰</td>
         </tr>
-		</tbody>
-	</table>
+    </thead>
+    
+    <tbody>
+        <c:forEach var="order" items="${orderList}">
+            <tr>
+                <!-- 주문 날짜 및 주문번호 -->
+                <td>(${order.ord_id})</td>
+
+                <!-- 상품명과 옵션 -->
+                <td>
+                    <img src="${contextPath}/resources/images/Shopping/${order.pdt_name}.jpg" alt="${order.pdt_name}" class="img-fluid rounded" style="width: 50px; height: 50px; object-fit: cover;">
+                    ${order.pdt_name}
+                </td>
+
+                <!-- 상품 금액 및 수량 -->
+                <td>${order.pdt_price}원 (${order.qty}개)</td>
+
+                <!-- 주문 상태 -->
+                <td>몰라</td>
+
+                <!-- 확인/리뷰 -->
+                <td>
+                    <div class="d-flex flex-column gap-1">
+                        <button class="btn btn-outline-secondary btn-sm" disabled>배송조회</button>
+                        <button class="btn btn-outline-success btn-sm" disabled>리뷰하기</button>
+                    </div>
+                </td>
+            </tr>
+        </c:forEach>
+    </tbody>
+    
+</table>
+
 	<nav aria-label="Page navigation">
 	  <ul class="pagination justify-content-center">
 	    <li class="page-item">
@@ -133,5 +131,6 @@
 	  </ul>
 	</nav>
 </div>
+</main>
 </body>
 </html>
