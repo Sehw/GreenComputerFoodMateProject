@@ -66,7 +66,7 @@
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: center;
 }
 
 .container_product {
@@ -112,39 +112,104 @@
     <div class="button">높은 가격순</div>
     <div class="button">판매량순</div>
 </article>
-<section class="container_display">
-
-	<c:choose>
-	    <c:when test="${empty list}">
-	        <p>표시할 내용이 없습니다.</p>
-	    </c:when>
-	    
-	    <c:otherwise>
-	        <c:forEach var="product" items="${list}">
-	        <article class="container_product">
-	            <div>
-	                <a href="${contextPath}/product_detail?pdt_id=${product.pdt_id}">
-	                    <img class="pdt_Image" src="${contextPath}/resources/images/${product.img_path}" alt="productImg">
-	                </a>
-	                <p>
-	                    ${product.name}<br>
-	                    <span class="pdt_FinalPrice">${product.price}원</span><br>
-	                    ⭐⭐⭐⭐⭐<br>
-	                </p>
-	            </div>
-	        </article>
-	        </c:forEach>
-	    </c:otherwise>
-	</c:choose>
-
-</section>
-
-필요한 기능 : 
-1. VO에 들어있는 판매자 아이디로 판매자 닉네임 가져와서 넣기
-아마 sql 자체에서 프로시저?로 처리? 혹은 판매자 닉네임까지 들어있는 뷰 만들고 거기서 갖고와야할듯?
-2. 금액 쉼표 처리하기
-3. 상품이 25개 넘어가면 페이지네이션 기능과 연동해서 처리하게하기
-
+<article class="container_display">
+	<div class="container_product">
+		<div>
+			<a href="${contextPath}/product_detail"><img class="pdt_Image" src="${contextPath}/resources/images/a1.jpg"></a>
+			<p>돼지고기 목전지 600g<br>
+			10% off, <span class="pdt_Price">30,000</span><br>
+			<span class="pdt_FinalPrice">27,000원</span><br>
+			⭐⭐⭐⭐⭐<br>
+			</p>
+		</div>
+	</div>
+	<div class="container_product">
+		<div>
+			<a href="${contextPath}/product_detail"><img class="pdt_Image" src="${contextPath}/resources/images/a2.jpg"></a>
+			<p>돼지고기 갈비 600g<br>
+			20% off, <span class="pdt_Price">60,000</span><br>
+			<span class="pdt_FinalPrice">48,000원</span><br>
+			⭐⭐⭐⭐⭐<br>
+			</p>
+		</div>
+	</div>
+	<div class="container_product">
+		<div>
+			<a href="${contextPath}/product_detail"><img class="pdt_Image" src="${contextPath}/resources/images/a3.jpg"></a>
+			<p>돼지고기 목살 600g<br>
+			15% off, <span class="pdt_Price">40,000</span><br>
+			<span class="pdt_FinalPrice">34,000원</span><br>
+			⭐⭐⭐⭐⭐<br>
+			</p>
+		</div>
+	</div>
+	<div class="container_product">
+		<div>
+			<a class="pdt_Image" href="${contextPath}/product_detail"><img src="${contextPath}/resources/images/placeholder(200x200).png"></a>
+			<p>돼지고기 목살 600g<br>
+			<span class="pdt_Price">27,000원</span><br>
+			⭐⭐⭐⭐⭐<br>
+			</p>
+		</div>
+	</div>
+	<div class="container_product">
+		<div>
+			<a class="pdt_Image" href="${contextPath}/product_detail"><img src="${contextPath}/resources/images/placeholder(200x200).png"></a>
+			<p>돼지고기 목살 600g<br>
+			<span class="pdt_Price">27,000원</span><br>
+			⭐⭐⭐⭐⭐<br>
+			</p>
+		</div>
+	</div>
+	
+	<div class="container_product">
+		<div>
+			<a href="${contextPath}/product_detail"><img class="pdt_Image" src="${contextPath}/resources/images/a1.jpg"></a>
+			<p>돼지고기 목살 600g<br>
+			10% 할인, <span class="pdt_Price">30,000</span><br>
+			<span class="pdt_FinalPrice">27,000원</span><br>
+			⭐⭐⭐⭐⭐<br>
+			</p>
+		</div>
+	</div>
+	<div class="container_product">
+		<div>
+			<a href="${contextPath}/product_detail"><img class="pdt_Image" src="${contextPath}/resources/images/a2.jpg"></a>
+			<p>돼지고기 목살 600g<br>
+			<span class="pdt_Price">27,000원</span><br>
+			⭐⭐⭐⭐⭐<br>
+			</p>
+		</div>
+	</div>
+	<div class="container_product">
+		<div>
+			<a href="${contextPath}/product_detail"><img class="pdt_Image" src="${contextPath}/resources/images/a3.jpg"></a>
+			<p>돼지고기 목살 600g<br>
+			<span class="pdt_Price">27,000원</span><br>
+			⭐⭐⭐⭐⭐<br>
+			</p>
+		</div>
+	</div>
+	<div class="container_product">
+		<div>
+			<a class="pdt_Image" href="${contextPath}/product_detail"><img src="${contextPath}/resources/images/placeholder(200x200).png"></a>
+			<p>돼지고기 목살 600g<br>
+			<span class="pdt_Price">27,000원</span><br>
+			⭐⭐⭐⭐⭐<br>
+			</p>
+		</div>
+	</div>
+	<div class="container_product">
+		<div>
+			<a class="pdt_Image" href="${contextPath}/product_detail"><img src="${contextPath}/resources/images/placeholder(200x200).png"></a>
+			<p>돼지고기 목살 600g<br>
+			<span class="pdt_Price">27,000원</span><br>
+			⭐⭐⭐⭐⭐<br>
+			</p>
+		</div>
+	</div>
+	
+</article>
 
 <article class="pagination">
     <div class="pagination_buttons">

@@ -98,10 +98,11 @@
 <div class="container1">
     <a href="${contextPath}/main"><img id="sitelogo" src="${contextPath}/resources/images/foodmatelogo.png" alt="푸드메이트로고"></a>
 
-    <div class="search-bar">
-        <input type="text" placeholder="레시피나 재료를 검색해 보세요.">
-        <button><i class="fas fa-search"></i></button>
-    </div>
+	<form action="${contextPath}/product_list" method="GET" class="search-bar">
+	    <input type="text" name="keyword" placeholder="재료만 검색가능">
+	    <button type="submit"><i class="fas fa-search"></i></button>
+	</form>
+
 
     <div class="action-buttons">
     	<!-- 로그인된 사용자 확인 -->
