@@ -1,4 +1,4 @@
-package com.spring.FoodMate.order;
+package com.spring.FoodMate.order.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

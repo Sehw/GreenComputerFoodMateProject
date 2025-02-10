@@ -159,9 +159,6 @@
 
 </style>
 </head>
-
-<c:set var="product" value="${pdt}"/>
-
 <body>
 <main id="product_detail">
 
@@ -172,19 +169,19 @@
 </article>
 
 <article class="container_pdt">
-	<img id="pdt_Img" src="${contextPath}/resources/images/${product.img_path}" alt="productImg">
+	<img id="pdt_Img" src="${contextPath}/resources/images/imgplaceholder.png">
 	<div class="info">
 		<div class="info1">
-			<div id="pdt_ID">상품번호 : ${product.pdt_id}</div>
+			<div id="pdt_ID">상품번호 : 125713</div>
 		</div>
 		<div class="info2">
-			<div id="pdt_Name">${product.name}</div>
-			<div id="pdt_Selr">판매자 : ?? 어케가져옴이거</div>
+			<div id="pdt_Name">돼지고기 목살 600g</div>
+			<div id="pdt_Selr">판매자 : 그린축산</div>
 			<div id="pdt_Dsc">상품 설명(1~3줄 정도) 되는 설명입니다. 상품 설명(1~3줄 정도) 되는 설명입니다. 상품 설명(1~3줄 정도) 되는 설명입니다.</div>
 		</div>
 		<div class="info3">
 			<div id="text_Price">판매가</div>
-			<div id="pdt_DiscountedPrice"><span id="pdt_DsctPer">-10&#37;&#32;</span><span id="pdt_Price">${product.price}&#32;</span>27,000원</div>
+			<div id="pdt_DiscountedPrice"><span id="pdt_DsctPer">-10&#37;&#32;</span><span id="pdt_Price">30,000원&#32;</span>27,000원</div>
 			<div id="text_DelivFee">배송비</div>
 			<div id="pdt_DelivPee">3,000원(40,000원 이상 구매 시 무료)</div>
 			<div id="pdt_Rank">⭐⭐⭐⭐⭐</div><div id="pdt_ReviewAmt">(상품평 n개)</div>

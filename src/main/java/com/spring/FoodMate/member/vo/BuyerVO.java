@@ -1,6 +1,5 @@
 package com.spring.FoodMate.member.vo;
 
-
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
