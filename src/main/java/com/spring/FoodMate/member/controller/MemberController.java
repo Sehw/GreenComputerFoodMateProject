@@ -68,7 +68,6 @@ public class MemberController {
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		buyerVO=memberService.login(loginMap);
 		if(buyerVO!= null && buyerVO.getByr_id()!=null){
-			
 //			if(memberVO.getDel_yn().equals("Y")) {
 //				String message="회원 탈퇴가 진행중인 아이디입니다.\\n관리자에게 문의해 주세요.\\nEmail : hong@gil.dong";
 //				mav.addObject("message", message);

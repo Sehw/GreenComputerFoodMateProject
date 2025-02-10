@@ -1,11 +1,14 @@
 package com.spring.FoodMate.mypage.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,11 +16,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.FoodMate.common.Util;
+import com.spring.FoodMate.member.vo.BuyerVO;
+import com.spring.FoodMate.mypage.service.MypageService;
+import com.spring.FoodMate.order.dto.OrderDTO;
 
 
 @Controller
 public class MypageController {
 	private static final Logger logger = LoggerFactory.getLogger(MypageController.class);
+	@Autowired
+	private MypageService mypageService;
 	
 	@RequestMapping(value="/mypage/mypageForm", method=RequestMethod.GET)
 	private ModelAndView mypageform(@RequestParam(value="result", required=false) String result, @RequestParam(value="action",required=false) String action, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -67,7 +75,6 @@ public class MypageController {
 		return mav;
 	}
 	
-	
 	@RequestMapping(value="/mypage/pointManage/*Form", method=RequestMethod.GET)
 	private ModelAndView pointManageform(@RequestParam(value="result", required=false) String result, @RequestParam(value="action",required=false) String action, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = Util.getViewName(request);
@@ -96,6 +103,26 @@ public class MypageController {
 		mav.addObject("showSidebar",true);
 		mav.addObject("sidebar","/WEB-INF/views/mypage/side.jsp");
 		mav.addObject("title", "푸드 메이트");
+		mav.addObject("body", "/WEB-INF/views" + viewName + ".jsp");
+		return mav;
+	}
+	
+	@RequestMapping(value="/mypage/ShoppingManage/orderlist", method=RequestMethod.GET)
+	private ModelAndView orderlist(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
+		BuyerVO memberVO = (BuyerVO)session.getAttribute("buyerInfo");
+		String id = memberVO.getByr_id();
+		
+		List<OrderDTO> orderList = mypageService.getOrderById(id);
+		
+		mav.setViewName("common/layout");
+		mav.addObject("showNavbar", true);
+		mav.addObject("showSidebar",true);
+		mav.addObject("sidebar","/WEB-INF/views/mypage/side.jsp");
+		mav.addObject("title", "푸드 메이트");
+		mav.addObject("orderList", orderList);
+		String viewName = Util.getViewName(request);
 		mav.addObject("body", "/WEB-INF/views" + viewName + ".jsp");
 		return mav;
 	}

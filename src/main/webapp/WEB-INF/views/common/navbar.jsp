@@ -6,40 +6,47 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>내비게이션 바</title>	
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<title>내비게이션 바</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
 
-.navbar a.nav-link {
-  font-family: "Noto Sans KR", serif;
-  font-optical-sizing: auto;
-  font-weight: 500;
-  font-size: 1.25rem;
-  color: white !important;
+nav {
+    font-family: "Noto Sans KR", sans-serif;
 }
 
-.navbar a.nav-link:hover, 
-.navbar a.nav-link.active {
-  color: #ffcc99 !important;
-}
-
-.navbar-inner {	
-    max-width: 1000px;
-    height: 50px;
-    margin: 0 auto;   
-}
-
-.navbar {
+.nav_main {
     background-color: #fa9820;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+.nav_main ul {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    flex-wrap: nowrap; /* 줄바꿈 방지 */
+}
 
+.nav_main li {
+    margin: 0 100px;
+    white-space: nowrap; /* 글자 줄바꿈 방지 */
+}
+
+.nav_main a {
+    font-size: 1.25em;
+    color: white;
+    text-decoration: none;
+}
+
+.nav_main a.active {
+    font-weight: bold;
+}
 </style>
 </head>
-
 <body>
 <nav class="navbar navbar-expand-lg p-0">
   <div class="container-fluid">

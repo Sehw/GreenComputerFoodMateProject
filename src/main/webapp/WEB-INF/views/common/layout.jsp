@@ -20,7 +20,6 @@
         }
         .content {
         	flex: 1; /* 남은 공간을 채움 */
-            padding: 20px;
         }
         .header, .footer {
             background-color: #ffffff;

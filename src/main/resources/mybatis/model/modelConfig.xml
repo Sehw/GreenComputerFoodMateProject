@@ -8,5 +8,8 @@
 		<typeAlias type="com.spring.FoodMate.member.vo.SellerVO" alias="sellerVO"/>
 		<typeAlias type="com.spring.FoodMate.member.vo.AdminVO" alias="adminVO"/>
 		<typeAlias type="com.spring.FoodMate.mypage.vo.ProfileVO" alias="profileVO"/>
+		<typeAlias type="com.spring.FoodMate.product.vo.ProductVO" alias="productVO"/>
+		<typeAlias type="com.spring.FoodMate.order.dto.OrderDTO" alias="orderDTO"/>
 	</typeAliases>
+	
 </configuration>

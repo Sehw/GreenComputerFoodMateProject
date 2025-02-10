@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"../mybatis-3-mapper.dtd">
+
+	<mapper namespace="mapper.product">
+		<resultMap id="product" type="ProductVO">
+			<result property="pdt_id" column="pdt_id" />
+		    <result property="slr_id" column="slr_id" />
+		    <result property="name" column="name" />
+		    <result property="img_path" column="img_path" />
+		    <result property="price" column="price" />
+		    <result property="qty" column="qty" />
+		    <result property="unit" column="unit" />
+		    <result property="category_id" column="category_id" />
+		    <result property="stock" column="stock" />
+		    <result property="status" column="status" />
+		</resultMap>
+
+	<select id="searchlist" resultType="productVO" parameterType="java.lang.String">
+	    <![CDATA[
+	        SELECT * FROM FOODMATE_PRODUCT
+	        WHERE NAME LIKE '%' || #{keyword} || '%'
+	    ]]>
+	</select>
+
+	<select id="alllist" resultType="productVO">
+	    <![CDATA[
+			select * from foodmate_product
+		]]>
+	</select>
+	
+	<select id="getPdt" resultType="productVO" parameterType="java.lang.String">
+		<![CDATA[
+			select * from foodmate_product
+			WHERE PDT_ID = #{pdt_id}
+		]]>
+	</select>
+
+	</mapper>
