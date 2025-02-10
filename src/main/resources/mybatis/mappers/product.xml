@@ -3,38 +3,63 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"../mybatis-3-mapper.dtd">
 
-	<mapper namespace="mapper.product">
-		<resultMap id="product" type="ProductVO">
-			<result property="pdt_id" column="pdt_id" />
-		    <result property="slr_id" column="slr_id" />
-		    <result property="name" column="name" />
-		    <result property="img_path" column="img_path" />
-		    <result property="price" column="price" />
-		    <result property="qty" column="qty" />
-		    <result property="unit" column="unit" />
-		    <result property="category_id" column="category_id" />
-		    <result property="stock" column="stock" />
-		    <result property="status" column="status" />
-		</resultMap>
+<mapper namespace="mapper.product">
 
-	<select id="searchlist" resultType="productVO" parameterType="java.lang.String">
-	    <![CDATA[
-	        SELECT * FROM FOODMATE_PRODUCT
-	        WHERE NAME LIKE '%' || #{keyword} || '%'
-	    ]]>
+	<resultMap id="product" type="ProductDTO">
+		<result property="pdt_id" column="pdt_id" />
+	    <result property="slr_id" column="slr_id" />
+	    <result property="name" column="name" />
+	    <result property="img_path" column="img_path" />
+	    <result property="price" column="price" />
+	    <result property="qty" column="qty" />
+	    <result property="unit" column="unit" />
+	    <result property="category_id" column="category_id" />
+	    <result property="stock" column="stock" />
+	    <result property="status" column="status" />
+	    <result property="slr_nickname" column="SLR_NICKNAME"/>
+	    <result property="description" column="DESCRIPTION"/>
+	</resultMap>
+
+	<resultMap id="category" type="CategoryDTO">
+		<result property="category_id" column="category_id" />
+		<result property="name" column="name" />
+		<result property="parent_id" column="parent_id" />
+	</resultMap>
+
+	<select id="searchlist" resultMap="product" parameterType="java.lang.String">
+       <![CDATA[
+           SELECT * FROM FOODMATE_PRODUCT_VIEW
+           WHERE NAME LIKE '%' || #{keyword} || '%'
+       ]]>
 	</select>
 
-	<select id="alllist" resultType="productVO">
-	    <![CDATA[
-			select * from foodmate_product
-		]]>
+   <!-- 전체 상품 리스트 조회 -->
+   <select id="alllist" resultMap="product">
+       <![CDATA[
+           SELECT * FROM FOODMATE_PRODUCT_VIEW
+       ]]>
+   </select>
+
+   <!-- 특정 상품 조회 -->
+   <select id="getPdt" resultMap="product" parameterType="java.lang.String">
+       <![CDATA[
+           SELECT * FROM FOODMATE_PRODUCT_VIEW
+           WHERE PDT_ID = #{pdt_id}
+       ]]>
+   </select>
+
+	<select id="getCategoryStep" resultMap="category">
+	    SELECT CATEGORY_ID, NAME
+	    FROM FOODMATE_PRODUCT_CATEGORY
+	    START WITH CATEGORY_ID = #{categoryId}
+	    CONNECT BY PRIOR PARENT_ID = CATEGORY_ID
+	    ORDER SIBLINGS BY CATEGORY_ID
 	</select>
 	
-	<select id="getPdt" resultType="productVO" parameterType="java.lang.String">
-		<![CDATA[
-			select * from foodmate_product
-			WHERE PDT_ID = #{pdt_id}
-		]]>
+	<select id="getNameById" parameterType="int" resultType="String">
+	    SELECT name
+	    FROM FOODMATE_PRODUCT
+	    WHERE pdt_id = #{pdt_id}
 	</select>
 
-	</mapper>
+</mapper>

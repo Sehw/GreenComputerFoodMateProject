@@ -1,0 +1,148 @@
+@charset "utf-8";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+
+#product_detail {
+    margin: 0;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.category {
+  height: 50px;
+  padding: 0px 12px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+  display: flex;
+  align-items: center;
+}
+
+#category_text {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.container_pdt {
+  margin: 10px auto;
+  max-width: 1200px;
+  overflow: hidden;
+}
+
+#pdt_Img {
+  width: 600px;
+  float: left;
+  margin-right: 20px;
+}
+
+.info {
+  font-family: "Noto Sans KR", serif;
+  position: relative;
+  max-width: 500px;
+  float: left;
+}
+
+.info1, .info2, .info3, .info4, .info5 {
+  padding-bottom: 20px;
+}
+
+.info1 {
+  border-bottom: 1px solid gray;
+  text-align: right;
+  color: gray;
+}
+
+.info2 {
+  border-bottom: 1px solid gray;
+}
+#pdt_Name {
+  font-size: 40px;
+}
+#pdt_Dsc {
+  font-size: 16px;
+  color: gray;  
+}
+#pdt_Selr {
+  font-size: 24px;
+}
+
+.info3 {
+  border-bottom: 1px solid gray;
+  text-align: right;
+  position: relative;
+}
+
+#pdt_DsctPer {
+  font-size: 26px;
+  color: orange;
+}
+.info3 #text_Price {
+  position: absolute;
+  font-size: 1.25rem;
+  top: 15px;
+  left: 10px;
+}
+
+.info3 #text_DelivFee {
+  position: absolute;
+  font-size: 1.25rem;
+  top: 60px;
+  left: 10px;
+}
+
+.info3 #pdt_DelivPee {
+  font-size: 1.25rem;
+}
+
+.info3 div {
+  margin-bottom: 10px;
+}
+
+#pdt_Price {
+  font-size: 20px;
+  color: gray;
+  text-decoration: line-through;
+}
+#pdt_DiscountedPrice {
+  font-size: 32px;
+  color: red;
+  font-weight: 700;
+}
+
+.info4 {
+  border-bottom: 1px solid gray;
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#pdt_Amount {
+  text-align: left;
+}
+
+#price_final {
+  text-align: right;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.info5 {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+#btn_buy, #btn_cart {
+  width: 220px;
+  font-size: 20px;
+  margin-top: 20px;
+  padding: 10px;
+  text-align: center;
+  background-color: green;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+#btn_buy:hover, #btn_cart:hover {
+  background-color: #0056b3;
+}
+

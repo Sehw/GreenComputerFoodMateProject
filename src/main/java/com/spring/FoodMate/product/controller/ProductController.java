@@ -1,5 +1,6 @@
 package com.spring.FoodMate.product.controller;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,13 +16,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.FoodMate.common.Util;
+import com.spring.FoodMate.product.dto.CategoryDTO;
+import com.spring.FoodMate.product.dto.ProductDTO;
 import com.spring.FoodMate.product.service.ProductService;
-import com.spring.FoodMate.product.vo.ProductVO;
 
 @Controller
 public class ProductController {
 	@Autowired
-	private ProductVO productVO;
+	private ProductDTO productVO;
+	@Autowired
+	private CategoryDTO categoryDTO;
 	@Autowired
 	private ProductService productService;
 	private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
@@ -33,7 +37,7 @@ public class ProductController {
 	) throws Exception {
 	    String viewName = Util.getViewName(request);
 	    ModelAndView mav = new ModelAndView();
-	    List<ProductVO> searchList = productService.pdtList(keyword);
+	    List<ProductDTO> searchList = productService.pdtList(keyword);
 	    // Service 에 keyword(검색어)를 주고 해당하는 상품VO의 List를 받아옴.
 	    mav.setViewName("common/layout");
 	    mav.addObject("showNavbar", true);
@@ -50,13 +54,16 @@ public class ProductController {
 		String viewName = Util.getViewName(request);
 		ModelAndView mav = new ModelAndView();
 		
-		ProductVO product = productService.select1Pdt(pdt_id);
-		
+		ProductDTO product = productService.select1Pdt(pdt_id);
+		List<CategoryDTO> categoryStep = productService.categoryStep(product.getCategory_id());
+
 		mav.setViewName("common/layout");
 		mav.addObject("showNavbar", true);
 		mav.addObject("title", "제품 상세정보");
 		mav.addObject("body", "/WEB-INF/views/product" + viewName + ".jsp");
 		mav.addObject("pdt", product);
+		Collections.reverse(categoryStep);
+		mav.addObject("category", categoryStep);
 		return mav;
 	}
 
