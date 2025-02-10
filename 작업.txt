@@ -89,3 +89,8 @@ DB ID,PW 이름통일
 	]]>
 	</select>
 
+INIpayTest
+inicis~1111
+
+이니시스 작업법
+request를 토대로 기존 order폼을 개조해야함, hidden을 통해서 잘 세팅할것

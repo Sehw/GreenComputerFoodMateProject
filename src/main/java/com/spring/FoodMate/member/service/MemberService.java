@@ -53,7 +53,7 @@ public class MemberService {
 		memberDAO.updateResetBuyerPW(buyerVO);
 	}
 	
-	public void restSellerPW(SellerVO sellerVO) throws Exception{
+	public void resetSellerPW(SellerVO sellerVO) throws Exception{
 		memberDAO.updateResetSellerPW(sellerVO);
 	}
 	

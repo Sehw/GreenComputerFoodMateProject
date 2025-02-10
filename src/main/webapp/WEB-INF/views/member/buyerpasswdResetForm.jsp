@@ -24,11 +24,22 @@
 <meta charset="UTF-8">
 <title>비밀번호 재설정</title>
 </head>
+<script>
+	function prepareFormSubmission() {
+		
+		if(document.frmpasswdreset.password.value != document.frmpasswdreset.password_confirm.value){
+			alert("비밀번호를 동일하게 입력하세요.");
+			return false;
+		}
+		
+	    return true;
+	}
+</script>
 <body>
 <div class="d-flex justify-content-center align-items-center">
     <div class="login-container ">
         <h2 style="color:#87c058">구매자 비밀번호 재설정</h2>
-        <form name="frmidFind" method="post" action="${contextPath}/member/buyerPasswordReset">
+        <form name="frmpasswdreset" method="post" action="${contextPath}/member/buyerPasswordReset" onsubmit="return prepareFormSubmission()">
         	<p>새로 설정하실 비밀번호를 입력해주십시오.</p>
             <!-- 비밀번호 입력 필드 -->
             <div class="mb-3">
