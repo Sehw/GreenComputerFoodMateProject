@@ -27,21 +27,38 @@ public class MemberDAO {
 	}
 	
 	public String selectOverlappedBuyerID(String id) throws DataAccessException {
-		String result =  sqlSession.selectOne("mapper.member.selectOverlappedBuyerID",id);
+		String result = sqlSession.selectOne("mapper.member.selectOverlappedBuyerID",id);
 		return result;
 	}
 	public String selectOverlappedSellerID(String id) throws DataAccessException {
-		String result =  sqlSession.selectOne("mapper.member.selectOverlappedSellerID",id);
+		String result = sqlSession.selectOne("mapper.member.selectOverlappedSellerID",id);
 		return result;
 	}
 	
 	public String selectFindBuyerID(BuyerVO buyerVO) throws DataAccessException {
-		String result =  sqlSession.selectOne("mapper.member.selectFindBuyerID",buyerVO);
+		String result = sqlSession.selectOne("mapper.member.selectFindBuyerID",buyerVO);
 		return result;
 	}
 	public String selectFindSellerID(SellerVO sellerVO) throws DataAccessException {
-		String result =  sqlSession.selectOne("mapper.member.selectFindSellerID",sellerVO);
+		String result = sqlSession.selectOne("mapper.member.selectFindSellerID",sellerVO);
 		return result;
+	}
+	
+	public String selectFindBuyerPW(BuyerVO buyerVO) throws DataAccessException {
+		String result = sqlSession.selectOne("mapper.member.selectFindBuyerPW",buyerVO);
+		return result;
+	}
+	public String selectFindSellerPW(SellerVO sellerVO) throws DataAccessException {
+		String result = sqlSession.selectOne("mapper.member.selectFindSellerPW",sellerVO);
+		return result;
+	}
+	
+	public void updateResetBuyerPW(BuyerVO buyerVO) throws DataAccessException{
+		sqlSession.update("mapper.member.updateResetBuyerPW",buyerVO);
+	}
+	
+	public void updateResetSellerPW(SellerVO sellerVO) throws DataAccessException{
+		sqlSession.update("mapper.member.updateResetSellerPW",sellerVO);
 	}
 	
 	public void insertNewBuyer(BuyerVO buyerVO) throws DataAccessException{

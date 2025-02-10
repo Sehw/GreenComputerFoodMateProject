@@ -28,7 +28,7 @@
 <div class="d-flex justify-content-center align-items-center">
     <div class="login-container ">
         <h2 style="color:#87c058">구매자 비밀번호 재설정</h2>
-        <form name="frmidFind" method="post" action="${contextPath}/member/IdFind.do">
+        <form name="frmidFind" method="post" action="${contextPath}/member/buyerPasswordReset">
         	<p>새로 설정하실 비밀번호를 입력해주십시오.</p>
             <!-- 비밀번호 입력 필드 -->
             <div class="mb-3">
@@ -38,7 +38,7 @@
             <!-- 비밀번호확인 입력 필드 -->
             <div class="mb-3">
                 <label for="passwordCheck" class="form-label">비밀번호 확인</label>
-                <input type="password" class="form-control" id="passwordC" name="passwordC" placeholder="비밀번호 확인" required>
+                <input type="password" class="form-control" id="password_confirm" name="password_confirm" placeholder="비밀번호 확인" required>
             </div>
             <div class="d-grid">
                 <button type="submit" class="btn btn-success">비밀번호 재설정</button>

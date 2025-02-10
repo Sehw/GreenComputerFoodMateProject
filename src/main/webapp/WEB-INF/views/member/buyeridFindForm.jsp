@@ -24,11 +24,21 @@
 <meta charset="UTF-8">
 <title>아이디찾기</title>
 </head>
+<script>
+	const urlParams = new URLSearchParams(window.location.search);
+	const errorType = urlParams.get('error'); // error 파라미터 값 가져오기
+	
+	if(errorType === 'notfound'){
+		alert("입력한 정보로 아이디를 찾을수 없습니다.")
+	} else if (errorType === 'exception'){
+		alert("내부 오류가 발생했습니다. 나중에 다시 시도해 주세요.");
+	}
+</script>
 <body>
 <div class="d-flex justify-content-center align-items-center">
     <div class="login-container ">
         <h2 style="color:#87c058">구매자 아이디 찾기</h2>
-        <form name="frmidFind" method="post" action="${contextPath}/member/byrIdFind.do">
+        <form name="frmidFind" method="post" action="${contextPath}/member/byrIdFind">
         	<p>가입때 사용한 이름과 이메일을 입력해주십시오.</p>
             <!-- 이름 입력 필드 -->
             <div class="mb-3">

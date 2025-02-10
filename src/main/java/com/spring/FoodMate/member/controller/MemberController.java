@@ -76,7 +76,7 @@ public class MemberController {
 				HttpSession session=request.getSession();
 				session=request.getSession();
 				session.setAttribute("isBuyerLogOn", true);
-				session.setAttribute("buyerInfo",buyerVO);
+				session.setAttribute("buyerInfo", buyerVO);
 				
 				message  = "<script>";
 			    message += " location.href='"+request.getContextPath()+"/main';";
@@ -258,47 +258,108 @@ public class MemberController {
 	        
 	        if (foundId != null && !foundId.isEmpty()) {
 	            mav.setViewName("common/layout");  // 공통 레이아웃 적용
-	            mav.addObject("body", "/WEB-INF/views/member/idfindresult.jsp"); // 실제 페이지 경로
+	            mav.addObject("body", "/WEB-INF/views/member/idFindResultForm.jsp"); // 실제 페이지 경로
+	            mav.addObject("name", _buyerVO.getName());
 	            mav.addObject("foundId", foundId); // 찾은 아이디를 뷰로 전달
-	            mav.addObject("title", "아이디 찾기 결과");
+	    		mav.addObject("smallHeader", true);
+	    		mav.addObject("smallFooter", true);
+	    		mav.addObject("title", "푸드 메이트");
 	        } else {
 	            // 아이디를 찾지 못했을 경우 메시지 처리
-	            mav.setViewName("redirect:/member/signUpSellerForm");
+	            mav.setViewName("redirect:/member/buyeridFindForm?error=notfound");
 	        }
 	    } catch (Exception e) {
 	        e.printStackTrace();
-	        mav.setViewName("redirect:/member/signUpSellerForm");
+	        mav.setViewName("redirect:/member/buyeridFindForm?error=exception");
 	    }
 
 	    return mav;
 	}
 	
-	@RequestMapping(value="/member/ByrPasswordFind.do", method=RequestMethod.POST)
+	@RequestMapping(value="/member/ByrPasswordFind", method=RequestMethod.POST)
 	public ModelAndView ByrPasswordFind(@ModelAttribute("buyerVO") BuyerVO _buyerVO,
 	                              HttpServletRequest request, HttpServletResponse response) throws Exception {
 	    request.setCharacterEncoding("utf-8");
 	    
 	    ModelAndView mav = new ModelAndView();
-	    String foundId = null;
+	    String foundInfo = null;
 
 	    try {
 	        // 아이디 찾기 로직 (예: memberService.findBuyerId 메서드 호출)
-	        foundId = memberService.findBuyerId(_buyerVO);
+	    	foundInfo = memberService.findBuyerId(_buyerVO);
 	        
-	        if (foundId != null && !foundId.isEmpty()) {
+	        if (foundInfo != null && !foundInfo.isEmpty()) {
 	            mav.setViewName("common/layout");  // 공통 레이아웃 적용
 	            mav.addObject("body", "/WEB-INF/views/member/buyerpasswdResetForm.jsp"); // 실제 페이지 경로
-	            mav.addObject("title", "비밀번호 재설정");
+	    		mav.addObject("smallHeader", true);
+	    		mav.addObject("smallFooter", true);
+	    		mav.addObject("title", "푸드 메이트");
 	        } else {
-	            // 아이디를 찾지 못했을 경우 메시지 처리
-	            mav.setViewName("redirect:/member/signUpSellerForm");
+	            // 패스워드 리셋정보를 찾지 못했을 경우 메시지 처리
+	        	mav.setViewName("redirect:/member/buyerpasswdFindForm?error=notfound");
 	        }
 	    } catch (Exception e) {
 	        e.printStackTrace();
-	        mav.setViewName("redirect:/member/signUpSellerForm");
+	        mav.setViewName("redirect:/member/buyerpasswdFindForm?error=exception");
 	    }
 
 	    return mav;
+	}
+	
+	@RequestMapping(value="/member/buyerPasswordReset" ,method = RequestMethod.POST)
+	public ResponseEntity buyerPasswordReset(@ModelAttribute("buyerVO") BuyerVO _buyerVO,
+			                HttpServletRequest request, HttpServletResponse response) throws Exception {
+		response.setContentType("text/html; charset=UTF-8");
+		request.setCharacterEncoding("utf-8");
+		String message = null;
+		ResponseEntity resEntity = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		try {
+		    memberService.resetBuyerPW(_buyerVO);
+		    
+		    message  = "<script>";
+		    message +=" alert('정상적으로 비밀번호가 변경되었습니다.');";
+		    message += " location.href='"+request.getContextPath()+"/member/loginForm';";
+		    message += " </script>";
+		    
+		}catch(Exception e) {
+			message  = "<script>";
+		    message +=" alert('작업 중 오류가 발생했습니다. 다시 시도해 주세요.');";
+		    message += " location.href='"+request.getContextPath()+"/member/ByrPasswordFind';";
+		    message += " </script>";
+			e.printStackTrace();
+		}
+		resEntity = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
+		return resEntity;
+	}
+	
+	@RequestMapping(value="/member/sellerPasswordReset" ,method = RequestMethod.POST)
+	public ResponseEntity sellerPasswordReset(@ModelAttribute("sellerVO") SellerVO _sellerVO,
+			                HttpServletRequest request, HttpServletResponse response) throws Exception {
+		response.setContentType("text/html; charset=UTF-8");
+		request.setCharacterEncoding("utf-8");
+		String message = null;
+		ResponseEntity resEntity = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		try {
+		    memberService.findSellerPW(_sellerVO);
+		    
+		    message  = "<script>";
+		    message +=" alert('정상적으로 비밀번호가 변경되었습니다.');";
+		    message += " location.href='"+request.getContextPath()+"/member/loginForm';";
+		    message += " </script>";
+		    
+		}catch(Exception e) {
+			message  = "<script>";
+		    message +=" alert('작업 중 오류가 발생했습니다. 다시 시도해 주세요.');";
+		    message += " location.href='"+request.getContextPath()+"/member/sellerPasswordReset';";
+		    message += " </script>";
+			e.printStackTrace();
+		}
+		resEntity = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
+		return resEntity;
 	}
 
 }
