@@ -71,6 +71,6 @@ local.properties
 ### jspm ###
 jspm_packages
 
-src/main/resources/.env
+.env
 
 # End of https://www.toptal.com/developers/gitignore/api/eclipse,jspm
