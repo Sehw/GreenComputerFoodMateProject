@@ -307,7 +307,7 @@
                         <td class="product-info">
                             <img src="${pageContext.request.contextPath}/resources/images/order_p_image1.PNG" alt="상품 이미지">
                             <div><strong>상품명</strong>: 와규 냉동 삼각살</div>
-                            <div><strong>옵션</strong>: 냉동 와규 삼각살 200g</div>
+                            <div id="product-option"><strong>옵션</strong>: 냉동 와규 삼각살 200g</div>
                         </td>
                         <td>2</td>
                         <td>22,500</td>
@@ -412,16 +412,16 @@
 		 <!-- 결제 수단  -->
 		<div class="payment-methods-container">
 		    <h2 class="section-title">결제 수단</h2>
-		    <div class="payment-methods">
+		    <div class="payment-methods" data-method="card">
 		        <div class="method">
 		            <img src="${pageContext.request.contextPath}/resources/images/credit_card.png" alt="신용카드">
 		            <p>신용카드</p>
 		        </div>
-		        <div class="method">
+		        <div class="method" data-method="vbank">
 		            <img src="${pageContext.request.contextPath}/resources/images/bank_transfer.png" alt="무통장입금">
 		            <p>무통장입금</p>
 		        </div>
-		        <div class="method">
+		        <div class="method" data-method="trans">
 		            <img src="${pageContext.request.contextPath}/resources/images/account_transfer.png" alt="계좌이체">
 		            <p>계좌이체</p>
 		        </div>
@@ -437,6 +437,8 @@
 		        });
 		        // 클릭한 결제 수단에 'selected' 클래스 추가
 		        method.classList.add('selected');
+		        
+		        selectedPaymentMethod = method.getAttribute('data-method') || "card";
 		    });
 		});
 		</script>
@@ -445,33 +447,47 @@
         <div class="button-container">
             <button type="submit" class="submit-btn" onclick="requestPay()">결제하기</button>
         </div>
+        <%
+    		String impUid = (String) request.getAttribute("impUid");
+		%>
         <script>
-    function requestPay() {
-        var IMP = window.IMP;
-        IMP.init("----"); // ✅ 포트원에서 발급받은 가맹점 식별 코드 입력 (ex: imp12345678)
-
-        IMP.request_pay({
-            pg: "html5_inicis", // ✅ 결제 PG사 설정 (이니시스: "html5_inicis", 카카오페이: "kakaopay")
-            pay_method: "card", // ✅ 결제 수단 (ex: "card", "trans", "vbank", "phone")
-            merchant_uid: "order_" + new Date().getTime(), // ✅ 주문번호 (고유해야 함)
-            name: "테스트 상품",
-            amount: 1000, // ✅ 결제 금액 (숫자로 입력)
-            buyer_email: "test@test.com",
-            buyer_name: "테스터",
-            buyer_tel: "01012345678",
-            buyer_addr: "서울특별시 강남구",
-            buyer_postcode: "12345"
-        }, function (rsp) {
-            if (rsp.success) {
-                // ✅ 결제 성공 시, 서버에 결제 검증 요청
-                location.href = "result.jsp?imp_uid=" + rsp.imp_uid + "&merchant_uid=" + rsp.merchant_uid;
-            } else {
-                // ❌ 결제 실패 시
-                alert("결제에 실패하였습니다. 에러 내용: " + rsp.error_msg);
-            }
-        });
-    }
-    </script>
+		    function requestPay() {
+		    	// 옵션 값 가져오기 (id를 사용하여 직접 선택)
+		        let optionText = document.getElementById("product-option").textContent;
+		        let productName = optionText.split(":")[1].trim();  // ":" 기준으로 나누어 옵션 값만 가져오기
+		        
+		    	// 주문자 정보 가져오기
+		        let ordererName = document.getElementById("orderer-name").value || "홍길동";
+			    let ordererPhone = document.getElementById("orderer-phone").value || "000-0000-0000";
+			    let ordererMobile = document.getElementById("orderer-mobile").value || ordererPhone;
+			    let ordererEmail = document.getElementById("orderer-email").value || "honggildong@naver.com";
+			    let ordererAddress = document.getElementById("address").value || "서울특별시 강남구";
+			    let ordererPostCode = document.getElementById("zipcode").value || "12345";
+		        
+		        var IMP = window.IMP;
+		        IMP.init("<%= impUid %>"); //  포트원에서 발급받은 가맹점 식별 코드 입력 (ex: imp12345678)
+		
+		        IMP.request_pay({
+		            pg: "html5_inicis", //  결제 PG사 설정 (이니시스: "html5_inicis", 카카오페이: "kakaopay")
+		            pay_method: selectedPaymentMethod, //  결제 수단 (ex: "card", "trans", "vbank", "phone")
+		            merchant_uid: "order_" + new Date().getTime(), //  주문번호 (고유번호)
+		            name: productName,
+		            amount: 1000, //  결제 금액 (숫자로 입력)
+		            buyer_email: ordererEmail,
+		            buyer_name: ordererName,
+		            buyer_tel: ordererMobile,
+		            buyer_addr: ordererAddress,
+		            buyer_postcode: ordererPostCode
+		        }, function (rsp) {
+		            if (rsp.success) {
+		            	// 결제 성공 시 페이지이동
+		            	window.location.replace("${contextPath}/order/order2");
+		            } else {
+		                alert("결제에 실패하였습니다. 에러 내용: " + rsp.error_msg);
+		            }
+		        });
+		    }
+	    </script>
     </div>
 </body>
 </html>

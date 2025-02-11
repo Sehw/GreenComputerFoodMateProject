@@ -37,6 +37,6 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/INIpaySample_v1.3.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/iamport-rest-client-java-0.2.23.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

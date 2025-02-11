@@ -14,9 +14,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.FoodMate.common.Util;
 
+import io.github.cdimascio.dotenv.Dotenv;
+
 @Controller
 public class OrderController {
 	private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
+	
+	private final Dotenv dotenv = Dotenv.load();
+    private final String PimpUid = dotenv.get("PORTONE_IMP_UID");
 	
 	@RequestMapping(value="/order/*", method=RequestMethod.GET)
 	public ModelAndView newsPage(@RequestParam(value="result", required=false) String result, @RequestParam(value="action",required=false) String action, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -26,9 +31,11 @@ public class OrderController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("result",result);
 		mav.setViewName("common/layout");
+		mav.addObject("impUid", PimpUid);
 		mav.addObject("showNavbar", true);
 		mav.addObject("title", "푸드 메이트");
 		mav.addObject("body", "/WEB-INF/views" + viewName + ".jsp");
 		return mav;
 	}
+	
 }
