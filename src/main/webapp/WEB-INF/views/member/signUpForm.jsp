@@ -15,45 +15,8 @@
             width: 100%;
         }
 </style>
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
-	function execDaumPostcode() {
-		  new daum.Postcode({
-		    oncomplete: function(data) {
-		      // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-	
-		      // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
-		      // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-		      var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
-		      var extraRoadAddr = ''; // 도로명 조합형 주소 변수
-	
-		      // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-		      // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-		      if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-		        extraRoadAddr += data.bname;
-		      }
-		      // 건물명이 있고, 공동주택일 경우 추가한다.
-		      if(data.buildingName !== '' && data.apartment === 'Y'){
-		        extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-		      }
-		      // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-		      if(extraRoadAddr !== ''){
-		        extraRoadAddr = ' (' + extraRoadAddr + ')';
-		      }
-		      // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
-		      if(fullRoadAddr !== ''){
-		        fullRoadAddr += extraRoadAddr;
-		      }
-	
-		      // 우편번호와 주소 정보를 해당 필드에 넣는다.
-		      document.getElementById('zipcode').value = data.zonecode; //5자리 새우편번호 사용
-		      document.getElementById('roadAddress').value = fullRoadAddr;
-		     
-		    }
-		  }).open();
-		}
-	
 	document.addEventListener('DOMContentLoaded', function () {
 		function toggleCustomInput() {
 		    const select = document.getElementById('email_domain');
@@ -103,18 +66,9 @@
 	 }	
 	
     function prepareFormSubmission() {
-		if(!document.newBuyer.byr_id.value){
-			alert("아이디를 입력하세요.");
-			return false;
-		}
 		
 		if(!document.getElementById("byr_id").readOnly){
 			alert("아이디 중복검사를 진행해 주십시오.");
-			return false;
-		}
-		
-		if(!document.newBuyer.password.value){
-			alert("비밀번호를 입력하세요.");
 			return false;
 		}
 		
@@ -123,18 +77,8 @@
 			return false;
 		}
 		
-		if(!document.newBuyer.name.value){
-			alert("이름를 입력하세요.");
-			return false;
-		}
-		
-		if(!document.newBuyer.birth_6.value || !document.newBuyer.ssn1.value){
-			alert("주민등록 번호를 입력하세요.");
-			return false;
-		}
-		
-		if(!document.newBuyer.email_id.value){
-			alert("이메일을 입력하세요.");
+		if((document.newBuyer.email_domain.value == "custom") && !document.newBuyer.customMail.value){
+			alert("이메일 도메인을 입력하세요.");
 			return false;
 		}
         return true;
@@ -154,7 +98,7 @@
 	                    <label class="col-sm-3 col-form-label text-end">아이디</label>
 	                    <div class="col-sm-6">
 	                    	<div class="d-flex align-items-center">
-		                        <input name="byr_id" id="byr_id" type="text" class="form-control me-2" placeholder="id">
+		                        <input name="byr_id" id="byr_id" type="text" class="form-control me-2" placeholder="id" required>
 		                        <input type="button" id="byrid_overlapped" class="btn btn-secondary" value="중복확인" onClick="fn_overlapped()">
 		                    </div>
 	                    </div>
@@ -162,19 +106,19 @@
 	                <div class="mb-3 row">
 	                    <label class="col-sm-3 col-form-label text-end">비밀번호</label>
 	                    <div class="col-sm-5">
-	                        <input name="password" id="password" type="password" class="form-control" placeholder="password">
+	                        <input name="password" id="password" type="password" class="form-control" placeholder="password" required>
 	                    </div>
 	                </div>
 	                <div class="mb-3 row">
 	                    <label class="col-sm-3 col-form-label text-end">비밀번호 확인</label>
 	                    <div class="col-sm-5">
-	                        <input name="password_confirm" id="password_confirm" type="password" class="form-control" placeholder="password confirm">
+	                        <input name="password_confirm" id="password_confirm" type="password" class="form-control" placeholder="password confirm" required>
 	                    </div>
 	                </div>
 	                <div class="mb-3 row">
 	                    <label class="col-sm-3 col-form-label text-end">성명</label>
 	                    <div class="col-sm-5">
-	                        <input name="name" id="name" type="text" class="form-control" placeholder="name">
+	                        <input name="name" id="name" type="text" class="form-control" placeholder="name" required>
 	                    </div>
 	                </div>
 	                <div class="mb-3 row">
@@ -183,13 +127,13 @@
 	                        <div class="row">
 	                        	<div class="d-flex align-items-center">
 		                            <div class="col-sm-4">
-		                                <input type="text" name="birth_6" id="birth_6" maxlength="6" class="form-control" placeholder="앞 6자리"">
+		                                <input type="text" name="birth_6" id="birth_6" maxlength="6" class="form-control" placeholder="앞 6자리" required>
 		                            </div>
 		                            	<div class="col-sm-1 d-flex justify-content-center align-items-center" style="width: auto; padding: 0 5px;">
             								<span>-</span>
 		        						</div>
 		                            <div style="width:35px;">
-		                                <input type="text" name="ssn1" id="ssn1" maxlength="1" class="form-control" placeholder="">
+		                                <input type="text" name="ssn1" id="ssn1" maxlength="1" class="form-control" placeholder="" required>
 		                            </div>
 		                            <div class="col-sm-1 d-flex justify-content-center align-items-center me-2" style="width: auto; padding: 0 5px;">
             							<span>******</span>
@@ -203,7 +147,7 @@
 					    <div class="col-sm-8">
 					        <div class="d-flex align-items-center">
 					            <!-- 이메일 입력 -->
-					            <input type="text" id="email_id" name="email_id" maxlength="50" class="form-control me-2" placeholder="email">
+					            <input type="text" id="email_id" name="email_id" maxlength="50" class="form-control me-2" placeholder="email" required>
 					            <div class="col-sm-1 d-flex justify-content-center align-items-center me-2" style="width: auto; padding: 0 5px;">
             							<span>@</span>
         						</div>
@@ -225,7 +169,7 @@
 	                <div class="mb-3 row">
 	                    <label class="col-sm-3 col-form-label text-end">전화번호</label>
 	                    <div class="col-sm-5">
-	                        <input name="phone_num" id="phone_num" type="text" class="form-control" placeholder="phone">
+	                        <input name="phone_num" id="phone_num" type="text" class="form-control" placeholder="phone" required>
 	                    </div>
 	                </div>
 
@@ -233,10 +177,25 @@
 						    <div class="col-12 text-center">
 						        <input type="submit" class="btn btn-success" value="회원가입">
 						        <input type="button" class="btn btn-secondary" onclick="location.href='${contextPath}/member/signUpSelectForm'" value="취소">
-						    	<input type="reset" class="btn btn-success" value="다시입력">
+						    	<input type="reset" id="resetBtn" class="btn btn-success" value="다시입력">
 						    </div>
 						</div>
 	            </form>
+	            <script>
+	            	document.getElementById("resetBtn").addEventListener("click", function() {
+	            		// 1. 중복 검사 버튼 다시 활성화
+	            	    document.getElementById("byrid_overlapped").disabled = false;
+	            	    document.getElementById("byr_id").removeAttribute("readonly");
+
+	            	    // 2. 직접 입력 이메일 필드 리셋 및 비활성화
+	            	    document.getElementById("customMail").value = "";
+	            	    document.getElementById("customMail").style.display = "none";
+
+	            	    // 3. 이메일 도메인 선택을 기본값(naver.com)으로 변경
+	            	    document.getElementById("email_domain").value = "naver.com";
+	            	    document.getElementById("email_domain").style.display = "block";
+	            	});
+	            </script>
 	        </div>
 	    </div>
 	</div>

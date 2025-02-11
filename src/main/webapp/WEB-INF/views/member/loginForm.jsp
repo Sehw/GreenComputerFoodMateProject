@@ -78,9 +78,9 @@
                 <button type="submit" class="btn btn-success">로그인</button>
             </div>
             <span class="mt-3 d-inline-block">
-            	<a href="${contextPath}/member/idFindForm" class="link_find">아이디</a>
+            	<a href="${contextPath}/member/buyeridFindForm" class="link_find">아이디</a>
                             / 
-                <a href="${contextPath}/member/passwdFindForm" class="link_find">비밀번호 찾기</a>
+                <a href="${contextPath}/member/buyerpasswdFindForm" class="link_find">비밀번호 찾기</a>
                         	/
                 <a href="${contextPath}/member/signUpContactForm" class="link_find">회원가입</a>
             </span>
@@ -104,7 +104,7 @@
     </div>
     <div id="sellerTab" class="tab-pane fade">
         <h2 style="color:#87c058">판매자 로그인</h2>
-        <form name="frmLogin" method="post" action="${contextPath}/member/login">
+        <form name="frmLogin" method="post" action="${contextPath}/member/loginslr">
             <!-- 아이디 입력 필드 -->
             <div class="mb-3">
                 <label for="userID" class="form-label">아이디</label>
@@ -120,28 +120,12 @@
                 <button type="submit" class="btn btn-success">로그인</button>
             </div>
             <span class="mt-3 d-inline-block">
-            	<a href="${contextPath}/member/idFindForm" class="link_find">아이디</a>
+            	<a href="${contextPath}/member/selleridFindForm" class="link_find">아이디</a>
                             / 
-                <a href="${contextPath}/member/passwdFindForm" class="link_find">비밀번호 찾기</a>
+                <a href="${contextPath}/member/sellerpasswdFindForm" class="link_find">비밀번호 찾기</a>
                         	/
                 <a href="${contextPath}/member/signUpContactForm" class="link_find">회원가입</a>
             </span>
-            <div class="container mt-2 d-inline-block">
-			    <div class="row">
-			        <div class="col-2">
-			            <a href="#"><img src="${contextPath}/resources/images/Naver.png" alt="네이버 로그인" class="img-fluid"></a>
-			        </div>
-			        <div class="col-2">
-			            <a href="#"><img src="${contextPath}/resources/images/Kakao.png" alt="카카오 로그인" class="img-fluid"></a>
-			        </div>
-			        <div class="col-2">
-			            <a href="#"><img src="${contextPath}/resources/images/Google.png" alt="구글 로그인" class="img-fluid"></a>
-			        </div>
-			        <div class="col-2">
-			            <a href="#"><img src="${contextPath}/resources/images/Apple.png" alt="애플 로그인" class="img-fluid"></a>
-			        </div>
-			    </div>
-			</div>
         </form>
     </div>
     </div>

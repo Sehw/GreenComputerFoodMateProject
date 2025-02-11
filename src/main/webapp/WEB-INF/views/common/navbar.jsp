@@ -48,13 +48,60 @@ nav {
 </style>
 </head>
 <body>
-<nav class="nav_main">
-    <ul>
-        <li><a class="active" href="${contextPath}/main">메인</a></li>
-        <li><a href="${contextPath}/recipe/recipe_list">레시피</a></li>
-        <li><a href="${contextPath}/product_list">식재료</a></li>
-        <li><a href="${contextPath}/support/Q&A">고객센터</a></li>
-    </ul>
+<nav class="navbar navbar-expand-lg p-0">
+  <div class="container-fluid">
+    <div class="navbar-inner w-100 d-flex justify-content-between">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mb-2 mb-lg-0 w-100 d-flex justify-content-between">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="${contextPath}/main">메인</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="${contextPath}/recipe/recipe_list">레시피</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="${contextPath}/product_list">식재료</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="${contextPath}/support/Q&A">고객센터</a>
+          </li>
+          
+          <li class="nav-item dropdown">
+			  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+			    개발중인 메뉴
+			  </a>
+			  <ul class="dropdown-menu">
+			    <li><a class="dropdown-item" href="${contextPath}/product_compare">상품비교</a></li>
+			    <li><hr class="dropdown-divider"></li>
+			    <li><a class="dropdown-item" href="${contextPath}/mypage/mypageForm">마이페이지 구매자</a></li>
+			    <li><a class="dropdown-item" href="${contextPath}/mypage_seller/mypage_sell_main">마이페이지 판매자</a></li>
+			    <li><a class="dropdown-item" href="${contextPath}/admin/adminMain">마이페이지 관리자</a></li>
+			  </ul>
+			</li>
+          
+          
+        </ul>
+      </div>
+    </div>
+  </div>
 </nav>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // 현재 페이지 URL 가져오기
+    let currentPage = window.location.pathname;
+
+//    // 레시피 페이지에서 장바구니 버튼 숨김
+//    if (currentPage.includes('/recipe')) {
+//        document.getElementById('cartLink').style.display = 'none';
+//    }
+
+//    // 장바구니 페이지에서 레시피 버튼 숨김
+//    if (currentPage.includes('/cart')) {
+//        document.getElementById('recipeLink').style.display = 'none';
+//    }
+</script>
 </body>
 </html>

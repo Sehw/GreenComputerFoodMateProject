@@ -27,23 +27,13 @@
 <body>
 <div class="d-flex justify-content-center align-items-center">
     <div class="login-container ">
-        <h2 style="color:#87c058">아이디 찾기</h2>
-        <form name="frmidFind" method="post" action="${contextPath}/member/IdFind.do">
-        	<p>가입때 사용한 이름과 이메일을 입력해주십시오.</p>
-            <!-- 이름 입력 필드 -->
-            <div class="mb-3">
-                <label for="userName" class="form-label">이름</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="이름을 입력하세요" required>
-            </div>
-            <!-- 이메일 입력 필드 -->
-            <div class="mb-3">
-                <label for="userEmail" class="form-label">이메일</label>
-                <input type="text" class="form-control" id="email" name="email" placeholder="이메일을 입력하세요" required>
-            </div>
+        <h2 style="color:#87c058">아이디 찾기 결과</h2>
+        	<p>@@@님의 아이디는</p>
+            <p>@@@</p>
+            <p>입니다.</p>
             <div class="d-grid">
-                <button type="submit" class="btn btn-success">아이디 찾기</button>
+                <button type="button" class="btn btn-success">로그인</button>
             </div>
-        </form>
     </div>
 </div>
 </body>

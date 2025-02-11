@@ -4,7 +4,7 @@
 	"../mybatis-3-mapper.dtd">
 
 	<mapper namespace="mapper.member">
-		<resultMap id="buyResult" type="buyerVO">
+		<resultMap id="byrResult" type="buyerVO">
 			<result property="byr_id" column="byr_id" />
 		    <result property="password" column="password" />
 		    <result property="name" column="name" />
@@ -14,11 +14,28 @@
 		    <result property="phone_num" column="phone_num" />
 		</resultMap>
 		
+		<resultMap id="slrResult" type="sellerVO">
+			<result property="slr_id" column="slr_id" />
+		    <result property="password" column="password" />
+		    <result property="name" column="name" />
+		    <result property="business_no" column="business_no" />
+		    <result property="email" column="email" />
+		    <result property="phone_num" column="phone_num" />
+		</resultMap>
+		
 		
 	<select id="login" resultType="buyerVO"  parameterType="java.util.Map"  >
 	    <![CDATA[
 			select byr_id, name from foodmate_buyer 
 			 where byr_id=#{byr_id}
+			 and pw=#{password}
+		]]>
+	</select>
+	
+	<select id="loginslr" resultType="sellerVO"  parameterType="java.util.Map"  >
+	    <![CDATA[
+			select * from foodmate_seller 
+			 where slr_id=#{slr_id}
 			 and pw=#{password}
 		]]>
 	</select>
@@ -50,9 +67,53 @@
 		]]>
 	</insert>
 	
+	<insert id="insertNewSeller" parameterType="sellerVO">
+		<![CDATA[
+			insert into foodmate_seller(
+					slr_id, 
+			        pw, 
+			        name, 
+			        business_no, 
+			        email,
+			        phone_num, 
+			        join_date, 
+			        status
+		        )values(
+			        #{slr_id}, 
+			        #{password}, 
+			        #{name}, 
+			        #{business_no}, 
+			        #{email}, 
+			        #{phone_num}, 
+			        DEFAULT,   -- join_date는 기본값 SYSDATE로 설정
+			        'ACTIVE'  -- 등록상태는 무조건 기본값으로는 ACTIVE로 설정
+			        
+		        )
+		]]>
+	</insert>
+	
 	<select id="selectOverlappedBuyerID" parameterType="String" resultType="String">
 	   select decode(count(*),1, 'true', 0, 'false')
 	   from foodmate_buyer
 	   where byr_id = #{byr_id}
 	</select>
+	
+	<select id="selectOverlappedSellerID" parameterType="String" resultType="String">
+	   select decode(count(*),1, 'true', 0, 'false')
+	   from foodmate_seller
+	   where slr_id = #{slr_id}
+	</select>
+	
+	<select id="selectFindBuyerPW" parameterType="java.util.Map" resultType="String">
+	   select decode(count(*),1, 'true', 0, 'false')
+	   from foodmate_buyer
+	   where name = #{name} and email = #{email} and byr_id = #{byr_id}
+	</select>
+	
+	<select id="selectFindSellerPW" parameterType="java.util.Map" resultType="String">
+	   select decode(count(*),1, 'true', 0, 'false')
+	   from foodmate_seller
+	   where name = #{name} and email = #{email} and slr_id = #{slr_id}
+	</select>
+	
 </mapper>

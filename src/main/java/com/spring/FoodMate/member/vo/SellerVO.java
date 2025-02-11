@@ -6,111 +6,177 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Component("sellerVO")
 public class SellerVO {
-	private String member_id;
-	private String member_password;
-	private String password_confirm;
+	// 로그인
+	private String slr_id;
+	private String password; // 로그인시에만 사용, 세션 정보 삽입때 사용X
 	private String name;
-	private String ssn6;
-	private String ssn1;
-	private String gender;
-	private String mail1;
-	private String mail2;
-	private String customMail;
-	private String phone;
-	private String zipcode;
-	private String roadAddress;
-	private String remainaddress;
-	private MultipartFile profileImage;
+	private String business_no;
+	private String email;
+	private String phone_num;
+	private String status;
 	
-	public String getMember_id() {
-		return member_id;
+	// 회원가입 요소
+	private String password_confirm;
+	private String email_id;
+	private String email_domain;
+	private String customMail;
+	private String bsnum1;
+	private String bsnum2;
+	private String bsnum3;
+	
+
+	private MultipartFile profileImage;
+
+
+	public String getSlr_id() {
+		return slr_id;
 	}
-	public void setMember_id(String member_id) {
-		this.member_id = member_id;
+
+
+	public void setSlr_id(String slr_id) {
+		this.slr_id = slr_id;
 	}
-	public String getMember_password() {
-		return member_password;
+
+
+	public String getPassword() {
+		return password;
 	}
-	public void setMember_password(String member_password) {
-		this.member_password = member_password;
+
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
-	public String getPassword_confirm() {
-		return password_confirm;
-	}
-	public void setPassword_confirm(String password_confirm) {
-		this.password_confirm = password_confirm;
-	}
+
+
 	public String getName() {
 		return name;
 	}
+
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getSsn6() {
-		return ssn6;
+
+
+	public String getBusiness_no() {
+		return business_no;
 	}
-	public void setSsn6(String ssn6) {
-		this.ssn6 = ssn6;
+
+
+	public void setBusiness_no(String business_no) {
+		this.business_no = business_no;
 	}
-	public String getSsn1() {
-		return ssn1;
+
+
+	public String getEmail() {
+		return email;
 	}
-	public void setSsn1(String ssn1) {
-		this.ssn1 = ssn1;
+
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	public String getMail1() {
-		return mail1;
+
+
+	public String getPhone_num() {
+		return phone_num;
 	}
-	public void setMail1(String mail1) {
-		this.mail1 = mail1;
+
+
+	public void setPhone_num(String phone_num) {
+		this.phone_num = phone_num;
 	}
-	public String getMail2() {
-		return mail2;
+
+
+	public String getStatus() {
+		return status;
 	}
-	public void setMail2(String mail2) {
-		this.mail2 = mail2;
+
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
+
+
+	public String getPassword_confirm() {
+		return password_confirm;
+	}
+
+
+	public void setPassword_confirm(String password_confirm) {
+		this.password_confirm = password_confirm;
+	}
+
+
+	public String getEmail_id() {
+		return email_id;
+	}
+
+
+	public void setEmail_id(String email_id) {
+		this.email_id = email_id;
+	}
+
+
+	public String getEmail_domain() {
+		return email_domain;
+	}
+
+
+	public void setEmail_domain(String email_domain) {
+		this.email_domain = email_domain;
+	}
+
+
 	public String getCustomMail() {
 		return customMail;
 	}
+
+
 	public void setCustomMail(String customMail) {
 		this.customMail = customMail;
 	}
-	public String getPhone() {
-		return phone;
+
+
+	public String getBsnum1() {
+		return bsnum1;
 	}
-	public void setPhone(String phone) {
-		this.phone = phone;
+
+
+	public void setBsnum1(String bsnum1) {
+		this.bsnum1 = bsnum1;
 	}
-	public String getZipcode() {
-		return zipcode;
+
+
+	public String getBsnum2() {
+		return bsnum2;
 	}
-	public void setZipcode(String zipcode) {
-		this.zipcode = zipcode;
+
+
+	public void setBsnum2(String bsnum2) {
+		this.bsnum2 = bsnum2;
 	}
-	public String getRoadAddress() {
-		return roadAddress;
+
+
+	public String getBsnum3() {
+		return bsnum3;
 	}
-	public void setRoadAddress(String roadAddress) {
-		this.roadAddress = roadAddress;
+
+
+	public void setBsnum3(String bsnum3) {
+		this.bsnum3 = bsnum3;
 	}
-	public String getRemainaddress() {
-		return remainaddress;
-	}
-	public void setRemainaddress(String remainaddress) {
-		this.remainaddress = remainaddress;
-	}
+
+
 	public MultipartFile getProfileImage() {
 		return profileImage;
 	}
+
+
 	public void setProfileImage(MultipartFile profileImage) {
 		this.profileImage = profileImage;
 	}
-	public String getGender() {
-		return gender;
-	}
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
+	
+	
 }
 
