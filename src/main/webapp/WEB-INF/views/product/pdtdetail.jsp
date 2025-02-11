@@ -4,7 +4,7 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"  />  
 <html>
 <head>
-<link href="<c:url value="/resources/css/product_detail.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/pdtdetail.css" />" rel="stylesheet">
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -25,6 +25,10 @@ function addToCart() {  // 수정된 부분: 함수 호출 방식 수정
             "quantity": quantity
         },
         success: function(response) {
+        	
+        	console.log(response); // 응답 확인
+        	console.log('에휴');
+        	
             // 장바구니에 추가된 후 알림 띄우기
             if (response.success) {
                 // 성공적으로 담긴 경우 알림
@@ -33,10 +37,10 @@ function addToCart() {  // 수정된 부분: 함수 호출 방식 수정
                     // 계속 쇼핑 선택 시 아무 작업도 하지 않음
                 } else {
                     // 아니오 선택 시 장바구니 페이지로 이동
-                    window.location.href = contextPath + "/cart";
+                    window.location.href = contextPath + "/cart/cartlist";
                 }
             } else {
-                alert(response.message);  // 컨트롤러에서 전달된 메시지 사용
+                alert(response.alertMsg);
             }
         },
         error: function() {
@@ -44,9 +48,6 @@ function addToCart() {  // 수정된 부분: 함수 호출 방식 수정
         }
     });
 }
-
-
-
 </script>
 
 </head>
@@ -126,8 +127,8 @@ function addToCart() {  // 수정된 부분: 함수 호출 방식 수정
 	</div>
 </article>
 
-<jsp:include page="product_detail_misc.jsp">
-	<jsp:param name="pdt_ID" value="123456"/>
+<jsp:include page="pdtdetail_misc.jsp">
+	<jsp:param name="pdt_ID" value="${product.pdt_id}"/>
 </jsp:include>
 
 </main>

@@ -176,7 +176,7 @@ body {
 		        <c:forEach var="product" items="${list}">
 		        <article class="container_product">
 		            <div>
-		                <a href="${contextPath}/product_detail?pdt_id=${product.pdt_id}">
+		                <a href="${contextPath}/product/pdtdetail?pdt_id=${product.pdt_id}">
 		                    <img class="pdt_Image" src="${contextPath}/resources/images/${product.img_path}" alt="productImg">
 		                </a>
 		                <p>
@@ -192,13 +192,6 @@ body {
 		</c:choose>
 	
 	</section>
-
-필요한 기능 : 
-1. VO에 들어있는 판매자 아이디로 판매자 닉네임 가져와서 넣기
-아마 sql 자체에서 프로시저?로 처리? 혹은 판매자 닉네임까지 들어있는 뷰 만들고 거기서 갖고와야할듯?
-2. 금액 쉼표 처리하기
-3. 상품이 25개 넘어가면 페이지네이션 기능과 연동해서 처리하게하기
-
 
 	<article class="pagination">
 	    <div class="pagination_buttons">

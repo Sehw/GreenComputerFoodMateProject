@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	                <div class="mb-3 row">
 	                    <label class="col-sm-3 col-form-label text-end">업체명</label>
 	                    <div class="col-sm-5">
-	                        <input name="name" type="text" class="form-control" placeholder="companyname">
+	                        <input name="nickname" type="text" class="form-control" placeholder="별명">
 	                    </div>
 	                </div>
 	                <div class="mb-3 row">

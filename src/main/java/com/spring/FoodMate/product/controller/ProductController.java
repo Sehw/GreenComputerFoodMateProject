@@ -30,7 +30,7 @@ public class ProductController {
 	private ProductService productService;
 	private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 	
-	@RequestMapping(value="/product_list", method=RequestMethod.GET)
+	@RequestMapping(value="/product/pdtlist", method=RequestMethod.GET)
 	private ModelAndView list(
 	    @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword, //keyword=검색어, 없으면 빈문자열로 바꿔줌
 	    HttpServletRequest request, HttpServletResponse response
@@ -42,12 +42,12 @@ public class ProductController {
 	    mav.setViewName("common/layout");
 	    mav.addObject("showNavbar", true);
 	    mav.addObject("title", "FoodMate-상품 검색창");
-	    mav.addObject("body", "/WEB-INF/views/product" + viewName + ".jsp");
+	    mav.addObject("body", "/WEB-INF/views" + viewName + ".jsp");
 	    mav.addObject("list", searchList);
 	    return mav;
 	}
 
-	@RequestMapping(value="/product_detail", method=RequestMethod.GET)
+	@RequestMapping(value="/product/pdtdetail", method=RequestMethod.GET)
 	private ModelAndView detail(
 			@RequestParam(value = "pdt_id", required = true) String pdt_id,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -60,14 +60,14 @@ public class ProductController {
 		mav.setViewName("common/layout");
 		mav.addObject("showNavbar", true);
 		mav.addObject("title", "제품 상세정보");
-		mav.addObject("body", "/WEB-INF/views/product" + viewName + ".jsp");
+		mav.addObject("body", "/WEB-INF/views" + viewName + ".jsp");
 		mav.addObject("pdt", product);
 		Collections.reverse(categoryStep);
 		mav.addObject("category", categoryStep);
 		return mav;
 	}
 
-	@RequestMapping(value="/product_add", method=RequestMethod.GET)
+	@RequestMapping(value="/product/pdtaddform", method=RequestMethod.GET)
 	private ModelAndView addForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = Util.getViewName(request);
 		ModelAndView mav = new ModelAndView();
@@ -75,11 +75,11 @@ public class ProductController {
 		mav.addObject("showHeadermenu", true);
 		mav.addObject("showNavbar", true);
 		mav.addObject("title", "상품 등록");
-		mav.addObject("body", "/WEB-INF/views/product" + viewName + ".jsp");
+		mav.addObject("body", "/WEB-INF/views" + viewName + ".jsp");
 		return mav;
 	}
 	
-	@RequestMapping(value="/product_compare", method=RequestMethod.GET)
+	@RequestMapping(value="/product/compare", method=RequestMethod.GET)
 	private ModelAndView compare(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = Util.getViewName(request);
 		ModelAndView mav = new ModelAndView();
@@ -87,7 +87,7 @@ public class ProductController {
 		mav.addObject("showHeadermenu", true);
 		mav.addObject("showNavbar", true);
 		mav.addObject("title", "재료 비교");
-		mav.addObject("body", "/WEB-INF/views/product" + viewName + ".jsp");
+		mav.addObject("body", "/WEB-INF/views" + viewName + ".jsp");
 		return mav;
 	}
 }

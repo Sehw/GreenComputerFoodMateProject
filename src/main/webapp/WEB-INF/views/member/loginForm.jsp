@@ -47,6 +47,16 @@
     </script>
 </c:if>
 
+<script type="text/javascript">
+    // LoginFilter 클래스에서 세션에 담아 보내는 alert 메시지
+    <c:if test="${not empty sessionScope.alertMsg}">
+        alert("${sessionScope.alertMsg}");
+        // alertMsg를 출력 후 세션에서 삭제
+        <c:set var="alertMsg" value="${sessionScope.alertMsg}"/>
+        <c:remove var="alertMsg" />
+    </c:if>
+</script>
+
 </head>
 <body>
 <main>

@@ -1,5 +1,9 @@
 package com.spring.FoodMate.cart.dao;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -21,5 +25,29 @@ public class CartDAO {
         	e.printStackTrace();
             return false; // 실패하면 false 반환
         }
+    }
+	
+	public List<CartDTO> getCartListById(String byr_id) {
+		// 구매자 ID를 받아온다.
+		try {
+			List<CartDTO> list = sqlSession.selectList("mapper.cart.getCartList", byr_id);
+			// DB에 구매자 ID를 주면서 구매자의 cartDTO 리스트를 요청한다.
+			return list;
+		} catch (DataAccessException e) {
+        	e.printStackTrace();
+            // 예외 로그 콘솔에 출력. 나중에 로그 기록하는 뭐시기 만들어야 할듯.
+            return null; // 실패하면 null 반환
+        }
+	}
+	
+	public int updateCartQuantity(int cart_id, int qty) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("cart_id", cart_id);
+        params.put("qty", qty);
+        return sqlSession.update("mapper.cart.updateCartQuantity", params);
+    }
+	
+	public int deleteCartItem(int cart_id) {
+        return sqlSession.delete("mapper.cart.deleteCartItem", cart_id);
     }
 }

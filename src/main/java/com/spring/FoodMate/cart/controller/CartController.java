@@ -1,6 +1,7 @@
 package com.spring.FoodMate.cart.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,13 +11,16 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.spring.FoodMate.cart.dto.CartDTO;
 import com.spring.FoodMate.cart.service.CartService;
 import com.spring.FoodMate.common.Util;
 import com.spring.FoodMate.member.vo.BuyerVO;
@@ -28,18 +32,21 @@ public class CartController {
 	@Autowired
 	CartService cartService; 
 	
-	@RequestMapping(value="/cart/*Form", method=RequestMethod.GET)
-	public ModelAndView mypageform(@RequestParam(value="result", required=false) String result, @RequestParam(value="action",required=false) String action, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = Util.getViewName(request);
-		HttpSession session = request.getSession();
-		session.setAttribute("action", action);
+	@RequestMapping(value="/cart/cartlist", method=RequestMethod.GET)
+	public ModelAndView cartlist(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
+		String viewName = Util.getViewName(request);		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("result",result);
+		
+		BuyerVO buyerInfo = (BuyerVO)session.getAttribute("buyerInfo");
+		String byr_id = buyerInfo.getByr_id();
+		Map<String, List<CartDTO>> groupedCart = cartService.getGroupedCartList(byr_id);
+		// cartService에 구매자 ID를 주면서 구매자의 판매자 별명별로 그룹화된 장바구니 목록을 달라고 요청.
+		
 		mav.setViewName("common/layout");
 		mav.addObject("showNavbar", true);
-		mav.addObject("showSidebar",false);
-		mav.addObject("title", "푸드 메이트");
+		mav.addObject("title", "FoodMate-장바구니");
 		mav.addObject("body", "/WEB-INF/views" + viewName + ".jsp");
+		mav.addObject("groupedCart", groupedCart);
 		return mav;
 	}
 	
@@ -49,13 +56,6 @@ public class CartController {
 	                                      @RequestParam("quantity") int qty,
 	                                      HttpSession session) {
 		Map<String, Object> response = new HashMap<>();
-		Boolean isBuyerLogOn = (Boolean) session.getAttribute("isBuyerLogOn");
-		if (isBuyerLogOn == null || !isBuyerLogOn) {
-		    System.out.println("로그인도 안해놓고");
-		    response.put("success", false);
-		    response.put("message", "로그인 후 장바구니에 담을 수 있습니다.");
-		    return response;
-		}
 		
 	    // 세션에서 BuyerVO 객체를 가져옴
 	    BuyerVO buyerInfo = (BuyerVO) session.getAttribute("buyerInfo");
@@ -75,9 +75,63 @@ public class CartController {
 	        response.put("success", true);
 	    } else {
 	        response.put("success", false);
-	        response.put("message", "장바구니에 상품을 추가하는데 실패했습니다. 근데 로그인 안돼있을땐 이메시지뜨면안됨.");
+	        response.put("message", "장바구니에 상품을 추가 중 오류 발생. 근데 로그인 안돼있을땐 이 오류 뜨면 안됨.");
 	    }
 	    
 	    return response;
+	}
+	
+	@RequestMapping(value = "/cart/updateQty", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> updateCartQuantity(@RequestParam("cart_id") int cart_id, @RequestParam("qty") int qty) {
+		
+        Map<String, Object> response = new HashMap<>();
+        try {
+            boolean success = cartService.updateCartQuantity(cart_id, qty);
+            if (success) {
+                response.put("success", true);
+            } else {
+                response.put("success", false);
+                response.put("message", "수량 업데이트에 실패했습니다.");
+            }
+        } catch (Exception e) {
+        	e.getStackTrace();
+            response.put("success", false);
+            response.put("message", "서버 오류가 발생했습니다.");
+        }
+        return response;
+    }
+	
+	@RequestMapping(value = "/cart/deleteselected", method = RequestMethod.POST)
+	public ResponseEntity<?> deleteSelected(@RequestBody Map<String, List<Integer>> request) {
+	    List<Integer> cartIds = request.get("cartIds");
+
+	    System.out.println(cartIds);
+	    System.out.println("이런 상품아이디를 갖고왔어.");
+
+	    try {
+	        boolean success = true;
+	        for (int cartId : cartIds) {
+	            success = success && cartService.deleteCartItem(cartId);
+	        }
+
+	        Map<String, Object> response = new HashMap<>();
+	        if (success) {
+	            response.put("success", true);
+	            System.out.println("시킨대로 삭제했어.");
+	        } else {
+	            response.put("success", false);
+	            response.put("message", "삭제 실패");
+	            System.out.println("삭제에 실패했어. 이유는 몰라.");
+	        }
+
+	        return ResponseEntity.ok().body(response); // JSON 형식으로 반환
+	    } catch (Exception e) {
+	        System.out.println("서버에 오류나서 실패했어.");
+	        Map<String, Object> response = new HashMap<>();
+	        response.put("success", false);
+	        response.put("message", "서버 오류");
+	        return ResponseEntity.status(500).body(response);
+	    }
 	}
 }
