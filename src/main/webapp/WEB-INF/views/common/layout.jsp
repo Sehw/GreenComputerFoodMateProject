@@ -13,14 +13,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <style>
-		.sidebar {
-            background-color: #f8f9fa;
-            height: 100vh; /* 화면 높이 */
-            padding: 20px;
-        }
-        .content {
-        	flex: 1; /* 남은 공간을 채움 */
-        }
         .header, .footer {
             background-color: #ffffff;
             color: white;
