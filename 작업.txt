@@ -1,11 +1,10 @@
-이메일 직접입력 픽스 - 테스트필요
-
 페이지에따라서 레시피 작성 or 판매등록 [구매자는 판매등록 미표시] - 뼈대완성
 
 아이디찾기/비밀번호찾기
 
 소셜로그인시 가입페이지 다르게
 
+일부 유동성 데이터 VO -> DTO이름변경
 
 -마이페이지
 
@@ -89,3 +88,9 @@ DB ID,PW 이름통일
 		select * from t_member where id = #{id} and pwd = #{pwd}
 	]]>
 	</select>
+
+INIpayTest
+inicis~1111
+
+이니시스 작업법
+request를 토대로 기존 order폼을 개조해야함, hidden을 통해서 잘 세팅할것

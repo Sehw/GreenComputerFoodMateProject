@@ -17,7 +17,7 @@ public class MemberService {
 	@Autowired
 	private MemberDAO memberDAO;
 	
-	public BuyerVO login(Map  loginMap) throws Exception{
+	public BuyerVO login(Map loginMap) throws Exception{
 		return memberDAO.login(loginMap);
 	}
 	
@@ -39,6 +39,22 @@ public class MemberService {
 	
 	public String findSellerId(SellerVO sellerVO) throws Exception{
 		return memberDAO.selectFindSellerID(sellerVO);
+	}
+	
+	public String findBuyerPW(BuyerVO buyerVO) throws Exception{
+		return memberDAO.selectFindBuyerPW(buyerVO);
+	}
+	
+	public String findSellerPW(SellerVO sellerVO) throws Exception{
+		return memberDAO.selectFindSellerPW(sellerVO);
+	}
+	
+	public void resetBuyerPW(BuyerVO buyerVO) throws Exception{
+		memberDAO.updateResetBuyerPW(buyerVO);
+	}
+	
+	public void resetSellerPW(SellerVO sellerVO) throws Exception{
+		memberDAO.updateResetSellerPW(sellerVO);
 	}
 	
 	public void addBuyer(BuyerVO buyerVO) throws Exception{

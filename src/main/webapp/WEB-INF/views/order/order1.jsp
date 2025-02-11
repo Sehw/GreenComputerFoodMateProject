@@ -282,11 +282,9 @@
         #font {
          	font-weight: 800;
         }
-        
-        
-
     </style>
 </head>
+<script src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <body>
     <div class="container">
         <!-- 주문 및 결제 -->
@@ -448,8 +446,35 @@
 
         <!-- 결제 버튼 -->
         <div class="button-container">
-            <button type="submit" class="submit-btn" onclick="window.location.href='${contextPath}/order/order2'">결제하기</button>
+            <button type="submit" class="submit-btn" onclick="requestPay()">결제하기</button>
         </div>
+        <script>
+    function requestPay() {
+        var IMP = window.IMP;
+        IMP.init("----"); // ✅ 포트원에서 발급받은 가맹점 식별 코드 입력 (ex: imp12345678)
+
+        IMP.request_pay({
+            pg: "html5_inicis", // ✅ 결제 PG사 설정 (이니시스: "html5_inicis", 카카오페이: "kakaopay")
+            pay_method: "card", // ✅ 결제 수단 (ex: "card", "trans", "vbank", "phone")
+            merchant_uid: "order_" + new Date().getTime(), // ✅ 주문번호 (고유해야 함)
+            name: "테스트 상품",
+            amount: 1000, // ✅ 결제 금액 (숫자로 입력)
+            buyer_email: "test@test.com",
+            buyer_name: "테스터",
+            buyer_tel: "01012345678",
+            buyer_addr: "서울특별시 강남구",
+            buyer_postcode: "12345"
+        }, function (rsp) {
+            if (rsp.success) {
+                // ✅ 결제 성공 시, 서버에 결제 검증 요청
+                location.href = "result.jsp?imp_uid=" + rsp.imp_uid + "&merchant_uid=" + rsp.merchant_uid;
+            } else {
+                // ❌ 결제 실패 시
+                alert("결제에 실패하였습니다. 에러 내용: " + rsp.error_msg);
+            }
+        });
+    }
+    </script>
     </div>
 </body>
 </html>

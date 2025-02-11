@@ -61,7 +61,7 @@
 		  </li>
     </ul>
     <div id="userTab" class="tab-pane fade show active">
-        <h2 style="color:#87c058">사용자 로그인</h2>
+        <h2 style="color:#87c058">구매자 로그인</h2>
         <form name="frmLogin" method="post" action="${contextPath}/member/login">
             <!-- 아이디 입력 필드 -->
             <div class="mb-3">

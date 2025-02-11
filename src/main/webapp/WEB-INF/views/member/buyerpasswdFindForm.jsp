@@ -24,16 +24,26 @@
 <meta charset="UTF-8">
 <title>비밀번호 찾기</title>
 </head>
+<script>
+	const urlParams = new URLSearchParams(window.location.search);
+	const errorType = urlParams.get('error'); // error 파라미터 값 가져오기
+	
+	if(errorType === 'notfound'){
+		alert("입력한 정보로 비밀번호 초기화 정보를 찾을수 없습니다.")
+	} else if (errorType === 'exception'){
+		alert("내부 오류가 발생했습니다. 나중에 다시 시도해 주세요.");
+	}
+</script>
 <body>
 <div class="d-flex justify-content-center align-items-center">
     <div class="login-container ">
         <h2 style="color:#87c058">구매자 비밀번호 찾기</h2>
-        <form name="frmidFind" method="post" action="${contextPath}/member/ByrPasswordFind.do">
+        <form name="frmbyrPWFind" method="post" action="${contextPath}/member/ByrPasswordFind.do">
         	<p>가입때 사용한 이름과 아이디와 이메일을 입력해주십시오.</p>
         	<!-- 아이디 입력 필드 -->
             <div class="mb-3">
                 <label for="userID" class="form-label">아이디</label>
-                <input type="text" class="form-control" id="id" name="id" placeholder="아이디를 입력하세요" required>
+                <input type="text" class="form-control" id="byr_id" name="byr_id" placeholder="아이디를 입력하세요" required>
             </div>
             <!-- 이름 입력 필드 -->
             <div class="mb-3">

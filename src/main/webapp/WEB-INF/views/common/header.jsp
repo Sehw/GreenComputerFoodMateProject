@@ -151,12 +151,12 @@
 </div>
 <script>
 	
-	let currentPage = window.location.pathname;
+	let currentPage2 = window.location.pathname;
 	
 	if(${sessionScope.isBuyerLogOn ? 'true' : 'false'} == true){
 		document.getElementById('recipeLink').href = "${contextPath}/recipe/recipe_Add";
 		document.getElementById('cartLink').href = "${contextPath}/cart/cartForm";
-		if (currentPage.includes('/product_list')) {
+		if (currentPage2.includes('/product_list')) {
 	        document.getElementById('write').style.display = 'none';
 	        document.getElementById('recipeLink').style.display = 'none';
 	    }

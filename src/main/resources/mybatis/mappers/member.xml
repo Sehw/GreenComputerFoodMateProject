@@ -103,6 +103,18 @@
 	   from foodmate_seller
 	   where slr_id = #{slr_id}
 	</select>
+
+	<select id="selectFindBuyerID" parameterType="java.util.Map" resultType="String">
+	   select byr_id
+	   from foodmate_buyer
+	   where name = #{name} and email = #{email}
+	</select>
+	
+	<select id="selectFindSellerID" parameterType="java.util.Map" resultType="String">
+	   select slr_id
+	   from foodmate_seller
+	   where name = #{name} and email = #{email}
+	</select>
 	
 	<select id="selectFindBuyerPW" parameterType="java.util.Map" resultType="String">
 	   select decode(count(*),1, 'true', 0, 'false')
@@ -115,5 +127,25 @@
 	   from foodmate_seller
 	   where name = #{name} and email = #{email} and slr_id = #{slr_id}
 	</select>
+	
+	<update id="updateResetBuyerPW" parameterType="buyerVO">
+	    <![CDATA[
+			update foodmate_buyer
+			       set pw=#{password}
+		 	       where byr_id=#{byr_id}
+			        and name=#{name}
+			        and email=#{email}
+    	]]>
+	</update>
+	
+		<update id="updateResetSellerPW" parameterType="sellerVO">
+	    <![CDATA[
+			update foodmate_seller
+			       set pw=#{password}
+		 	       where slr_id=#{slr_id}
+			        and name=#{name}
+			        and email=#{email}
+    	]]>
+	</update>
 	
 </mapper>
