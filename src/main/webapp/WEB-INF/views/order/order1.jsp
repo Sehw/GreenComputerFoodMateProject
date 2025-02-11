@@ -212,9 +212,6 @@
 		    font-size: 1.2rem;
 		    color: #333;
 		}
-        
-        
-        
 
         /* 결제 수단을 감싸는 박스 */
 		.payment-methods-container {
