@@ -1,11 +1,11 @@
-package com.spring.FoodMate.member.vo;
+package com.spring.FoodMate.member.dto;
 
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 @Component("sellerVO")
-public class SellerVO {
+public class SellerDTO {
 	// 로그인
 	private String slr_id;
 	private String password; // 로그인시에만 사용, 세션 정보 삽입때 사용X

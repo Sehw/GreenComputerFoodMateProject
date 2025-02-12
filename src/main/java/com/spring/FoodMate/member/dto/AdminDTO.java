@@ -1,8 +1,8 @@
-package com.spring.FoodMate.member.vo;
+package com.spring.FoodMate.member.dto;
 
 import org.springframework.stereotype.Component;
 
 @Component("adminVO")
-public class AdminVO {
+public class AdminDTO {
 
 }

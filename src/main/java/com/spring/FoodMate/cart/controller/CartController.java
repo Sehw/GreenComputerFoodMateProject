@@ -19,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.FoodMate.cart.service.CartService;
 import com.spring.FoodMate.common.Util;
-import com.spring.FoodMate.member.vo.BuyerVO;
+import com.spring.FoodMate.member.dto.BuyerDTO;
 
 
 @Controller
@@ -58,7 +58,7 @@ public class CartController {
 		}
 		
 	    // 세션에서 BuyerVO 객체를 가져옴
-	    BuyerVO buyerInfo = (BuyerVO) session.getAttribute("buyerInfo");
+	    BuyerDTO buyerInfo = (BuyerDTO) session.getAttribute("buyerInfo");
 	    
 	    if (buyerInfo == null) {
 	        response.put("success", false);

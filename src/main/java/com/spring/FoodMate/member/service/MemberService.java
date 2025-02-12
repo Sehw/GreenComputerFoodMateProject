@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.spring.FoodMate.member.vo.BuyerVO;
-import com.spring.FoodMate.member.vo.SellerVO;
 import com.spring.FoodMate.member.dao.MemberDAO;
+import com.spring.FoodMate.member.dto.BuyerDTO;
+import com.spring.FoodMate.member.dto.SellerDTO;
 
 @Service("memberService")
 @Transactional(propagation=Propagation.REQUIRED)
@@ -17,11 +17,11 @@ public class MemberService {
 	@Autowired
 	private MemberDAO memberDAO;
 	
-	public BuyerVO login(Map loginMap) throws Exception{
+	public BuyerDTO login(Map loginMap) throws Exception{
 		return memberDAO.login(loginMap);
 	}
 	
-	public SellerVO loginslr(Map  loginMap) throws Exception{
+	public SellerDTO loginslr(Map  loginMap) throws Exception{
 		return memberDAO.loginslr(loginMap);
 	}
 	
@@ -33,31 +33,31 @@ public class MemberService {
 		return memberDAO.selectOverlappedSellerID(id);
 	}
 	
-	public String findBuyerId(BuyerVO buyerVO) throws Exception{
+	public String findBuyerId(BuyerDTO buyerVO) throws Exception{
 		return memberDAO.selectFindBuyerID(buyerVO);
 	}
 	
-	public String findSellerId(SellerVO sellerVO) throws Exception{
+	public String findSellerId(SellerDTO sellerVO) throws Exception{
 		return memberDAO.selectFindSellerID(sellerVO);
 	}
 	
-	public String findBuyerPW(BuyerVO buyerVO) throws Exception{
+	public String findBuyerPW(BuyerDTO buyerVO) throws Exception{
 		return memberDAO.selectFindBuyerPW(buyerVO);
 	}
 	
-	public String findSellerPW(SellerVO sellerVO) throws Exception{
+	public String findSellerPW(SellerDTO sellerVO) throws Exception{
 		return memberDAO.selectFindSellerPW(sellerVO);
 	}
 	
-	public void resetBuyerPW(BuyerVO buyerVO) throws Exception{
+	public void resetBuyerPW(BuyerDTO buyerVO) throws Exception{
 		memberDAO.updateResetBuyerPW(buyerVO);
 	}
 	
-	public void resetSellerPW(SellerVO sellerVO) throws Exception{
+	public void resetSellerPW(SellerDTO sellerVO) throws Exception{
 		memberDAO.updateResetSellerPW(sellerVO);
 	}
 	
-	public void addBuyer(BuyerVO buyerVO) throws Exception{
+	public void addBuyer(BuyerDTO buyerVO) throws Exception{
 		
 		String ssn1 = buyerVO.getSsn1();
 		if (ssn1 != null && (ssn1.equals("1") || ssn1.equals("3"))) {
@@ -78,7 +78,7 @@ public class MemberService {
 		memberDAO.insertNewBuyer(buyerVO);
 	}
 	
-	public void addSeller(SellerVO sellerVO) throws Exception{
+	public void addSeller(SellerDTO sellerVO) throws Exception{
 		
 		sellerVO.setBusiness_no(sellerVO.getBsnum1() + sellerVO.getBsnum2() + sellerVO.getBsnum3());
 		

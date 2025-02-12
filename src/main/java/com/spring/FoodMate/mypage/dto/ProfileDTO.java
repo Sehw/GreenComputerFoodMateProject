@@ -1,9 +1,9 @@
-package com.spring.FoodMate.mypage.vo;
+package com.spring.FoodMate.mypage.dto;
 
 import org.springframework.stereotype.Component;
 
 @Component("ProfileVO")
-public class ProfileVO {
+public class ProfileDTO {
 	private String nickname;
 	private String img_path;
 	private String BIO; //자기소개

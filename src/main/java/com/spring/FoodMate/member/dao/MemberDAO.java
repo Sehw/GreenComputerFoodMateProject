@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
-import com.spring.FoodMate.member.vo.BuyerVO;
-import com.spring.FoodMate.member.vo.SellerVO;
+import com.spring.FoodMate.member.dto.BuyerDTO;
+import com.spring.FoodMate.member.dto.SellerDTO;
 
 @Repository("memberDAO")
 public class MemberDAO {
@@ -16,13 +16,13 @@ public class MemberDAO {
 	private SqlSession sqlSession;	
 	
 	
-	public BuyerVO login(Map loginMap) throws DataAccessException{
-		BuyerVO buyer=(BuyerVO)sqlSession.selectOne("mapper.member.login",loginMap);
+	public BuyerDTO login(Map loginMap) throws DataAccessException{
+		BuyerDTO buyer=(BuyerDTO)sqlSession.selectOne("mapper.member.login",loginMap);
 	   return buyer;
 	}
 	
-	public SellerVO loginslr(Map loginMap) throws DataAccessException{
-		SellerVO seller=(SellerVO)sqlSession.selectOne("mapper.member.loginslr",loginMap);
+	public SellerDTO loginslr(Map loginMap) throws DataAccessException{
+		SellerDTO seller=(SellerDTO)sqlSession.selectOne("mapper.member.loginslr",loginMap);
 	   return seller;
 	}
 	
@@ -35,37 +35,37 @@ public class MemberDAO {
 		return result;
 	}
 	
-	public String selectFindBuyerID(BuyerVO buyerVO) throws DataAccessException {
+	public String selectFindBuyerID(BuyerDTO buyerVO) throws DataAccessException {
 		String result = sqlSession.selectOne("mapper.member.selectFindBuyerID",buyerVO);
 		return result;
 	}
-	public String selectFindSellerID(SellerVO sellerVO) throws DataAccessException {
+	public String selectFindSellerID(SellerDTO sellerVO) throws DataAccessException {
 		String result = sqlSession.selectOne("mapper.member.selectFindSellerID",sellerVO);
 		return result;
 	}
 	
-	public String selectFindBuyerPW(BuyerVO buyerVO) throws DataAccessException {
+	public String selectFindBuyerPW(BuyerDTO buyerVO) throws DataAccessException {
 		String result = sqlSession.selectOne("mapper.member.selectFindBuyerPW",buyerVO);
 		return result;
 	}
-	public String selectFindSellerPW(SellerVO sellerVO) throws DataAccessException {
+	public String selectFindSellerPW(SellerDTO sellerVO) throws DataAccessException {
 		String result = sqlSession.selectOne("mapper.member.selectFindSellerPW",sellerVO);
 		return result;
 	}
 	
-	public void updateResetBuyerPW(BuyerVO buyerVO) throws DataAccessException{
+	public void updateResetBuyerPW(BuyerDTO buyerVO) throws DataAccessException{
 		sqlSession.update("mapper.member.updateResetBuyerPW",buyerVO);
 	}
 	
-	public void updateResetSellerPW(SellerVO sellerVO) throws DataAccessException{
+	public void updateResetSellerPW(SellerDTO sellerVO) throws DataAccessException{
 		sqlSession.update("mapper.member.updateResetSellerPW",sellerVO);
 	}
 	
-	public void insertNewBuyer(BuyerVO buyerVO) throws DataAccessException{
+	public void insertNewBuyer(BuyerDTO buyerVO) throws DataAccessException{
 		sqlSession.insert("mapper.member.insertNewBuyer",buyerVO);
 	}
 	
-	public void insertNewSeller(SellerVO sellerVO) throws DataAccessException{
+	public void insertNewSeller(SellerDTO sellerVO) throws DataAccessException{
 		sqlSession.insert("mapper.member.insertNewSeller",sellerVO);
 	}
 }

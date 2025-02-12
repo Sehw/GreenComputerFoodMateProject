@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.FoodMate.common.Util;
-import com.spring.FoodMate.member.vo.BuyerVO;
+import com.spring.FoodMate.member.dto.BuyerDTO;
 import com.spring.FoodMate.mypage.service.MypageService;
 import com.spring.FoodMate.order.dto.OrderDTO;
 
@@ -111,7 +111,7 @@ public class MypageController {
 	private ModelAndView orderlist(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession();
-		BuyerVO memberVO = (BuyerVO)session.getAttribute("buyerInfo");
+		BuyerDTO memberVO = (BuyerDTO)session.getAttribute("buyerInfo");
 		String id = memberVO.getByr_id();
 		
 		List<OrderDTO> orderList = mypageService.getOrderById(id);

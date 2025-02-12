@@ -22,11 +22,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.FoodMate.common.Util;
+import com.spring.FoodMate.member.dto.BuyerDTO;
+import com.spring.FoodMate.member.dto.SellerDTO;
 import com.spring.FoodMate.member.service.MemberService;
-import com.spring.FoodMate.member.vo.BuyerVO;
-import com.spring.FoodMate.member.vo.SellerVO;
+import com.spring.FoodMate.mypage.dto.ProfileDTO;
 import com.spring.FoodMate.mypage.service.ProfileService;
-import com.spring.FoodMate.mypage.vo.ProfileVO;
 
 
 @Controller
@@ -37,11 +37,11 @@ public class MemberController {
 	@Autowired
 	private ProfileService profileService;
 	@Autowired
-	private BuyerVO buyerVO;
+	private BuyerDTO buyerVO;
 	@Autowired
-	private SellerVO sellerVO;
+	private SellerDTO sellerVO;
 	@Autowired
-	private ProfileVO profileVO;
+	private ProfileDTO profileVO;
 
 	@RequestMapping(value="/member/*Form", method=RequestMethod.GET)
 	private ModelAndView form(@RequestParam(value="result", required=false) String result, @RequestParam(value="action",required=false) String action, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -158,7 +158,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/member/addBuyer" ,method = RequestMethod.POST)
-	public ResponseEntity addBuyer(@ModelAttribute("buyerVO") BuyerVO _buyerVO,
+	public ResponseEntity addBuyer(@ModelAttribute("buyerVO") BuyerDTO _buyerVO,
 			                HttpServletRequest request, HttpServletResponse response) throws Exception {
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("utf-8");
@@ -202,7 +202,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/member/addSeller" ,method = RequestMethod.POST)
-	public ResponseEntity addSeller(@ModelAttribute("sellerVO") SellerVO _sellerVO,
+	public ResponseEntity addSeller(@ModelAttribute("sellerVO") SellerDTO _sellerVO,
 			                HttpServletRequest request, HttpServletResponse response) throws Exception {
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("utf-8");
@@ -246,7 +246,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/member/byrIdFind", method=RequestMethod.POST)
-	public ModelAndView byrIdFind(@ModelAttribute("buyerVO") BuyerVO _buyerVO,
+	public ModelAndView byrIdFind(@ModelAttribute("buyerVO") BuyerDTO _buyerVO,
 	                              HttpServletRequest request, HttpServletResponse response) throws Exception {
 	    request.setCharacterEncoding("utf-8");
 	    
@@ -278,7 +278,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/member/slrIdFind", method=RequestMethod.POST)
-	public ModelAndView slrIdFind(@ModelAttribute("sellerVO") SellerVO _sellerVO,
+	public ModelAndView slrIdFind(@ModelAttribute("sellerVO") SellerDTO _sellerVO,
 	                              HttpServletRequest request, HttpServletResponse response) throws Exception {
 	    request.setCharacterEncoding("utf-8");
 	    
@@ -310,7 +310,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/member/ByrPasswordFind", method=RequestMethod.POST)
-	public ModelAndView ByrPasswordFind(@ModelAttribute("buyerVO") BuyerVO _buyerVO,
+	public ModelAndView ByrPasswordFind(@ModelAttribute("buyerVO") BuyerDTO _buyerVO,
 	                              HttpServletRequest request, HttpServletResponse response) throws Exception {
 	    request.setCharacterEncoding("utf-8");
 	    
@@ -345,7 +345,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/member/SlrPasswordFind", method=RequestMethod.POST)
-	public ModelAndView ByrPasswordFind(@ModelAttribute("sellerVO") SellerVO _sellerVO,
+	public ModelAndView ByrPasswordFind(@ModelAttribute("sellerVO") SellerDTO _sellerVO,
 	                              HttpServletRequest request, HttpServletResponse response) throws Exception {
 	    request.setCharacterEncoding("utf-8");
 	    
@@ -380,7 +380,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/member/buyerPasswordReset" ,method = RequestMethod.POST)
-	public ResponseEntity buyerPasswordReset(@ModelAttribute("buyerVO") BuyerVO _buyerVO,
+	public ResponseEntity buyerPasswordReset(@ModelAttribute("buyerVO") BuyerDTO _buyerVO,
 			                HttpServletRequest request, HttpServletResponse response) throws Exception {
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("utf-8");
@@ -415,7 +415,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/member/sellerPasswordReset" ,method = RequestMethod.POST)
-	public ResponseEntity sellerPasswordReset(@ModelAttribute("sellerVO") SellerVO _sellerVO,
+	public ResponseEntity sellerPasswordReset(@ModelAttribute("sellerVO") SellerDTO _sellerVO,
 			                HttpServletRequest request, HttpServletResponse response) throws Exception {
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("utf-8");
