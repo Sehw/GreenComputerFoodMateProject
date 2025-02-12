@@ -2,6 +2,7 @@ package com.spring.FoodMate.member.controller;
 
 
 import java.net.URI;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +29,8 @@ import com.spring.FoodMate.member.service.MemberService;
 import com.spring.FoodMate.mypage.dto.ProfileDTO;
 import com.spring.FoodMate.mypage.service.ProfileService;
 
+import io.github.cdimascio.dotenv.Dotenv;
+
 
 @Controller
 public class MemberController {
@@ -42,7 +45,29 @@ public class MemberController {
 	private SellerDTO sellerVO;
 	@Autowired
 	private ProfileDTO profileVO;
+	@Autowired
+	private SocialLoginController sociallogincontroller; 
 
+	private final Dotenv dotenv = Dotenv.load();
+	
+	private final String KAKAO_API_KEY = dotenv.get("KAKAO_REST_API");  //  카카오 REST API 키
+	
+	@RequestMapping(value="/member/loginForm", method=RequestMethod.GET)
+	private ModelAndView Loginform(@RequestParam(value="result", required=false) String result, @RequestParam(value="action",required=false) String action, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = Util.getViewName(request);
+		HttpSession session = request.getSession();
+		session.setAttribute("action", action);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("result",result);
+		mav.setViewName("common/layout");
+		mav.addObject("smallHeader", true);
+		mav.addObject("smallFooter", true);
+		mav.addObject("kakao_API_key", KAKAO_API_KEY);
+		mav.addObject("title", "푸드 메이트");
+		mav.addObject("body", "/WEB-INF/views" + viewName + ".jsp");
+		return mav;
+	}
+	
 	@RequestMapping(value="/member/*Form", method=RequestMethod.GET)
 	private ModelAndView form(@RequestParam(value="result", required=false) String result, @RequestParam(value="action",required=false) String action, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = Util.getViewName(request);
@@ -88,6 +113,55 @@ public class MemberController {
 		    message  = "<script>";
 		    message +=" alert('아이디나 비밀번호가 잘못되었습니다. 다시 로그인해주세요.');";
 		    message += " location.href='"+request.getContextPath()+"/member/loginForm';";
+		    message += " </script>";
+		}
+		resEntity = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
+		return resEntity;
+	}
+	
+	@RequestMapping(value="/login/kakao" ,method = RequestMethod.GET)
+	public ResponseEntity kakaologin(@RequestParam String code,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String accessToken = sociallogincontroller.getKakaoAccessToken(code);
+		Map<String, Object> userInfo = sociallogincontroller.getKakaoUserInfo(accessToken);
+		response.setContentType("text/html; charset=UTF-8");
+		request.setCharacterEncoding("utf-8");
+		String message = null;
+		ResponseEntity resEntity = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		
+		Map<String, String> loginMap = new HashMap<>();
+		// byr_id와 password 저장
+        loginMap.put("byr_id", (String)userInfo.get("id"));
+        loginMap.put("password", "sociallogin");
+        
+		buyerVO=memberService.login(loginMap);
+		if(buyerVO!= null && buyerVO.getByr_id()!=null){
+//			if(memberVO.getDel_yn().equals("Y")) {
+//				String message="회원 탈퇴가 진행중인 아이디입니다.\\n관리자에게 문의해 주세요.\\nEmail : hong@gil.dong";
+//				mav.addObject("message", message);
+//				mav.setViewName("/member/loginForm");
+//			} else {
+				HttpSession session=request.getSession();
+				session=request.getSession();
+				session.setAttribute("isBuyerLogOn", true);
+				session.setAttribute("buyerInfo", buyerVO);
+				
+				message  = "<script>";
+			    message += " location.href='"+request.getContextPath()+"/main';";
+			    message += " </script>";
+//			}
+			
+		}else{
+			HttpSession session = request.getSession();
+			session.setAttribute("byr_id", (String)userInfo.get("id"));
+			session.setAttribute("password", "sociallogin");
+			session.setAttribute("nickname", (String)userInfo.get("nickname"));
+			session.setAttribute("profile_image", (String)userInfo.get("profile_link"));
+		    message  = "<script>";
+		    message +=" alert('가입된 아이디가 아닙니다. 회원가입 창으로 이동합니다.');";
+		    message += " location.href='"+request.getContextPath()+"/member/signUpSocialForm';";
 		    message += " </script>";
 		}
 		resEntity = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
@@ -194,6 +268,50 @@ public class MemberController {
 			message  = "<script>";
 		    message +=" alert('작업 중 오류가 발생했습니다. 다시 시도해 주세요.');";
 		    message += " location.href='"+request.getContextPath()+"/member/signUpForm';";
+		    message += " </script>";
+			e.printStackTrace();
+		}
+		resEntity = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
+		return resEntity;
+	}
+	
+	@RequestMapping(value="/member/addSocialBuyer" ,method = RequestMethod.POST)
+	public ResponseEntity addSocialBuyer(@ModelAttribute("buyerVO") BuyerDTO _buyerVO,
+			                HttpServletRequest request, HttpServletResponse response) throws Exception {
+		response.setContentType("text/html; charset=UTF-8");
+		request.setCharacterEncoding("utf-8");
+		String message = null;
+		ResponseEntity resEntity = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		try {
+//			MultipartFile file = _memberVO.getProfileImage();
+//			if (file != null && !file.isEmpty()) {
+//	            String baseDir = "C:/FoodMate/users/";
+//	            
+//	            String userId = _memberVO.getMember_id();
+//	            String uploadDir = baseDir + userId;
+//	            
+//	            File uploadPath = new File(uploadDir);
+//	            if (!uploadPath.exists()) {
+//	                uploadPath.mkdirs();
+//	            }
+//	            // 파일 저장
+//	            file.transferTo(new File(uploadDir + file.getOriginalFilename()));
+//	            _memberVO.setProfileImagePath(uploadDir + file.getOriginalFilename());
+//	            System.out.println("프로필 이미지 업로드 완료: " + file.getOriginalFilename());
+//	        }
+		    memberService.addBuyer(_buyerVO);
+		    
+		    message  = "<script>";
+		    message +=" alert('회원 가입을 마쳤습니다. 로그인창으로 이동합니다.');";
+		    message += " location.href='"+request.getContextPath()+"/member/loginForm';";
+		    message += " </script>";
+		    
+		}catch(Exception e) {
+			message  = "<script>";
+		    message +=" alert('작업 중 오류가 발생했습니다. 다시 시도해 주세요.');";
+		    message += " location.href='"+request.getContextPath()+"/member/signUpSocialForm';";
 		    message += " </script>";
 			e.printStackTrace();
 		}

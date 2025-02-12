@@ -90,7 +90,7 @@
 			            <a href="#"><img src="${contextPath}/resources/images/Naver.png" alt="네이버 로그인" class="img-fluid"></a>
 			        </div>
 			        <div class="col-2">
-			            <a href="#"><img src="${contextPath}/resources/images/Kakao.png" alt="카카오 로그인" class="img-fluid"></a>
+			            <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${kakao_API_key}&redirect_uri=${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/login/kakao"><img src="${contextPath}/resources/images/Kakao.png" alt="카카오 로그인" class="img-fluid"></a>
 			        </div>
 			        <div class="col-2">
 			            <a href="#"><img src="${contextPath}/resources/images/Google.png" alt="구글 로그인" class="img-fluid"></a>

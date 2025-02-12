@@ -35,47 +35,7 @@
 		window.toggleCustomInput = toggleCustomInput;
 		});
 	
-	function fn_overlapped(){
-	    var _id=$("#byr_id").val();
-	    if(_id==''){
-	   	 alert("ID를 입력하세요");
-	   	 return;
-	    }
-	    $.ajax({
-	       type:"post",
-	       async:false,  
-	       url:"${contextPath}/member/overlapped.do",
-	       dataType:"text",
-	       data: {id:_id},
-	       success:function (data,textStatus){
-	          if(data=='false'){
-	       	    alert("사용할 수 있는 ID입니다.");
-	       	    $('#byrid_overlapped').prop("disabled", true);
-	       	    $('#byr_id').prop("readonly", true);
-	          }else{
-	        	  alert("중복된 ID입니다.");
-	          }
-	       },
-	       error:function(data,textStatus){
-	          alert("에러가 발생했습니다.");
-	       },
-	       complete:function(data,textStatus){
-	          //alert("작업을완료 했습니다");
-	       }
-	    });  //end ajax	 
-	 }	
-	
     function prepareFormSubmission() {
-		
-		if(!document.getElementById("byr_id").readOnly){
-			alert("아이디 중복검사를 진행해 주십시오.");
-			return false;
-		}
-		
-		if(document.newBuyer.password.value != document.newBuyer.password_confirm.value){
-			alert("비밀번호를 동일하게 입력하세요.");
-			return false;
-		}
 		
 		if((document.newBuyer.email_domain.value == "custom") && !document.newBuyer.customMail.value){
 			alert("이메일 도메인을 입력하세요.");
@@ -173,6 +133,10 @@
 	            	    // 3. 이메일 도메인 선택을 기본값(naver.com)으로 변경
 	            	    document.getElementById("email_domain").value = "naver.com";
 	            	    document.getElementById("email_domain").style.display = "block";
+	            	});
+	            	window.addEventListener("beforeunload", function(event) {
+	            	    // 페이지를 떠날 때 서버에 세션 삭제 요청
+	            	    navigator.sendBeacon("${pageContext.request.contextPath}/deleteSession");
 	            	});
 	            </script>
 	        </div>
