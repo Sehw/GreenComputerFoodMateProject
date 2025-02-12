@@ -7,10 +7,10 @@ import org.springframework.stereotype.Component;
 @Component("cartDTO")
 public class CartDTO {
 	private int cart_id;
-	private String byr_id;
-	private int pdt_id;
-	private String pdt_name;
-	private int qty;
+	private String byr_id;		// 사용자 아이디
+	private int pdt_id;			// 상품 아이디
+	private String pdt_name;	// 상품 이름
+	private int qty;			// 상품 개수
 	private LocalDateTime add_date;
 	
 	public int getCart_id() {		return cart_id;	}

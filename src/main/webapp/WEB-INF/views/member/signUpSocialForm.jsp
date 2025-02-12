@@ -41,6 +41,7 @@
 			alert("이메일 도메인을 입력하세요.");
 			return false;
 		}
+		
         return true;
     }
 </script>
@@ -55,6 +56,8 @@
 	            <h1 class="mb-4 text-center">소셜 로그인 회원 가입</h1>
 	            <form name="newBuyer" action="${contextPath}/member/addBuyer" method="post" enctype="multipart/form-data" onsubmit="return prepareFormSubmission()">
 	                <div class="mb-3 row">
+	                	<input name="byr_id" id="byr_id" type="hidden" value="${sessionScope.byr_id}">
+	                	<input name="password" id="password" type="hidden" value="${sessionScope.password}">
 	                    <label class="col-sm-3 col-form-label text-end">성명</label>
 	                    <div class="col-sm-5">
 	                        <input name="name" id="name" type="text" class="form-control" placeholder="name" required>

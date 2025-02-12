@@ -44,12 +44,12 @@ public class PaymentController {
     private final String API_SECRET = dotenv.get("PORTONE_API_SECRET");  //  포트원 REST API 시크릿 키
     private IamportClient iamportClient = new IamportClient(API_KEY, API_SECRET);
 	
-    @RequestMapping(value="/order/verify/*", method=RequestMethod.GET)
+    @RequestMapping(value="/order/verify/*")
     public IamportResponse<Payment> paymentByImpUid(@PathVariable("imp_uid") String imp_uid) throws IamportResponseException, IOException {
         System.out.println(API_KEY);
         System.out.println(API_SECRET);
         System.out.println(iamportClient.getAuth().getCode());
-    	return iamportClient.paymentByImpUid("imp_416446072023");
+    	return iamportClient.paymentByImpUid("imp_124580296817");
     }
     
     

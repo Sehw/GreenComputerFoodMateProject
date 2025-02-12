@@ -13,6 +13,29 @@
         <result property="pdt_price" column="PDT_PRICE"/>
         <result property="qty" column="QTY"/>
     </resultMap>
+    
+    <resultMap id="cart" type="CartDTO">
+    	<!-- FoodMate_Cart 테이블 명시된 필드 -->
+	    <result property="cart_id" column="cart_id" />
+	    <result property="byr_id" column="byr_id" />
+	    <result property="pdt_id" column="pdt_id" />
+	    <result property="pdt_name" column="pdt_name" />
+	    <result property="price" column="price" />
+	    <result property="qty" column="qty" />
+	    <result property="add_date" column="add_date" />
+	    <!-- FoodMate_CartList_View 에 따라 추가된 필드 -->
+	    <result property="slr_id" column="slr_id" />
+	    <result property="nickname" column="nickname" />
+	    <result property="status" column="status" />
+	    <result property="img_path" column="img_path" />
+	</resultMap>
+
+	<select id="getCartItemsByIds" parameterType="list" resultType="CartDTO">
+	    SELECT * FROM FoodMate_CartList_View WHERE cart_id IN
+	    <foreach item="cartId" collection="list" open="(" separator="," close=")">
+	        #{cartId}
+	    </foreach>
+	</select>
 
 	<!-- OrdIdById 쿼리 -->
 	<select id="OrdIdById" resultType="java.lang.Integer">

@@ -284,8 +284,8 @@
 
         <!-- 버튼 -->
         <div class="button-container">
-            <button onclick="window.location.href='${contextPath}/main2.do'">상품 목록으로 이동</button>
-            <button onclick="window.location.href='${contextPath}/mypage/order-history'">주문/배송상태 확인</button>
+            <button onclick="window.location.href='${contextPath}/product/pdtlist'">상품 목록으로 이동</button>
+            <button onclick="window.location.href='${contextPath}/mypage/ShoppingManage/orderlist'">주문/배송상태 확인</button>
         </div>
     </div>
 </body>

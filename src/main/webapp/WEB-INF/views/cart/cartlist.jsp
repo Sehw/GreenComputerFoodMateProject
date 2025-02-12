@@ -76,7 +76,7 @@
 </style>
 </head>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
 var contextPath = '${contextPath}';
 //컨텍스트패스를 자바스크립트에서도 쓸 수 있게.
@@ -212,6 +212,41 @@ $(document).on("click", ".delete-product", function() {
     });
 });
 
+$(document).ready(function() {
+    // 선택 상품 주문 버튼 클릭
+    $("#orderSelected").click(function() {
+        let selectedCartIds = [];
+        $(".cart-checkbox:checked").each(function() {
+            selectedCartIds.push($(this).data("cart-id"));
+        });
+
+        if (selectedCartIds.length === 0) {
+            alert("주문할 상품을 선택해주세요.");
+            return;
+        }
+
+        $("#cartIds").val(selectedCartIds.join(",")); // 선택된 cart_id 리스트를 hidden input에 저장
+        $("#orderForm").submit(); // order1 페이지로 전송
+    });
+
+    // 전체 상품 주문 버튼 클릭
+    $("#orderAll").click(function() {
+        let allCartIds = [];
+        $(".cart-checkbox").each(function() {
+            allCartIds.push($(this).data("cart-id"));
+        });
+
+        if (allCartIds.length === 0) {
+            alert("장바구니에 상품이 없습니다.");
+            return;
+        }
+
+        $("#cartIds").val(allCartIds.join(",")); // 모든 cart_id 리스트를 hidden input에 저장
+        $("#orderForm").submit(); // order1 페이지로 전송
+    });
+});
+
+
 </script>
 
 <body>
@@ -287,8 +322,11 @@ $(document).on("click", ".delete-product", function() {
         </div>
     
 	<div class="text-end mt-1">
-	  <a href="#" class="btn btn-outline-secondary">선택 상품 주문</a>
-	  <a href="#" class="btn btn-success">전체 상품 주문</a>
+		<form id="orderForm" action="${contextPath}/order/order1" method="post">
+		  <input type="hidden" name="cartIds" id="cartIds">
+		  <button type="button" class="btn btn-outline-secondary" id="orderSelected">선택 상품 주문</button>
+    	  <button type="button" class="btn btn-success" id="orderAll">전체 상품 주문</button>
+	  	</form>
 	</div>
 </div>
 </body>

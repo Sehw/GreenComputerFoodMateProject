@@ -282,6 +282,44 @@
     </style>
 </head>
 <script src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script>
+function execDaumPostcode() {
+	  new daum.Postcode({
+	    oncomplete: function(data) {
+	      // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+	      // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
+	      // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+	      var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
+	      var extraRoadAddr = ''; // 도로명 조합형 주소 변수
+
+	      // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+	      // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+	      if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+	        extraRoadAddr += data.bname;
+	      }
+	      // 건물명이 있고, 공동주택일 경우 추가한다.
+	      if(data.buildingName !== '' && data.apartment === 'Y'){
+	        extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	      }
+	      // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+	      if(extraRoadAddr !== ''){
+	        extraRoadAddr = ' (' + extraRoadAddr + ')';
+	      }
+	      // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
+	      if(fullRoadAddr !== ''){
+	        fullRoadAddr += extraRoadAddr;
+	      }
+
+	      // 우편번호와 주소 정보를 해당 필드에 넣는다.
+	      document.getElementById('zipcode').value = data.zonecode; //5자리 새우편번호 사용
+	      document.getElementById('address').value = fullRoadAddr;
+	     
+	    }
+	  }).open();
+	}
+</script>
 <body>
     <div class="container">
         <!-- 주문 및 결제 -->
@@ -303,17 +341,18 @@
                     </tr>
                 </thead>
                 <tbody>
+                <c:forEach var="orderitems" items="${orderItems}">
                     <tr>
                         <td class="product-info">
-                            <img src="${pageContext.request.contextPath}/resources/images/order_p_image1.PNG" alt="상품 이미지">
-                            <div><strong>상품명</strong>: 와규 냉동 삼각살</div>
-                            <div id="product-option"><strong>옵션</strong>: 냉동 와규 삼각살 200g</div>
+                            <img src="${pageContext.request.contextPath}/resources/images/${orderitems.img_path}" alt="상품 이미지">
+                            <div id="product-option"><strong>상품명</strong>: ${orderitems.pdt_name}</div>
                         </td>
-                        <td>2</td>
-                        <td>22,500</td>
-                        <td>-1,000p</td>
-                        <td>기본 3,500원</td>
+                        <td>${orderitems.qty}</td>
+                        <td>${orderitems.price}</td>
+                        <td>0p</td>
+                        <td>기본 0원</td>
                     </tr>
+                    </c:forEach>
                 </tbody>
             </table>
         </div>
@@ -343,7 +382,7 @@
 			    <label for="address">받으실 곳</label>
 			    <div class="zipcode-container">
 			        <input type="text" id="zipcode" placeholder="우편번호" class="zipcode-input">
-			        <button type="button" class="zipcode-btn">우편번호 검색</button>
+			        <button type="button" class="zipcode-btn" onclick="execDaumPostcode()">우편번호 검색</button>
 			    </div>
 			    <input type="text" id="address" placeholder="상세주소를 입력하세요" class="address-input">
 			</div>
@@ -482,6 +521,19 @@
 		            if (rsp.success) {
 		            	// 결제 성공 시 페이지이동
 		            	window.location.replace("${contextPath}/order/order2");
+		            	// 결제 성공 시, 서버에 결제 검증 요청
+//		            	$.ajax({
+//		                    type: "POST",
+//		                    url: "${contextPath}/order/verify/" + rsp.imp_uid
+//		            	}).done(function(data) {
+//		                    if(rsp.paid_amount === data.response.amount){
+//		                        alert("결제 성공");
+//		                     
+//		                    } else {
+//		                        alert("결제 실패");
+//		                    }
+//		                });
+		            	
 		            } else {
 		                alert("결제에 실패하였습니다. 에러 내용: " + rsp.error_msg);
 		            }
