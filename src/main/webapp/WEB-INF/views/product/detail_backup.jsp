@@ -195,7 +195,7 @@
 		</div>
 	</div>
 </article>
-<jsp:include page="product_detail_misc.jsp">
+<jsp:include page="pdtdetail_misc.jsp">
 	<jsp:param name="pdt_ID" value="123456"/>
 </jsp:include>
 

@@ -44,6 +44,13 @@
 		    <version>${org.springframework-version}</version>
 		</dependency>
 		
+	    <dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>javax.servlet-api</artifactId>
+		    <version>4.0.1</version> <!-- 적절한 버전으로 수정 -->
+		    <scope>provided</scope>
+		</dependency>
+		
 	<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjrt -->
 		<dependency>
 		    <groupId>org.aspectj</groupId>

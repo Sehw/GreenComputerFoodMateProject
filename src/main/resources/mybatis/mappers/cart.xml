@@ -6,13 +6,20 @@
 <mapper namespace="mapper.cart">
 
     <resultMap id="cart" type="CartDTO">
-        <result property="cart_id" column="cart_id" />
-        <result property="byr_id" column="byr_id" />
-        <result property="pdt_id" column="pdt_id" />
-        <result property="pdt_name" column="pdt_name" />
-        <result property="qty" column="qty" />
-        <result property="add_date" column="add_date" />
-    </resultMap>
+    	<!-- FoodMate_Cart 테이블 명시된 필드 -->
+	    <result property="cart_id" column="cart_id" />
+	    <result property="byr_id" column="byr_id" />
+	    <result property="pdt_id" column="pdt_id" />
+	    <result property="pdt_name" column="pdt_name" />
+	    <result property="price" column="price" />
+	    <result property="qty" column="qty" />
+	    <result property="add_date" column="add_date" />
+	    <!-- FoodMate_CartList_View 에 따라 추가된 필드 -->
+	    <result property="slr_id" column="slr_id" />
+	    <result property="nickname" column="nickname" />
+	    <result property="status" column="status" />
+	    <result property="img_path" column="img_path" />
+	</resultMap>
 
     <insert id="addPdt" parameterType="CartDTO">
         <![CDATA[
@@ -20,5 +27,27 @@
         VALUES (FOODMATE_CART_SEQ.NEXTVAL, #{byr_id}, #{pdt_id}, #{pdt_name}, #{qty}, sysdate)
         ]]>
     </insert>
+    
+    <select id="getCartList" parameterType="String" resultMap="cart">
+	    SELECT * 
+	    FROM FoodMate_CartList_View
+	    WHERE byr_id = #{byr_id}
+	</select>
+	
+	<select id="isInMyCart" parameterType="CartDTO" resultType="CartDTO">
+	    SELECT *
+	    FROM FoodMate_Cart
+	    WHERE byr_id = #{byr_id} AND pdt_id = #{pdt_id}
+	</select>
+
+	<update id="updateCartQuantity" parameterType="map">
+        UPDATE FoodMate_cart
+        SET qty = #{qty}
+        WHERE cart_id = #{cart_id}
+    </update>
+    
+    <delete id="deleteCartItem" parameterType="int">
+	    DELETE FROM FOODMATE_CART WHERE CART_ID = #{cart_id}
+	</delete>
 
 </mapper>

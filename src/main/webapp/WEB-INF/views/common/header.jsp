@@ -151,20 +151,21 @@
 </div>
 <script>
 	
-	let currentPage2 = window.location.pathname;
+	let currentPage = window.location.pathname;
 	
 	if(${sessionScope.isBuyerLogOn ? 'true' : 'false'} == true){
 		document.getElementById('recipeLink').href = "${contextPath}/recipe/recipe_Add";
-		document.getElementById('cartLink').href = "${contextPath}/cart/cartForm";
-		if (currentPage2.includes('/product_list')) {
+		document.getElementById('cartLink').href = "${contextPath}/cart/cartlist";
+		if (currentPage.includes('/product_list')) {
 	        document.getElementById('write').style.display = 'none';
 	        document.getElementById('recipeLink').style.display = 'none';
 	    }
 	}
 	
 	if(${sessionScope.isSellerLogOn ? 'true' : 'false'} == true){
-		document.getElementById('recipeLink').href = "${contextPath}/product_add";
-		document.getElementById('cartLink').href = "${contextPath}/cart/cartForm";
+		document.getElementById('recipeLink').href = "${contextPath}/product/pdtaddform";
+		document.getElementById('recipeLink').title = "상품 등록"; //이거 추가함
+		document.getElementById('cartLink').href = "${contextPath}/cart/cartlist";
 	}
 </script>
 </body>
