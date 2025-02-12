@@ -26,6 +26,14 @@ public class ProductService {
 		return productDAO.select1Pdt(pdt_id);
 	}
 	
+	public List<CategoryDTO> getGrandCategoryList() throws Exception {
+		return productDAO.getGrandCategoryList();
+	}
+	
+	public List<CategoryDTO> getChildCategoryList(int category_id) throws Exception {
+		return productDAO.getChildCategoryList(category_id);
+	}
+	
 	public List<CategoryDTO> categoryStep(int category_id) throws Exception {
 		return productDAO.getCategoryStep(category_id);
 	}

@@ -30,6 +30,16 @@ public class ProductDAO {
 		return searchVO;
 	}
 	
+	public List<CategoryDTO> getGrandCategoryList() throws DataAccessException {
+		List<CategoryDTO> list = sqlSession.selectList("mapper.product.getGrandCategory");
+		return list;
+	}
+	
+	public List<CategoryDTO> getChildCategoryList(int parent_id) throws DataAccessException {
+		List<CategoryDTO> list = sqlSession.selectList("mapper.product.getChildCategory", parent_id);
+		return list;
+	}
+	
 	public List<CategoryDTO> getCategoryStep(int category_id) throws DataAccessException {
 		List<CategoryDTO> list = sqlSession.selectList("mapper.product.getCategoryStep", category_id);
 		return list;

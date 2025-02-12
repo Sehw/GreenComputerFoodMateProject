@@ -34,6 +34,12 @@
 	    WHERE byr_id = #{byr_id}
 	</select>
 	
+	<select id="isInMyCart" parameterType="CartDTO" resultType="CartDTO">
+	    SELECT *
+	    FROM FoodMate_Cart
+	    WHERE byr_id = #{byr_id} AND pdt_id = #{pdt_id}
+	</select>
+
 	<update id="updateCartQuantity" parameterType="map">
         UPDATE FoodMate_cart
         SET qty = #{qty}

@@ -40,14 +40,35 @@ public class CartDAO {
         }
 	}
 	
+	public CartDTO isInMyCart(CartDTO cartDTO) {
+		try {
+			CartDTO resultDTO = sqlSession.selectOne("mapper.cart.isInMyCart", cartDTO);
+			return resultDTO;
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 	public int updateCartQuantity(int cart_id, int qty) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("cart_id", cart_id);
-        params.put("qty", qty);
-        return sqlSession.update("mapper.cart.updateCartQuantity", params);
+		try {
+			Map<String, Object> params = new HashMap<>();
+	        params.put("cart_id", cart_id);
+	        params.put("qty", qty);
+	        int result = sqlSession.update("mapper.cart.updateCartQuantity", params);
+	        return result;
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			return -1;
+		}   
     }
 	
 	public int deleteCartItem(int cart_id) {
-        return sqlSession.delete("mapper.cart.deleteCartItem", cart_id);
+		try {
+			return sqlSession.delete("mapper.cart.deleteCartItem", cart_id);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			return -1;
+		}
     }
 }

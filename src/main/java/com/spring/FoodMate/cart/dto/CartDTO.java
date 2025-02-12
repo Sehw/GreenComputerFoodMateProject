@@ -38,7 +38,14 @@ public class CartDTO {
         this.byr_id = byr_id;
         this.pdt_name = pdt_name;
     }
-	// 얘는 특수 생성자. CartSerVice에서 set 메서드로 4개 다 처넣기 귀찮아서 여기서 처리함.
+	// 얘는 특수 생성자. CartService에서 FM_cartlist_view에 넣을 4데이터값 넣는 용도.
+	
+	public CartDTO(int pdt_id, String byr_id) {
+		this.pdt_id = pdt_id;
+        this.byr_id = byr_id;
+	}
+	// 얘도 특수 생성자. CartService에서 FM_cart를 상품번호랑 아이디로 검색해서
+	// 이미 장바구니에 있는지 확인한 다음 새로 넣을지 수량을 더할지 판단하기 위해서 준비.
 	
 	private int price;
 	private String slr_id;

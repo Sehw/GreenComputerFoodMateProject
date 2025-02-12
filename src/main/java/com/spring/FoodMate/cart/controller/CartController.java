@@ -59,13 +59,6 @@ public class CartController {
 		
 	    // 세션에서 BuyerVO 객체를 가져옴
 	    BuyerVO buyerInfo = (BuyerVO) session.getAttribute("buyerInfo");
-	    
-	    if (buyerInfo == null) {
-	        response.put("success", false);
-	        response.put("message", "로그인 정보가 유효하지 않습니다. 다시 로그인해주세요.");
-	        return response;
-	    }
-	    
 	    String byr_id = buyerInfo.getByr_id();
 	    
 	    // 장바구니 추가 서비스 호출
@@ -118,19 +111,16 @@ public class CartController {
 	        Map<String, Object> response = new HashMap<>();
 	        if (success) {
 	            response.put("success", true);
-	            System.out.println("시킨대로 삭제했어.");
+	            response.put("message", "삭제 성공");
 	        } else {
 	            response.put("success", false);
-	            response.put("message", "삭제 실패");
-	            System.out.println("삭제에 실패했어. 이유는 몰라.");
+	            response.put("message", "삭제 실패. 왜지?");
 	        }
-
 	        return ResponseEntity.ok().body(response); // JSON 형식으로 반환
 	    } catch (Exception e) {
-	        System.out.println("서버에 오류나서 실패했어.");
 	        Map<String, Object> response = new HashMap<>();
 	        response.put("success", false);
-	        response.put("message", "서버 오류");
+	        response.put("message", "서버 오류로 인한 삭제 실패");
 	        return ResponseEntity.status(500).body(response);
 	    }
 	}

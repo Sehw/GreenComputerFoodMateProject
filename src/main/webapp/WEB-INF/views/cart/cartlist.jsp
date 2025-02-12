@@ -191,6 +191,27 @@ $(document).ready(function() {
     });
 });
 
+//개별 삭제 버튼
+$(document).on("click", ".delete-product", function() {
+    let cartId = $(this).data("cart-id");
+
+    if (!confirm("이 상품을 삭제하시겠습니까?")) { return; }
+
+    $.ajax({
+        type: "POST",
+        url: contextPath + "/cart/deleteselected",
+        contentType: "application/json",
+        data: JSON.stringify({ cartIds: [cartId] }), // 선택한 cartId를 배열로 전달
+        success: function(response) {
+            alert(response.message); // 컨트롤러에서 전달한 메시지 출력
+            if (response.success) { location.reload(); } // 성공하면 새로고침
+        },
+        error: function() {
+            alert("서버 오류가 발생했습니다.");
+        }
+    });
+});
+
 </script>
 
 <body>
@@ -240,34 +261,22 @@ $(document).ready(function() {
 
 	<div class="summary-box">
         <div class="summary-row">
-        <!-- 왼쪽 빈 공간 -->
-                <div></div>
-
-                <!-- 합계 내용 -->
+        		<div></div>
                 <div class="d-flex align-items-center gap-4">
-                    <!-- 상품 금액 -->
 					<div class="item">
 					    <span>선택한 상품의 금액 총합</span>
 					    <span id="total_amount" class="text-green">0원</span>
 					</div>
-
-                    <!-- 더하기 기호 -->
                     <div class="item">
                         <span class="text-gray">+</span>
                     </div>
-
-                    <!-- 배송비 -->
                     <div class="item">
                         <span>배송비</span>
                         <span class="text-green">m원</span>
                     </div>
-
-                    <!-- 같음 기호 -->
                     <div class="item">
                         <span class="text-gray">=</span>
                     </div>
-
-                    <!-- 합계 -->
                     <div class="item">
                         <span>합계</span>
                         <span class="text-green">n+m원</span>

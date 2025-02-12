@@ -20,12 +20,6 @@
 	    <result property="description" column="DESCRIPTION"/>
 	</resultMap>
 
-	<resultMap id="category" type="CategoryDTO">
-		<result property="category_id" column="category_id" />
-		<result property="name" column="name" />
-		<result property="parent_id" column="parent_id" />
-	</resultMap>
-
 	<select id="searchlist" resultMap="product" parameterType="java.lang.String">
        <![CDATA[
            SELECT * FROM FOODMATE_PRODUCT_VIEW
@@ -34,21 +28,33 @@
 	</select>
 
    <!-- 전체 상품 리스트 조회 -->
-   <select id="alllist" resultMap="product">
-       <![CDATA[
-           SELECT * FROM FOODMATE_PRODUCT_VIEW
-       ]]>
-   </select>
+   <select id="alllist" resultType="ProductDTO">
+	    SELECT * FROM FOODMATE_PRODUCT_VIEW
+	</select>
+
 
    <!-- 특정 상품 조회 -->
    <select id="getPdt" resultMap="product" parameterType="java.lang.String">
-       <![CDATA[
            SELECT * FROM FOODMATE_PRODUCT_VIEW
            WHERE PDT_ID = #{pdt_id}
-       ]]>
    </select>
+	
+	<!-- 카테고리 최상위만 가져온다. 상품등록할때 필요 -->
+	<select id="getGrandCategory" resultType="CategoryDTO">
+	    SELECT CATEGORY_ID, NAME, PARENT_ID
+	    FROM FOODMATE_PRODUCT_CATEGORY
+	    WHERE PARENT_ID IS NULL
+	</select>
+	
+	<!-- 카테고리를 선택하면 그거에 해당하는 직계자식 카테고리만 가져온다. 상품등록할때 필요 -->
+	<select id="getChildCategory" resultType="CategoryDTO" parameterType="java.lang.Integer">
+		SELECT CATEGORY_ID, NAME, PARENT_ID
+	    FROM FOODMATE_PRODUCT_CATEGORY
+	    WHERE PARENT_ID = #{parent_id}
+	</select>
 
-	<select id="getCategoryStep" resultMap="category">
+	<!-- 특정 상품의 카테고리를 부모까지 싹 가져온다 -->
+	<select id="getCategoryStep" resultType="CategoryDTO">
 	    SELECT CATEGORY_ID, NAME
 	    FROM FOODMATE_PRODUCT_CATEGORY
 	    START WITH CATEGORY_ID = #{categoryId}

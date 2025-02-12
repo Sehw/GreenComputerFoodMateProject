@@ -10,9 +10,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.FoodMate.common.Util;
@@ -72,19 +74,31 @@ public class ProductController {
 		String viewName = Util.getViewName(request);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("common/layout");
-		mav.addObject("showHeadermenu", true);
 		mav.addObject("showNavbar", true);
 		mav.addObject("title", "상품 등록");
 		mav.addObject("body", "/WEB-INF/views" + viewName + ".jsp");
+		
+		List<CategoryDTO> categories = productService.getGrandCategoryList();
+		mav.addObject("categories", categories);
+		
 		return mav;
 	}
+	
+	@RequestMapping(value="/getSubCategories/{category_id}", method=RequestMethod.GET)
+	@ResponseBody
+	public List<CategoryDTO> getSubCategories(@PathVariable("category_id") int category_id) throws Exception {
+	    // 데이터베이스에서 category_id에 해당하는 자식 카테고리 가져오기
+	    List<CategoryDTO> subCategories = productService.getChildCategoryList(category_id);
+	    return subCategories;
+	}
+
+	
 	
 	@RequestMapping(value="/product/compare", method=RequestMethod.GET)
 	private ModelAndView compare(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = Util.getViewName(request);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("common/layout");
-		mav.addObject("showHeadermenu", true);
 		mav.addObject("showNavbar", true);
 		mav.addObject("title", "재료 비교");
 		mav.addObject("body", "/WEB-INF/views" + viewName + ".jsp");

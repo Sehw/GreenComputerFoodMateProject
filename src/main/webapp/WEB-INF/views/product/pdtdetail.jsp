@@ -27,7 +27,6 @@ function addToCart() {  // 수정된 부분: 함수 호출 방식 수정
         success: function(response) {
         	
         	console.log(response); // 응답 확인
-        	console.log('에휴');
         	
             // 장바구니에 추가된 후 알림 띄우기
             if (response.success) {
