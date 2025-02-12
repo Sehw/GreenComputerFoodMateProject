@@ -4,10 +4,10 @@
 	"../mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias type="com.spring.FoodMate.member.vo.BuyerVO" alias="buyerVO"/>
-		<typeAlias type="com.spring.FoodMate.member.vo.SellerVO" alias="sellerVO"/>
-		<typeAlias type="com.spring.FoodMate.member.vo.AdminVO" alias="adminVO"/>
-		<typeAlias type="com.spring.FoodMate.mypage.vo.ProfileVO" alias="profileVO"/>
+		<typeAlias type="com.spring.FoodMate.member.dto.BuyerDTO" alias="buyerDTO"/>
+		<typeAlias type="com.spring.FoodMate.member.dto.SellerDTO" alias="sellerDTO"/>
+		<typeAlias type="com.spring.FoodMate.member.dto.AdminDTO" alias="adminDTO"/>
+		<typeAlias type="com.spring.FoodMate.mypage.dto.ProfileDTO" alias="profileDTO"/>
 		<typeAlias type="com.spring.FoodMate.product.dto.ProductDTO" alias="productDTO"/>
 		<typeAlias type="com.spring.FoodMate.product.dto.CategoryDTO" alias="categoryDTO"/>
 		<typeAlias type="com.spring.FoodMate.cart.dto.CartDTO" alias="cartDTO"/>

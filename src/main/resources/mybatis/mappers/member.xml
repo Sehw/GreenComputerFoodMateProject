@@ -4,7 +4,7 @@
 	"../mybatis-3-mapper.dtd">
 
 	<mapper namespace="mapper.member">
-		<resultMap id="byrResult" type="buyerVO">
+		<resultMap id="byrResult" type="buyerDTO">
 			<result property="byr_id" column="byr_id" />
 		    <result property="password" column="password" />
 		    <result property="name" column="name" />
@@ -14,7 +14,7 @@
 		    <result property="phone_num" column="phone_num" />
 		</resultMap>
 		
-		<resultMap id="slrResult" type="sellerVO">
+		<resultMap id="slrResult" type="sellerDTO">
 			<result property="slr_id" column="slr_id" />
 		    <result property="password" column="password" />
 		    <result property="name" column="name" />
@@ -24,7 +24,7 @@
 		</resultMap>
 		
 		
-	<select id="login" resultType="buyerVO"  parameterType="java.util.Map"  >
+	<select id="login" resultType="buyerDTO"  parameterType="java.util.Map"  >
 	    <![CDATA[
 			select byr_id, name from foodmate_buyer 
 			 where byr_id=#{byr_id}
@@ -32,7 +32,7 @@
 		]]>
 	</select>
 	
-	<select id="loginslr" resultType="sellerVO"  parameterType="java.util.Map"  >
+	<select id="loginslr" resultType="sellerDTO"  parameterType="java.util.Map"  >
 	    <![CDATA[
 			select * from foodmate_seller 
 			 where slr_id=#{slr_id}
@@ -40,7 +40,7 @@
 		]]>
 	</select>
 		
-	<insert id="insertNewBuyer" parameterType="buyerVO">
+	<insert id="insertNewBuyer" parameterType="buyerDTO">
 		<![CDATA[
 			insert into foodmate_buyer(
 					byr_id, 
@@ -67,7 +67,7 @@
 		]]>
 	</insert>
 	
-	<insert id="insertNewSeller" parameterType="sellerVO">
+	<insert id="insertNewSeller" parameterType="sellerDTO">
 		<![CDATA[
 			insert into foodmate_seller(
 					slr_id, 
@@ -128,7 +128,7 @@
 	   where name = #{name} and email = #{email} and slr_id = #{slr_id}
 	</select>
 	
-	<update id="updateResetBuyerPW" parameterType="buyerVO">
+	<update id="updateResetBuyerPW" parameterType="buyerDTO">
 	    <![CDATA[
 			update foodmate_buyer
 			       set pw=#{password}
@@ -138,7 +138,7 @@
     	]]>
 	</update>
 	
-		<update id="updateResetSellerPW" parameterType="sellerVO">
+		<update id="updateResetSellerPW" parameterType="sellerDTO">
 	    <![CDATA[
 			update foodmate_seller
 			       set pw=#{password}

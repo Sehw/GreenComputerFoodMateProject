@@ -4,7 +4,7 @@
 	"../mybatis-3-mapper.dtd">
 
 	<mapper namespace="mapper.profile">
-		<resultMap id="ProfileResult" type="profileVO">
+		<resultMap id="ProfileResult" type="profileDTO">
 			<result property="byr_id" column="byr_id" />
 			<result property="nickname" column="nickname" />
 		    <result property="img_path" column="img_path" />
@@ -12,7 +12,7 @@
 		</resultMap>
 	
 	
-		<insert id="insertNewProfile" parameterType="profileVO">
+		<insert id="insertNewProfile" parameterType="profileDTO">
 		<![CDATA[
 			insert into FOODMATE_BUYER_PROFILE(
 					byr_id, 
@@ -34,7 +34,7 @@
 		]]>
 	</select>
 	
-	<select id="selectMemberById" resultType="profileVO" parameterType="String">
+	<select id="selectMemberById" resultType="profileDTO" parameterType="String">
 		<![CDATA[
 			select * from t_member where id = #{id}
 		]]>
