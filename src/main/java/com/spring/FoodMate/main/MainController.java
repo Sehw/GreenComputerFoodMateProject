@@ -14,6 +14,8 @@ public class MainController {
 	
 	@RequestMapping("/main")
 	public ModelAndView mainPage() {
+		logger.error("This is an error message!");
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("common/layout_Regacy");
 		mav.addObject("showNavbar", true);
