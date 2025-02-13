@@ -485,11 +485,30 @@ function execDaumPostcode() {
         <!-- 결제 버튼 -->
         <div class="button-container">
             <button type="submit" class="submit-btn" onclick="requestPay()">결제하기</button>
+            <button type="submit" class="submit-btn" onclick="requestOrder2()">결제패스</button>
         </div>
         <%
     		String impUid = (String) request.getAttribute("impUid");
 		%>
         <script>
+        	var orderItemList = ${orderItemList != null ? orderItemList : '[]'};
+        	
+        	function requestOrder2() {
+        		$.ajax({
+                    type: "POST",
+                    url: "${contextPath}/order/setOrderItems",
+                    contentType: "application/json",
+                    data: JSON.stringify(orderItemList),  // 기존 데이터를 전송
+                    success: function(response) {
+                        // 데이터 저장 후 주문 완료 페이지로 이동
+                        window.location.replace("${contextPath}/order/order2");
+                    },
+                    error: function(xhr, status, error) {
+                        alert("결제 데이터 저장 중 오류 발생: " + error);
+                    }
+                });
+        	}
+        	
 		    function requestPay() {
 		    	// 옵션 값 가져오기 (id를 사용하여 직접 선택)
 		        let optionText = document.getElementById("product-option").textContent;
@@ -519,8 +538,22 @@ function execDaumPostcode() {
 		            buyer_postcode: ordererPostCode
 		        }, function (rsp) {
 		            if (rsp.success) {
+		            	$.ajax({
+		                    type: "POST",
+		                    url: "${contextPath}/order/setOrderItems",
+		                    contentType: "application/json",
+		                    data: JSON.stringify(orderItemList),  // 기존 데이터를 전송
+		                    success: function(response) {
+		                        // 데이터 저장 후 주문 완료 페이지로 이동
+		                        window.location.replace("${contextPath}/order/order2");
+		                    },
+		                    error: function(xhr, status, error) {
+		                        alert("결제 데이터 저장 중 오류 발생: " + error);
+		                    }
+		                });
+		            	
 		            	// 결제 성공 시 페이지이동
-		            	window.location.replace("${contextPath}/order/order2");
+//		            	window.location.replace("${contextPath}/order/order2");
 		            	// 결제 성공 시, 서버에 결제 검증 요청
 //		            	$.ajax({
 //		                    type: "POST",

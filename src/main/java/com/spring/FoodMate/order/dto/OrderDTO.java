@@ -1,12 +1,12 @@
 package com.spring.FoodMate.order.dto;
 
 public class OrderDTO {
-	private int ord_detail_id;
-	private int ord_id;
-	private int pdt_id;
-	private String pdt_name;
-	private int pdt_price;
-	private int qty;
+	private int ord_detail_id;	// 상세고유id[시퀀스]
+	private int ord_id;			// 주문id[부모키]
+	private int pdt_id;			// 상품id
+	private String pdt_name;	// 상품 이름
+	private int pdt_price;		// 상품 가격
+	private int qty;			// 개수
 	public int getOrd_detail_id() {
 		return ord_detail_id;
 	}
