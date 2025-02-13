@@ -3,7 +3,7 @@ package com.spring.FoodMate.member.dto;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-@Component("sellerVO")
+@Component("sellerDTO")
 public class SellerDTO {
 	// 로그인
 	private String slr_id;
