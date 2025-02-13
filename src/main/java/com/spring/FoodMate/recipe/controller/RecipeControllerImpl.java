@@ -56,6 +56,7 @@ public class RecipeControllerImpl implements RecipeController {
     	HttpSession session=request.getSession();
     	Map recipeMap = recipeService.selectRecipeDetail(rcp_Id);
         ModelAndView mav = new ModelAndView(viewName);
+        mav.setViewName("common/layout");
         mav.addObject("recipeMap", recipeMap);
         RecipeVO recipeVO=(RecipeVO)recipeMap.get("recipeVO");
         RecentRecipeView(rcp_Id,recipeVO,session);
@@ -63,9 +64,9 @@ public class RecipeControllerImpl implements RecipeController {
         mav.addObject("recipeVO", recipeMap.get("recipeVO"));
         mav.addObject("ingredientsList", recipeMap.get("ingredientsList"));
         mav.addObject("stepList", recipeMap.get("stepList"));
-        mav.addObject("common/layout");
-        mav.addObject("showHeadermenu", true);
+        mav.addObject("showNavbar", true);
         mav.addObject("title", "레시피 상세");
+        mav.addObject("body", "/WEB-INF/views/recipe/recipe_Detail.jsp");
         return mav;
     }
     
