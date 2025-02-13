@@ -22,7 +22,11 @@ public class ProductService {
 		}
 	}
 	
-	public ProductDTO select1Pdt(String pdt_id) throws Exception {
+	public List<ProductDTO> ms_pdtList(String slr_id) throws Exception{
+		return productDAO.pdtListBySlrId(slr_id);
+	}
+	
+	public ProductDTO select1PdtByPdtId(int pdt_id) throws Exception {
 		return productDAO.select1Pdt(pdt_id);
 	}
 	
@@ -36,5 +40,9 @@ public class ProductService {
 	
 	public List<CategoryDTO> categoryStep(int category_id) throws Exception {
 		return productDAO.getCategoryStep(category_id);
+	}
+	
+	public int insertNewProduct(ProductDTO newpdt) throws Exception {
+		return productDAO.insertNewProduct(newpdt);
 	}
 }

@@ -25,7 +25,12 @@ public class ProductDAO {
 		return searchList;
 	}
 	
-	public ProductDTO select1Pdt(String pdt_id) throws DataAccessException {
+	public List<ProductDTO> pdtListBySlrId(String slr_id) throws DataAccessException {
+		List<ProductDTO> searchList = sqlSession.selectList("mapper.product.listBySlrId", slr_id);
+		return searchList;
+	}
+	
+	public ProductDTO select1Pdt(int pdt_id) throws DataAccessException {
 		ProductDTO searchVO = sqlSession.selectOne("mapper.product.getPdt", pdt_id);
 		return searchVO;
 	}
@@ -48,5 +53,15 @@ public class ProductDAO {
 	public String getNameById(int pdt_id) throws DataAccessException {
 		String pdt_name = sqlSession.selectOne("mapper.product.getNameById", pdt_id);
 		return pdt_name;
+	}
+	
+	public int insertNewProduct(ProductDTO newpdt) {
+		try {
+			int result = sqlSession.insert("mapper.product.newpdt", newpdt);
+			return result;
+		} catch(DataAccessException e) {
+			e.printStackTrace();
+			return -1;
+		}
 	}
 }

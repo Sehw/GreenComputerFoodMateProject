@@ -105,9 +105,6 @@ public class CartController {
 	public ResponseEntity<?> deleteSelected(@RequestBody Map<String, List<Integer>> request) {
 	    List<Integer> cartIds = request.get("cartIds");
 
-	    System.out.println(cartIds);
-	    System.out.println("이런 상품아이디를 갖고왔어.");
-
 	    try {
 	        boolean success = true;
 	        for (int cartId : cartIds) {

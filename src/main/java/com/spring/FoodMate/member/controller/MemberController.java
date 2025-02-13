@@ -1,7 +1,6 @@
 package com.spring.FoodMate.member.controller;
 
 
-import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.spring.FoodMate.common.SessionDTO;
 import com.spring.FoodMate.common.Util;
 import com.spring.FoodMate.member.dto.BuyerDTO;
 import com.spring.FoodMate.member.dto.SellerDTO;
@@ -101,8 +101,14 @@ public class MemberController {
 //			} else {
 				HttpSession session=request.getSession();
 				session=request.getSession();
+				
+				SessionDTO sessionDTO = new SessionDTO();
+				sessionDTO.setUserId(buyerVO.getByr_id());
+				sessionDTO.setUserRole("buyer");
+				
 				session.setAttribute("isBuyerLogOn", true);
 				session.setAttribute("buyerInfo", buyerVO);
+				session.setAttribute("sessionDTO", sessionDTO);
 				
 				message  = "<script>";
 			    message += " location.href='"+request.getContextPath()+"/main';";
@@ -189,6 +195,12 @@ public class MemberController {
 				session=request.getSession();
 				session.setAttribute("isSellerLogOn", true);
 				session.setAttribute("sellerInfo",sellerVO);
+				
+				SessionDTO sessionDTO = new SessionDTO();
+				sessionDTO.setUserId(sellerVO.getSlr_id());
+				sessionDTO.setUserRole("seller");
+				session.setAttribute("sessionDTO", sessionDTO);
+				
 				
 				message  = "<script>";
 			    message += " location.href='"+request.getContextPath()+"/main';";
