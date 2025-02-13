@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.spring.FoodMate.common.Util;
 import com.spring.FoodMate.member.dto.BuyerDTO;
 import com.spring.FoodMate.recipe.service.RecipeService;
 import com.spring.FoodMate.recipe.vo.RecipeIngredientVO;
@@ -41,7 +42,7 @@ public class RecipeControllerImpl implements RecipeController {
         ModelAndView mav = new ModelAndView();
         mav.addObject("recipeList", recipeService.selectRecipeList()); //서비스에 selectRecipeList메소드있어야함
         mav.setViewName("common/layout");
-        mav.addObject("showHeadermenu", true);
+        mav.addObject("showNavbar", true);
         mav.addObject("title","레시피 목록");
         mav.addObject("body", "/WEB-INF/views/recipe/recipe_list.jsp");
         return mav;
@@ -128,7 +129,7 @@ public class RecipeControllerImpl implements RecipeController {
     // 레시피 작성 폼으로 이동
 	@RequestMapping(value="/recipe/recipe_Add", method=RequestMethod.GET)
 	public ModelAndView addRecipeForm(@RequestParam(value="result", required=false) String result, @RequestParam(value="action",required=false) String action, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = getViewName(request);
+		String viewName = Util.getViewName(request);
 		HttpSession session = request.getSession();
 		session.setAttribute("action", action);
 		ModelAndView mav = new ModelAndView();
@@ -253,37 +254,6 @@ public class RecipeControllerImpl implements RecipeController {
 	    
 	    // 저장된 파일의 이름만 반환 (파일명만 추출)
 	    return fileOnlyName;  // 경로는 제외하고 파일명만 반환
-	}
-
-	
-	private String getViewName(HttpServletRequest request) throws Exception{
-		String contextPath = request.getContextPath();
-		String uri = (String) request.getAttribute("javax.servlet.include.request_uri");
-		if(uri == null || uri.trim().equals("")) {
-			uri=request.getRequestURI();
-		}
-		int begin = 0;
-		if(!((contextPath==null) || ("".equals(contextPath))))
-		{
-			begin=contextPath.length();
-		}
-		int end;
-		if(uri.indexOf(";")!= -1) {
-			end = uri.indexOf(":");
-		} else if(uri.indexOf("?")!= -1) {
-			end = uri.indexOf("?");
-		} else {
-			end = uri.length();
-		}
-		
-		String fileName = uri.substring(begin, end);
-		if (fileName.indexOf(".")!= -1) {
-			fileName = fileName.substring(0,fileName.lastIndexOf("."));
-		}
-		if (fileName.lastIndexOf("/")!=-1) {
-			fileName = fileName.substring(fileName.lastIndexOf("/",1),fileName.length());
-		}
-		return fileName;
 	}
 
 }

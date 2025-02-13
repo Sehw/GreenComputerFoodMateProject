@@ -105,9 +105,6 @@
 			        <div class="col-2">
 			            <a href="#"><img src="${contextPath}/resources/images/Google.png" alt="구글 로그인" class="img-fluid"></a>
 			        </div>
-			        <div class="col-2">
-			            <a href="#"><img src="${contextPath}/resources/images/Apple.png" alt="애플 로그인" class="img-fluid"></a>
-			        </div>
 			    </div>
 			</div>
         </form>
