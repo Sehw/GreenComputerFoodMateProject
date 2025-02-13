@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "../mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.recipe">
+
+    <!-- 레시피 정보 -->
+    <resultMap id="recipeResult" type="RecipeVO">
+        <result property="rcp_Id" column="RCP_ID"/>
+        <result property="byr_Id" column="BYR_ID"/>
+        <result property="category_Id" column="CATEGORY_ID"/>
+        <result property="title" column="TITLE"/>
+        <result property="mainImg_Path" column="MAINIMG_PATH"/>
+        <result property="food_Name" column="FOOD_NAME"/>
+        <result property="req_Time" column="REQ_TIME"/>
+        <result property="description" column="DESCRIPTION"/>
+        <result property="status" column="STATUS"/>
+        <result property="create_Date" column="CREATE_DATE"/>
+    </resultMap>
+    
+    <!-- 레시피 재료 -->
+    <resultMap id="recipeIngredienteResult" type="RecipeIngredientVO">
+        <result property="rcp_Id" column="RCP_ID"/>
+        <result property="ingrd_Name" column="INGRD_NAME"/>
+        <result property="category_Id" column="CATEGORY_ID"/>
+        <result property="ingrd_Qty" column="INGRD_QTY"/>
+        <result property="unit" column="UNIT"/>
+	</resultMap>
+	
+    <!-- 레시피 단계 -->
+    <resultMap id="recipeStepResult" type="RecipeStepVO">
+        <result property="rcp_Id" column="RCP_ID"/>
+        <result property="rcp_Step" column="RCP_STEP"/>
+        <result property="step_Desc" column="STEP_DESC"/>
+        <result property="stepImg_Path" column="STEPIMG_PATH"/>
+    </resultMap>
+    
+
+
+    <!-- 레시피 추가 -->
+    <insert id="insertRecipe" parameterType="RecipeVO">
+        INSERT INTO FOODMATE_RECIPE (
+            RCP_ID, 
+            BYR_ID, 
+            TITLE, 
+            MAINIMG_PATH, 
+            FOOD_NAME, 
+            REQ_TIME, 
+            DESCRIPTION
+        ) 
+        VALUES (
+            FOODMATE_RECIPE_SEQ.NEXTVAL,  <!-- 시퀀스를 사용하여 RCP_ID 값 자동 생성 -->
+            #{byr_Id},                    <!-- 사용자 ID -->
+            #{title},                     <!-- 레시피 제목 -->
+            #{mainImg_Path},              <!-- 레시피 이미지 경로 -->
+            #{food_Name},                 <!-- 음식 이름 -->
+            #{req_Time},                  <!-- 조리 시간 -->
+            #{description}                <!-- 레시피 설명 -->
+        )
+    </insert>
+
+    <!-- 생성된 RCP_ID 값을 반환하는 SELECT 쿼리 -->
+    <select id="selectLastInsertedRecipeId" resultType="int">
+        SELECT FOODMATE_RECIPE_SEQ.CURRVAL FROM DUAL
+    </select>
+
+    <!-- 재료 배치 삽입 -->
+	<insert id="insertRecipeIngredients" parameterType="RecipeIngredientVO">
+	    INSERT INTO FOODMATE_RECIPE_INGREDIENT (RCP_ID, INGRD_NAME, INGRD_QTY, UNIT)
+	    VALUES (#{rcp_Id}, #{ingrd_Name}, #{ingrd_Qty}, #{unit})
+	</insert>
+	
+	<!-- 단계별 조리법 배치 삽입 -->
+	<insert id="insertRecipeSteps" parameterType="RecipeStepVO">
+	    INSERT INTO FOODMATE_RECIPE_STEP (RCP_ID, RCP_STEP, STEP_DESC, STEPIMG_PATH)
+	    VALUES (#{rcp_Id}, #{rcp_Step}, #{step_Desc}, #{stepImg_Path})
+	</insert>
+	
+	 <!-- 레시피 조회 -->
+    <select id="selectRecipeList" resultMap="recipeResult">
+        SELECT 
+            RCP_ID, 
+            BYR_ID, 
+            CATEGORY_ID, 
+            TITLE, 
+            MAINIMG_PATH, 
+            FOOD_NAME, 
+            REQ_TIME, 
+            DESCRIPTION, 
+            STATUS, 
+            CREATE_DATE
+        FROM FOODMATE_RECIPE
+        WHERE STATUS = 'Y' 
+    </select>
+    
+	<!-- 레시피, 재료, 조리법 상세 조회 -->
+		<select id="selectRecipeDetail" resultMap="recipeResult" parameterType="String">
+		    <![CDATA[
+		        SELECT * 
+		        FROM FOODMATE_RECIPE
+		        WHERE RCP_ID = #{rcp_Id}
+		    ]]>
+		</select>
+	    
+	   	<select id="selectIngredientDetail" resultMap="recipeIngredienteResult" parameterType="String">
+		    <![CDATA[
+		        SELECT * 
+		        FROM FOODMATE_RECIPE_INGREDIENT
+		        WHERE RCP_ID = #{rcp_Id}
+		    ]]>
+		</select>
+	    
+		<select id="selectStepDetail" resultMap="recipeStepResult" parameterType="String">
+		    <![CDATA[
+		        SELECT * 
+		        FROM FOODMATE_RECIPE_STEP
+		        WHERE RCP_ID = #{rcp_Id}
+		    ]]>
+		</select>
+
+</mapper>

@@ -284,10 +284,10 @@
 </head>
 
 <body>
-	<div class="category-section mt-4">
 
+<div class="category-section mt-4">
     <div class="category-container">
-        <!-- 모든 카테고리를 한 박스에 담기 -->
+ <!-- 모든 카테고리를 한 박스에 담기 -->
         <div class="category-card">
             <h5>원하는 레시피를 찾아보세요!</h5>
             <div class="category-content">
@@ -350,186 +350,48 @@
     </div>
 </div>
 
+<div class="container mt-4">
+    <div class="mb-3 text-end">
+        <button class="btn btn-outline-primary me-2">최신순</button>
+        <button class="btn btn-outline-primary">평점순</button>
+    </div>
 
+    <div class="row">
+       
+        <c:forEach var="recipe" items="${recipeList}">
+            <div class="col-md-3 col-sm-6">
+                <a href="${contextPath}/recipe/recipe_Detail?rcp_Id=${recipe.rcp_Id}" class="text-decoration-none">
+                    <div class="card recipe-card">
+                        <div class="recipe-image">
+                            
+                            <img src="${contextPath}/resources/images/${recipe.mainImg_Path}" alt="Recipe Image">
+                        </div>
+                        <div class="card-body">
+                            
+                            <h5 class="recipe-title">${recipe.title}</h5>
+                            <p class="recipe-info">
+                                <!-- 작성자는 byrId로 수정 -->
+                                작성자: ${recipe.byr_Id} <br>                                
+                               <!--  평점: 4.7 (참여: 16명) 추후테이블 생기고 반영--> <br> 
+                                조리시간: ${recipe.req_Time}
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </c:forEach>
+    </div>
 
+    <div class="pagination">
+        <!-- 페이지 네비게이션(기본적으로 하드코딩된 부분을 동적으로 처리하려면 추가적인 로직 필요) -->
+        <a href="#" class="active">1</a> 
+        <a href="#">2</a> 
+        <a href="#">3</a> 
+        <a href="#">4</a> 
+        <a href="#">5</a>
+    </div>
 
-	<div class="container mt-4">
-		<div class="mb-3 text-end">
-			<button class="btn btn-outline-primary me-2">최신순</button>
-			<button class="btn btn-outline-primary">평점순</button>
-		</div>
-
-
-
-	
-
-		<div class="row">
-			<div class="col-md-3 col-sm-6">
-			    <!-- a 태그를 div 태그 바깥으로 위치시킵니다. -->
-			    <a href="${contextPath}/recipe/recipe_Detail" class="text-decoration-none">
-			        <div class="card recipe-card">
-			            <div class="recipe-image"><img src="${pageContext.request.contextPath}/resources/images/pasta.PNG" alt="Recipe Image"></div>
-			            <div class="card-body">
-			                <h5 class="recipe-title">레시피 제목</h5>
-			                <p class="recipe-info">
-			                    작성자: 이정희 <br> 평점: 4.5 (참여: 20명) <br> 조리시간: 30분
-			                </p>
-			            </div>
-			        </div>
-			    </a>
-			</div>
-
-			<div class="col-md-3 col-sm-6">
-				<div class="card recipe-card">
-					<div class="recipe-image">이미지</div>
-					<div class="card-body">
-						<h5 class="recipe-title">레시피 제목</h5>
-						<p class="recipe-info">
-							작성자: 김영호 <br> 평점: 4.0 (참여: 15명) <br> 조리시간: 25분
-						</p>					
-					</div>
-				</div>
-			</div>
-
-			<div class="col-md-3 col-sm-6">
-				<div class="card recipe-card">
-					<div class="recipe-image">이미지</div>
-						<div class="card-body">
-						<h5 class="recipe-title">레시피 제목</h5>
-						<p class="recipe-info">
-							작성자: 최민수 <br> 평점: 4.8 (참여: 10명) <br> 조리시간: 20분
-						</p>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-md-3 col-sm-6">
-				<div class="card recipe-card">
-					<div class="recipe-image">이미지</div>
-					<div class="card-body">
-						<h5 class="recipe-title">레시피 제목</h5>
-						<p class="recipe-info">
-							작성자: 박준호 <br> 평점: 3.8 (참여: 45명) <br> 조리시간: 40분
-						</p>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-md-3 col-sm-6">
-				<div class="card recipe-card">
-					<div class="recipe-image">이미지</div>
-						<div class="card-body">
-						<h5 class="recipe-title">레시피 제목</h5>
-						<p class="recipe-info">
-							작성자: 윤지혜 <br> 평점: 3.9 (참여: 26명) <br> 조리시간: 30분
-						</p>
-					</div>
-				</div>
-
-			</div>
-			<div class="col-md-3 col-sm-6">
-				<div class="card recipe-card">
-					<div class="recipe-image">이미지</div>
-					<div class="card-body">
-						<h5 class="recipe-title">레시피 제목</h5>
-						<p class="recipe-info">
-							작성자: 강상철 <br> 평점: 3.9 (참여: 21명) <br> 조리시간: 40분
-						</p>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-md-3 col-sm-6">
-				<div class="card recipe-card">
-					<div class="recipe-image">이미지</div>
-					<div class="card-body">
-						<h5 class="recipe-title">레시피 제목</h5>
-						<p class="recipe-info">
-							작성자: 박진수 <br> 평점: 3.8 (참여: 25명) <br> 조리시간: 50분
-						</p>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-md-3 col-sm-6">
-				<div class="card recipe-card">
-					<div class="recipe-image">이미지</div>
-					<div class="card-body">
-						<h5 class="recipe-title">레시피 제목</h5>
-						<p class="recipe-info">
-							작성자: 한유진 <br> 평점: 4.2 (참여: 14명) <br> 조리시간: 25분
-						</p>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-md-3 col-sm-6">
-				<div class="card recipe-card">
-					<div class="recipe-image">이미지</div>
-					<div class="card-body">
-						<h5 class="recipe-title">레시피 제목</h5>
-						<p class="recipe-info">
-							작성자: 오성준 <br> 평점: 4.4 (참여: 18명) <br> 조리시간: 40분
-						</p>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-md-3 col-sm-6">
-				<div class="card recipe-card">
-					<div class="recipe-image">이미지</div>
-					<div class="card-body">
-						<h5 class="recipe-title">레시피 제목</h5>
-						<p class="recipe-info">
-							작성자: 송미라 <br> 평점: 3.9 (참여: 42명) <br> 조리시간: 45분
-						</p>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-md-3 col-sm-6">
-				<div class="card recipe-card">
-					<div class="recipe-image">이미지</div>
-					<div class="card-body">
-						<h5 class="recipe-title">레시피 제목</h5>
-						<p class="recipe-info">
-							작성자: 김동혁 <br> 평점: 4.5 (참여: 33명) <br> 조리시간: 35분
-						</p>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-md-3 col-sm-6">
-				<div class="card recipe-card">
-					<div class="recipe-image">이미지</div>
-					<div class="card-body">
-						<h5 class="recipe-title">레시피 제목</h5>
-						<p class="recipe-info">
-							작성자: 이영준<br> 평점: 4.7 (참여: 16명) <br>조리시간: 40분
-						</p>
-					</div>
-				</div>
-
-			</div>
-		</div>
-
-
-		<div class="pagination">
-			<a href="#" class="active">1</a> 
-			<a href="#">2</a> 
-			<a href="#">3</a> 
-			<a href="#">4</a> 
-			<a href="#">5</a> 
-			<a href="#">6</a> 
-			<a href="#">7</a> 
-			<a href="#">8</a> 
-			<a href="#">9</a> 
-			<a href="#">10</a>
-		</div>
-			
-
-
-		<div class="mt-5">
+ 		<div class="mt-5">
 			<h5>최근 본 레시피</h5>
 			
 			<div class="swiper-container">
@@ -584,40 +446,30 @@
 			</div>
 		</div>
 
-
-
-	</div>
-
-
-
-
-
-	<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-	<script>
-		// Swiper 초기화
-		const swiper = new Swiper(".swiper-container", {
-			slidesPerView : 3, // 한 화면에 보여질 슬라이드 수
-			spaceBetween : 20, // 슬라이드 간격
-			navigation : {
-				nextEl : ".swiper-button-next", // 다음 버튼
-				prevEl : ".swiper-button-prev" // 이전 버튼
-			},
-			breakpoints : {
-				1024 : {
-					slidesPerView : 4, // 1024px 이상일 때 슬라이드 4개 표시
-				},
-				768 : {
-					slidesPerView : 2, // 768px 이하일 때 슬라이드 2개 표시
-				},
-				480 : {
-					slidesPerView : 1, // 480px 이하일 때 슬라이드 1개 표시
-				}
-			}
-		});
-	</script>
-
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+    // Swiper 초기화
+    const swiper = new Swiper(".swiper-container", {
+        slidesPerView : 3, // 한 화면에 보여질 슬라이드 수
+        spaceBetween : 20, // 슬라이드 간격
+        navigation : {
+            nextEl : ".swiper-button-next", // 다음 버튼
+            prevEl : ".swiper-button-prev" // 이전 버튼
+        },
+        breakpoints : {
+            1024 : {
+                slidesPerView : 4, // 1024px 이상일 때 슬라이드 4개 표시
+            },
+            768 : {
+                slidesPerView : 2, // 768px 이하일 때 슬라이드 2개 표시
+            },
+            480 : {
+                slidesPerView : 1, // 480px 이하일 때 슬라이드 1개 표시
+            }
+        }
+    });
+</script>
 
 
 </body>
-
 </html>

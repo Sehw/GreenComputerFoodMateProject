@@ -3,6 +3,11 @@
 	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	"../mybatis-3-config.dtd">
 <configuration>
+	<!-- ▼<typeAliases> 위에 입력해야된다 -->
+	<settings>
+        <setting name="jdbcTypeForNull" value="NULL" />
+    </settings>
+
 	<typeAliases>
 		<typeAlias type="com.spring.FoodMate.member.dto.BuyerDTO" alias="buyerDTO"/>
 		<typeAlias type="com.spring.FoodMate.member.dto.SellerDTO" alias="sellerDTO"/>
@@ -12,6 +17,9 @@
 		<typeAlias type="com.spring.FoodMate.product.dto.CategoryDTO" alias="categoryDTO"/>
 		<typeAlias type="com.spring.FoodMate.cart.dto.CartDTO" alias="cartDTO"/>
 		<typeAlias type="com.spring.FoodMate.order.dto.OrderDTO" alias="orderDTO"/>
+		<typeAlias type="com.spring.FoodMate.recipe.vo.RecipeVO" alias="RecipeVO"/>
+        <typeAlias type="com.spring.FoodMate.recipe.vo.RecipeIngredientVO" alias="RecipeIngredientVO"/>
+        <typeAlias type="com.spring.FoodMate.recipe.vo.RecipeStepVO" alias="RecipeStepVO"/>
 	</typeAliases>
 	
 </configuration>
