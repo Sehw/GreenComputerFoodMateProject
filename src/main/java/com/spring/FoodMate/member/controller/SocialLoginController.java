@@ -8,6 +8,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -26,7 +28,7 @@ public class SocialLoginController {
 	
 	private final String KAKAO_API_KEY = dotenv.get("KAKAO_REST_API");  //  카카오 REST API 키
 	
-	public String getKakaoAccessToken(String code) {
+	public String getKakaoAccessToken(String code, HttpServletRequest request) {
 	    String accessToken = "";
 	    String refreshToken = "";
 	    String reqUrl = "https://kauth.kakao.com/oauth/token";
@@ -42,10 +44,13 @@ public class SocialLoginController {
 	        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
 	        StringBuilder sb = new StringBuilder();
 	        
+	        // 현재 실행 중인 서버의 프로토콜, 도메인, 포트를 가져와서 redirect_uri 설정
+	        String redirectUri = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/login/kakao";
+	        
 	        //필수 쿼리 파라미터 세팅
 	        sb.append("grant_type=authorization_code");
 	        sb.append("&client_id=").append(KAKAO_API_KEY);
-	        sb.append("&redirect_uri=").append("http://localhost:8090/FoodMate/login/kakao");
+	        sb.append("&redirect_uri=").append(redirectUri);
 	        sb.append("&code=").append(code);
 
 	        bw.write(sb.toString());

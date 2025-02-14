@@ -122,7 +122,7 @@ public class MemberController {
 	@RequestMapping(value="/login/kakao" ,method = RequestMethod.GET)
 	public ResponseEntity kakaologin(@RequestParam String code,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String accessToken = sociallogincontroller.getKakaoAccessToken(code);
+		String accessToken = sociallogincontroller.getKakaoAccessToken(code, request);
 		Map<String, Object> userInfo = sociallogincontroller.getKakaoUserInfo(accessToken);
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("utf-8");

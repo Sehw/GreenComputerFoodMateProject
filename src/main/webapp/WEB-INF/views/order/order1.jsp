@@ -348,7 +348,7 @@ function execDaumPostcode() {
                             <div id="product-option"><strong>상품명</strong>: ${orderitems.pdt_name}</div>
                         </td>
                         <td>${orderitems.qty}</td>
-                        <td>${orderitems.price}</td>
+                        <td>${orderitems.price * orderitems.qty}</td>
                         <td>0p</td>
                         <td>기본 0원</td>
                     </tr>
@@ -421,20 +421,16 @@ function execDaumPostcode() {
 		<div class="payment-info-container">
 		    <h2 class="section-title">결제 정보</h2>
 		    <div class="payment-info">
-		    	<div class="payment-detail">
-		            <label>상품 금액</label>
-		            <p class="price">₩ 22,500</p>
-		        </div>
-		        <div class="payment-detail">
-		            <label>상품 수량</label>
-		            <p class="price">2개</p>
-		        </div>
 		        <div class="payment-detail">
 		            <label>상품 합계 금액</label>
 		            <p class="price">₩ 45,000</p>
 		        </div>
 		       	<div class="payment-detail">
 		            <label>포인트 할인</label>
+		            <p class="price">-₩ 1,000</p>
+		        </div>
+		        <div class="payment-detail">
+		            <label>쿠폰 할인</label>
 		            <p class="price">-₩ 1,000</p>
 		        </div>
 		        <div class="payment-detail">
