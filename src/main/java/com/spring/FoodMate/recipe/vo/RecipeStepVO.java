@@ -33,17 +33,5 @@ public class RecipeStepVO {
 	public void setStepImg_Path(String stepImg_Path) {
 		this.stepImg_Path = stepImg_Path;
 	}
-	
-	    @Override
-	    public String toString() {
-	        return "RecipeStepVO{" +
-	                "rcp_Id=" + rcp_Id +
-	                ", rcp_Step=" + rcp_Step +
-	                ", step_Desc='" + step_Desc + '\'' +
-	                ", stepImg_Path='" + stepImg_Path + '\'' +
-	                '}';
-	    }
-	
 
-  
 }

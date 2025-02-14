@@ -7,10 +7,6 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
 
-body {
-	background-color: #f8f9fa;
-}
-
 #product_list {
     margin: 0 auto;
     font-family: 'Noto Sans KR', sans-serif;
@@ -147,24 +143,40 @@ body {
     border-color: white;
 }
 
+#product_list .stylish-button {
+    display: inline-block;
+    padding: 10px 16px;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#product_list .stylish-button:hover {
+    background-color: #0056b3;
+    transform: scale(0.9);
+}
+
+#product_list .stylish-button:active {
+    background-color: #004085;
+}
+
 </style>
 </head>
 <body>
 <main id="product_list">
 
-	<article class="category">
-		<div id="category_text">
-		카테고리 : 전체상품
-		</div> 
-	</article>
-	
-	<article class="sort_button">
-	    <div class="button">메이트추천</div>
-	    <div class="button">낮은 가격순</div>
-	    <div class="button">높은 가격순</div>
-	    <div class="button">판매량순</div>
-	</article>
-	
+<article class="sort_button">
+    <div class="button">이름순</div>
+    <div class="button">낮은 가격순</div>
+    <div class="button">높은 가격순</div>
+    <div class="button">판매량순</div>
+    <div class="button">주문대기순</div>
+</article>
+
 	<section class="container_display">
 	
 		<c:choose>
@@ -184,6 +196,7 @@ body {
 		                    판매자 : ${product.slr_nickname}<br>
 		                    <span class="pdt_FinalPrice">${product.price}원</span><br>
 		                    ⭐⭐⭐⭐⭐<br>
+		                    <a href="${contextPath}/product/pdteditform?pdt_id=${product.pdt_id}" class="button stylish-button">수정</a>
 		                </p>
 		            </div>
 		        </article>
@@ -193,20 +206,20 @@ body {
 	
 	</section>
 
-	<article class="pagination">
-	    <div class="pagination_buttons">
-	    	<a href="#" class="page_button active">1</a>
-	        <a href="#" class="page_button">2</a>
-	        <a href="#" class="page_button">3</a>
-	        <a href="#" class="page_button">4</a>
-	        <a href="#" class="page_button">5</a>
-	        <a href="#" class="page_button">6</a>
-	        <a href="#" class="page_button">7</a>
-	        <a href="#" class="page_button">8</a>
-	        <a href="#" class="page_button">9</a>
-	        <a href="#" class="page_button">10</a>
-	    </div>
-	</article>
+<article class="pagination">
+    <div class="pagination_buttons">
+    	<a href="#" class="page_button active">1</a>
+        <a href="#" class="page_button">2</a>
+        <a href="#" class="page_button">3</a>
+        <a href="#" class="page_button">4</a>
+        <a href="#" class="page_button">5</a>
+        <a href="#" class="page_button">6</a>
+        <a href="#" class="page_button">7</a>
+        <a href="#" class="page_button">8</a>
+        <a href="#" class="page_button">9</a>
+        <a href="#" class="page_button">10</a>
+    </div>
+</article>
 
 </main>
 </body>

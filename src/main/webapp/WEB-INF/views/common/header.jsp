@@ -99,7 +99,7 @@
 <div class="container1">
     <a href="${contextPath}/main"><img id="sitelogo" src="${contextPath}/resources/images/foodmatelogo.png" alt="푸드메이트로고"></a>
 
-	<form action="${contextPath}/product_list" method="GET" class="search-bar">
+	<form action="${contextPath}/product/pdtlist" method="GET" class="search-bar">
 	    <input type="text" name="keyword" placeholder="재료만 검색가능">
 	    <button type="submit"><i class="fas fa-search"></i></button>
 	</form>
@@ -165,7 +165,6 @@
 	if(${sessionScope.isSellerLogOn ? 'true' : 'false'} == true){
 		document.getElementById('recipeLink').href = "${contextPath}/product/pdtaddform";
 		document.getElementById('recipeLink').title = "상품 등록"; //이거 추가함
-		document.getElementById('cartLink').href = "${contextPath}/cart/cartlist";
 	}
 </script>
 </body>

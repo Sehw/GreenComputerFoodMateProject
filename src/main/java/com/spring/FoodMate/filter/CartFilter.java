@@ -41,14 +41,15 @@ public class CartFilter implements Filter {
                 httpResponse.sendRedirect(httpRequest.getContextPath() + "/member/loginForm");
             }
             return;
-        }
+        } else {
         
-        BuyerDTO buyerInfo = (BuyerDTO) session.getAttribute("buyerInfo");
-        //이즈바이어로그온을 뚫었더라도 바이어인포가 없으면
-        if (buyerInfo == null) {
-        	session.setAttribute("alertMsg", "로그인 정보가 유효하지 않습니다. 다시 로그인해 주세요.");
-            httpResponse.sendRedirect(httpRequest.getContextPath() + "/member/loginForm");
-	        return;
+	        BuyerDTO buyerInfo = (BuyerDTO) session.getAttribute("buyerInfo");
+	        //이즈바이어로그온을 뚫었더라도 바이어인포가 없으면
+	        if (buyerInfo == null) {
+	        	session.setAttribute("alertMsg", "로그인 정보가 유효하지 않습니다. 다시 로그인해 주세요.");
+	            httpResponse.sendRedirect(httpRequest.getContextPath() + "/member/loginForm");
+		        return;
+	        }
 	    }
         // 로그인된 경우 필터 체인 계속 진행
         chain.doFilter(request, response);

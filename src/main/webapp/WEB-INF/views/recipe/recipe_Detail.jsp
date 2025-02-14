@@ -73,7 +73,7 @@
 	        <c:forEach var="step" items="${recipeMap.stepVO}">
 	            <div class="cooking-step-card">
 	                <div class="cooking-step-image">
-	                    <img src="${pageContext.request.contextPath}/resources/images${step.stepImg_Path}" alt="Step ${step.rcp_Step}" class="step-image">
+	                    <img src="${pageContext.request.contextPath}/resources/images/${step.stepImg_Path}" alt="Step ${step.rcp_Step}" class="step-image">
 	                </div>
 	                <div class="cooking-step-text">
 	                    <h5>Step ${step.rcp_Step}</h5>                   

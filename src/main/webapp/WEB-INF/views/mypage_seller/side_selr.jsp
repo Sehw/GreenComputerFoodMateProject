@@ -46,7 +46,7 @@
         
         <h5>상품관리</h5>
         <ul>
-	        <li><a href="${contextPath}/mypage_seller/mypage_sell_productlist">내 상품</a></li>
+	        <li><a href="${contextPath}/mypage_seller/ms_pdtlist">내 상품</a></li>
 	        <li><a href="${contextPath}/mypage_seller/mypage_sell_productamount">상품 재고관리/공개설정</a></li>
         </ul>
         <hr>

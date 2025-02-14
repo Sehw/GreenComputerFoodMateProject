@@ -10,20 +10,20 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.spring.FoodMate.cart.dto.CartDTO;
+import com.spring.FoodMate.common.exception.DBException;
 
 @Repository("cartDAO")
 public class CartDAO {
     @Autowired
 	private SqlSession sqlSession;
 	
-	public boolean insertCartItem(CartDTO cartItem) {
+	public boolean insertCartItem(CartDTO cartDTO) {
         try {
-            int result = sqlSession.insert("mapper.cart.addPdt", cartItem);
+            int result = sqlSession.insert("mapper.cart.addPdt", cartDTO);
             return result > 0;
+            // result 는 insert 한 행 수를 표시하므로 성공하면 1 이상, 실패하면 0이다.
         } catch (DataAccessException e) {
-            // 예외 로그 기록
-        	e.printStackTrace();
-            return false; // 실패하면 false 반환
+        	throw new DBException("CartDAO.insertCartItem error!" + cartDTO.toLogString(), e);
         }
     }
 	
@@ -34,41 +34,37 @@ public class CartDAO {
 			// DB에 구매자 ID를 주면서 구매자의 cartDTO 리스트를 요청한다.
 			return list;
 		} catch (DataAccessException e) {
-        	e.printStackTrace();
-            // 예외 로그 콘솔에 출력. 나중에 로그 기록하는 뭐시기 만들어야 할듯.
-            return null; // 실패하면 null 반환
+            throw new DBException("CartDAO.getCartListById error! byr_id=" + byr_id, e);
         }
 	}
 	
-	public CartDTO isInMyCart(CartDTO cartDTO) {
+	// 카트 검사해서 
+	public CartDTO isInMyCart(int pdt_id, String byr_id) {
 		try {
+			CartDTO cartDTO = new CartDTO(pdt_id, byr_id);
 			CartDTO resultDTO = sqlSession.selectOne("mapper.cart.isInMyCart", cartDTO);
 			return resultDTO;
 		} catch (DataAccessException e) {
-			e.printStackTrace();
-			return null;
+			throw new DBException("CartDAO.inInMyCart error! pdt_id =" + pdt_id + ", byr_id = " + byr_id , e);
 		}
 	}
 	
 	public int updateCartQuantity(int cart_id, int qty) {
-		try {
-			Map<String, Object> params = new HashMap<>();
+	    Map<String, Object> params = new HashMap<>();
+	    try {
 	        params.put("cart_id", cart_id);
 	        params.put("qty", qty);
-	        int result = sqlSession.update("mapper.cart.updateCartQuantity", params);
-	        return result;
-		} catch (DataAccessException e) {
-			e.printStackTrace();
-			return -1;
-		}   
-    }
+	        return sqlSession.update("mapper.cart.updateCartQuantity", params);
+	    } catch (DataAccessException e) {
+	        throw new DBException("CartDAO.updateCartQuantity error!" + params.toString(), e);
+	    }
+	}
 	
 	public int deleteCartItem(int cart_id) {
 		try {
 			return sqlSession.delete("mapper.cart.deleteCartItem", cart_id);
 		} catch (DataAccessException e) {
-			e.printStackTrace();
-			return -1;
+			throw new DBException("CartDAO.deleteCartItem error! cart_id=" + cart_id, e);
 		}
     }
 }

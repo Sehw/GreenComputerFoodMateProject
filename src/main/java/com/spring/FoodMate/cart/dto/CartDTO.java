@@ -63,7 +63,22 @@ public class CartDTO {
 	public void setStatus(String status) {		this.status = status;	}
 	public String getImg_path() {		return img_path;	}
 	public void setImg_path(String img_path) {		this.img_path = img_path;	}
-	
 	// 이건 cartList view 에서 받아올 필드와 GetSetter
-
+	
+	// 예외 로그 기록용
+	public String toLogString() {
+	    return "CartDTO{" +
+	            "cart_id=" + cart_id +
+	            ", byr_id='" + byr_id + '\'' +
+	            ", pdt_id=" + pdt_id +
+	            ", pdt_name='" + pdt_name + '\'' +
+	            ", qty=" + qty +
+	            ", add_date=" + add_date +
+	            ", price=" + price +
+	            ", slr_id='" + slr_id + '\'' +
+	            ", nickname='" + nickname + '\'' +
+	            ", status='" + status + '\'' +
+	            ", img_path='" + img_path + '\'' +
+	            '}';
+	}
 }

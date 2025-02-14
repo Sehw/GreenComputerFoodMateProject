@@ -1,12 +1,9 @@
 package com.spring.FoodMate.recipe.controller;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,6 +25,7 @@ import com.spring.FoodMate.recipe.service.RecipeService;
 import com.spring.FoodMate.recipe.vo.RecipeIngredientVO;
 import com.spring.FoodMate.recipe.vo.RecipeStepVO;
 import com.spring.FoodMate.recipe.vo.RecipeVO;
+import com.spring.FoodMate.common.Util;
 
 @Controller
 public class RecipeControllerImpl implements RecipeController {
@@ -161,8 +159,10 @@ public class RecipeControllerImpl implements RecipeController {
 	) throws Exception {
 
 	    // 세션에서 로그인한 사용자 정보 가져오기
-		BuyerDTO BuyerDTO = (BuyerDTO) session.getAttribute("memberInfo");
+		BuyerDTO BuyerDTO = (BuyerDTO) session.getAttribute("buyerInfo");
 	    String byrId = BuyerDTO != null ? BuyerDTO.getByr_id() : "unknownUser";
+	    System.out.println(byrId);
+	    System.out.println("이게 바이어 아이디임.");
 
 	    // 레시피 객체 생성
 	    RecipeVO recipe = new RecipeVO();
@@ -174,7 +174,7 @@ public class RecipeControllerImpl implements RecipeController {
 
 	    // 레시피 이미지 저장 (메인 이미지)
 	    if (mainImg != null && !mainImg.isEmpty()) {
-	        String mainImgPath = saveImageFile(mainImg);
+	        String mainImgPath = Util.saveRecipeImage(mainImg);
 	        recipe.setMainImg_Path(mainImgPath);  // 이미지 경로 저장
 	    }
 
@@ -212,7 +212,7 @@ public class RecipeControllerImpl implements RecipeController {
 	            step.setRcp_Step(stepNumbers.get(i));
 	            step.setStep_Desc(stepDescriptions.get(i));
 	            if (!stepImages.isEmpty() && stepImages.size() > i && stepImages.get(i) != null) {
-	                String stepImgPath = saveImageFile(stepImages.get(i));  // 단계 이미지 저장
+	                String stepImgPath = Util.saveRecipeImage(stepImages.get(i));  // 단계 이미지 저장
 	                step.setStepImg_Path(stepImgPath);  // 단계 이미지 경로 저장
 	            }
 	            steps.add(step);
@@ -225,36 +225,6 @@ public class RecipeControllerImpl implements RecipeController {
 	    response.put("message", "레시피 등록에 성공했습니다.");
 	    response.put("status", "success");
 	    return new ResponseEntity<>(response, HttpStatus.OK);
-	}
-
-
-
-
-
-
-	// 이미지 저장 메서드
-	public String saveImageFile(MultipartFile file) throws IOException {
-	    // 이미지 저장 경로 (운영 환경에서 경로 수정 필요)
-	    String uploadPath = "C:\\taeyong_test\\GreenComputerFoodMateProject-main3\\src\\main\\webapp\\resources\\images";
-	    
-	    // 디렉토리가 존재하지 않으면 생성
-	    File uploadDir = new File(uploadPath);
-	    if (!uploadDir.exists()) {
-	        uploadDir.mkdirs();
-	    }
-	    
-	    // 파일 이름에 고유성을 부여 (UUID 사용)
-	    String fileName = System.currentTimeMillis() + "_" + UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
-	    
-	    // 파일 저장 경로 설정
-	    File dest = new File(uploadPath, fileName);
-	    file.transferTo(dest);  // 파일을 디스크에 저장
-	    
-	    // 경로에서 마지막 '/' 이후 부분만 추출 (파일명 + 확장자)
-	    String fileOnlyName = fileName.substring(fileName.lastIndexOf(File.separator) + 1);  // 마지막 '/'부터 포함된 파일 이름 추출
-	    
-	    // 저장된 파일의 이름만 반환 (파일명만 추출)
-	    return fileOnlyName;  // 경로는 제외하고 파일명만 반환
 	}
 
 }
