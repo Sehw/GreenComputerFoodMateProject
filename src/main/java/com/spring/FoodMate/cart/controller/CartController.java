@@ -23,12 +23,11 @@ import com.spring.FoodMate.cart.exception.CartException;
 import com.spring.FoodMate.cart.service.CartService;
 import com.spring.FoodMate.common.Util;
 import com.spring.FoodMate.common.exception.UnhandledException;
-import com.spring.FoodMate.main.MainController;
 import com.spring.FoodMate.member.dto.BuyerDTO;
 
 @Controller
 public class CartController {
-	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
+	private static final Logger logger = LoggerFactory.getLogger(CartController.class);
 	
 	@Autowired
 	CartService cartService; 
