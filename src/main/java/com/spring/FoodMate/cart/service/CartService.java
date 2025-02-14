@@ -10,81 +10,75 @@ import org.springframework.stereotype.Service;
 
 import com.spring.FoodMate.cart.dao.CartDAO;
 import com.spring.FoodMate.cart.dto.CartDTO;
+import com.spring.FoodMate.cart.exception.CartException;
+import com.spring.FoodMate.common.exception.DBException;
 import com.spring.FoodMate.product.dao.ProductDAO;
 
 @Service("cartService")
 public class CartService {
 
     @Autowired
-    private CartDAO cartDAO;  // CartDAO는 실제 DB 작업을 처리하는 클래스
+    private CartDAO cartDAO;
     @Autowired
     private ProductDAO productDAO;
 
-    public CartDTO isInMyCart(int pdt_id, String byr_id) {
-    	try {
-    		CartDTO cartTest = new CartDTO(pdt_id, byr_id);
-    		CartDTO resultDTO = cartDAO.isInMyCart(cartTest);
-    		return resultDTO;
-    	} catch (Exception e) {
-    		CartDTO error = new CartDTO();
-    		error.setCart_id(0);
-    		return error;
-    	}
-    }
-    
     public boolean addToCart(int pdt_id, int qty, String byr_id) {
-    	try {
-    		CartDTO duplResult = isInMyCart(pdt_id, byr_id);
-    		
-    		int dupl;
-    		if(duplResult != null) {
-    			if(duplResult.getCart_id() == 0) { dupl = -1; }
-    			else { dupl = 1; } 
-    		} else { dupl = 0; }
-    		
-    		if(dupl==0) {
-    			// cartController에서 보낸 상품ID, 수량, 구매자ID 값을 받아온다.
-            	String pdt_name = productDAO.getNameById(pdt_id);
-            	// productDAO의 getNameById 메서드에 상품ID를 넣어서 상품이름을 가져온다.
-            	// 생각할점 : 상품 ID를 넣었는데 없으면 어떡하지? 예외처리 있어야함.
-                CartDTO cartItem = new CartDTO(pdt_id, qty, byr_id, pdt_name);
-                // CartDTO의 특수 생성자에 4개의 값을 넣어서 CartDTO형 cartItem 객체를 만든다.
-                boolean result = cartDAO.insertCartItem(cartItem);
-                return result;
-                // DB에 성공적으로 추가되었다면 true 반환
-    		} else if(dupl==1) {
-    			int cartId = duplResult.getCart_id();
-    			int newQty = duplResult.getQty() + qty;
-    			return updateCartQuantity(cartId, newQty);
-    		} else {
-    			return false;
-    		}
-    	} catch (Exception e) {
-    		e.printStackTrace();
-    		return false;
-    	}
-    }
-    
-    public Map<String, List<CartDTO>> getGroupedCartList(String byr_id) throws Exception {
-    	// cartController 에서 보낸 구매자 ID를 받아온다.
-    	List<CartDTO> cartList = cartDAO.getCartListById(byr_id);
-    	// cartDAO에 구매자ID를 주면서 구매자의 cartDTO 리스트를 요청한다.
-        Map<String, List<CartDTO>> groupedCart = new LinkedHashMap<>();
-        // 링크드 해시맵? 으로 판매자 별명별로 상품 그룹지을 준비
-        for (CartDTO cart : cartList) {    
-            groupedCart.computeIfAbsent(cart.getNickname(), k -> new ArrayList<>()).add(cart);
-            // 판매자 별명 기준으로 그룹화
+        try {
+            CartDTO duplResult = cartDAO.isInMyCart(pdt_id, byr_id); // 담으려는 상품이 이미 장바구니에 있냐?
+
+            if (duplResult != null && duplResult.getCart_id() != 0) {
+                return updateCartQuantity(duplResult.getCart_id(), duplResult.getQty() + qty);
+                // 이미 장바구니에 있으면 수량만 더해
+            }
+
+            // 없으면 새 상품 담아
+            String pdt_name = productDAO.getNameById(pdt_id); // 상품 이름 가져오기
+            CartDTO cartItem = new CartDTO(pdt_id, qty, byr_id, pdt_name); // 장바구니 아이템 생성
+            return cartDAO.insertCartItem(cartItem); // 장바구니에 아이템 추가
+
+        } catch (DBException e) {
+        	throw new CartException("", e);
+        } catch (Exception e) {
+            throw new CartException("CartService.addToCart error! pdt_id=" + pdt_id + ", qty=" + qty + ", byr_id=" + byr_id, e);
         }
-        
-        return groupedCart;
+    }
+
+    public Map<String, List<CartDTO>> getGroupedCartList(String byr_id) {
+        try {
+            // cartController 에서 보낸 구매자 ID를 받아온다.
+            List<CartDTO> cartList = cartDAO.getCartListById(byr_id);
+            // cartDAO에 구매자ID를 주면서 구매자의 cartDTO 리스트를 요청한다.            
+            Map<String, List<CartDTO>> groupedCart = new LinkedHashMap<>();
+            // 링크드 해시맵? 으로 판매자 별명별로 상품 그룹지을 준비            
+            for (CartDTO cart : cartList) {    
+                groupedCart.computeIfAbsent(cart.getNickname(), k -> new ArrayList<>()).add(cart);
+                // 판매자 별명 기준으로 그룹화
+            }
+            return groupedCart;
+        } catch (DBException e) {
+            throw new CartException("", e);
+        } catch (Exception e) {
+            throw new CartException("CartService.getGroupedCartList error! byr_id=" + byr_id, e);
+        }
     }
     
     public boolean updateCartQuantity(int cart_id, int qty) {
-        return cartDAO.updateCartQuantity(cart_id, qty) > 0; // 업데이트된 행 수가 1 이상이면 성공
+        try {
+            return cartDAO.updateCartQuantity(cart_id, qty) > 0; // 업데이트된 행 수가 1 이상이면 성공
+        } catch (DBException e) {
+        	throw new CartException("", e);
+        } catch (Exception e) {
+            throw new CartException("CartService.updateCartQuantity error! cart_id=" + cart_id + ", qty=" + qty, e);
+        }
     }
-    
+
     public boolean deleteCartItem(int cart_id) {
-        int result = cartDAO.deleteCartItem(cart_id);
-        return result > 0;  // 성공하면 true, 실패하면 false
+    	try {
+    		return cartDAO.deleteCartItem(cart_id) > 0;  // 성공하면 true, 실패하면 false
+        } catch (DBException e) {
+        	throw new CartException("", e);
+        } catch (Exception e) {
+            throw new CartException("CartService.updateCartQuantity error! cart_id=" + cart_id, e);
+        }
     }   
 }
