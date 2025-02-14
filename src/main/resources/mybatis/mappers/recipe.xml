@@ -94,7 +94,27 @@
 	    JOIN FOODMATE_BUYER_PROFILE BP ON R.BYR_ID = BP.BYR_ID  <!-- JOIN 조건 -->
 	    WHERE R.STATUS = 'Y'
 	</select>
-
+	
+	<!-- 레시피, 재료, 조리법 상세 조회 -->
+		<select id="selectRecipeListByrID" resultMap="recipeResult" parameterType="String">
+		    <![CDATA[
+		        SELECT 
+		        R.RCP_ID, 
+		        R.BYR_ID, 
+		        BP.NICKNAME,  <!-- 닉네임 추가 -->
+		        R.CATEGORY_ID, 
+		        R.TITLE, 
+		        R.MAINIMG_PATH, 
+		        R.FOOD_NAME, 
+		        R.REQ_TIME, 
+		        R.DESCRIPTION, 
+		        R.STATUS, 
+		        R.CREATE_DATE
+		    FROM FOODMATE_RECIPE R
+		    JOIN FOODMATE_BUYER_PROFILE BP ON R.BYR_ID = BP.BYR_ID  <!-- JOIN 조건 -->
+		    WHERE R.BYR_ID = #{byr_Id}
+		    ]]>
+		</select>
     
 	<!-- 레시피, 재료, 조리법 상세 조회 -->
 		<select id="selectRecipeDetail" resultMap="recipeResult" parameterType="String">

@@ -50,6 +50,12 @@ public class RecipeDAOImpl implements RecipeDAO {
         return sqlSession.selectList("mapper.recipe.selectRecipeList");  // 레시피 목록 조회
     }
     
+    @Override
+    // 레시피 목록 조회 회원ID로
+    public List<RecipeVO> selectRecipeListByrID(String byr_Id) throws Exception {
+        return sqlSession.selectList("mapper.recipe.selectRecipeList", byr_Id);  // 레시피 목록 조회
+    }
+    
     // 레시피 상세 조회
     @Override
     public RecipeVO selectRecipeDetail(String rcp_Id) throws Exception {   

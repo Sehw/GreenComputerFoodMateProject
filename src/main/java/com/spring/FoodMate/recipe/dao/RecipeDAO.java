@@ -27,6 +27,9 @@ public interface RecipeDAO {
     // 레시피 목록 조회
     List<RecipeVO> selectRecipeList() throws Exception;
     
+    // 레시피 아이디 목록 조회
+    List<RecipeVO> selectRecipeListByrID(String byr_Id) throws Exception;
+    
     // 레시피 상세 조회
     RecipeVO selectRecipeDetail(String rcp_Id) throws Exception;
     List<RecipeIngredientVO> selectIngredientDetail(String rcp_Id) throws DataAccessException;

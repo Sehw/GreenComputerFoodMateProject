@@ -43,6 +43,7 @@
     align-items: center;
     color: #777;
     font-size: 20px;
+    object-fit: cover;
 }
 
 .recipe-card {
@@ -364,7 +365,7 @@
                     <div class="card recipe-card">
                         <div class="recipe-image">
                             
-                            <img src="${contextPath}/resources/images/${recipe.mainImg_Path}" alt="Recipe Image">
+                            <img src="${contextPath}/resources/images/${recipe.mainImg_Path}" alt="Recipe Image" class="img-fluid">
                         </div>
                         <div class="card-body">
                             

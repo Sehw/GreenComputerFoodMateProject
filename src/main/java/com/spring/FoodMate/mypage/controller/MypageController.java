@@ -19,6 +19,7 @@ import com.spring.FoodMate.common.Util;
 import com.spring.FoodMate.member.dto.BuyerDTO;
 import com.spring.FoodMate.mypage.service.MypageService;
 import com.spring.FoodMate.order.dto.OrderDTO;
+import com.spring.FoodMate.recipe.service.RecipeService;
 
 
 @Controller
@@ -27,13 +28,25 @@ public class MypageController {
 	@Autowired
 	private MypageService mypageService;
 	
+	@Autowired
+    private RecipeService recipeService;
+	
 	@RequestMapping(value="/mypage/mypageForm", method=RequestMethod.GET)
 	private ModelAndView mypageform(@RequestParam(value="result", required=false) String result, @RequestParam(value="action",required=false) String action, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = Util.getViewName(request);
 		HttpSession session = request.getSession();
 		session.setAttribute("action", action);
+		
+		BuyerDTO buyerInfo = (BuyerDTO) session.getAttribute("buyerInfo"); // 세션에서 buyerInfo 가져오기
+		String byr_id = null;
+
+		if (buyerInfo != null) {
+		    byr_id = buyerInfo.getByr_id(); // byr_id 값 추출
+		}
+		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("result",result);
+		mav.addObject("myrecipeList", recipeService.selectRecipeListByrID(byr_id)); //서비스에 selectRecipeList메소드있어야함
 		mav.setViewName("common/layout");
 		mav.addObject("showNavbar", true);
 		mav.addObject("showSidebar",true);

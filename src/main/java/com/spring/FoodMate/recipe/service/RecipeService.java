@@ -21,6 +21,9 @@ public interface RecipeService {
     // 레시피 목록 조회
     List<RecipeVO> selectRecipeList() throws Exception;
     
+ // 레시피 목록 아이디 조회
+    List<RecipeVO> selectRecipeListByrID(String byr_Id) throws Exception;
+    
     //레시피 상세 조회
     Map selectRecipeDetail(String rcp_Id) throws Exception;
 }
