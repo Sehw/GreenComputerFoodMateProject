@@ -341,7 +341,9 @@ function execDaumPostcode() {
                     </tr>
                 </thead>
                 <tbody>
+                <c:set var="totalPrice" value="0" />
                 <c:forEach var="orderitems" items="${orderItems}">
+                <c:set var="totalPrice" value="${totalPrice + (orderitems.price * orderitems.qty)}" />
                     <tr>
                         <td class="product-info">
                             <img src="${pageContext.request.contextPath}/resources/images/${orderitems.img_path}" alt="상품 이미지">
@@ -421,9 +423,10 @@ function execDaumPostcode() {
 		<div class="payment-info-container">
 		    <h2 class="section-title">결제 정보</h2>
 		    <div class="payment-info">
+		    
 		        <div class="payment-detail">
 		            <label>상품 합계 금액</label>
-		            <p class="price">₩ 45,000</p>
+		            <p class="price">₩ ${totalPrice}</p>
 		        </div>
 		       	<div class="payment-detail">
 		            <label>포인트 할인</label>

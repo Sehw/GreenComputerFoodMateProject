@@ -33,6 +33,20 @@
     	text-align: center; /* 텍스트 중앙 정렬 */
         margin-top: 10px;
 }
+.item_review_star {
+        height: 10px;
+        font-size: 15px;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center; /* 세로 중앙 정렬 */
+    	justify-content: center; /* 가로 중앙 정렬 */
+    	text-align: center; /* 텍스트 중앙 정렬 */
+        margin-top: 1px;
+}
+.item_product_price{
+	font-size: larger;
+}
 .item-footer {
     width: 100%;
     display: flex;

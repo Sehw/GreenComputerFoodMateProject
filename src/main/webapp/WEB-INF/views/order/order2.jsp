@@ -20,12 +20,17 @@
         }
 
         .container {
-            max-width: 800px;
+            max-width: 1000px;
             margin: 50px auto;
             padding: 40px;
             background-color: white;
             border-radius: 10px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .slider-container {
+        	width: 45%;
+            margin: 20px auto;
         }
 
         h1 {
@@ -90,6 +95,15 @@
         .info-box img {
             width: 200px;
             height: 200px;
+        }
+        
+        .centerd-message-box{
+	        width: 100%;  /*  가로 전체 차지 */
+		    text-align: center;  /*  텍스트 중앙 정렬 */
+		    display: flex;
+		    flex-direction: column;  /*  세로 정렬 */
+		    align-items: center;  /*  가로 중앙 정렬 */
+		    justify-content: center; /*  세로 정렬 */
         }
 
         .payment-info, .order-info, .payment-summary {
@@ -197,6 +211,10 @@
         }  
     </style>
 </head>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
 <body>
     <div class="container">
         <!-- 주문 완료 알림 -->
@@ -208,31 +226,33 @@
 
         <!-- 주문 상품 정보, 결제 정보 가로 정렬 -->
         <div class="order-info" style="display: flex; justify-content: space-between;">
-
-            <div class="info-box">
-			    <h3 class="section-title">주문 상품 정보</h3>
-			    <table style="width: 100%; border-collapse: collapse;">
-			        <tr>
-			            <th style="text-align: left; padding: 10px; width: 30%;">상품 정보</th>
-			            <td style="padding: 10px; text-align: center;">
-			                <img src="${pageContext.request.contextPath}/resources/images/order_p_image1.PNG" alt="상품 이미지" style="width: 180px; height: 120px; object-fit: cover; border-radius: 8px;">
-			            </td>
-			        </tr>
-			        <tr>
-			            <th style="text-align: left; padding: 10px;">상품명</th>
-			            <td style="padding: 10px;">와규 냉동 삼각살</td>
-			        </tr>
-			        <tr>
-			            <th style="text-align: left; padding: 10px;">상품 옵션</th>
-			            <td style="padding: 10px;">냉동 와규 삼각살 200g</td>
-			        </tr>
-			        <tr>
-			            <th style="text-align: left; padding: 10px;">개별 판매가</th>
-			            <td style="padding: 10px;">₩ 22,500</td>
-			        </tr>
-			    </table>
+			<div class="slider-container">
+			<c:forEach var="orderitems" items="${orderItems}">
+	            <div class="info-box">
+				    <h3 class="section-title">주문 상품 정보</h3>
+				    <table style="width: 100%; border-collapse: collapse;">
+				        <tr>
+				            <th style="text-align: left; padding: 10px; width: 35%;">상품 정보</th>
+				            <td style="padding: 10px; text-align: center;">
+				                <img src="${pageContext.request.contextPath}/resources/images/${orderitems.img_path}" alt="상품 이미지" style="width: 180px; height: 120px; object-fit: cover; border-radius: 8px;">
+				            </td>
+				        </tr>
+				        <tr>
+				            <th style="text-align: left; padding: 10px;">상품명</th>
+				            <td style="padding: 10px;">${orderitems.pdt_name} ${orderitems.qty}개</td>
+				        </tr>
+				        <tr>
+				            <th style="text-align: left; padding: 10px;">개별 판매가</th>
+				            <td style="padding: 10px;">₩ ${orderitems.price}</td>
+				        </tr>
+						<tr>
+				            <th style="text-align: left; padding: 10px;">총 구입가</th>
+				            <td style="padding: 10px;">₩ ${orderitems.price * orderitems.qty}</td>
+				        </tr>
+				    </table>
+				</div>
+				</c:forEach>
 			</div>
-
             <!-- 결제 정보 표 -->
             <div class="payment-summary-box" style="width: 48%;">  
                 <h3 class="section-title">결제 정보</h3>
@@ -272,7 +292,7 @@
         </div>
 
         <!-- 배송 안내 -->
-		<div class="info-box" style="display: flex; align-items: center;">
+		<div class="info-box centerd-message-box" style="display: flex; align-items: center;">
 		    <i class="fas fa-utensils" style="font-size: 70px; color: #f39c12; margin-right: 25px;"></i>
 		    
 		    <div>
@@ -289,4 +309,13 @@
         </div>
     </div>
 </body>
+    <script>
+        $(document).ready(function(){
+            $('.slider-container').slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                autoplay: false
+            });
+        });
+    </script>
 </html>

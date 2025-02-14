@@ -44,8 +44,7 @@
         <h5>메이트관리</h5>
         <ul>
 	        <li><a href="${contextPath}/mypage/mateManage/myrecipeForm.do">내 레시피</a></li>
-	        <li><a href="${contextPath}/mypage/mateManage/myrecipereviewForm.do">레시피 리뷰</a></li>
-	        <li><a href="${contextPath}/mypage/mateManage/mycommentForm.do">내 댓글</a></li>
+	        <li><a href="${contextPath}/mypage/mateManage/myrecipereviewForm.do">레시피 리뷰</a></li>	
 	        <li><a href="${contextPath}/mypage/mateManage/myShoppingReviewForm.do">쇼핑 리뷰</a></li>
         </ul>
         <hr>

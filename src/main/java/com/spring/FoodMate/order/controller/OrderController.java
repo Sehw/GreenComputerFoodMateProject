@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,7 +62,7 @@ public class OrderController {
 	}
 	
 	@RequestMapping("/order/setOrderItems")
-	public String setOrderItems(@RequestBody List<Integer> cartIds, RedirectAttributes redirectAttributes) {
+	public String setOrderItems(@RequestBody List<Integer> cartIds, HttpSession session) {
 		
 		 System.out.println("받은 주문 ID 리스트: " + cartIds); // 디버깅용
 		 
@@ -69,17 +70,18 @@ public class OrderController {
 	    List<CartDTO> cartItems = orderService.getCartItems(cartIds);
 
 	    // FlashAttribute에 저장하여 order2에서도 사용 가능
-	    redirectAttributes.addFlashAttribute("orderItems", cartItems);
+	    session.setAttribute("orderItems", cartItems);
 	    
 	    // 주문 완료 페이지로 리다이렉트
 	    return "redirect:/order/order2";
 	}
 	
 	@RequestMapping(value="/order/order2")
-	public ModelAndView newsPage(@RequestBody List<CartDTO> orderItems, @RequestParam(value="result", required=false) String result, @RequestParam(value="action",required=false) String action, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView newsPage(@RequestParam(value="result", required=false) String result, @RequestParam(value="action",required=false) String action, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = Util.getViewName(request);
 		HttpSession session = request.getSession();
 		session.setAttribute("action", action);
+		List<CartDTO> orderItems = (List<CartDTO>) session.getAttribute("orderItems");
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("result",result);
 		mav.setViewName("common/layout");

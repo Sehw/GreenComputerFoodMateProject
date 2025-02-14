@@ -7,6 +7,7 @@
     <resultMap id="recipeResult" type="RecipeVO">
         <result property="rcp_Id" column="RCP_ID"/>
         <result property="byr_Id" column="BYR_ID"/>
+        <result property="nickname" column="NICKNAME"/>
         <result property="category_Id" column="CATEGORY_ID"/>
         <result property="title" column="TITLE"/>
         <result property="mainImg_Path" column="MAINIMG_PATH"/>
@@ -76,21 +77,24 @@
 	</insert>
 	
 	 <!-- 레시피 조회 -->
-    <select id="selectRecipeList" resultMap="recipeResult">
-        SELECT 
-            RCP_ID, 
-            BYR_ID, 
-            CATEGORY_ID, 
-            TITLE, 
-            MAINIMG_PATH, 
-            FOOD_NAME, 
-            REQ_TIME, 
-            DESCRIPTION, 
-            STATUS, 
-            CREATE_DATE
-        FROM FOODMATE_RECIPE
-        WHERE STATUS = 'Y' 
-    </select>
+    <select id="selectRecipeList" resultMap="recipeResult"> <!-- View가 확정되면 view로변경할것 -->
+	    SELECT 
+	        R.RCP_ID, 
+	        R.BYR_ID, 
+	        BP.NICKNAME,  <!-- 닉네임 추가 -->
+	        R.CATEGORY_ID, 
+	        R.TITLE, 
+	        R.MAINIMG_PATH, 
+	        R.FOOD_NAME, 
+	        R.REQ_TIME, 
+	        R.DESCRIPTION, 
+	        R.STATUS, 
+	        R.CREATE_DATE
+	    FROM FOODMATE_RECIPE R
+	    JOIN FOODMATE_BUYER_PROFILE BP ON R.BYR_ID = BP.BYR_ID  <!-- JOIN 조건 -->
+	    WHERE R.STATUS = 'Y'
+	</select>
+
     
 	<!-- 레시피, 재료, 조리법 상세 조회 -->
 		<select id="selectRecipeDetail" resultMap="recipeResult" parameterType="String">

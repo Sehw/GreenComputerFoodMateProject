@@ -1,5 +1,6 @@
 package com.spring.FoodMate.recipe.vo;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.springframework.stereotype.Component;
 
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Component;
 public class RecipeVO {
     private int rcp_Id;
     private String byr_Id;
+    private String nickname;
 	private int category_Id;
     private String title;
 	private String mainImg_Path;
@@ -64,8 +66,9 @@ public class RecipeVO {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Date getCreate_Date() {
-		return create_Date;
+	public String getCreate_Date() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
+		return sdf.format(create_Date);
 	}
 	public void setCreate_Date(Date create_Date) {
 		this.create_Date = create_Date;
@@ -76,4 +79,11 @@ public class RecipeVO {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+	
 }
