@@ -102,10 +102,11 @@ public class CartController {
 	    try {
 	        boolean success = true;
 	        for (int cartId : cartIds) {
-	            success = success && cartService.deleteCartItem(cartId);
+	        	boolean result = cartService.deleteCartItem(cartId);
+	        	System.out.println(result);
+	            success = success && result;
 	        }
 	        response.put("success", success);
-	        response.put("message", "장바구니에서 상품을 삭제하였습니다.");
 	        return response;
 	    } catch (CartException e) {
 	        throw e;

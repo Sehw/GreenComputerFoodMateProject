@@ -25,9 +25,6 @@ function addToCart() {  // 수정된 부분: 함수 호출 방식 수정
             "quantity": quantity
         },
         success: function(response) {
-        	
-        	console.log(response); // 응답 확인
-        	
             // 장바구니에 추가된 후 알림 띄우기
             if (response.success) {
                 // 성공적으로 담긴 경우 알림
@@ -39,7 +36,13 @@ function addToCart() {  // 수정된 부분: 함수 호출 방식 수정
                     window.location.href = contextPath + "/cart/cartlist";
                 }
             } else {
-                alert(response.message);
+                var loginToShopping = confirm(response.alertMsg);
+                if (loginToShopping) {
+                	// 예 선택 시 로그인 페이지로 이동
+                	window.location.href = contextPath + "/member/loginForm";
+                } else {
+                	// 아니오 선택 시 아무 작업도 하지 않음
+                }
             }
         },
         error: function() {
