@@ -81,71 +81,26 @@
 			<div class="col-md-9">
 			<h5><strong>내 레시피</strong></h5>
     			<div class="myrecipy">
-					<div class="item-img position-relative">
-				        <img src="${contextPath}/resources/images/Food/bazilpasta.jpg" alt="Slide 1" class="img-fluid">
-				        <div class="item-title d-flex flex-column justify-content-center align-items-center">
-				            <h5><strong>바질 파스타</strong></h5>
-				            <div class="item_etc">
-			                	<p><span>2025</span>년 <span>1</span>월<span>10</span>일  댓글 <span>0</span>개  조회수: <span>10</span></p>
-			                </div>
-			                <div class="item-footer">
-			              		<p><span>작성자: 요리연구가</span></p>
-			              		<p>♥ <span>3</span></p>
-			            	</div>
-				        </div>
-				    </div>
-				    <div class="item-img position-relative">
-				        <img src="${contextPath}/resources/images/Food/dumpling.jpg" alt="Slide 2" class="img-fluid">
-				        <div class="item-title d-flex flex-column justify-content-center align-items-center">
-				            <h5><strong>만두</strong></h5>
-				            <div class="item_etc">
-			                	<p><span>2025</span>년 <span>1</span>월<span>10</span>일  댓글 <span>0</span>개  조회수: <span>10</span></p>
-			                </div>
-			                <div class="item-footer">
-			              		<p><span>작성자: 요리연구가</span></p>
-			              		<p>♥ <span>3</span></p>
-			            	</div>
-				        </div>
-				    </div>
-				    <div class="item-img position-relative">
-				        <img src="${contextPath}/resources/images/Food/friednoodle.jpg" alt="Slide 3" class="img-fluid">
-				        <div class="item-title d-flex flex-column justify-content-center align-items-center">
-				            <h5><strong>볶음국수</strong></h5>
-				            <div class="item_etc">
-			                	<p><span>2025</span>년 <span>1</span>월<span>10</span>일  댓글 <span>0</span>개  조회수: <span>10</span></p>
-			                </div>
-			                <div class="item-footer">
-			              		<p><span>작성자: 요리연구가</span></p>
-			              		<p>♥ <span>3</span></p>
-			            	</div>
-				        </div>
-				    </div>
-				    <div class="item-img position-relative">
-				        <img src="${contextPath}/resources/images/Food/potato.jpg" alt="Slide 4" class="img-fluid">
-				        <div class="item-title d-flex flex-column justify-content-center align-items-center">
-				            <h5><strong>감자튀김</strong></h5>
-				            <div class="item_etc">
-			                	<p><span>2025</span>년 <span>1</span>월<span>10</span>일  댓글 <span>0</span>개  조회수: <span>10</span></p>
-			                </div>
-			                <div class="item-footer">
-			              		<p><span>작성자: 요리연구가</span></p>
-			              		<p>♥ <span>3</span></p>
-			            	</div>
-				        </div>
-				    </div>
-				    <div class="item-img position-relative">
-				        <img src="${contextPath}/resources/images/Food/taco.jpg" alt="Slide 5" class="img-fluid">
-				        <div class="item-title d-flex flex-column justify-content-center align-items-center">
-				            <h5><strong>타코</strong></h5>
-				            <div class="item_etc">
-			                	<p><span>2025</span>년 <span>1</span>월<span>10</span>일  댓글 <span>0</span>개  조회수: <span>10</span></p>
-			                </div>
-			                <div class="item-footer">
-			              		<p><span>작성자: 요리연구가</span></p>
-			              		<p>♥ <span>3</span></p>
-			            	</div>
-				        </div>
-				    </div>
+					<c:forEach var="recipe" items="${myrecipeList}">
+			    		<a href="${contextPath}/recipe/recipe_Detail?rcp_Id=${recipe.rcp_Id}">
+						    <div class="item-img position-relative">
+						        <img src="${contextPath}/resources/images/${recipe.mainImg_Path}" alt="Recipe Image" class="img-fluid">
+						        <div class="item-title d-flex flex-column justify-content-center align-items-center">
+						            <h5><strong>${recipe.title}</strong></h5>
+						            <div class="item_etc">
+					                	<p><span>${recipe.create_Date}</span>  리뷰 <span>0</span>개  조회수: <span>0</span></p>
+					                </div>
+					               	<div class="item_review_star">
+					                	<p><span>⭐⭐⭐⭐⭐</span></p>
+					                </div>
+					                <div class="item-footer">
+					              		<p><span>작성자: ${recipe.nickname}</span></p>
+					              		<p>♥ <span>0</span></p>
+					            	</div>
+						        </div>
+						    </div>
+			    		</a>
+					 </c:forEach>
 				</div>
 			</div>
 		</div>
@@ -164,24 +119,32 @@
 			</tr>
 		</thead>
       	<tbody>
-      	<tr>
-          <td>400</td>
-          <td>2024-12-24 16:16:13</td>
-          <td>돼지고기 뒷다리살</td>
-          <td>상품준비중</td>
-          <td>
-            <button class="btn btn-outline-secondary btn-sm" disabled>주문 취소</button>
-          </td>
-        </tr>
-        <tr>
-          <td>401</td>
-          <td>2024-12-24 16:16:13</td>
-          <td>돼지고기 앞다리살</td>
-          <td>상품준비중</td>
-          <td>
-            <button class="btn btn-outline-secondary btn-sm" disabled>주문 취소</button>
-          </td>
-        </tr>
+			<c:forEach var="order" items="${orderList}">
+	            <tr>
+	                <!-- 주문 날짜 및 주문번호 -->
+	                <td>(${order.ord_id})</td>
+	
+	                <!-- 상품명과 옵션 -->
+	                <td>
+	                    <img src="${contextPath}/resources/images/Shopping/${order.pdt_name}.jpg" alt="${order.pdt_name}" class="img-fluid rounded" style="width: 50px; height: 50px; object-fit: cover;">
+	                    ${order.pdt_name}
+	                </td>
+	
+	                <!-- 상품 금액 및 수량 -->
+	                <td>${order.pdt_price}원 (${order.qty}개)</td>
+	
+	                <!-- 주문 상태 -->
+	                <td>몰라</td>
+	
+	                <!-- 확인/리뷰 -->
+	                <td>
+	                    <div class="d-flex flex-column gap-1">
+	                        <button class="btn btn-outline-secondary btn-sm" disabled>배송조회</button>
+	                        <button class="btn btn-outline-success btn-sm" disabled>리뷰하기</button>
+	                    </div>
+	                </td>
+	            </tr>
+	        </c:forEach>
 		</tbody>
 	</table>
 	<div class="d-flex justify-content-between align-items-center mb-2">
