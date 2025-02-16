@@ -1,6 +1,7 @@
 package com.spring.FoodMate.product.dto;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 @Component("productDTO")
 public class ProductDTO {
@@ -15,9 +16,13 @@ public class ProductDTO {
 	private int stock;
 	private String status;
 	private String description;
+	// 여기까지 FoodMate_Product 테이블
+	
 	private String slr_nickname;
-		
-	public int getPdt_id() { return pdt_id; }
+	// pdt_id 매개로 Join 해서 쓰는 판매자 별명
+	private MultipartFile pdt_img;
+	// 실제 이미지 전달용
+	
 	public void setPdt_id(int pdt_id) { this.pdt_id = pdt_id; }
 	public String getSlr_id() { return slr_id; }
 	public void setSlr_id(String slr_id) { this.slr_id = slr_id; }
@@ -41,4 +46,7 @@ public class ProductDTO {
 	public void setDescription(String description) {this.description = description;}
 	public String getSlr_nickname() {return slr_nickname;}
 	public void setSlr_nickname(String slr_nickname) {this.slr_nickname = slr_nickname;}
+	public int getPdt_id() { return pdt_id; }
+	public MultipartFile getPdt_img() {return pdt_img;}
+	public void setPdt_img(MultipartFile pdt_img) {this.pdt_img = pdt_img;}
 }

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.spring.FoodMate.common.Util;
+import com.spring.FoodMate.common.UtilMethod;
 import com.spring.FoodMate.member.dto.BuyerDTO;
 import com.spring.FoodMate.mypage.service.MypageService;
 import com.spring.FoodMate.order.dto.OrderDTO;
@@ -29,7 +29,7 @@ public class MypageController {
 	
 	@RequestMapping(value="/mypage/mypageForm", method=RequestMethod.GET)
 	private ModelAndView mypageform(@RequestParam(value="result", required=false) String result, @RequestParam(value="action",required=false) String action, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = Util.getViewName(request);
+		String viewName = UtilMethod.getViewName(request);
 		HttpSession session = request.getSession();
 		session.setAttribute("action", action);
 		ModelAndView mav = new ModelAndView();
@@ -45,7 +45,7 @@ public class MypageController {
 	
 	@RequestMapping(value="/mypage/mateManage/*Form", method=RequestMethod.GET)
 	private ModelAndView mateManageform(@RequestParam(value="result", required=false) String result, @RequestParam(value="action",required=false) String action, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = Util.getViewName(request);
+		String viewName = UtilMethod.getViewName(request);
 		HttpSession session = request.getSession();
 		session.setAttribute("action", action);
 		ModelAndView mav = new ModelAndView();
@@ -61,7 +61,7 @@ public class MypageController {
 	
 	@RequestMapping(value="/mypage/myInfoManage/*Form", method=RequestMethod.GET)
 	private ModelAndView myInfoManageform(@RequestParam(value="result", required=false) String result, @RequestParam(value="action",required=false) String action, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = Util.getViewName(request);
+		String viewName = UtilMethod.getViewName(request);
 		HttpSession session = request.getSession();
 		session.setAttribute("action", action);
 		ModelAndView mav = new ModelAndView();
@@ -77,7 +77,7 @@ public class MypageController {
 	
 	@RequestMapping(value="/mypage/pointManage/*Form", method=RequestMethod.GET)
 	private ModelAndView pointManageform(@RequestParam(value="result", required=false) String result, @RequestParam(value="action",required=false) String action, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = Util.getViewName(request);
+		String viewName = UtilMethod.getViewName(request);
 		HttpSession session = request.getSession();
 		session.setAttribute("action", action);
 		ModelAndView mav = new ModelAndView();
@@ -93,7 +93,7 @@ public class MypageController {
 	
 	@RequestMapping(value="/mypage/ShoppingManage/*Form", method=RequestMethod.GET)
 	private ModelAndView ShoppingManageform(@RequestParam(value="result", required=false) String result, @RequestParam(value="action",required=false) String action, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = Util.getViewName(request);
+		String viewName = UtilMethod.getViewName(request);
 		HttpSession session = request.getSession();
 		session.setAttribute("action", action);
 		ModelAndView mav = new ModelAndView();
@@ -122,14 +122,14 @@ public class MypageController {
 		mav.addObject("sidebar","/WEB-INF/views/mypage/side.jsp");
 		mav.addObject("title", "푸드 메이트");
 		mav.addObject("orderList", orderList);
-		String viewName = Util.getViewName(request);
+		String viewName = UtilMethod.getViewName(request);
 		mav.addObject("body", "/WEB-INF/views" + viewName + ".jsp");
 		return mav;
 	}
 	
 	@RequestMapping(value="/mypage/customerManage/*Form", method=RequestMethod.GET)
 	private ModelAndView customerManageform(@RequestParam(value="result", required=false) String result, @RequestParam(value="action",required=false) String action, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = Util.getViewName(request);
+		String viewName = UtilMethod.getViewName(request);
 		HttpSession session = request.getSession();
 		session.setAttribute("action", action);
 		ModelAndView mav = new ModelAndView();
@@ -147,7 +147,7 @@ public class MypageController {
 	
 		@RequestMapping(value="/mypage_seller/mypage_sell_main", method=RequestMethod.GET)
 		private ModelAndView seller_Mypage(HttpServletRequest request, HttpServletResponse response) throws Exception {
-			String viewName = Util.getViewName(request);
+			String viewName = UtilMethod.getViewName(request);
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("common/layout");
 			mav.addObject("showNavbar", true);
@@ -160,7 +160,7 @@ public class MypageController {
 		
 		@RequestMapping(value="/mypage_seller/mypage_sell_productlist", method=RequestMethod.GET)
 		private ModelAndView seller_Mypage_productList(HttpServletRequest request, HttpServletResponse response) throws Exception {
-			String viewName = Util.getViewName(request);
+			String viewName = UtilMethod.getViewName(request);
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("common/layout");
 			mav.addObject("showNavbar", true);
@@ -173,7 +173,7 @@ public class MypageController {
 		
 		@RequestMapping(value="/mypage_seller/mypage_sell_productamount", method=RequestMethod.GET)
 		private ModelAndView seller_Mypage_productAmount(HttpServletRequest request, HttpServletResponse response) throws Exception {
-			String viewName = Util.getViewName(request);
+			String viewName = UtilMethod.getViewName(request);
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("common/layout");
 			mav.addObject("showNavbar", true);

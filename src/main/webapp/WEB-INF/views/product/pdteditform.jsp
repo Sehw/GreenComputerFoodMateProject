@@ -77,7 +77,7 @@ $(document).ready(function() {
         event.preventDefault();
 
         // 마지막 카테고리 ID를 hidden input에 설정
-        $('#lastCategoryId').val(getLastCategoryId());
+        $('#category_id').val(getLastCategoryId());
 
         // 폼 제출
         $("form").submit();
@@ -128,7 +128,7 @@ $(document).ready(function() {
 	
 				<div class="row">
 				<label for="category">카테고리</label>
-					
+					&#8251;카테고리를 정확히 설정해야 구매자에게 상품이 노출될 확률이 올라갑니다.
 					<select name="category_1" id="category_1">
 					    <option value="" disabled selected>1단계분류</option>
 					    <c:forEach var="category" items="${categories}">
@@ -139,7 +139,7 @@ $(document).ready(function() {
 					<div id="category_container"></div> <!-- 자식 카테고리들을 넣을 div -->
 
 				</div>
-				<input type="hidden" id="lastCategoryId" name="lastCategoryId" value="${pdt.category_id}">
+				<input type="hidden" id="category_id" name="category_id" value="${pdt.category_id}">
 				<input type="hidden" id="status" name="status" value="${pdt.status}">
 				
 			</div>
@@ -147,7 +147,7 @@ $(document).ready(function() {
 		<div class="form-Rightbox">
 			<div class="row">
 				<label for="introImage">상품 이미지</label>
-				<input type="file" id="pdt_Img" name="pdt_Img" accept="image/*" required>
+				<input type="file" id="pdt_img" name="pdt_img" accept="image/*" required>
 				상품 이미지를 변경할 때만 입력!!
 			</div>
 			
