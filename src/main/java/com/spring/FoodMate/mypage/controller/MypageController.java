@@ -58,7 +58,7 @@ public class MypageController {
 	
 	@RequestMapping(value="/mypage/mateManage/myrecipeForm", method=RequestMethod.GET)
 	private ModelAndView mateManagemyrecipeform(@RequestParam(value="result", required=false) String result, @RequestParam(value="action",required=false) String action, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = Util.getViewName(request);
+		String viewName = UtilMethod.getViewName(request);
 		HttpSession session = request.getSession();
 		session.setAttribute("action", action);
 		
