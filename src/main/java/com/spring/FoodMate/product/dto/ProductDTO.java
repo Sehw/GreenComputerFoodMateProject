@@ -12,16 +12,14 @@ public class ProductDTO {
 	private int price;
 	private int qty;
 	private String unit;
-	private int category_id;
+	private Integer category_id;
 	private int stock;
 	private String status;
 	private String description;
 	// 여기까지 FoodMate_Product 테이블
 	
-	private String slr_nickname;
-	// pdt_id 매개로 Join 해서 쓰는 판매자 별명
-	private MultipartFile pdt_img;
-	// 실제 이미지 전달용
+	private String slr_nickname; // pdt_id 매개로 Join 해서 쓰는 판매자 별명
+	private MultipartFile pdt_img; // 실제 이미지 전달용
 	
 	public void setPdt_id(int pdt_id) { this.pdt_id = pdt_id; }
 	public String getSlr_id() { return slr_id; }
@@ -36,8 +34,8 @@ public class ProductDTO {
 	public void setQty(int qty) { this.qty = qty; }
 	public String getUnit() { return unit; }
 	public void setUnit(String unit) { this.unit = unit; }
-	public int getCategory_id() { return category_id; }
-	public void setCategory_id(int category_id) { this.category_id = category_id; }
+	public Integer getCategory_id() { return category_id; }
+	public void setCategory_id(Integer category_id) { this.category_id = category_id; }
 	public int getStock() { return stock; }
 	public void setStock(int stock) { this.stock = stock; }
 	public String getStatus() { return status; }
@@ -49,4 +47,22 @@ public class ProductDTO {
 	public int getPdt_id() { return pdt_id; }
 	public MultipartFile getPdt_img() {return pdt_img;}
 	public void setPdt_img(MultipartFile pdt_img) {this.pdt_img = pdt_img;}
+	
+	// 예외 로그 기록용
+	public String toLogString() {
+	    return "ProductDTO{" +
+	            "pdt_id=" + pdt_id +
+	            ", slr_id='" + slr_id + '\'' +
+	            ", name='" + name + '\'' +
+	            ", img_path='" + img_path + '\'' +
+	            ", price=" + price +
+	            ", qty=" + qty +
+	            ", unit='" + unit + '\'' +
+	            ", category_id=" + category_id +
+	            ", stock=" + stock +
+	            ", status='" + status + '\'' +
+	            ", description='" + description + '\'' +
+	            ", slr_nickname='" + slr_nickname + '\'' +
+	            '}';
+	}
 }

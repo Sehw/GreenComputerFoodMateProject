@@ -16,7 +16,6 @@ import com.spring.FoodMate.product.dao.ProductDAO;
 
 @Service("cartService")
 public class CartService {
-
     @Autowired
     private CartDAO cartDAO;
     @Autowired

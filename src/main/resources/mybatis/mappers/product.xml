@@ -5,6 +5,7 @@
 
 <mapper namespace="mapper.product">
 
+	<!-- 검색어와 일치하는 상품 중 공개 리스트 조회 -->
 	<select id="searchlist" resultType="ProductDTO" parameterType="java.lang.String">
        <![CDATA[
            SELECT * FROM FOODMATE_PRODUCT_VIEW
@@ -12,22 +13,29 @@
        ]]>
 	</select>
 
-   <!-- 전체 상품 리스트 조회 -->
+   <!-- 전체 상품 중 공개 리스트 조회 -->
    <select id="alllist" resultType="ProductDTO">
 	    SELECT * FROM FOODMATE_PRODUCT_VIEW
+	    WHERE STATUS = 'Y'
 	</select>
 	
+	<!-- 특정 판매자와 일치하는 상품 중 공개 리스트 조회 -->
 	<select id="listBySlrId" resultType="ProductDTO" parameterType="java.lang.String">
+	    SELECT * FROM FOODMATE_PRODUCT_VIEW
+	    WHERE SLR_ID = #{slr_id} AND STATUS = 'Y'
+	</select>
+	
+	<!-- 특정 판매자와 일치하는 모든 상품 리스트 조회(당사자용) -->
+	<select id="listBySlrSelf" resultType="ProductDTO" parameterType="java.lang.String">
 	    SELECT * FROM FOODMATE_PRODUCT_VIEW
 	    WHERE SLR_ID = #{slr_id}
 	</select>
 
-
-   <!-- 특정 상품 조회 -->
-   <select id="getPdt" resultType="ProductDTO" parameterType="int">
-           SELECT * FROM FOODMATE_PRODUCT_VIEW
-           WHERE PDT_ID = #{pdt_id}
-   </select>
+	<!-- 특정 상품 조회 -->
+	<select id="getPdt" resultType="ProductDTO" parameterType="int">
+		SELECT * FROM FOODMATE_PRODUCT_VIEW
+		WHERE PDT_ID = #{pdt_id}
+	</select>
 	
 	<!-- 카테고리 최상위만 가져온다. 상품등록할때 필요 -->
 	<select id="getGrandCategory" resultType="CategoryDTO">
@@ -58,10 +66,23 @@
 	    WHERE pdt_id = #{pdt_id}
 	</select>
 	
-	<insert id="newpdt" parameterType="ProductDTO">
+	<insert id="newPdt" parameterType="ProductDTO">
 		INSERT INTO FoodMate_Product (PDT_ID, SLR_ID, NAME, IMG_PATH, PRICE, QTY, UNIT, CATEGORY_ID, STOCK, STATUS, DESCRIPTION)
 		VALUES (FOODMATE_PRODUCT_SEQ.NEXTVAL, #{slr_id}, #{name}, #{img_path}, #{price}, #{qty}, #{unit}, #{category_id}, #{stock}, #{status}, #{description})
 	</insert>
 	
-
+	<update id="editPdt" parameterType="ProductDTO">
+	    UPDATE FoodMate_Product
+	    SET 
+	        NAME = #{name}, IMG_PATH = #{img_path}, PRICE = #{price}, 
+	        QTY = #{qty}, UNIT = #{unit}, CATEGORY_ID = #{category_id}, STOCK = #{stock}, 
+	        STATUS = #{status}, DESCRIPTION = #{description}
+	    WHERE PDT_ID = #{pdt_id}
+	</update>
+	
+	<delete id="deletePdt" parameterType="int">
+	    DELETE FROM FoodMate_Product
+	    WHERE PDT_ID = #{pdt_id}
+	</delete>
+	
 </mapper>

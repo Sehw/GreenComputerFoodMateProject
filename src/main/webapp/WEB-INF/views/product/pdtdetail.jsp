@@ -16,7 +16,6 @@ function addToCart() {  // 수정된 부분: 함수 호출 방식 수정
     var quantity = $("#quantity").text(); // 수정된 부분: 수량을 가져오는 방식
     var contextPath = "${contextPath}";    // 경로 설정 (확인 필요)
 
-    // Ajax 요청
     $.ajax({
         type: "POST",
         url: contextPath + "/cart/addtocart",
@@ -25,30 +24,29 @@ function addToCart() {  // 수정된 부분: 함수 호출 방식 수정
             "quantity": quantity
         },
         success: function(response) {
-            // 장바구니에 추가된 후 알림 띄우기
             if (response.success) {
-                // 성공적으로 담긴 경우 알림
                 var continueShopping = confirm(response.message);
-                if (continueShopping) {
-                    // 계속 쇼핑 선택 시 아무 작업도 하지 않음
-                } else {
-                    // 아니오 선택 시 장바구니 페이지로 이동
+                if (!continueShopping) {
                     window.location.href = contextPath + "/cart/cartlist";
-                }
-            } else {
-                var loginToShopping = confirm(response.alertMsg);
-                if (loginToShopping) {
-                	// 예 선택 시 로그인 페이지로 이동
-                	window.location.href = contextPath + "/member/loginForm";
-                } else {
-                	// 아니오 선택 시 아무 작업도 하지 않음
                 }
             }
         },
-        error: function() {
-            alert("장바구니에 담는 중 오류가 발생했습니다.");
+        error: function(jqXHR) { // 요청이 실패했을 때 실행
+            if (jqXHR.status === 401 && jqXHR.responseJSON) { 
+                // 401(Unauthorized) 상태 코드이며 JSON 응답이 존재할 경우
+                var loginToShopping = confirm(jqXHR.responseJSON.alertMsg); 
+                // 로그인 필요 메시지를 확인 창으로 띄움
+                if (loginToShopping) { 
+                    // "예" 선택 시 로그인 페이지로 이동
+                    window.location.href = contextPath + "/member/loginForm";
+                }
+            } else { 
+                // 그 외의 에러 발생 시 기본적인 오류 메시지 출력
+                alert("장바구니에 담는 중 오류가 발생했습니다.");
+            }
         }
     });
+
 }
 </script>
 

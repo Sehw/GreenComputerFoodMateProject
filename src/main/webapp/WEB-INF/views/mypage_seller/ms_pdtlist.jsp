@@ -165,6 +165,21 @@
 }
 
 </style>
+
+<c:if test="${not empty message}">
+    <script type="text/javascript">
+        alert("${message}");
+    </script>
+</c:if>
+
+<script>
+function deleteProduct(pdt_id) {
+    if (confirm('정말로 이 상품을 삭제하시겠습니까? 삭제 후 되돌릴 수 없습니다.')) {
+        document.getElementById("deleteForm-" + pdt_id).submit();
+    }
+}
+</script>
+
 </head>
 <body>
 <main id="product_list">
@@ -197,7 +212,11 @@
 		                    <span class="pdt_FinalPrice">${product.price}원</span><br>
 		                    ⭐⭐⭐⭐⭐<br>
 		                    <a href="${contextPath}/product/pdteditform?pdt_id=${product.pdt_id}" class="button stylish-button">수정</a>
-		                </p>
+		                    <a href="#" onclick="deleteProduct(${product.pdt_id})" class="button stylish-button">삭제</a>
+						</p>	                    
+		                <form id="deleteForm-${product.pdt_id}" action="${contextPath}/product/pdtdelete" method="post" style="display:none;">
+		                    <input type="hidden" name="pdt_id" value="${product.pdt_id}">
+		                </form>
 		            </div>
 		        </article>
 		        </c:forEach>

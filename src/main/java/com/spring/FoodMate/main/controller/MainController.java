@@ -25,11 +25,11 @@ public class MainController {
 	@RequestMapping("/main")
 	public ModelAndView mainPage() throws Exception {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("common/layout");
+		mav.addObject("title", "FoodMate - 메인");
+        mav.setViewName("common/layout");
+        mav.addObject("showNavbar", true);
 		mav.addObject("recipeList", recipeService.selectRecipeList()); //서비스에 selectRecipeList메소드있어야함
-		mav.addObject("productList", productService.pdtList("")); 
-		mav.addObject("showNavbar", true);
-		mav.addObject("title","메인 페이지");
+		mav.addObject("productList", productService.pdtList(""));
 		mav.addObject("body", "/WEB-INF/views/main/main.jsp");
 		return mav;
 	}
