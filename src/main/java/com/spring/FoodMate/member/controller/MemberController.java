@@ -1,6 +1,7 @@
 package com.spring.FoodMate.member.controller;
 
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.FoodMate.common.SessionDTO;
@@ -43,8 +45,6 @@ public class MemberController {
 	private BuyerDTO buyerDTO;
 	@Autowired
 	private SellerDTO sellerDTO;
-	@Autowired
-	private ProfileDTO profileDTO;
 	@Autowired
 	private SocialLoginController sociallogincontroller; 
 
@@ -244,7 +244,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/member/addBuyer" ,method = RequestMethod.POST)
-	public ResponseEntity addBuyer(@ModelAttribute("buyerVO") BuyerDTO _buyerVO,
+	public ResponseEntity addBuyer(@ModelAttribute("buyerDTO") BuyerDTO _buyerDTO,
 			                HttpServletRequest request, HttpServletResponse response) throws Exception {
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("utf-8");
@@ -253,23 +253,16 @@ public class MemberController {
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		try {
-//			MultipartFile file = _memberVO.getProfileImage();
-//			if (file != null && !file.isEmpty()) {
-//	            String baseDir = "C:/FoodMate/users/";
-//	            
-//	            String userId = _memberVO.getMember_id();
-//	            String uploadDir = baseDir + userId;
-//	            
-//	            File uploadPath = new File(uploadDir);
-//	            if (!uploadPath.exists()) {
-//	                uploadPath.mkdirs();
-//	            }
-//	            // 파일 저장
-//	            file.transferTo(new File(uploadDir + file.getOriginalFilename()));
-//	            _memberVO.setProfileImagePath(uploadDir + file.getOriginalFilename());
-//	            System.out.println("프로필 이미지 업로드 완료: " + file.getOriginalFilename());
-//	        }
-		    memberService.addBuyer(_buyerVO);
+            String baseDir = "src/main/resources/images/users/";
+            String byrid = _buyerDTO.getByr_id();
+            String uploadDir = baseDir + byrid;
+            
+            File uploadPath = new File(uploadDir);
+            if (!uploadPath.exists()) {
+                uploadPath.mkdirs();
+            }
+            memberService.addBuyer(_buyerDTO);
+            profileService.addNewBuyerProfile(byrid);
 		    
 		    message  = "<script>";
 		    message +=" alert('회원 가입을 마쳤습니다.로그인창으로 이동합니다.');";
@@ -288,7 +281,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/member/addSocialBuyer" ,method = RequestMethod.POST)
-	public ResponseEntity addSocialBuyer(@ModelAttribute("buyerVO") BuyerDTO _buyerVO,
+	public ResponseEntity addSocialBuyer(@ModelAttribute("buyerDTO") BuyerDTO _buyerDTO,
 			                HttpServletRequest request, HttpServletResponse response) throws Exception {
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("utf-8");
@@ -297,23 +290,16 @@ public class MemberController {
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		try {
-//			MultipartFile file = _memberVO.getProfileImage();
-//			if (file != null && !file.isEmpty()) {
-//	            String baseDir = "C:/FoodMate/users/";
-//	            
-//	            String userId = _memberVO.getMember_id();
-//	            String uploadDir = baseDir + userId;
-//	            
-//	            File uploadPath = new File(uploadDir);
-//	            if (!uploadPath.exists()) {
-//	                uploadPath.mkdirs();
-//	            }
-//	            // 파일 저장
-//	            file.transferTo(new File(uploadDir + file.getOriginalFilename()));
-//	            _memberVO.setProfileImagePath(uploadDir + file.getOriginalFilename());
-//	            System.out.println("프로필 이미지 업로드 완료: " + file.getOriginalFilename());
-//	        }
-		    memberService.addBuyer(_buyerVO);
+	            String baseDir = "C:/FoodMate/users/";
+	            
+	            String userId = _buyerDTO.getByr_id();
+	            String uploadDir = baseDir + userId;
+	            
+	            File uploadPath = new File(uploadDir);
+	            if (!uploadPath.exists()) {
+	                uploadPath.mkdirs();
+	            }
+		    memberService.addBuyer(_buyerDTO);
 		    
 		    message  = "<script>";
 		    message +=" alert('회원 가입을 마쳤습니다. 로그인창으로 이동합니다.');";
@@ -332,7 +318,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/member/addSeller" ,method = RequestMethod.POST)
-	public ResponseEntity addSeller(@ModelAttribute("sellerVO") SellerDTO _sellerVO,
+	public ResponseEntity addSeller(@ModelAttribute("sellerDTO") SellerDTO _sellerDTO,
 			                HttpServletRequest request, HttpServletResponse response) throws Exception {
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("utf-8");
@@ -357,7 +343,7 @@ public class MemberController {
 //	            _memberVO.setProfileImagePath(uploadDir + file.getOriginalFilename());
 //	            System.out.println("프로필 이미지 업로드 완료: " + file.getOriginalFilename());
 //	        }
-		    memberService.addSeller(_sellerVO);
+		    memberService.addSeller(_sellerDTO);
 		    
 		    message  = "<script>";
 		    message +=" alert('회원 가입을 마쳤습니다.로그인창으로 이동합니다.');";

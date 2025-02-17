@@ -12,7 +12,7 @@
 		</resultMap>
 	
 	
-		<insert id="insertNewProfile" parameterType="profileDTO">
+		<insert id="insertNewBuyerProfile" parameterType="profileDTO">
 		<![CDATA[
 			insert into FOODMATE_BUYER_PROFILE(
 					byr_id, 
@@ -33,6 +33,17 @@
 			select * from FOODMATE_BUYER_PROFILE where byr_id = #{byr_id}
 		]]>
 	</select>
+	
+	<update id="updateUserProfile" parameterType="profileDTO">
+	    <![CDATA[
+			update FOODMATE_BUYER_PROFILE
+			       set 
+			        nickname = #{nickname}, 
+            		bio = #{BIO}, 
+            		img_path = #{img_path}
+		 	       where byr_id=#{byr_id}
+    	]]>
+	</update>
 	
 	<select id="selectMemberById" resultType="profileDTO" parameterType="String">
 		<![CDATA[

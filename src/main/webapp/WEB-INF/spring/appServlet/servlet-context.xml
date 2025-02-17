@@ -29,6 +29,9 @@
     <beans:bean id="CommonInterceptor" class="com.spring.FoodMate.interceptor.CommonInterceptor"/>
     <beans:bean id="BuyerInterceptor" class="com.spring.FoodMate.interceptor.BuyerInterceptor"/>
     <beans:bean id="SellerInterceptor" class="com.spring.FoodMate.interceptor.SellerInterceptor"/>
+    <beans:bean id="MyInterceptor" class="com.spring.FoodMate.interceptor.MyInterceptor"/>
+    <beans:bean id="CartInterceptor" class="com.spring.FoodMate.interceptor.CartInterceptor"/>
+    <beans:bean id="MypageInterceptor" class="com.spring.FoodMate.interceptor.MypageInterceptor"/>
     
     <mvc:interceptors>
     	<!-- 인터셉터 추가할때마다 위쪽엔 빈 등록하고 여기선 <mvc:interceptor> 태그로 적용시킬 주소 지정하면됨 -->
@@ -46,6 +49,10 @@
         <mvc:interceptor>
             <mvc:mapping path="/cart/**"/>
         	<beans:ref bean="BuyerInterceptor"/>    
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/mypage/**"/>
+        	<beans:ref bean="MypageInterceptor"/>    
         </mvc:interceptor>
     </mvc:interceptors>
 

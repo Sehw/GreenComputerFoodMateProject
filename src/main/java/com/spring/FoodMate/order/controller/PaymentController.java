@@ -1,33 +1,24 @@
 package com.spring.FoodMate.order.controller;
 
-import java.io.IOException;
-
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.siot.IamportRestClient.IamportClient;
-import com.siot.IamportRestClient.exception.IamportResponseException;
-import com.siot.IamportRestClient.response.IamportResponse;
-import com.siot.IamportRestClient.response.Payment;
 
-import io.github.cdimascio.dotenv.Dotenv;
 
 @RestController
 public class PaymentController {
-	private final Dotenv dotenv = Dotenv.load();
+//	private final Dotenv dotenv = Dotenv.load();
 	
-	private final String API_KEY = dotenv.get("PORTONE_API_KEY");  //  포트원 REST API 키
-    private final String API_SECRET = dotenv.get("PORTONE_API_SECRET");  //  포트원 REST API 시크릿 키
-    private IamportClient iamportClient = new IamportClient(API_KEY, API_SECRET);
+//	private final String API_KEY = dotenv.get("PORTONE_API_KEY");  //  포트원 REST API 키
+//    private final String API_SECRET = dotenv.get("PORTONE_API_SECRET");  //  포트원 REST API 시크릿 키
+//    private IamportClient iamportClient = new IamportClient(API_KEY, API_SECRET);
 	
-    @RequestMapping(value="/order/verify/*")
-    public IamportResponse<Payment> paymentByImpUid(@PathVariable("imp_uid") String imp_uid) throws IamportResponseException, IOException {
-        System.out.println(API_KEY);
-        System.out.println(API_SECRET);
-        System.out.println(iamportClient.getAuth().getCode());
-    	return iamportClient.paymentByImpUid("imp_124580296817");
-    }
+//    @RequestMapping(value="/order/verify/*")
+//    public IamportResponse<Payment> paymentByImpUid(@PathVariable("imp_uid") String imp_uid) throws IamportResponseException, IOException {
+//        System.out.println(API_KEY);
+//        System.out.println(API_SECRET);
+//        System.out.println(iamportClient.getAuth().getCode());
+//    	return iamportClient.paymentByImpUid("imp_124580296817");
+//    }
     
     
 	// 액세스 토큰 발급 메서드

@@ -97,7 +97,6 @@
 	
 	<!-- 레시피, 재료, 조리법 상세 조회 -->
 		<select id="selectRecipeListByrID" resultMap="recipeResult" parameterType="String">
-		    <![CDATA[
 		        SELECT 
 		        R.RCP_ID, 
 		        R.BYR_ID, 
@@ -113,7 +112,6 @@
 		    FROM FOODMATE_RECIPE R
 		    JOIN FOODMATE_BUYER_PROFILE BP ON R.BYR_ID = BP.BYR_ID  <!-- JOIN 조건 -->
 		    WHERE R.BYR_ID = #{byr_Id}
-		    ]]>
 		</select>
     
 	<!-- 레시피, 재료, 조리법 상세 조회 -->
