@@ -22,6 +22,7 @@ import com.spring.FoodMate.common.SessionDTO;
 import com.spring.FoodMate.common.UtilMethod;
 import com.spring.FoodMate.product.dto.CategoryDTO;
 import com.spring.FoodMate.product.dto.ProductDTO;
+import com.spring.FoodMate.product.exception.ProductException;
 import com.spring.FoodMate.product.service.ProductService;
 
 @Controller
@@ -37,36 +38,25 @@ public class ProductControllerImpl implements ProductController {
 	    //keyword=검색어, 없으면 빈문자열로 바꿔줌
 	    HttpServletRequest request
 	) throws Exception {
-	    String viewName = UtilMethod.getViewName(request);
+	    
 	    ModelAndView mav = new ModelAndView();
 	    List<ProductDTO> searchList = productService.pdtList(keyword);
+	    mav.addObject("title", "FoodMate-상품 검색창");
 	    mav.addObject("list", searchList);
 	    // Service 에 keyword(검색어)를 주고 해당하는 상품VO들의 List를 받아옴.
 	    // 검색어 없을땐 전체 상품리스트 갖고옴.
-	    mav.setViewName("common/layout");
-	    mav.addObject("showNavbar", true);
-	    mav.addObject("title", "FoodMate-상품 검색창");
-	    mav.addObject("body", "/WEB-INF/views" + viewName + ".jsp");
-	    
 	    return mav;
 	}
 	
 	@Override
 	@RequestMapping(value="/mypage_seller/ms_pdtlist", method=RequestMethod.GET)
 	public ModelAndView msPdtList(HttpServletRequest request, HttpSession session) throws Exception {
-		    String viewName = UtilMethod.getViewName(request);
 		    ModelAndView mav = new ModelAndView();
-		    // 판매자 아니면 못들어오게하는 필터 나중에 만들어
 		    SessionDTO sellerInfo = (SessionDTO)session.getAttribute("sessionDTO");
-		    String slr_id = sellerInfo.getUserId();
-		    List<ProductDTO> searchList = productService.ms_pdtList(slr_id);
+		    List<ProductDTO> searchList = productService.ms_pdtList(sellerInfo.getUserId());
 		    mav.addObject("list", searchList);
 		    // Service 에 판매자 ID를 주고 해당하는 상품VO들의 List를 받아옴.
-		    mav.setViewName("common/layout");
-		    mav.addObject("showNavbar", true);
 		    mav.addObject("title", "FoodMate-상품 검색창");
-		    mav.addObject("body", "/WEB-INF/views" + viewName + ".jsp");
-		    
 		    return mav;
 		}
 	
@@ -75,18 +65,16 @@ public class ProductControllerImpl implements ProductController {
 	public ModelAndView pdtDetail(
 			@RequestParam(value = "pdt_id", required = true) int pdt_id,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = UtilMethod.getViewName(request);
+		
 		ModelAndView mav = new ModelAndView();
 		
-		ProductDTO product = productService.select1PdtByPdtId(pdt_id);
+		ProductDTO product = productService.select1PdtByPdtId(pdt_id); // pdt_id로 pdt 전체행 받아옴
 		List<CategoryDTO> categoryStep = productService.categoryStep(product.getCategory_id());
-
-		mav.setViewName("common/layout");
-		mav.addObject("showNavbar", true);
+		// pdt의 카테고리id 받아서 최상위 부모카테고리까지 싹 받아옴
+		Collections.reverse(categoryStep); // 이걸로 배열 안 뒤집으면 카테고리 순서가 거꾸로 나옴
+		
 		mav.addObject("title", "제품 상세정보");
-		mav.addObject("body", "/WEB-INF/views" + viewName + ".jsp");
 		mav.addObject("pdt", product);
-		Collections.reverse(categoryStep);
 		mav.addObject("category", categoryStep);
 		return mav;
 	}
@@ -94,17 +82,38 @@ public class ProductControllerImpl implements ProductController {
 	@Override
 	@RequestMapping(value="/product/pdtaddform", method=RequestMethod.GET)
 	public ModelAndView pdtAddForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = UtilMethod.getViewName(request);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("common/layout");
-		mav.addObject("showNavbar", true);
-		mav.addObject("title", "상품 등록");
-		mav.addObject("body", "/WEB-INF/views" + viewName + ".jsp");
-		
 		List<CategoryDTO> categories = productService.getGrandCategoryList();
+		mav.addObject("title", "상품 등록");
 		mav.addObject("categories", categories);
-		
 		return mav;
+	}
+	
+	@Override
+	@RequestMapping(value="/product/pdtadd", method=RequestMethod.POST)
+	public void pdtAdd(@ModelAttribute ProductDTO newPdt,
+	        HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
+			    SessionDTO sessionDTO = (SessionDTO)session.getAttribute("sessionDTO");
+	    String slr_id = sessionDTO.getUserId();
+	    String imagePath = UtilMethod.savePdtImage(request, newPdt.getPdt_img()); // 유틸메서드로 일단 경로에 이미지 저장해
+	    
+	    newPdt.setSlr_id(slr_id);
+	    newPdt.setImg_path(imagePath);
+	    
+	    int result = productService.insertNewProduct(newPdt);
+	    
+	    PrintWriter out = null;
+	    if(result > 0) {
+	    	// 상품 추가 성공 시 JavaScript로 알림 및 페이지 이동 처리
+            response.setContentType("text/html; charset=UTF-8");
+            out = response.getWriter();
+            out.println("<script type='text/javascript'>");
+            out.println("alert('상품이 추가되었습니다. 상품 관리 페이지로 이동합니다.');");
+            out.println("window.location.href='/FoodMate/mypage_seller/ms_pdtlist';");
+            out.println("</script>");
+	    } else {
+	    	throw new ProductException(201);
+	    }
 	}
 	
 	@Override
@@ -132,9 +141,7 @@ public class ProductControllerImpl implements ProductController {
 		ProductDTO needEdit = productService.select1PdtByPdtId(pdt_id);
 		
 		// 없으면 오류처리 해야함
-		
 		SessionDTO sellerInfo = (SessionDTO)session.getAttribute("sessionDTO");
-		
 		
 		// 등록한놈이랑 다른놈이 수정하려고하면
 		if( !sellerInfo.getUserId().equals( needEdit.getSlr_id() ) ) {
@@ -163,30 +170,7 @@ public class ProductControllerImpl implements ProductController {
 		return mav;
 	}
 	
-	@Override
-	@RequestMapping(value="/product/pdtadd", method=RequestMethod.POST)
-	public ModelAndView pdtAdd(@ModelAttribute ProductDTO newPdt,
-	        HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
-	    
-	    String imagePath = UtilMethod.savePdtImage(request, newPdt.getPdt_img());
-	    SessionDTO sessionDTO = (SessionDTO)session.getAttribute("sessionDTO");
-	    String slr_id = sessionDTO.getUserId();
-	    
-	    newPdt.setSlr_id(slr_id);
-	    newPdt.setImg_path(imagePath);
-	    
-	    int result = productService.insertNewProduct(newPdt);
-	    
-	    // 결과에 따라서 메시지 출력하기
-	    // 성공하면 "상품 추가되었고 마이페이지로 이동합니다" 하면서 마이페이지
-	    // 메서드 Model and view 에서 String 같은걸로 바꿔야할수있음
-	    ModelAndView mav = new ModelAndView();
-	    mav.setViewName("common/layout");
-	    mav.addObject("showNavbar", true);
-	    mav.addObject("title", "푸메");
-	    mav.addObject("body", "/WEB-INF/views/main/main.jsp");
-	    return mav;
-	}
+	
 
 	@RequestMapping(value="/getSubCategories/{category_id}", method=RequestMethod.GET)
 	@ResponseBody

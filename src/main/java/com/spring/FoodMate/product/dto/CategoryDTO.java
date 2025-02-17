@@ -16,4 +16,12 @@ public class CategoryDTO {
 	public Integer getParent_id() {		return parent_id;	}
 	public void setParent_id(Integer parent_id) {		this.parent_id = parent_id;	}
 	
+	// 예외 로그 기록용
+	public String toLogString() {
+	    return "CategoryDTO{" +
+	            "category_id=" + category_id +
+	            ", name='" + name + '\'' +
+	            ", parent_id=" + parent_id +
+	            '}';
+	}
 }

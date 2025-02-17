@@ -28,12 +28,18 @@
     <!-- 인터셉터로 쓰려면 여기서 빈 등록해야함. @Component 안먹히는듯? -->
     <beans:bean id="MyInterceptor" class="com.spring.FoodMate.interceptor.MyInterceptor"/>
     <beans:bean id="CartInterceptor" class="com.spring.FoodMate.interceptor.CartInterceptor"/>
+    <beans:bean id="ProductInterceptor" class="com.spring.FoodMate.interceptor.ProductInterceptor"/>
     
     <mvc:interceptors>
     	<!-- 인터셉터 추가할때마다 위쪽엔 빈 등록하고 여기선 <mvc:interceptor> 태그로 적용시킬 주소 지정하면됨 -->
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
         	<beans:ref bean="MyInterceptor"/>    
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/product/pdtadd**"/>
+            <mvc:mapping path="/product/pdtedit**"/>
+        	<beans:ref bean="ProductInterceptor"/>    
         </mvc:interceptor>
         <mvc:interceptor>
             <mvc:mapping path="/cart/**"/>

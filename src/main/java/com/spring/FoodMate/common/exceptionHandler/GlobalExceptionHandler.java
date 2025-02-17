@@ -22,6 +22,7 @@ import com.spring.FoodMate.common.exception.DBException;
 import com.spring.FoodMate.common.exception.JjamException;
 import com.spring.FoodMate.common.exception.UnauthorizedException;
 import com.spring.FoodMate.common.exception.UnhandledException;
+import com.spring.FoodMate.product.exception.ProductException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -42,50 +43,67 @@ public class GlobalExceptionHandler {
         return mav;
     }
 
-    // 로그인 관련 예외 처리
+ // 로그인 관련 예외 처리
     @ExceptionHandler(UnauthorizedException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ResponseBody
     public Object handleUnauthorizedException(HttpServletRequest request, HttpServletResponse response, UnauthorizedException ex) {
         boolean ajax = isAjaxRequest(request);
-        logger.error("권한오류, isAjax=" + ajax + ex.getMessage(), ex);
+        logger.error("권한오류, 이 요청은 Ajax 요청이 " + ajax + "입니다. " + ex.getMessage(), ex);
         HttpSession session = request.getSession();
 
-        try {
-            if (ex.getErrorCode() == 101) {
-                session.setAttribute("alertMsg", "로그인이 필요한 서비스입니다.");
-                response.sendRedirect(request.getContextPath() + "/member/loginForm");
-            } else if (ex.getErrorCode() == 102) {
-                session.setAttribute("alertMsg", "구매자 로그인이 필요한 서비스입니다.");
-                response.sendRedirect(request.getContextPath() + "/member/loginForm");
-            } else if (ex.getErrorCode() == 103) {
-                session.setAttribute("alertMsg", "판매자 로그인이 필요한 서비스입니다.");
-                response.sendRedirect(request.getContextPath() + "/member/loginForm");
-            } else if (ex.getErrorCode() == 104) {
-                session.setAttribute("alertMsg", "관리자 로그인이 필요한 서비스입니다.");
-                response.sendRedirect(request.getContextPath() + "/member/loginForm");
-            } else if (ex.getErrorCode() == 105) {
+        String alertMsg = "로그인이 필요한 서비스입니다.";
+        
+        switch (ex.getErrorCode()) {
+            case 101:
+                alertMsg = "로그인이 필요한 서비스입니다.";
+                break;
+            case 102:
+                alertMsg = "구매자 " + alertMsg;
+                break;
+            case 103:
+                alertMsg = "판매자 " + alertMsg;
+                break;
+            case 104:
+                alertMsg = "관리자 " + alertMsg;
+                break;
+            case 105:
                 session.invalidate();
-                session.setAttribute("alertMsg", "비정상적인 로그인이 감지되었습니다. 다시 로그인해 주세요.");
-                response.sendRedirect(request.getContextPath() + "/member/loginForm");
-            }
-        } catch (IOException ioEx) {
-            logger.error("IOException 발생: " + ioEx.getMessage(), ioEx);
-            // 글로벌익셉션핸들러에서 오류날만할짓을 했을땐어떻게처리해야하는지?
-            // 그리고 상품설명에서 구매자로그인아닌상태로 장바구니에 담으려했을때는 ajax요청인데
-            // 그거에맞게 if(ajax) 같은걸로 맞게 처리할것
+                alertMsg = "비정상적인 로그인이 감지되었습니다. 다시 로그인해 주세요.";
+                break;
         }
 
-        return false;
+        if (ajax) {
+            // Ajax 요청이면 JSON 응답 반환하되 에러난건 아니라고 알려줘야함
+        	response.setStatus(HttpServletResponse.SC_OK); // 이렇게 에러는 아니라고 해야
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("success", false);
+            errorResponse.put("alertMsg", alertMsg + " 로그인 화면으로 이동하시겠습니까?");
+            return errorResponse;
+        } else {
+            try {
+                session.setAttribute("alertMsg", alertMsg);
+                response.sendRedirect(request.getContextPath() + "/member/loginForm");
+            } catch (IOException ioEx) {
+                logger.error("IOException 발생: " + ioEx.getMessage(), ioEx);
+            }
+            return false;
+        }
     }
-
-
 
     // 장바구니 예외 처리
     @ExceptionHandler(CartException.class)
     @ResponseBody
     public Object handleCartException(HttpServletRequest request, CartException ex) {
         logger.error("CartException 발생: " + ex.getMessage(), ex);
+        return handleException(request, ex.getMessage());
+    }
+    
+    // 상품 예외 처리
+    @ExceptionHandler(ProductException.class)
+    @ResponseBody
+    public Object handleProductException(HttpServletRequest request, ProductException ex) {
+        logger.error("ProductException 발생: " + ex.getMessage(), ex);
         return handleException(request, ex.getMessage());
     }
 

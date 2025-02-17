@@ -30,7 +30,7 @@ public class CartControllerImpl implements CartController {
     
     @Override
     @RequestMapping(value="/cart/cartlist", method=RequestMethod.GET)
-    public ModelAndView cartlist(HttpServletRequest request, HttpSession session) throws Exception {
+    public ModelAndView cartlist(HttpServletRequest request, HttpSession session) {
         try {
             BuyerDTO buyerInfo = (BuyerDTO) session.getAttribute("buyerInfo");
             Map<String, List<CartDTO>> groupedCart = cartService.getGroupedCartList(buyerInfo.getByr_id());
