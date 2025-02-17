@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="com.spring.FoodMate.member.dto.BuyerDTO" %>
+
 <c:set var="contextPath" value="${pageContext.request.contextPath }"/>
 
 <!DOCTYPE html>
@@ -190,6 +192,23 @@
 
 		<form id="recipeForm" action="${contextPath}/recipe/addNewRecipe" method="POST" enctype="multipart/form-data">
 		    <!-- 레시피 기본 정보 -->
+		     <!-- 작성자 정보 (수정 불가) -->
+			<%
+			    BuyerDTO buyerDTO = (BuyerDTO) session.getAttribute("buyerInfo");
+			    if (buyerDTO != null) {
+			        String byr_Id = buyerDTO.getByr_Id(); // 예시로 getId() 사용
+			%>
+			    <label for="byr_Id">작성자:</label>
+			    <input type="text" id="byr_Id" name="byr_Id" value="<%= byr_Id %>" readonly>
+			<%
+			    } else {
+			%>
+			    <label for="byr_Id">작성자:</label>
+			    <input type="text" id="byr_Id" name="byr_Id" value="작성자 정보가 없습니다. 로그인 상태를 확인하세요" disabled style="color: red;">
+			<%
+			    }
+			%>
+		    
 		    <div>
 		        <label for="title">레시피 제목:</label>
 		        <input type="text" id="title" name="title" required placeholder="레시피 제목 입력">
@@ -348,7 +367,7 @@
         })
         .catch(error => {
             console.log('Error:', error); // 정확한 에러를 콘솔에 출력
-            alert('레시피 등록에 실패했습니다.');
+            alert('로그인 상태 및 재료명과 조리 단계가 중복되어 있는지 확인하세요');
         });
     };
 </script>

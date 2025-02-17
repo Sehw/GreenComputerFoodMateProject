@@ -33,16 +33,19 @@
     font-size: 20px;
 }
 
-.recipe-image img {
-    background-color: #ccc;
-    width: 100%;
-    height: 150px;
+.image-wrapper {
+    width: 100%; /* 또는 원하는 고정 크기 */
+    height: 100%; /* 이미지 크기를 부모 div 안에 맞추기 */
     display: flex;
-    border-radius: 8px;
     justify-content: center;
     align-items: center;
-    color: #777;
-    font-size: 20px;
+}
+
+.recipe-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 이미지 비율을 유지하며 잘라내기 */
+    border-radius: 8px;
 }
 
 .recipe-card {
@@ -52,6 +55,7 @@
 .recipe-title {
     font-size: 1.2rem;
     font-weight: bold;
+    color:#333;
 }
 
 .recipe-info {
@@ -59,10 +63,26 @@
     color: #666;
 }
 
-.slider {
-    position: relative;
+/* Swiper 슬라이드 컨테이너 크기 조절하는곳 */
+.swiper-container { 
     width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center; /* 하나일 때는 중앙 정렬 */
 }
+
+.swiper-wrapper {
+    display: flex;
+    justify-content: flex-start; /* 여러 개일 때는 왼쪽 정렬 */
+    gap: 10px;  /* 슬라이드 간격 */
+}
+
+.recipe-item {
+    width: 250px;  
+    height: 200px; 
+}
+
+
 
 .swiper-button-prev, .swiper-button-next {
     font-size: 30px;
@@ -82,20 +102,12 @@
 .swiper-button-prev:hover, .swiper-button-next:hover {
     opacity: 1;
 }
-
+/*▲여기까지 */
 .pagination {
     justify-content: center;
     margin-top: 20px;
 }
 
-.swiper-slide {
-    height: 200px;
-}
-
-.swiper-container {
-    width: 100%;
-    overflow: hidden;
-}
 
 @media ( max-width : 767px) {
     .recipe-card {
@@ -264,19 +276,7 @@
     }
 }
 
-.swiper-container {
-    width: 100%;
-    overflow: hidden;
-}
 
-.swiper-wrapper {
-    display: flex;
-}
-
-.swiper-slide {
-    flex: 1;
-    margin-right: 20px;
-}
 
 
 </style>
@@ -287,62 +287,65 @@
 
 <div class="category-section mt-4">
     <div class="category-container">
- <!-- 모든 카테고리를 한 박스에 담기 -->
+        <!-- 모든 카테고리를 한 박스에 담기 -->
         <div class="category-card">
             <h5>원하는 레시피를 찾아보세요!</h5>
             <div class="category-content">
                 <!-- 한식 카테고리 -->
                 <div class="category-category">
-                    <h6>🥘한식</h6>
+                    <h6><a href="${contextPath}/recipe/recipe_list?categoryId=1">🥘한식</a></h6> <!-- 대분류 ID = 1 -->
                     <ul>
-                        <li><a href="#">국/찌개</a></li>
-                        <li><a href="#">구이</a></li>
-                        <li><a href="#">전/부침</a></li>
-                        <li><a href="#">볶음류</a></li>
-                        <li><a href="#">조림/찜류</a></li>
-                        <li><a href="#">반찬류</a></li>
-                        <li><a href="#">면류</a></li>
-                        <li><a href="#">전통 디저트</a></li>
+                        <li><a href="${contextPath}/recipe/recipe_list?categoryId=5&parent_Id=1">국/찌개</a></li> <!-- 카테고리 ID = 5, 부모 ID = 1 -->
+                        <li><a href="${contextPath}/recipe/recipe_list?categoryId=6&parent_Id=1">구이</a></li> <!-- 카테고리 ID = 6, 부모 ID = 1 -->
+                        <li><a href="${contextPath}/recipe/recipe_list?categoryId=7&parent_Id=1">전/부침</a></li> <!-- 카테고리 ID = 7, 부모 ID = 1 -->
+                        <li><a href="${contextPath}/recipe/recipe_list?categoryId=8&parent_Id=1">볶음류</a></li> <!-- 카테고리 ID = 8, 부모 ID = 1 -->
+                        <li><a href="${contextPath}/recipe/recipe_list?categoryId=9&parent_Id=1">조림/찜류</a></li> <!-- 카테고리 ID = 9, 부모 ID = 1 -->
+                        <li><a href="${contextPath}/recipe/recipe_list?categoryId=10&parent_Id=1">반찬류</a></li> <!-- 카테고리 ID = 10, 부모 ID = 1 -->
+                        <li><a href="${contextPath}/recipe/recipe_list?categoryId=11&parent_Id=1">면류</a></li> <!-- 카테고리 ID = 11, 부모 ID = 1 -->
+                        <li><a href="${contextPath}/recipe/recipe_list?categoryId=12&parent_Id=1">전통 디저트</a></li> <!-- 카테고리 ID = 12, 부모 ID = 1 -->
                     </ul>
                 </div>
 
                 <!-- 양식 카테고리 -->
                 <div class="category-category">
-                    <h6>🍽️양식</h6>
+                    <h6><a href="${contextPath}/recipe/recipe_list?categoryId=2">🍽️양식</a></h6> <!-- 대분류 ID = 2-->
                     <ul>
-                        <li><a href="#">스테이크</a></li>
-                        <li><a href="#">파스타</a></li>
-                        <li><a href="#">피자</a></li>
-                        <li><a href="#">수프</a></li>
-                        <li><a href="#">리조또</a></li>
-                        <li><a href="#">오믈렛</a></li>
-                        <li><a href="#">샌드위치/버거</a></li>
-                        <li><a href="#">치킨 요리</a></li>
-                        <li><a href="#">디저트</a></li>
+                        <li><a href="${contextPath}/recipe/recipe_list?categoryId=13&parent_Id=2">스테이크</a></li> <!-- 카테고리 ID = 13, 부모 ID = 2 -->
+                        <li><a href="${contextPath}/recipe/recipe_list?categoryId=14&parent_Id=2">파스타</a></li> <!-- 카테고리 ID = 14, 부모 ID = 2 -->
+                        <li><a href="${contextPath}/recipe/recipe_list?categoryId=15&parent_Id=2">피자</a></li> <!-- 카테고리 ID = 15, 부모 ID = 2 -->
+                        <li><a href="${contextPath}/recipe/recipe_list?categoryId=16&parent_Id=2">수프</a></li> <!-- 카테고리 ID = 16, 부모 ID = 2 -->
+                        <li><a href="${contextPath}/recipe/recipe_list?categoryId=17&parent_Id=2">리조또</a></li> <!-- 카테고리 ID = 17, 부모 ID = 2 -->
+                        <li><a href="${contextPath}/recipe/recipe_list?categoryId=18&parent_Id=2">오믈렛</a></li> <!-- 카테고리 ID = 18, 부모 ID = 2 -->
+                        <li><a href="${contextPath}/recipe/recipe_list?categoryId=19&parent_Id=2">샌드위치/버거</a></li> <!-- 카테고리 ID = 19, 부모 ID = 2 -->
+                        <li><a href="${contextPath}/recipe/recipe_list?categoryId=20&parent_Id=2">치킨 요리</a></li> <!-- 카테고리 ID = 20, 부모 ID = 2 -->
+                        <li><a href="${contextPath}/recipe/recipe_list?categoryId=21&parent_Id=2">디저트</a></li> <!-- 카테고리 ID = 21, 부모 ID = 2 -->
                     </ul>
                 </div>
 
                 <!-- 일식 카테고리 -->
                 <div class="category-category">
-                    <h6>🍣일식</h6>
+                    <h6><a href="${contextPath}/recipe/recipe_list?categoryId=3">🍣일식</a></h6> <!-- 대분류 ID = 3 -->
                     <ul>
-                        <li><a href="#">회</a></li>
-                        <li><a href="#">스시</a></li>
-                        <li><a href="#">라멘</a></li>
-                        <li><a href="#">전골</a></li>
-                        <li><a href="#">튀김</a></li>
-                        <li><a href="#">덮밥</a></li>
+                        <li><a href="${contextPath}/recipe/recipe_list?categoryId=22&parent_Id=3">회</a></li> <!-- 카테고리 ID = 22, 부모 ID = 3 -->
+                        <li><a href="${contextPath}/recipe/recipe_list?categoryId=23&parent_Id=3">스시</a></li> <!-- 카테고리 ID = 23, 부모 ID = 3 -->
+                        <li><a href="${contextPath}/recipe/recipe_list?categoryId=24&parent_Id=3">덮밥</a></li> <!-- 카테고리 ID = 24, 부모 ID = 3 -->
+                        <li><a href="${contextPath}/recipe/recipe_list?categoryId=25&parent_Id=3">초밥</a></li> <!-- 카테고리 ID = 25, 부모 ID = 3 -->
+                        <li><a href="${contextPath}/recipe/recipe_list?categoryId=26&parent_Id=3">오야꼬동</a></li> <!-- 카테고리 ID = 26, 부모 ID = 3 -->
+                        <li><a href="${contextPath}/recipe/recipe_list?categoryId=27&parent_Id=3">튀김</a></li> <!-- 카테고리 ID = 27, 부모 ID = 3 -->
+                        <li><a href="${contextPath}/recipe/recipe_list?categoryId=28&parent_Id=3">찜</a></li> <!-- 카테고리 ID = 28, 부모 ID = 3 -->
+                        <li><a href="${contextPath}/recipe/recipe_list?categoryId=29&parent_Id=3">야끼소바</a></li> <!-- 카테고리 ID = 29, 부모 ID = 3 -->
                     </ul>
                 </div>
 
                 <!-- 중식 카테고리 -->
                 <div class="category-category">
-                    <h6>🍚중식</h6>
+                    <h6><a href="${contextPath}/recipe/recipe_list?categoryId=4">🍜중식</a></h6> <!-- 대분류 ID = 4 -->
                     <ul>
-                        <li><a href="#">볶음밥</a></li>
-                        <li><a href="#">딤섬</a></li>
-                        <li><a href="#">해물</a></li>
-                        <li><a href="#">육류</a></li>
+                        <li><a href="${contextPath}/recipe/recipe_list?categoryId=30&parent_Id=4">짜장면</a></li> <!-- 카테고리 ID = 30, 부모 ID = 4 -->
+                        <li><a href="${contextPath}/recipe/recipe_list?categoryId=31&parent_Id=4">짬뽕</a></li> <!-- 카테고리 ID = 31, 부모 ID = 4 -->
+                        <li><a href="${contextPath}/recipe/recipe_list?categoryId=32&parent_Id=4">탕수육</a></li> <!-- 카테고리 ID = 32, 부모 ID = 4 -->
+                        <li><a href="${contextPath}/recipe/recipe_list?categoryId=33&parent_Id=4">볶음밥</a></li> <!-- 카테고리 ID = 33, 부모 ID = 4 -->
+                        <li><a href="${contextPath}/recipe/recipe_list?categoryId=34&parent_Id=4">만두</a></li> <!-- 카테고리 ID = 34, 부모 ID = 4 -->
                     </ul>
                 </div>
             </div>
@@ -363,7 +366,6 @@
                 <a href="${contextPath}/recipe/recipe_Detail?rcp_Id=${recipe.rcp_Id}" class="text-decoration-none">
                     <div class="card recipe-card">
                         <div class="recipe-image">
-                            
                             <img src="${contextPath}/resources/images/${recipe.mainImg_Path}" alt="Recipe Image">
                         </div>
                         <div class="card-body">
@@ -391,83 +393,66 @@
         <a href="#">5</a>
     </div>
 
- 		<div class="mt-5">
-			<h5>최근 본 레시피</h5>
-			
-			<div class="swiper-container">
-				<div class="swiper-wrapper">
-					
-					<div class="swiper-slide">
-						<div class="recipe-item">
-							<div class="recipe-image" style="background-color: #ccc;">이미지</div>
-							<h6 class="recipe-title">레시피 제목 1</h6>
-						</div>
-					</div>
+<div class="mt-5">
+    <strong>🏷️최근 본 레시피</strong>   
+    <c:if test="${not empty recentRecipeList}">
+        <!-- Swiper 컨테이너로 최근 본 레시피 출력 -->
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <c:forEach var="recipe" items="${recentRecipeList}">
+                    <div class="swiper-slide">
+                        <div class="recipe-item">
+                            <a href="${contextPath}/recipe/recipe_Detail?rcp_Id=${recipe.rcp_Id}" class="text-decoration-none">
+                                <div class="recipe-image">
+								    <div class="image-wrapper">
+								        <img src="${contextPath}/resources/images/${recipe.mainImg_Path}" alt="Recipe Image">
+								    </div>
+								</div>
+                                <h6 class="recipe-title">${recipe.title}</h6>
+                            </a>
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
+            <!-- Swiper 네비게이션 버튼 -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+    </c:if>
 
-					<div class="swiper-slide">
-						<div class="recipe-item">
-							<div class="recipe-image" style="background-color: #ccc;">이미지</div>
-							<h6 class="recipe-title">레시피 제목 2</h6>
-						</div>
-					</div>
-
-					<div class="swiper-slide">
-						<div class="recipe-item">
-							<div class="recipe-image" style="background-color: #ccc;">이미지</div>
-							<h6 class="recipe-title">레시피 제목 3</h6>
-						</div>
-					</div>
-
-					<div class="swiper-slide">
-						<div class="recipe-item">
-							<div class="recipe-image" style="background-color: #ccc;">이미지</div>
-							<h6 class="recipe-title">레시피 제목 4</h6>
-						</div>
-					</div>
-
-					<div class="swiper-slide">
-						<div class="recipe-item">
-							<div class="recipe-image" style="background-color: #ccc;">이미지</div>
-							<h6 class="recipe-title">레시피 제목 5</h6>
-						</div>
-					</div>
-
-					<div class="swiper-slide">
-						<div class="recipe-item">
-							<div class="recipe-image" style="background-color: #ccc;">이미지</div>
-							<h6 class="recipe-title">레시피 제목 6</h6>
-						</div>
-					</div>
-				</div>
-				<div class="swiper-button-prev"></div>
-				<div class="swiper-button-next"></div>
-				
-
-			</div>
-		</div>
+    <!-- 최근 본 레시피가 없을 경우 -->
+    <c:if test="${empty recentRecipeList}">
+        <strong>최근 본 레시피가 없습니다.</strong>
+    </c:if>
+</div>
 
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script>
-    // Swiper 초기화
-    const swiper = new Swiper(".swiper-container", {
-        slidesPerView : 3, // 한 화면에 보여질 슬라이드 수
-        spaceBetween : 20, // 슬라이드 간격
-        navigation : {
-            nextEl : ".swiper-button-next", // 다음 버튼
-            prevEl : ".swiper-button-prev" // 이전 버튼
+const swiper = new Swiper(".swiper-container", {
+    slidesPerView: 'auto',  // 슬라이드 수를 자동으로 조정
+    spaceBetween: 20,  // 슬라이드 간격
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev"
+    },
+    breakpoints: {
+        1024: {
+            slidesPerView: 4, // 1024px 이상일 때 슬라이드 4개
         },
-        breakpoints : {
-            1024 : {
-                slidesPerView : 4, // 1024px 이상일 때 슬라이드 4개 표시
-            },
-            768 : {
-                slidesPerView : 2, // 768px 이하일 때 슬라이드 2개 표시
-            },
-            480 : {
-                slidesPerView : 1, // 480px 이하일 때 슬라이드 1개 표시
-            }
+        768: {
+            slidesPerView: 2, // 768px 이하일 때 슬라이드 2개
+        },
+        480: {
+            slidesPerView: 1, // 480px 이하일 때 슬라이드 1개
         }
-    });
+    }
+});
+
+// 최근본 레시피가 하나일 때 중앙 배치
+if (document.querySelectorAll('.swiper-slide').length === 1) {
+    const swiperContainer = document.querySelector('.swiper-container');
+    swiperContainer.style.justifyContent = 'center'; // 중앙 정렬
+}
 </script>
 
 

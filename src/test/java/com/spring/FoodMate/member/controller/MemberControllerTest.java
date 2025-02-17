@@ -57,12 +57,12 @@ public class MemberControllerTest {
     public void testLogin_Success() throws Exception {
         // given: 유효한 로그인 정보
         Map<String, String> loginMap = new HashMap<>();
-        loginMap.put("byr_id", "qwer12");
+        loginMap.put("byr_Id", "qwer12");
         loginMap.put("pw", "1234");
 
         // memberService의 login 메서드가 정상적인 MemberVO를 반환하도록 설정
         when(memberService.login(anyMap())).thenReturn(memberVO);
-        when(memberVO.getByr_id()).thenReturn("qwer12");
+        when(memberVO.getByr_Id()).thenReturn("qwer12");
 
         // when: 로그인 요청 처리
         ResponseEntity<String> result = memberController.login(loginMap, request, response);
@@ -76,7 +76,7 @@ public class MemberControllerTest {
     public void testLogin_Failure() throws Exception {
         // given: 잘못된 로그인 정보
         Map<String, String> loginMap = new HashMap<>();
-        loginMap.put("byr_id", "wrongUser");
+        loginMap.put("byr_Id", "wrongUser");
         loginMap.put("pw", "wrongPassword");
 
         // memberService의 login 메서드가 null을 반환하도록 설정

@@ -75,6 +75,7 @@
 	    VALUES (#{rcp_Id}, #{rcp_Step}, #{step_Desc}, #{stepImg_Path})
 	</insert>
 	
+	
 	 <!-- 레시피 조회 -->
     <select id="selectRecipeList" resultMap="recipeResult">
         SELECT 
@@ -114,6 +115,7 @@
 		        SELECT * 
 		        FROM FOODMATE_RECIPE_STEP
 		        WHERE RCP_ID = #{rcp_Id}
+		        ORDER BY RCP_STEP ASC
 		    ]]>
 		</select>
 

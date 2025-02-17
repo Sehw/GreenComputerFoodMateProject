@@ -92,17 +92,16 @@ public class MemberController {
 		ResponseEntity resEntity = null;
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
-		buyerVO=memberService.login(loginMap);
-		if(buyerVO!= null && buyerVO.getByr_id()!=null){
+		buyerVO = memberService.login(loginMap);
+		if(buyerVO!= null && buyerVO.getByr_Id()!=null){
 //			if(memberVO.getDel_yn().equals("Y")) {
 //				String message="회원 탈퇴가 진행중인 아이디입니다.\\n관리자에게 문의해 주세요.\\nEmail : hong@gil.dong";
 //				mav.addObject("message", message);
 //				mav.setViewName("/member/loginForm");
 //			} else {
-				HttpSession session=request.getSession();
-				session=request.getSession();
-				session.setAttribute("isBuyerLogOn", true);
-				session.setAttribute("buyerInfo", buyerVO);
+				HttpSession session=request.getSession();   //객체에 담을 세션하우스를 생성 - 각 유저가 접속할때마다 생기는 Http 요청에 대한 세션값을 넣기위해 하는작업
+				session.setAttribute("isBuyerLogOn", true); // 만들어진 세션하우스에 가구를 들이기 - 세션에다가 속성을 넣는거임
+				session.setAttribute("buyerInfo", buyerVO); //    "
 				
 				message  = "<script>";
 			    message += " location.href='"+request.getContextPath()+"/main';";
@@ -133,11 +132,11 @@ public class MemberController {
 		
 		Map<String, String> loginMap = new HashMap<>();
 		// byr_id와 password 저장
-        loginMap.put("byr_id", (String)userInfo.get("id"));
+        loginMap.put("byr_Id", (String)userInfo.get("id"));
         loginMap.put("password", "sociallogin");
         
 		buyerVO=memberService.login(loginMap);
-		if(buyerVO!= null && buyerVO.getByr_id()!=null){
+		if(buyerVO!= null && buyerVO.getByr_Id()!=null){
 //			if(memberVO.getDel_yn().equals("Y")) {
 //				String message="회원 탈퇴가 진행중인 아이디입니다.\\n관리자에게 문의해 주세요.\\nEmail : hong@gil.dong";
 //				mav.addObject("message", message);
@@ -155,7 +154,7 @@ public class MemberController {
 			
 		}else{
 			HttpSession session = request.getSession();
-			session.setAttribute("byr_id", (String)userInfo.get("id"));
+			session.setAttribute("byr_Id", (String)userInfo.get("id"));
 			session.setAttribute("password", "sociallogin");
 			session.setAttribute("nickname", (String)userInfo.get("nickname"));
 			session.setAttribute("profile_image", (String)userInfo.get("profile_link"));
@@ -441,7 +440,7 @@ public class MemberController {
 	        
 	        if (foundInfo != null && !foundInfo.isEmpty()) {
 	        	HttpSession session = request.getSession();
-	        	session.setAttribute("byr_id", _buyerVO.getByr_id());
+	        	session.setAttribute("byr_Id", _buyerVO.getByr_Id());
 	            session.setAttribute("name", _buyerVO.getName());
 	            session.setAttribute("email", _buyerVO.getEmail());
 	            
@@ -509,7 +508,7 @@ public class MemberController {
 		try {
 			HttpSession session = request.getSession();
 			
-			_buyerVO.setByr_id((String)session.getAttribute("byr_id"));
+			_buyerVO.setByr_Id((String)session.getAttribute("byr_Id"));
 			_buyerVO.setName((String)session.getAttribute("name"));
 			_buyerVO.setEmail((String)session.getAttribute("email"));
 		    memberService.resetBuyerPW(_buyerVO);

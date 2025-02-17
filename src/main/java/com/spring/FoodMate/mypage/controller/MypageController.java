@@ -112,7 +112,7 @@ public class MypageController {
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession();
 		BuyerDTO memberVO = (BuyerDTO)session.getAttribute("buyerInfo");
-		String id = memberVO.getByr_id();
+		String id = memberVO.getByr_Id();
 		
 		List<OrderDTO> orderList = mypageService.getOrderById(id);
 		

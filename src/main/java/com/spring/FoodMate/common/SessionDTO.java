@@ -2,7 +2,7 @@ package com.spring.FoodMate.common;
 
 public class SessionDTO {
     private String userId;
-    private String userName;
+    private String userName;   
     private String userRole;
     private String msg;
 

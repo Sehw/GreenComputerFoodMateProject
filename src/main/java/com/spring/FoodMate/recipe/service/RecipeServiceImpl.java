@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.FoodMate.recipe.dao.RecipeDAO;
 import com.spring.FoodMate.recipe.vo.RecipeIngredientVO;
@@ -13,10 +14,12 @@ import com.spring.FoodMate.recipe.vo.RecipeStepVO;
 import com.spring.FoodMate.recipe.vo.RecipeVO;
 
 @Service
+@Transactional
 public class RecipeServiceImpl implements RecipeService {
 
     @Autowired
     private RecipeDAO recipeDAO;
+   
 
     // 레시피 등록 후 recipeId 반환
     @Override

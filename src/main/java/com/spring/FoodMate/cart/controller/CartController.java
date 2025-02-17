@@ -38,7 +38,7 @@ public class CartController {
 		ModelAndView mav = new ModelAndView();
 		
 		BuyerDTO buyerInfo = (BuyerDTO)session.getAttribute("buyerInfo");
-		String byr_id = buyerInfo.getByr_id();
+		String byr_id = buyerInfo.getByr_Id();
 		Map<String, List<CartDTO>> groupedCart = cartService.getGroupedCartList(byr_id);
 		// cartService에 구매자 ID를 주면서 구매자의 판매자 별명별로 그룹화된 장바구니 목록을 달라고 요청.
 		
@@ -65,7 +65,7 @@ public class CartController {
 	        response.put("message", "로그인 정보가 유효하지 않습니다. 다시 로그인해주세요.");
 	        return response;
 	    }
-	    String byr_id = buyerInfo.getByr_id();
+	    String byr_id = buyerInfo.getByr_Id();
 	    
 	    // 장바구니 추가 서비스 호출
 	    boolean result = cartService.addToCart(pdt_id, qty, byr_id);
