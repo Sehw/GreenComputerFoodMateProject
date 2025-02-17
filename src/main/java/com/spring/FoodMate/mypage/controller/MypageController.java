@@ -46,7 +46,7 @@ public class MypageController {
 		String byr_id = null;
 
 		if (buyerInfo != null) {
-		    byr_id = buyerInfo.getByr_id(); // byr_id 값 추출
+		    byr_id = buyerInfo.getByr_Id(); // byr_id 값 추출
 		}
 		
 		ProfileDTO profileDTO = profileService.getBuyerProfile(byr_id);
@@ -68,7 +68,7 @@ public class MypageController {
 		String byr_id = null;
 
 		if (buyerInfo != null) {
-		    byr_id = buyerInfo.getByr_id(); // byr_id 값 추출
+		    byr_id = buyerInfo.getByr_Id(); // byr_id 값 추출
 		}
 		
 		
@@ -105,7 +105,7 @@ public class MypageController {
 		String byr_id = null;
 
 		if (buyerInfo != null) {
-		    byr_id = buyerInfo.getByr_id(); // byr_id 값 추출
+		    byr_id = buyerInfo.getByr_Id(); // byr_id 값 추출
 		}
 		
 		ProfileDTO profileDTO = profileService.getBuyerProfile(byr_id);
@@ -138,7 +138,7 @@ public class MypageController {
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession();
 		BuyerDTO memberVO = (BuyerDTO)session.getAttribute("buyerInfo");
-		String id = memberVO.getByr_id();
+		String id = memberVO.getByr_Id();
 		
 		List<OrderDTO> orderList = mypageService.getOrderById(id);
 		

@@ -55,7 +55,7 @@ public class ProfileController {
 		String byr_id = null;
 
 		if (buyerInfo != null) {
-		    byr_id = buyerInfo.getByr_id(); // byr_id 값 추출
+		    byr_id = buyerInfo.getByr_Id(); // byr_id 값 추출
 		    _profileDTO.setByr_id(byr_id);
 		}
 		try {

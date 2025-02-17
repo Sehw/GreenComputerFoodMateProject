@@ -94,6 +94,7 @@
 }
 
 </style>
+
 </head>
 <body>
 <div class="container1">
@@ -139,11 +140,31 @@
             </a>
         </c:if>
         
-        
-        
-        <a id = "recipeLink" href="${contextPath}/member/loginForm" title="레시피 작성">
-            <i id ="write" class="fas fa-pen"></i>
-        </a>
+               
+       	<a id="recipeLink" href="javascript:void(0);" onclick="checkLoginAndRedirect()" title="레시피 작성">
+		    <i id="write" class="fas fa-pen"></i>
+		</a>
+		<script type="text/javascript">
+			function checkLoginAndRedirect() { 
+				
+			var buyerInfo = "${sessionScope.buyerInfo}";
+		    
+		    if (buyerInfo == null || buyerInfo === "") {
+		        console.log("현재 세션에 buyerInfo가 없습니다.");
+		    } else {
+		        console.log("현재 세션의 buyerInfo: " + buyerInfo);
+		    }
+		    // 세션에 buyerInfo가 없으면 로그인 페이지로 이동
+		    var isBuyerLogOn = "${empty sessionScope.buyerInfo}";
+		    if (isBuyerLogOn == 'true') {
+		        alert("로그인 후에 레시피를 작성할 수 있습니다.");
+		        window.location.href = "${contextPath}/member/loginForm";
+		    } else {
+		        window.location.href = "${contextPath}/recipe/recipe_Add";
+		    }
+		}
+		</script>
+		
         <a id = "cartLink" href="${contextPath}/member/loginForm" title="장바구니">
             <i id ="cart" class="fas fa-shopping-cart"></i>
         </a>
