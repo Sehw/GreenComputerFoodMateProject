@@ -19,13 +19,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.spring.FoodMate.common.Util;
+import com.spring.FoodMate.common.UtilMethod;
 import com.spring.FoodMate.member.dto.BuyerDTO;
 import com.spring.FoodMate.recipe.service.RecipeService;
 import com.spring.FoodMate.recipe.vo.RecipeIngredientVO;
 import com.spring.FoodMate.recipe.vo.RecipeStepVO;
 import com.spring.FoodMate.recipe.vo.RecipeVO;
-import com.spring.FoodMate.common.Util;
 
 @Controller
 public class RecipeControllerImpl implements RecipeController {
@@ -128,7 +127,7 @@ public class RecipeControllerImpl implements RecipeController {
     // 레시피 작성 폼으로 이동
 	@RequestMapping(value="/recipe/recipe_Add", method=RequestMethod.GET)
 	public ModelAndView addRecipeForm(@RequestParam(value="result", required=false) String result, @RequestParam(value="action",required=false) String action, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = Util.getViewName(request);
+		String viewName = UtilMethod.getViewName(request);
 		HttpSession session = request.getSession();
 		session.setAttribute("action", action);
 		ModelAndView mav = new ModelAndView();
@@ -174,7 +173,7 @@ public class RecipeControllerImpl implements RecipeController {
 
 	    // 레시피 이미지 저장 (메인 이미지)
 	    if (mainImg != null && !mainImg.isEmpty()) {
-	        String mainImgPath = Util.saveRecipeImage(mainImg);
+	        String mainImgPath = UtilMethod.saveRecipeImage(mainImg);
 	        recipe.setMainImg_Path(mainImgPath);  // 이미지 경로 저장
 	    }
 
@@ -212,7 +211,7 @@ public class RecipeControllerImpl implements RecipeController {
 	            step.setRcp_Step(stepNumbers.get(i));
 	            step.setStep_Desc(stepDescriptions.get(i));
 	            if (!stepImages.isEmpty() && stepImages.size() > i && stepImages.get(i) != null) {
-	                String stepImgPath = Util.saveRecipeImage(stepImages.get(i));  // 단계 이미지 저장
+	                String stepImgPath = UtilMethod.saveRecipeImage(stepImages.get(i));  // 단계 이미지 저장
 	                step.setStepImg_Path(stepImgPath);  // 단계 이미지 경로 저장
 	            }
 	            steps.add(step);

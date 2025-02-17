@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
-public class Util {
+public class UtilMethod {
 	public static String getViewName(HttpServletRequest request) throws Exception{
 		String contextPath = request.getContextPath();
 		String uri = (String) request.getAttribute("javax.servlet.include.request_uri");
@@ -50,14 +50,14 @@ public class Util {
 	    return ResponseEntity.ok().build();
 	}
 	
+	// 저장할 경로를 saveXXImage 메서드들에 뿌려줌
+	// 배포할 때는 배포환경에 맞게 바꿔주면 됨
+	private static String imagePath1 = "C:/Users/Administrator/git/GreenComputerFoodMateProject/src/main/webapp/resources/images";
+	private static String imagePath2 = "C:/Users/confl/git/GreenComputerFoodMateProject/src/main/webapp/resources/images";
+	
 	public static String savePdtImage(HttpServletRequest request, MultipartFile file) throws Exception {
 	    // 저장할 디렉토리 경로 설정
-//	    String uploadDirReal = request.getServletContext().getRealPath("/resources/images/pdt");
-//	    System.out.println("실제론"+uploadDirReal+"에 저장돼야함.");
-	    String uploadDir = "C:/Users/Administrator/git/GreenComputerFoodMateProject/src/main/webapp/resources/images/pdt";
-//	    System.out.println("학원에선"+uploadDir+"에 저장돼야함.");
-//	    String uploadDirSTHHome = "C:/Users/confl/git/GreenComputerFoodMateProject/src/main/webapp/resources/images/pdt";
-//	    System.out.println("송태호자택에선"+uploadDirSTHHome+"에 저장돼야함.");
+	    String uploadDir = imagePath2 + "/pdt";
 
 	    File dir = new File(uploadDir);
 
@@ -92,12 +92,7 @@ public class Util {
 	
 	public static String saveRecipeImage(MultipartFile file) throws Exception {
 	    // 저장할 디렉토리 경로 설정
-//	    String uploadDirReal = request.getServletContext().getRealPath("/resources/images/pdt");
-//	    System.out.println("실제론"+uploadDirReal+"에 저장돼야함.");
-	    String uploadDir = "C:/Users/Administrator/git/GreenComputerFoodMateProject/src/main/webapp/resources/images/recipe";
-//	    System.out.println("학원에선"+uploadDir+"에 저장돼야함.");
-//	    String uploadDirSTHHome = "C:/Users/confl/git/GreenComputerFoodMateProject/src/main/webapp/resources/images/pdt";
-//	    System.out.println("송태호자택에선"+uploadDirSTHHome+"에 저장돼야함.");
+		String uploadDir = imagePath2 + "/recipe";
 
 	    File dir = new File(uploadDir);
 	    // 디렉토리가 존재하지 않으면 생성

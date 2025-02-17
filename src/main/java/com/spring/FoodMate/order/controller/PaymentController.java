@@ -1,43 +1,20 @@
 package com.spring.FoodMate.order.controller;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.siot.IamportRestClient.IamportClient;
 import com.siot.IamportRestClient.exception.IamportResponseException;
 import com.siot.IamportRestClient.response.IamportResponse;
 import com.siot.IamportRestClient.response.Payment;
-import com.spring.FoodMate.common.Util;
 
 import io.github.cdimascio.dotenv.Dotenv;
 
 @RestController
 public class PaymentController {
-	private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
-	
 	private final Dotenv dotenv = Dotenv.load();
 	
 	private final String API_KEY = dotenv.get("PORTONE_API_KEY");  //  포트원 REST API 키

@@ -37,9 +37,9 @@ public class CartService {
             return cartDAO.insertCartItem(cartItem); // 장바구니에 아이템 추가
 
         } catch (DBException e) {
-        	throw new CartException("", e);
+        	throw new CartException("CartService에서 DB예외 전달.", e);
         } catch (Exception e) {
-            throw new CartException("CartService.addToCart error! pdt_id=" + pdt_id + ", qty=" + qty + ", byr_id=" + byr_id, e);
+            throw new CartException("CartService.addToCart 에러! pdt_id=" + pdt_id + ", qty=" + qty + ", byr_id=" + byr_id, e);
         }
     }
 
@@ -56,9 +56,9 @@ public class CartService {
             }
             return groupedCart;
         } catch (DBException e) {
-            throw new CartException("", e);
+        	throw new CartException("CartService에서 DB예외 전달.", e);
         } catch (Exception e) {
-            throw new CartException("CartService.getGroupedCartList error! byr_id=" + byr_id, e);
+            throw new CartException("CartService.getGroupedCartList 에러! byr_id=" + byr_id, e);
         }
     }
     
@@ -66,9 +66,9 @@ public class CartService {
         try {
             return cartDAO.updateCartQuantity(cart_id, qty) > 0; // 업데이트된 행 수가 1 이상이면 성공
         } catch (DBException e) {
-        	throw new CartException("", e);
+        	throw new CartException("CartService에서 DB예외 전달.", e);
         } catch (Exception e) {
-            throw new CartException("CartService.updateCartQuantity error! cart_id=" + cart_id + ", qty=" + qty, e);
+            throw new CartException("CartService.updateCartQuantity 에러! cart_id=" + cart_id + ", qty=" + qty, e);
         }
     }
 
@@ -76,9 +76,9 @@ public class CartService {
     	try {
     		return cartDAO.deleteCartItem(cart_id) > 0;  // 성공하면 true, 실패하면 false
         } catch (DBException e) {
-        	throw new CartException("", e);
+        	throw new CartException("CartService에서 DB예외 전달.", e);
         } catch (Exception e) {
-            throw new CartException("CartService.updateCartQuantity error! cart_id=" + cart_id, e);
+            throw new CartException("CartService.updateCartQuantity 에러! cart_id=" + cart_id, e);
         }
     }   
 }

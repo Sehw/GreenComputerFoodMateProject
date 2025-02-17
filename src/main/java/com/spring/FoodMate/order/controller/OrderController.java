@@ -12,18 +12,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.FoodMate.cart.dto.CartDTO;
-import com.spring.FoodMate.cart.service.CartService;
-import com.spring.FoodMate.common.Util;
+import com.spring.FoodMate.common.UtilMethod;
 import com.spring.FoodMate.order.service.OrderService;
 
 import io.github.cdimascio.dotenv.Dotenv;
@@ -39,7 +34,7 @@ public class OrderController {
 	
 	@RequestMapping(value="/order/order1")
 	public ModelAndView orderPage(@RequestParam(value = "cartIds", required = false) String cartIds, @RequestParam(value="result", required=false) String result, @RequestParam(value="action",required=false) String action, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = Util.getViewName(request);
+		String viewName = UtilMethod.getViewName(request);
 		HttpSession session = request.getSession();
 		session.setAttribute("action", action);
 		
@@ -78,7 +73,7 @@ public class OrderController {
 	
 	@RequestMapping(value="/order/order2")
 	public ModelAndView newsPage(@RequestParam(value="result", required=false) String result, @RequestParam(value="action",required=false) String action, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = Util.getViewName(request);
+		String viewName = UtilMethod.getViewName(request);
 		HttpSession session = request.getSession();
 		session.setAttribute("action", action);
 		List<CartDTO> orderItems = (List<CartDTO>) session.getAttribute("orderItems");

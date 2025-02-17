@@ -77,7 +77,7 @@
 	</insert>
 	
 	 <!-- 레시피 조회 -->
-    <select id="selectRecipeList" resultMap="recipeResult"> <!-- View가 확정되면 view로변경할것 -->
+    <select id="selectRecipeList" resultMap="recipeResult"> <!-- View가 확정되면 view로변경할것 그냥 이대로 조인해서 쓰세요 -->
 	    SELECT 
 	        R.RCP_ID, 
 	        R.BYR_ID, 
@@ -91,7 +91,7 @@
 	        R.STATUS, 
 	        R.CREATE_DATE
 	    FROM FOODMATE_RECIPE R
-	    JOIN FOODMATE_BUYER_PROFILE BP ON R.BYR_ID = BP.BYR_ID  <!-- JOIN 조건 -->
+	    LEFT JOIN FOODMATE_BUYER_PROFILE BP ON R.BYR_ID = BP.BYR_ID  <!-- JOIN 조건, LEFT JOIN으로 바꿔서 닉네임 없을때도 표시하게 바꿈 -->
 	    WHERE R.STATUS = 'Y'
 	</select>
 	

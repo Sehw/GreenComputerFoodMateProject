@@ -23,7 +23,7 @@ public class CartDAO {
             return result > 0;
             // result 는 insert 한 행 수를 표시하므로 성공하면 1 이상, 실패하면 0이다.
         } catch (DataAccessException e) {
-        	throw new DBException("CartDAO.insertCartItem error!" + cartDTO.toLogString(), e);
+        	throw new DBException("CartDAO.insertCartItem 에러!" + cartDTO.toLogString(), e);
         }
     }
 	
@@ -34,7 +34,7 @@ public class CartDAO {
 			// DB에 구매자 ID를 주면서 구매자의 cartDTO 리스트를 요청한다.
 			return list;
 		} catch (DataAccessException e) {
-            throw new DBException("CartDAO.getCartListById error! byr_id=" + byr_id, e);
+            throw new DBException("CartDAO.getCartListById 에러! byr_id=" + byr_id, e);
         }
 	}
 	
@@ -45,7 +45,7 @@ public class CartDAO {
 			CartDTO resultDTO = sqlSession.selectOne("mapper.cart.isInMyCart", cartDTO);
 			return resultDTO;
 		} catch (DataAccessException e) {
-			throw new DBException("CartDAO.inInMyCart error! pdt_id =" + pdt_id + ", byr_id = " + byr_id , e);
+			throw new DBException("CartDAO.inInMyCart 에러! pdt_id =" + pdt_id + ", byr_id = " + byr_id , e);
 		}
 	}
 	
@@ -56,7 +56,7 @@ public class CartDAO {
 	        params.put("qty", qty);
 	        return sqlSession.update("mapper.cart.updateCartQuantity", params);
 	    } catch (DataAccessException e) {
-	        throw new DBException("CartDAO.updateCartQuantity error!" + params.toString(), e);
+	        throw new DBException("CartDAO.updateCartQuantity 에러!" + params.toString(), e);
 	    }
 	}
 	
@@ -64,7 +64,7 @@ public class CartDAO {
 		try {
 			return sqlSession.delete("mapper.cart.deleteCartItem", cart_id);
 		} catch (DataAccessException e) {
-			throw new DBException("CartDAO.deleteCartItem error! cart_id=" + cart_id, e);
+			throw new DBException("CartDAO.deleteCartItem 에러! cart_id=" + cart_id, e);
 		}
     }
 }

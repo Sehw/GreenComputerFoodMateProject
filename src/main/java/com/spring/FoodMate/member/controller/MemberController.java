@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.FoodMate.common.SessionDTO;
-import com.spring.FoodMate.common.Util;
+import com.spring.FoodMate.common.UtilMethod;
 import com.spring.FoodMate.member.dto.BuyerDTO;
 import com.spring.FoodMate.member.dto.SellerDTO;
 import com.spring.FoodMate.member.service.MemberService;
@@ -40,11 +40,11 @@ public class MemberController {
 	@Autowired
 	private ProfileService profileService;
 	@Autowired
-	private BuyerDTO buyerVO;
+	private BuyerDTO buyerDTO;
 	@Autowired
-	private SellerDTO sellerVO;
+	private SellerDTO sellerDTO;
 	@Autowired
-	private ProfileDTO profileVO;
+	private ProfileDTO profileDTO;
 	@Autowired
 	private SocialLoginController sociallogincontroller; 
 
@@ -54,7 +54,7 @@ public class MemberController {
 	
 	@RequestMapping(value="/member/loginForm", method=RequestMethod.GET)
 	private ModelAndView Loginform(@RequestParam(value="result", required=false) String result, @RequestParam(value="action",required=false) String action, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = Util.getViewName(request);
+		String viewName = UtilMethod.getViewName(request);
 		HttpSession session = request.getSession();
 		session.setAttribute("action", action);
 		ModelAndView mav = new ModelAndView();
@@ -70,7 +70,7 @@ public class MemberController {
 	
 	@RequestMapping(value="/member/*Form", method=RequestMethod.GET)
 	private ModelAndView form(@RequestParam(value="result", required=false) String result, @RequestParam(value="action",required=false) String action, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = Util.getViewName(request);
+		String viewName = UtilMethod.getViewName(request);
 		HttpSession session = request.getSession();
 		session.setAttribute("action", action);
 		ModelAndView mav = new ModelAndView();
@@ -92,8 +92,8 @@ public class MemberController {
 		ResponseEntity resEntity = null;
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
-		buyerVO=memberService.login(loginMap);
-		if(buyerVO!= null && buyerVO.getByr_id()!=null){
+		buyerDTO=memberService.login(loginMap);
+		if(buyerDTO!= null && buyerDTO.getByr_id()!=null){
 //			if(memberVO.getDel_yn().equals("Y")) {
 //				String message="회원 탈퇴가 진행중인 아이디입니다.\\n관리자에게 문의해 주세요.\\nEmail : hong@gil.dong";
 //				mav.addObject("message", message);
@@ -103,12 +103,12 @@ public class MemberController {
 				session=request.getSession();
 				
 				SessionDTO sessionDTO = new SessionDTO();
-				sessionDTO.setUserId(buyerVO.getByr_id());
+				sessionDTO.setUserId(buyerDTO.getByr_id());
 				sessionDTO.setUserRole("buyer");
+				session.setAttribute("sessionDTO", sessionDTO);
 				
 				session.setAttribute("isBuyerLogOn", true);
-				session.setAttribute("buyerInfo", buyerVO);
-				session.setAttribute("sessionDTO", sessionDTO);
+				session.setAttribute("buyerInfo", buyerDTO);
 				
 				message  = "<script>";
 			    message += " location.href='"+request.getContextPath()+"/main';";
@@ -142,8 +142,8 @@ public class MemberController {
         loginMap.put("byr_id", (String)userInfo.get("id"));
         loginMap.put("password", "sociallogin");
         
-		buyerVO=memberService.login(loginMap);
-		if(buyerVO!= null && buyerVO.getByr_id()!=null){
+		buyerDTO=memberService.login(loginMap);
+		if(buyerDTO!= null && buyerDTO.getByr_id()!=null){
 //			if(memberVO.getDel_yn().equals("Y")) {
 //				String message="회원 탈퇴가 진행중인 아이디입니다.\\n관리자에게 문의해 주세요.\\nEmail : hong@gil.dong";
 //				mav.addObject("message", message);
@@ -152,7 +152,7 @@ public class MemberController {
 				HttpSession session=request.getSession();
 				session=request.getSession();
 				session.setAttribute("isBuyerLogOn", true);
-				session.setAttribute("buyerInfo", buyerVO);
+				session.setAttribute("buyerInfo", buyerDTO);
 				
 				message  = "<script>";
 			    message += " location.href='"+request.getContextPath()+"/main';";
@@ -183,8 +183,8 @@ public class MemberController {
 		ResponseEntity resEntity = null;
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
-		sellerVO=memberService.loginslr(loginMap);
-		if(sellerVO!= null && sellerVO.getSlr_id()!=null){
+		sellerDTO=memberService.loginslr(loginMap);
+		if(sellerDTO!= null && sellerDTO.getSlr_id()!=null){
 			
 //			if(memberVO.getDel_yn().equals("Y")) {
 //				String message="회원 탈퇴가 진행중인 아이디입니다.\\n관리자에게 문의해 주세요.\\nEmail : hong@gil.dong";
@@ -194,10 +194,10 @@ public class MemberController {
 				HttpSession session=request.getSession();
 				session=request.getSession();
 				session.setAttribute("isSellerLogOn", true);
-				session.setAttribute("sellerInfo",sellerVO);
+				session.setAttribute("sellerInfo",sellerDTO);
 				
 				SessionDTO sessionDTO = new SessionDTO();
-				sessionDTO.setUserId(sellerVO.getSlr_id());
+				sessionDTO.setUserId(sellerDTO.getSlr_id());
 				sessionDTO.setUserRole("seller");
 				session.setAttribute("sessionDTO", sessionDTO);
 				
