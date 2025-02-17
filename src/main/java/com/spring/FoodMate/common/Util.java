@@ -20,7 +20,7 @@ public class Util {
 		if(!((contextPath==null) || ("".equals(contextPath))))
 		{
 			begin=contextPath.length();
-		}
+		} 
 		int end;
 		if(uri.indexOf(";")!= -1) {
 			end = uri.indexOf(":");
