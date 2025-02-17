@@ -1,5 +1,8 @@
 package com.spring.FoodMate.recipe.controller;
 
+import java.io.File;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,7 +34,43 @@ public class RecipeControllerImpl implements RecipeController {
 
     @Autowired
     private RecipeService recipeService;
+    
+    /*
+    @RequestMapping("/recipe/selectRecipeByCategory")
+    public ModelAndView selectRecipeByCategory(@RequestParam("categoryId") int categoryId, HttpServletRequest request) throws Exception {
+        String viewName = (String) request.getAttribute("viewName");
+        HttpSession session = request.getSession();
 
+        // 카테고리 아이디에 맞는 레시피를 조회
+        List<RecipeVO> recipeList = categoryService.getRecipesByCategory(categoryId);
+
+        // 최근 본 레시피 리스트 갱신
+        RecentRecipeView(categoryId, recipeList, session);
+
+        // 업데이트된 recentRecipeList를 jsp에 전달
+        List<RecipeVO> recentRecipeList = (List<RecipeVO>) session.getAttribute("recentRecipeList");
+        ModelAndView mav = new ModelAndView(viewName);
+        mav.setViewName("common/layout");
+        mav.addObject("recipeList", recipeList);
+        mav.addObject("recentRecipeList", recentRecipeList);
+        mav.addObject("showNavbar", true);
+        mav.addObject("title", "카테고리별 레시피");
+        mav.addObject("body", "/WEB-INF/views/recipe/recipeList.jsp"); 
+        return mav;
+    }*/
+
+
+    // 레시피 수정 폼
+    @RequestMapping(value = "/recipe/recipe_Edit", method = RequestMethod.GET)
+    public ModelAndView RecipeEditForm(HttpServletRequest request) throws Exception {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("common/layout");
+        mav.addObject("showNavbar", true);
+        mav.addObject("title","레시피 수정 페이지");
+        mav.addObject("body", "/WEB-INF/views/recipe/recipe_Edit.jsp");
+        return mav;
+    }
+    
     
     // 레시피 목록 조회
     @RequestMapping(value = "/recipe/recipe_list", method = RequestMethod.GET)
@@ -47,62 +86,72 @@ public class RecipeControllerImpl implements RecipeController {
     
     //레시피 상세조회
     @RequestMapping(value = "/recipe/recipe_Detail", method = RequestMethod.GET)
-    public ModelAndView selectRecipeDetail(@RequestParam("rcp_Id") String rcp_Id, 
-    								HttpServletRequest request) throws Exception {
-    	String viewName=(String)request.getAttribute("viewName");
-    	HttpSession session=request.getSession();
-    	Map recipeMap = recipeService.selectRecipeDetail(rcp_Id);
+    public ModelAndView selectRecipeDetail(@RequestParam("rcp_Id") String rcp_Id, HttpServletRequest request) throws Exception {
+        String viewName = (String) request.getAttribute("viewName");
+        HttpSession session = request.getSession();
+        Map recipeMap = recipeService.selectRecipeDetail(rcp_Id);
+        
+        // 최근 본 레시피 리스트 갱신
+        RecipeVO recipeVO = (RecipeVO) recipeMap.get("recipeVO");
+        RecentRecipeView(rcp_Id, recipeVO, session);
+
+        // 업데이트된 recentRecipeList를 jsp에 전달
+        List<RecipeVO> recentRecipeList = (List<RecipeVO>) session.getAttribute("recentRecipeList");
         ModelAndView mav = new ModelAndView(viewName);
         mav.setViewName("common/layout");
         mav.addObject("recipeMap", recipeMap);
-        RecipeVO recipeVO=(RecipeVO)recipeMap.get("recipeVO");
-        RecentRecipeView(rcp_Id,recipeVO,session);
-        
+        mav.addObject("recentRecipeList", recentRecipeList);
         mav.addObject("recipeVO", recipeMap.get("recipeVO"));
         mav.addObject("ingredientsList", recipeMap.get("ingredientsList"));
         mav.addObject("stepList", recipeMap.get("stepList"));
         mav.addObject("showNavbar", true);
         mav.addObject("title", "레시피 상세");
-        mav.addObject("body", "/WEB-INF/views/recipe/recipe_Detail.jsp");
+        mav.addObject("body", "/WEB-INF/views/recipe/recipe_Detail.jsp"); 
         return mav;
     }
-    
-    //최근 본 레시피
+
     private void RecentRecipeView(String rcp_Id, RecipeVO recipeVO, HttpSession session) {
-        boolean alreadyExisted = false;
+        // 세션에서 '최근 본 레시피' 리스트를 가져옴
         List<RecipeVO> recentRecipeList = (List<RecipeVO>) session.getAttribute("recentRecipeList");
 
-        // 최근 본 레시피가 이미 세션에 저장되어 있는지 확인
+        // 최근 본 레시피가 세션에 존재할 경우
         if (recentRecipeList != null) {
-            // 최근 본 레시피 리스트에서 해당 레시피가 있는지 확인
+            boolean alreadyExisted = false;
+
+            // 이미 해당 레시피가 최근 본 리스트에 있는지 확인
             for (int i = 0; i < recentRecipeList.size(); i++) {
                 RecipeVO _recipe = recentRecipeList.get(i);
                 if (rcp_Id.equals(_recipe.getRcp_Id())) {
                     alreadyExisted = true;
+                    // 이미 리스트에 있으면 해당 레시피를 가장 앞에 오도록 이동
+                    recentRecipeList.remove(i);  // 기존 항목 삭제
+                    recentRecipeList.add(0, _recipe);  // 최근 항목으로 추가
                     break;
                 }
             }
 
-            // 이미 최근 본 리스트에 없으면 추가
+            // 최근 본 레시피 리스트에 없다면
             if (!alreadyExisted) {
-                if (recentRecipeList.size() < 5) { // 최대 5개까지만 저장하도록 설정
-                    recentRecipeList.add(recipeVO);
-                } else {
-                    recentRecipeList.remove(0); // 가장 오래된 항목을 제거하고 새 레시피 추가
-                    recentRecipeList.add(recipeVO);
+                // 리스트가 20개 이상일 경우, 가장 오래된 레시피를 제거
+                if (recentRecipeList.size() >= 20) {
+                    recentRecipeList.remove(recentRecipeList.size() - 1);  // 가장 오래된 레시피 제거
                 }
+                // 새로운 레시피를 리스트 앞에 추가
+                recentRecipeList.add(0, recipeVO);
             }
-
         } else {
-            // 리스트가 없다면 새로 생성하고 추가
+            // '최근 본 레시피' 리스트가 세션에 없으면 새로 생성
             recentRecipeList = new ArrayList<RecipeVO>();
             recentRecipeList.add(recipeVO);
         }
-
-        // 세션에 최근 본 레시피 리스트를 저장
+        
+        // 세션에 최근 본 레시피 리스트 저장
         session.setAttribute("recentRecipeList", recentRecipeList);
         session.setAttribute("recentRecipeListNum", recentRecipeList.size());
     }
+
+
+    
 
     
 
@@ -124,6 +173,7 @@ public class RecipeControllerImpl implements RecipeController {
         
         return mav;
     }
+    
     // 레시피 작성 폼으로 이동
 	@RequestMapping(value="/recipe/recipe_Add", method=RequestMethod.GET)
 	public ModelAndView addRecipeForm(@RequestParam(value="result", required=false) String result, @RequestParam(value="action",required=false) String action, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -159,18 +209,21 @@ public class RecipeControllerImpl implements RecipeController {
 
 	    // 세션에서 로그인한 사용자 정보 가져오기
 		BuyerDTO BuyerDTO = (BuyerDTO) session.getAttribute("buyerInfo");
-	    String byrId = BuyerDTO != null ? BuyerDTO.getByr_id() : "unknownUser";
-	    System.out.println(byrId);
-	    System.out.println("이게 바이어 아이디임.");
 
+	    String byr_Id = BuyerDTO != null ? BuyerDTO.getByr_Id() : "unknownUser"; //삼항연산자  조건 ? 조건이 참일때 실행 : 조건이 거짓일때 실행
+    	                //세션이데이터가잇니? , //있으면 DTO에서 가져와 , / 없으면 "unknownUser" 데이터를 담아
+	    
+    	System.out.println("step1" + BuyerDTO.getByr_Id()); 
 	    // 레시피 객체 생성
 	    RecipeVO recipe = new RecipeVO();
 	    recipe.setTitle(title);
 	    recipe.setFood_Name(foodName);
 	    recipe.setReq_Time(reqTime);
 	    recipe.setDescription(description);
-	    recipe.setByr_Id(byrId);  // 작성자 ID 추가
-
+	    recipe.setByr_Id(byr_Id);  // 작성자 ID 추가
+	    System.out.println("step2-1" + recipe.getByr_Id());
+	    //or
+	    System.out.println("step2-2" + byr_Id);
 	    // 레시피 이미지 저장 (메인 이미지)
 	    if (mainImg != null && !mainImg.isEmpty()) {
 	        String mainImgPath = UtilMethod.saveRecipeImage(mainImg);
@@ -178,7 +231,7 @@ public class RecipeControllerImpl implements RecipeController {
 	    }
 
 	    // 레시피 등록 (ID 반환)
-	    int recipeId = recipeService.addRecipe(recipe, byrId);  // 레시피 ID를 반환받음
+	    int recipeId = recipeService.addRecipe(recipe, byr_Id);  // 레시피 ID를 반환받음
 
 	    // 재료 객체 생성 후 배치 삽입
 	    List<RecipeIngredientVO> ingredients = new ArrayList<>();
@@ -224,6 +277,43 @@ public class RecipeControllerImpl implements RecipeController {
 	    response.put("message", "레시피 등록에 성공했습니다.");
 	    response.put("status", "success");
 	    return new ResponseEntity<>(response, HttpStatus.OK);
+	}
+
+
+	// 이미지 저장 메서드
+	public String saveImageFile(MultipartFile file) throws IOException {
+	    // 이미지 저장 경로 (운영 환경에서 경로 수정 필요)
+	    String uploadPath = "C:\\Users\\Administrator\\git\\GreenComputerFoodMateProject\\src\\main\\webapp\\resources\\images";
+	    
+	    // 디렉토리가 존재하지 않으면 생성
+	    File uploadDir = new File(uploadPath);
+	    if (!uploadDir.exists()) {
+	        uploadDir.mkdirs();
+	    }
+	    
+	    // 원본 파일 이름을 추출 (확장자 제외)
+	    String originalFileName = file.getOriginalFilename();
+	    String fileNameWithoutExt = originalFileName.substring(0, originalFileName.lastIndexOf("."));
+	    String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
+	    
+	    // 파일 이름에 숫자를 붙여서 중복을 피하는 로직
+	    String fileName = fileNameWithoutExt + fileExtension;
+	    File dest = new File(uploadPath, fileName);
+	    
+	    // 파일 이름이 중복되는 경우, 숫자를 붙여가며 파일을 찾음
+	    int counter = 1;
+	    while (dest.exists()) {
+	        // 숫자를 붙여서 새로운 파일 이름 생성
+	        fileName = fileNameWithoutExt + counter + fileExtension;
+	        dest = new File(uploadPath, fileName);
+	        counter++;
+	    }
+
+	    // 파일 저장
+	    file.transferTo(dest);  // 파일을 디스크에 저장
+	    
+	    // 저장된 파일의 이름만 반환 (파일명만 추출)
+	    return fileName;  // 경로는 제외하고 파일명만 반환
 	}
 
 }

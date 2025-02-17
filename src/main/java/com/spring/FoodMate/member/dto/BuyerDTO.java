@@ -6,7 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Component("buyerDTO")
 public class BuyerDTO {
 	// 로그인
-	private String byr_id;
+	private String byr_Id;
 	private String password; // 로그인시에만 사용, 세션 정보 삽입때 사용X
 	private String name;
 	private String birth_6;
@@ -24,11 +24,11 @@ public class BuyerDTO {
 
 	private MultipartFile profileImage;
 	
-	public String getByr_id() {
-		return byr_id;
+	public String getByr_Id() {
+		return byr_Id;
 	}
-	public void setByr_id(String byr_id) {
-		this.byr_id = byr_id;
+	public void setByr_Id(String byr_Id) {
+		this.byr_Id = byr_Id;
 	}
 	public String getPassword() {
 		return password;

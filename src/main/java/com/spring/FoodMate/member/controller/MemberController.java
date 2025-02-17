@@ -93,7 +93,7 @@ public class MemberController {
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		buyerDTO=memberService.login(loginMap);
-		if(buyerDTO!= null && buyerDTO.getByr_id()!=null){
+		if(buyerDTO!= null && buyerDTO.getByr_Id()!=null){
 //			if(memberVO.getDel_yn().equals("Y")) {
 //				String message="회원 탈퇴가 진행중인 아이디입니다.\\n관리자에게 문의해 주세요.\\nEmail : hong@gil.dong";
 //				mav.addObject("message", message);
@@ -103,7 +103,7 @@ public class MemberController {
 				session=request.getSession();
 				
 				SessionDTO sessionDTO = new SessionDTO();
-				sessionDTO.setUserId(buyerDTO.getByr_id());
+				sessionDTO.setUserId(buyerDTO.getByr_Id());
 				sessionDTO.setUserRole("buyer");
 				session.setAttribute("sessionDTO", sessionDTO);
 				
@@ -139,11 +139,11 @@ public class MemberController {
 		
 		Map<String, String> loginMap = new HashMap<>();
 		// byr_id와 password 저장
-        loginMap.put("byr_id", (String)userInfo.get("id"));
+        loginMap.put("byr_Id", (String)userInfo.get("id"));
         loginMap.put("password", "sociallogin");
         
 		buyerDTO=memberService.login(loginMap);
-		if(buyerDTO!= null && buyerDTO.getByr_id()!=null){
+		if(buyerDTO!= null && buyerDTO.getByr_Id()!=null){
 //			if(memberVO.getDel_yn().equals("Y")) {
 //				String message="회원 탈퇴가 진행중인 아이디입니다.\\n관리자에게 문의해 주세요.\\nEmail : hong@gil.dong";
 //				mav.addObject("message", message);
@@ -161,7 +161,7 @@ public class MemberController {
 			
 		}else{
 			HttpSession session = request.getSession();
-			session.setAttribute("byr_id", (String)userInfo.get("id"));
+			session.setAttribute("byr_Id", (String)userInfo.get("id"));
 			session.setAttribute("password", "sociallogin");
 			session.setAttribute("nickname", (String)userInfo.get("nickname"));
 			session.setAttribute("profile_image", (String)userInfo.get("profile_link"));
@@ -254,7 +254,7 @@ public class MemberController {
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		try {
             String baseDir = "src/main/resources/images/users/";
-            String byrid = _buyerDTO.getByr_id();
+            String byrid = _buyerDTO.getByr_Id();
             String uploadDir = baseDir + byrid;
             
             File uploadPath = new File(uploadDir);
@@ -292,7 +292,7 @@ public class MemberController {
 		try {
 	            String baseDir = "C:/FoodMate/users/";
 	            
-	            String userId = _buyerDTO.getByr_id();
+	            String userId = _buyerDTO.getByr_Id();
 	            String uploadDir = baseDir + userId;
 	            
 	            File uploadPath = new File(uploadDir);
@@ -439,7 +439,7 @@ public class MemberController {
 	        
 	        if (foundInfo != null && !foundInfo.isEmpty()) {
 	        	HttpSession session = request.getSession();
-	        	session.setAttribute("byr_id", _buyerVO.getByr_id());
+	        	session.setAttribute("byr_Id", _buyerVO.getByr_Id());
 	            session.setAttribute("name", _buyerVO.getName());
 	            session.setAttribute("email", _buyerVO.getEmail());
 	            
@@ -507,7 +507,7 @@ public class MemberController {
 		try {
 			HttpSession session = request.getSession();
 			
-			_buyerVO.setByr_id((String)session.getAttribute("byr_id"));
+			_buyerVO.setByr_Id((String)session.getAttribute("byr_Id"));
 			_buyerVO.setName((String)session.getAttribute("name"));
 			_buyerVO.setEmail((String)session.getAttribute("email"));
 		    memberService.resetBuyerPW(_buyerVO);

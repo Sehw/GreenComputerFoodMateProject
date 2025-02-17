@@ -32,6 +32,9 @@ public interface RecipeController {
     
      // 레시피 상세 조회
     ModelAndView selectRecipeDetail(String rcp_Id, HttpServletRequest request) throws Exception;
+    
+    //레시피 수정
+    ModelAndView RecipeEditForm(HttpServletRequest request) throws Exception;
     }
 
 
