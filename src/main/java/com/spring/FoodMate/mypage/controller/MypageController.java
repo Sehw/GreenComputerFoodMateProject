@@ -17,7 +17,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.FoodMate.common.UtilMethod;
 import com.spring.FoodMate.member.dto.BuyerDTO;
+import com.spring.FoodMate.mypage.dto.ProfileDTO;
 import com.spring.FoodMate.mypage.service.MypageService;
+import com.spring.FoodMate.mypage.service.ProfileService;
 import com.spring.FoodMate.order.dto.OrderDTO;
 import com.spring.FoodMate.recipe.service.RecipeService;
 
@@ -30,6 +32,9 @@ public class MypageController {
 	
 	@Autowired
     private RecipeService recipeService;
+	
+	@Autowired
+    private ProfileService profileService;
 	
 	@RequestMapping(value="/mypage/mypageForm", method=RequestMethod.GET)
 	private ModelAndView mypageform(@RequestParam(value="result", required=false) String result, @RequestParam(value="action",required=false) String action, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -44,15 +49,12 @@ public class MypageController {
 		    byr_id = buyerInfo.getByr_id(); // byr_id 값 추출
 		}
 		
+		ProfileDTO profileDTO = profileService.getBuyerProfile(byr_id);
+		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("result",result);
 		mav.addObject("myrecipeList", recipeService.selectRecipeListByrID(byr_id)); //서비스에 selectRecipeList메소드있어야함
-		mav.setViewName("common/layout");
-		mav.addObject("showNavbar", true);
-		mav.addObject("showSidebar",true);
-		mav.addObject("sidebar","/WEB-INF/views/mypage/side.jsp");
-		mav.addObject("title", "푸드 메이트");
-		mav.addObject("body", "/WEB-INF/views" + viewName + ".jsp");
+		mav.addObject("orderList", mypageService.getOrderById(byr_id));
+		mav.addObject("profile", profileDTO);
 		return mav;
 	}
 	
@@ -71,15 +73,7 @@ public class MypageController {
 		
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("result",result);
 		mav.addObject("myrecipeList", recipeService.selectRecipeListByrID(byr_id)); //서비스에 selectRecipeList메소드있어야함
-		mav.addObject("orderList", mypageService.getOrderById(byr_id));
-		mav.setViewName("common/layout");
-		mav.addObject("showNavbar", true);
-		mav.addObject("showSidebar",true);
-		mav.addObject("sidebar","/WEB-INF/views/mypage/side.jsp");
-		mav.addObject("title", "푸드 메이트");
-		mav.addObject("body", "/WEB-INF/views" + viewName + ".jsp");
 		return mav;
 	}
 	
@@ -89,13 +83,6 @@ public class MypageController {
 		HttpSession session = request.getSession();
 		session.setAttribute("action", action);
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("result",result);
-		mav.setViewName("common/layout");
-		mav.addObject("showNavbar", true);
-		mav.addObject("showSidebar",true);
-		mav.addObject("sidebar","/WEB-INF/views/mypage/side.jsp");
-		mav.addObject("title", "푸드 메이트");
-		mav.addObject("body", "/WEB-INF/views" + viewName + ".jsp");
 		return mav;
 	}
 	
@@ -105,13 +92,26 @@ public class MypageController {
 		HttpSession session = request.getSession();
 		session.setAttribute("action", action);
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("result",result);
-		mav.setViewName("common/layout");
-		mav.addObject("showNavbar", true);
-		mav.addObject("showSidebar",true);
-		mav.addObject("sidebar","/WEB-INF/views/mypage/side.jsp");
-		mav.addObject("title", "푸드 메이트");
-		mav.addObject("body", "/WEB-INF/views" + viewName + ".jsp");
+		return mav;
+	}
+	
+	@RequestMapping(value="/mypage/myInfoManage/profileEditForm", method=RequestMethod.GET)
+	private ModelAndView profileEditform(@RequestParam(value="result", required=false) String result, @RequestParam(value="action",required=false) String action, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = UtilMethod.getViewName(request);
+		HttpSession session = request.getSession();
+		session.setAttribute("action", action);
+		
+		BuyerDTO buyerInfo = (BuyerDTO) session.getAttribute("buyerInfo"); // 세션에서 buyerInfo 가져오기
+		String byr_id = null;
+
+		if (buyerInfo != null) {
+		    byr_id = buyerInfo.getByr_id(); // byr_id 값 추출
+		}
+		
+		ProfileDTO profileDTO = profileService.getBuyerProfile(byr_id);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("profile", profileDTO);
 		return mav;
 	}
 	
@@ -121,13 +121,6 @@ public class MypageController {
 		HttpSession session = request.getSession();
 		session.setAttribute("action", action);
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("result",result);
-		mav.setViewName("common/layout");
-		mav.addObject("showNavbar", true);
-		mav.addObject("showSidebar",true);
-		mav.addObject("sidebar","/WEB-INF/views/mypage/side.jsp");
-		mav.addObject("title", "푸드 메이트");
-		mav.addObject("body", "/WEB-INF/views" + viewName + ".jsp");
 		return mav;
 	}
 	
@@ -135,15 +128,8 @@ public class MypageController {
 	private ModelAndView ShoppingManageform(@RequestParam(value="result", required=false) String result, @RequestParam(value="action",required=false) String action, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = UtilMethod.getViewName(request);
 		HttpSession session = request.getSession();
-		session.setAttribute("action", action);
+		session.setAttribute("action", action);	
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("result",result);
-		mav.setViewName("common/layout");
-		mav.addObject("showNavbar", true);
-		mav.addObject("showSidebar",true);
-		mav.addObject("sidebar","/WEB-INF/views/mypage/side.jsp");
-		mav.addObject("title", "푸드 메이트");
-		mav.addObject("body", "/WEB-INF/views" + viewName + ".jsp");
 		return mav;
 	}
 	
@@ -156,14 +142,6 @@ public class MypageController {
 		
 		List<OrderDTO> orderList = mypageService.getOrderById(id);
 		
-		mav.setViewName("common/layout");
-		mav.addObject("showNavbar", true);
-		mav.addObject("showSidebar",true);
-		mav.addObject("sidebar","/WEB-INF/views/mypage/side.jsp");
-		mav.addObject("title", "푸드 메이트");
-		mav.addObject("orderList", orderList);
-		String viewName = UtilMethod.getViewName(request);
-		mav.addObject("body", "/WEB-INF/views" + viewName + ".jsp");
 		return mav;
 	}
 	
@@ -173,13 +151,6 @@ public class MypageController {
 		HttpSession session = request.getSession();
 		session.setAttribute("action", action);
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("result",result);
-		mav.setViewName("common/layout");
-		mav.addObject("showNavbar", true);
-		mav.addObject("showSidebar",true);
-		mav.addObject("sidebar","/WEB-INF/views/mypage/side.jsp");
-		mav.addObject("title", "푸드 메이트");
-		mav.addObject("body", "/WEB-INF/views" + viewName + ".jsp");
 		return mav;
 	}
 	

@@ -68,7 +68,7 @@
 				<div class="mainbox">
 					<div class="name_icon_btn">
 						<a href="${contextPath}/mypage/myInfoManage/profileEditForm">
-							<img src="${contextPath}/resources/images/profile_09.png" alt="" />
+							<img src="${contextPath}/resources/images/users/${sessionScope.buyerInfo.byr_id}/${profile.img_path}" alt="" />
 						</a>
 						<p> ${sessionScope.buyerInfo.name} 회원님 </p>
 						<p> 보유포인트 </p>
@@ -115,7 +115,7 @@
 				<td>주문일자</td>
 				<td>주문상품</td>
 				<td>주문상태</td>
-				<td>주문취소</td>
+				<td>확인/리뷰</td>
 			</tr>
 		</thead>
       	<tbody>
