@@ -210,10 +210,12 @@ public class RecipeControllerImpl implements RecipeController {
 	    // 세션에서 로그인한 사용자 정보 가져오기
 		BuyerDTO BuyerDTO = (BuyerDTO) session.getAttribute("buyerInfo");
 
-	    String byr_Id = BuyerDTO != null ? BuyerDTO.getByr_Id() : "unknownUser"; //삼항연산자  조건 ? 조건이 참일때 실행 : 조건이 거짓일때 실행
+	    String byr_Id = BuyerDTO != null ? BuyerDTO.getByr_id() : "unknownUser"; //삼항연산자  조건 ? 조건이 참일때 실행 : 조건이 거짓일때 실행
     	                //세션이데이터가잇니? , //있으면 DTO에서 가져와 , / 없으면 "unknownUser" 데이터를 담아
 	    
-    	System.out.println("step1" + BuyerDTO.getByr_Id()); 
+	    // 세션에 로그인데이터가 없으면 로그인에러처리를 해야지 왜 unknownUser를 담아주나요? 
+	    
+    	System.out.println("step1" + BuyerDTO.getByr_id()); 
 	    // 레시피 객체 생성
 	    RecipeVO recipe = new RecipeVO();
 	    recipe.setTitle(title);

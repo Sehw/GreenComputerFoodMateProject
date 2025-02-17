@@ -8,31 +8,15 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import com.spring.FoodMate.common.SessionDTO;
 import com.spring.FoodMate.common.UtilMethod;
-import com.spring.FoodMate.common.exception.UnauthorizedException;
 
 public class MypageInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        HttpSession session = request.getSession();
-        SessionDTO sessionInfo = (SessionDTO) session.getAttribute("sessionDTO");
-        
-        // 로그인 안 되어 있을 때
-        if (sessionInfo == null) {
-//			session.setAttribute("alertMsg", "구매자 로그인이 필요한 서비스입니다.");
-//			response.sendRedirect(request.getContextPath() + "/member/loginForm");
-//			return false;
-            throw new UnauthorizedException(101);
-        }
-
-        // 구매자 ID가 없을 때
-        if (sessionInfo.getUserId() == null) {
-//            session.invalidate();
-//            session.setAttribute("alertMsg", "로그인 정보가 유효하지 않습니다. 다시 로그인해 주세요.");
-//            response.sendRedirect(request.getContextPath() + "/member/loginForm");
-//            return false;
-            throw new UnauthorizedException(105);
-        }
+    	
+    	// 여기서 로그인 권한 확인하던거 없애고,
+    	// BuyerInterceptor 에서 /mypage/* 담당
+    	// SellerInterceptor 에서 /mypage_seller/* 담당
 
         return true; // 정상적인 경우 컨트롤러 실행
     }
@@ -41,11 +25,18 @@ public class MypageInterceptor implements HandlerInterceptor {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, org.springframework.web.servlet.ModelAndView modelAndView) throws Exception {
         if (modelAndView != null) {
+        	HttpSession session = request.getSession(); // 여기까지 왔으면 당연히 sessionDTO에 로그인정보가 담겨있을것임 그래서 오류처리는 딱히 안함
+        	SessionDTO userInfo = (SessionDTO)session.getAttribute("sessionDTO");
+        	String userRole = userInfo.getUserRole();
+        	if(userRole.equals("buyer")) {        		
+        		modelAndView.addObject("sidebar","/WEB-INF/views/mypage/side.jsp");
+        		modelAndView.addObject("title", "FoodMate - 마이페이지");
+        	} else if(userRole.equals("seller")) {        	
+        		modelAndView.addObject("sidebar","/WEB-INF/views/mypage_seller/side_selr.jsp");
+        	}
             modelAndView.setViewName("common/layout");
             modelAndView.addObject("showNavbar", true);
-            modelAndView.addObject("showSidebar",true);
-            modelAndView.addObject("sidebar","/WEB-INF/views/mypage/side.jsp");
-            modelAndView.addObject("title", "푸드메이트");
+            modelAndView.addObject("showSidebar",true);            
             modelAndView.addObject("body", "/WEB-INF/views" + UtilMethod.getViewName(request) + ".jsp");
         }
     }

@@ -59,7 +59,7 @@ public class UtilMethod {
 	
 	public static String savePdtImage(HttpServletRequest request, MultipartFile file) throws Exception {
 	    // 저장할 디렉토리 경로 설정
-	    String uploadDir = imagePath1 + "/pdt";
+	    String uploadDir = imagePath2 + "/pdt";
 
 	    File dir = new File(uploadDir);
 
@@ -94,7 +94,7 @@ public class UtilMethod {
 	
 	public static String saveRecipeImage(MultipartFile file) throws Exception {
 	    // 저장할 디렉토리 경로 설정
-		String uploadDir = imagePath1 + "/recipe";
+		String uploadDir = imagePath2 + "/recipe";
 
 	    File dir = new File(uploadDir);
 	    // 디렉토리가 존재하지 않으면 생성
