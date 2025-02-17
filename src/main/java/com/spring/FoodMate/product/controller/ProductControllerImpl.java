@@ -63,7 +63,7 @@ public class ProductControllerImpl implements ProductController {
 		    mav.addObject("list", searchList);
 		    // Service 에 판매자 ID를 주고 해당하는 상품VO들의 List를 받아옴.
 		    return mav;
-		}
+	}
 	
 	@Override
 	@RequestMapping(value="/product/pdtdetail", method=RequestMethod.GET)

@@ -33,7 +33,7 @@ public class CartControllerImpl implements CartController {
     public ModelAndView cartlist(HttpServletRequest request, HttpSession session) {
         try {
             BuyerDTO buyerInfo = (BuyerDTO) session.getAttribute("buyerInfo");
-            Map<String, List<CartDTO>> groupedCart = cartService.getGroupedCartList(buyerInfo.getByr_Id());
+            Map<String, List<CartDTO>> groupedCart = cartService.getGroupedCartList(buyerInfo.getByr_id());
             ModelAndView mav = new ModelAndView();
             mav.setViewName("common/layout");
             mav.addObject("title", "FoodMate - 장바구니");
@@ -56,7 +56,7 @@ public class CartControllerImpl implements CartController {
                                          HttpSession session) {
         try {
             BuyerDTO buyerInfo = (BuyerDTO) session.getAttribute("buyerInfo");
-            boolean isAdded = cartService.addToCart(pdt_id, qty, buyerInfo.getByr_Id());
+            boolean isAdded = cartService.addToCart(pdt_id, qty, buyerInfo.getByr_id());
             Map<String, Object> response = new HashMap<>();
             response.put("success", isAdded);
             response.put("message", isAdded ? "장바구니에 상품을 " + qty + "개 담았습니다. 계속 쇼핑하시겠습니까?" : "장바구니에 상품을 추가 중 오류가 발생했습니다. 잠시 후 다시 시도해 보세요.");
