@@ -23,7 +23,7 @@ public interface ProductController {
 
     ModelAndView pdtEditForm(int pdt_id, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception;
 
-    ModelAndView pdtAdd(ProductDTO newPdt, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception;
+    void pdtAdd(ProductDTO newPdt, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception;
 
     List<CategoryDTO> getSubCategories(int category_id) throws Exception;
 

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.spring.FoodMate.common.exception.DBException;
 import com.spring.FoodMate.product.dto.CategoryDTO;
 import com.spring.FoodMate.product.dto.ProductDTO;
 
@@ -15,53 +16,84 @@ public class ProductDAO {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public List<ProductDTO> pdtSearchList(String keyword) throws DataAccessException {
-		List<ProductDTO> searchList = sqlSession.selectList("mapper.product.searchlist", keyword);
-		return searchList;
+	public List<ProductDTO> pdtSearchList(String keyword) {
+		try {
+			List<ProductDTO> searchList = sqlSession.selectList("mapper.product.searchlist", keyword);
+			return searchList;
+		} catch (DataAccessException e) {
+			throw new DBException("ProductDAO.pdtSerachList 에러! 검색어 : '" + keyword + "'", e);
+		}	
 	}
 	
-	public List<ProductDTO> pdtAllList() throws DataAccessException {
-		List<ProductDTO> searchList = sqlSession.selectList("mapper.product.alllist");
-		return searchList;
+	public List<ProductDTO> pdtAllList() {
+		try {
+			List<ProductDTO> searchList = sqlSession.selectList("mapper.product.alllist");
+			return searchList;
+		} catch (DataAccessException e) {
+			throw new DBException("ProductDAO.pdtAllList 에러!", e);
+		}
 	}
 	
-	public List<ProductDTO> pdtListBySlrId(String slr_id) throws DataAccessException {
-		List<ProductDTO> searchList = sqlSession.selectList("mapper.product.listBySlrId", slr_id);
-		return searchList;
+	public List<ProductDTO> pdtListBySlrId(String slr_id) {
+		try {
+			List<ProductDTO> searchList = sqlSession.selectList("mapper.product.listBySlrId", slr_id);
+			return searchList;
+		} catch (DataAccessException e) {
+			throw new DBException("ProductDAO.pdtListBySlrId 에러! 판매자 id : '" + slr_id + "'", e);
+		}
 	}
 	
-	public ProductDTO select1Pdt(int pdt_id) throws DataAccessException {
-		ProductDTO searchVO = sqlSession.selectOne("mapper.product.getPdt", pdt_id);
-		return searchVO;
+	public ProductDTO select1Pdt(int pdt_id) {
+		try {
+			ProductDTO searchDTO = sqlSession.selectOne("mapper.product.getPdt", pdt_id);
+			return searchDTO;
+		} catch (DataAccessException e) {
+			throw new DBException("ProductDAO.select1Pdt 에러! pdt_id = '" + pdt_id + "'", e);
+		}
 	}
 	
-	public List<CategoryDTO> getGrandCategoryList() throws DataAccessException {
-		List<CategoryDTO> list = sqlSession.selectList("mapper.product.getGrandCategory");
-		return list;
+	public List<CategoryDTO> getGrandCategoryList() {
+		try {
+			List<CategoryDTO> list = sqlSession.selectList("mapper.product.getGrandCategory");
+			return list;
+		} catch (DataAccessException e) {
+			throw new DBException("ProductDAO.getGrandCategoryList 에러!", e);
+		}
 	}
 	
-	public List<CategoryDTO> getChildCategoryList(int parent_id) throws DataAccessException {
-		List<CategoryDTO> list = sqlSession.selectList("mapper.product.getChildCategory", parent_id);
-		return list;
+	public List<CategoryDTO> getChildCategoryList(int parent_id) {
+		try {
+			List<CategoryDTO> list = sqlSession.selectList("mapper.product.getChildCategory", parent_id);
+			return list;
+		} catch (DataAccessException e) {
+			throw new DBException("ProductDAO.getChildCategoryList 에러! parent_id = '" + parent_id + "'", e);
+		}
 	}
 	
-	public List<CategoryDTO> getCategoryStep(int category_id) throws DataAccessException {
-		List<CategoryDTO> list = sqlSession.selectList("mapper.product.getCategoryStep", category_id);
-		return list;
+	public List<CategoryDTO> getCategoryStep(int category_id) {
+		try {
+			List<CategoryDTO> list = sqlSession.selectList("mapper.product.getCategoryStep", category_id);
+			return list;
+		} catch (DataAccessException e) {
+			throw new DBException("ProductDAO.getCategoryStep 에러! category_id = '" + category_id + "'", e);
+		}
 	}
 	
-	public String getNameById(int pdt_id) throws DataAccessException {
-		String pdt_name = sqlSession.selectOne("mapper.product.getNameById", pdt_id);
-		return pdt_name;
+	public String getNameById(int pdt_id) {
+		try {
+			String pdt_name = sqlSession.selectOne("mapper.product.getNameById", pdt_id);
+			return pdt_name;
+		} catch (DataAccessException e) {
+			throw new DBException("ProductDAO.getNameById 에러! pdt_id = '" + pdt_id + "'", e);
+		}
 	}
 	
 	public int insertNewProduct(ProductDTO newpdt) {
 		try {
 			int result = sqlSession.insert("mapper.product.newpdt", newpdt);
 			return result;
-		} catch(DataAccessException e) {
-			e.printStackTrace();
-			return -1;
+		} catch (DataAccessException e) {
+			throw new DBException("ProductDAO.insertNewProduct 에러!" + newpdt.toLogString(), e);
 		}
 	}
 }
