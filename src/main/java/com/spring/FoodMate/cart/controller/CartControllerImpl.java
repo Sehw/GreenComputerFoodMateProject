@@ -35,6 +35,10 @@ public class CartControllerImpl implements CartController {
             BuyerDTO buyerInfo = (BuyerDTO) session.getAttribute("buyerInfo");
             Map<String, List<CartDTO>> groupedCart = cartService.getGroupedCartList(buyerInfo.getByr_id());
             ModelAndView mav = new ModelAndView();
+            mav.setViewName("common/layout");
+            mav.addObject("title", "FoodMate - 장바구니");
+            mav.addObject("showNavbar", true);
+            mav.addObject("body", "/WEB-INF/views" + UtilMethod.getViewName(request) + ".jsp");
             mav.addObject("groupedCart", groupedCart);
             return mav;
         } catch (CartException e) {

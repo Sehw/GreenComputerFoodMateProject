@@ -27,7 +27,7 @@ public class UtilMethod {
 		}
 		int end;
 		if(uri.indexOf(";")!= -1) {
-			end = uri.indexOf(":");
+			end = uri.indexOf(";");
 		} else if(uri.indexOf("?")!= -1) {
 			end = uri.indexOf("?");
 		} else {
@@ -124,5 +124,37 @@ public class UtilMethod {
 	    // 저장된 파일 경로 반환 (웹에서 접근할 수 있는 경로)
 	    return "recipe/" + dest.getName();
 	}
+	
+	public static String getTopLevelPath(HttpServletRequest request) throws Exception {
+	    String contextPath = request.getContextPath();
+	    String uri = (String) request.getAttribute("javax.servlet.include.request_uri");
+
+	    if (uri == null || uri.trim().equals("")) {
+	        uri = request.getRequestURI();
+	    }
+
+	    int begin = 0;
+	    if (contextPath != null && !contextPath.equals("")) {
+	        begin = contextPath.length();
+	    }
+
+	    int end = uri.length();
+	    if (uri.indexOf(";") != -1) {
+	        end = uri.indexOf(";");
+	    } else if (uri.indexOf("?") != -1) {
+	        end = uri.indexOf("?");
+	    }
+
+	    // 최상위 경로 추출
+	    String path = uri.substring(begin, end);
+	    String[] pathParts = path.split("/");
+	    
+	    if (pathParts.length > 1) {
+	        return pathParts[1]; // 최상위 경로만 반환
+	    } else {
+	        return ""; // 최상위 경로가 없으면 빈 문자열 반환
+	    }
+	}
+
 
 }

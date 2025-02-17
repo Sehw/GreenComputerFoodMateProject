@@ -72,7 +72,7 @@ $(document).ready(function() {
         return lastCategoryId;
     }
 
-    // 폼 제출 이벤트
+    // 폼 제출 이벤트(공개)
     $('#submit_public').on('click', function(event) {
         event.preventDefault();
 
@@ -82,6 +82,19 @@ $(document).ready(function() {
         // 폼 제출
         $("form").submit();
     });
+    
+    // 폼 제출 이벤트(비공개)
+    $('#submit_hide').on('click', function(event) {
+        // 마지막 카테고리 ID를 hidden input에 설정
+        $('#category_id').val(getLastCategoryId());
+        $('#status').val('N');
+
+        // 폼 제출
+        $("form").submit();
+    });
+    
+    
+    
 });
 </script>
 
@@ -139,6 +152,7 @@ $(document).ready(function() {
 					<div id="category_container"></div> <!-- 자식 카테고리들을 넣을 div -->
 
 				</div>
+				<input type="hidden" id="pdt_id" name="pdt_id" value="${pdt.pdt_id }">
 				<input type="hidden" id="category_id" name="category_id" value="${pdt.category_id}">
 				<input type="hidden" id="status" name="status" value="${pdt.status}">
 				

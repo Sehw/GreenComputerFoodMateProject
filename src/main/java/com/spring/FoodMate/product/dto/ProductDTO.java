@@ -12,7 +12,7 @@ public class ProductDTO {
 	private int price;
 	private int qty;
 	private String unit;
-	private int category_id;
+	private Integer category_id;
 	private int stock;
 	private String status;
 	private String description;
@@ -34,8 +34,8 @@ public class ProductDTO {
 	public void setQty(int qty) { this.qty = qty; }
 	public String getUnit() { return unit; }
 	public void setUnit(String unit) { this.unit = unit; }
-	public int getCategory_id() { return category_id; }
-	public void setCategory_id(int category_id) { this.category_id = category_id; }
+	public Integer getCategory_id() { return category_id; }
+	public void setCategory_id(Integer category_id) { this.category_id = category_id; }
 	public int getStock() { return stock; }
 	public void setStock(int stock) { this.stock = stock; }
 	public String getStatus() { return status; }

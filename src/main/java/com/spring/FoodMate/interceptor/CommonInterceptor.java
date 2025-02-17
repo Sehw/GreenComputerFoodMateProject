@@ -5,7 +5,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 
-public class MyInterceptor implements HandlerInterceptor {
+import com.spring.FoodMate.common.UtilMethod;
+
+public class CommonInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -27,7 +29,7 @@ public class MyInterceptor implements HandlerInterceptor {
 		 * response.getWriter().write("{\"error\":\"로그인이 필요합니다.\"}"); } else { // 로그인
 		 * 페이지로 리다이렉트 response.sendRedirect("/login"); } return false; }
 		 */
-    	System.out.println("실험용 마이인터셉터 실행중");
+    	
         return true;
         // true일 경우 계속 진행(컨트롤러로 ㄱㄱ)
         // false일 경우 요청을 중단, 여기서 어디로 보낼지 정해야함. ajax요청이면 메시지 주고, 일반 요청이면 어딘가로 리다이렉트하면될듯
@@ -35,7 +37,30 @@ public class MyInterceptor implements HandlerInterceptor {
     
 
     @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, org.springframework.web.servlet.ModelAndView modelAndView) throws Exception {
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, org.springframework.web.servlet.ModelAndView mav) throws Exception {
+//    	if (mav != null) {            
+//            String title = "FoodMate";
+//            String topPath = UtilMethod.getTopLevelPath(request);
+//            if(topPath.equals("cart")) {
+//            	title += " - 장바구니";
+//            } else if(topPath.equals("product")) {
+//            	title += " - 상품";
+//            } else if(topPath.equals("main")) {
+//            	title += " - 메인";
+//            }
+//            
+//            mav.addObject("title", title);
+//            mav.setViewName("common/layout");
+//            mav.addObject("showNavbar", true);
+//            if(topPath.equals("main")) {
+//            	mav.addObject("body", "/WEB-INF/views/main/main.jsp");
+//            } else {
+//            	mav.addObject("body", "/WEB-INF/views" + UtilMethod.getViewName(request) + ".jsp");
+//            }   
+//        }
+    	
+    	// 이거 개짓거리인듯.
+    	
         // 컨트롤러에서 처리가 끝난 후, 뷰를 렌더링하기 전에 실행됨
         // 이 시점에서는 모델과 뷰 정보에 접근할 수 있음
     	// 이때 mav.addObject(shownavbar, true) 이런거 해줄수있음. 여기서 하면 controller 메서드마다 길이 줄어들고좋을듯?

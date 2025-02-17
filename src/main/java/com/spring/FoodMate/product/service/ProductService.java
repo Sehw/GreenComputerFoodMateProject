@@ -42,11 +42,14 @@ public class ProductService {
 	
 	public ProductDTO select1PdtByPdtId(int pdt_id) {
 		try {
-			return productDAO.select1Pdt(pdt_id);
+			ProductDTO pdt = productDAO.select1Pdt(pdt_id);
+			if(pdt != null) {
+				return pdt;
+			} else {
+				throw new ProductException("ProductService.select1PdtByPdtId 에러!", 201);
+			}
 		} catch (DBException e) {
 			throw new ProductException("ProductService에서 DB예외 전달.", e);
-		} catch (Exception e) {
-			throw new ProductException("ProductService.select1PdtByPdtId 에러! pdt_id = '" + pdt_id + "'", e);
 		}
 	}
 	
@@ -80,13 +83,39 @@ public class ProductService {
 		}
 	}
 	
-	public int insertNewProduct(ProductDTO newpdt) {
+	public boolean insertNewProduct(ProductDTO newPdt) {
 		try {
-			return productDAO.insertNewProduct(newpdt);
+			int result = productDAO.insertNewProduct(newPdt);
+			if(result <= 0) {
+				throw new ProductException("ProductService.insertNewProduct 에러!" + newPdt.toLogString(), 202);
+			}
+			return result > 0;
 		} catch (DBException e) {
 			throw new ProductException("ProductService에서 DB예외 전달.", e);
-		} catch (Exception e) {
-			throw new ProductException("ProductService.insertNewProduct 에러!" + newpdt.toLogString(), e);
+		}
+	}
+	
+	public boolean updateProduct(ProductDTO editPdt) {
+		try {
+			int result = productDAO.updateProduct(editPdt);
+			if(result <= 0) {
+				throw new ProductException("ProductService.updateProduct 에러!" + editPdt.toLogString(), 204);
+			}
+			return result > 0;
+		} catch (DBException e) {
+			throw new ProductException("ProductService에서 DB예외 전달.", e);
+		}
+	}
+	
+	public boolean deleteProduct(int pdt_id) {
+		try {
+			int result = productDAO.deleteProduct(pdt_id);
+			if(result <= 0) {
+				throw new ProductException("ProductService.deleteProduct 에러! pdt_id = " + pdt_id, 205);
+			}
+			return result > 0;
+		} catch (DBException e) {
+			throw new ProductException("ProductService에서 DB예외 전달.", e);
 		}
 	}
 }

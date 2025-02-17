@@ -11,7 +11,7 @@ import com.spring.FoodMate.common.SessionDTO;
 import com.spring.FoodMate.common.UtilMethod;
 import com.spring.FoodMate.common.exception.UnauthorizedException;
 
-public class ProductInterceptor implements HandlerInterceptor {
+public class SellerInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
@@ -39,18 +39,13 @@ public class ProductInterceptor implements HandlerInterceptor {
  // 컨트롤러가 호출된 후, 뷰가 렌더링되기 전에 호출
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView mav) throws Exception {
-	    if (mav != null) {
-	    	mav.setViewName("common/layout");
-		    mav.addObject("showNavbar", true);
-		    mav.addObject("body", "/WEB-INF/views" + UtilMethod.getViewName(request) + ".jsp");
-        }	    
+	      
     }
 
     // 요청 처리 후, 뷰가 렌더링된 후에 호출
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        // 예: 리소스 정리, 로그 기록
-        System.out.println("afterCompletion: 요청 처리 후, 뷰 렌더링 후에 실행됩니다.");
+
     }
     
 }

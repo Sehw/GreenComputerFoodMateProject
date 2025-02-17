@@ -36,7 +36,7 @@ public class ProductDAO {
 	
 	public List<ProductDTO> pdtListBySlrId(String slr_id) {
 		try {
-			List<ProductDTO> searchList = sqlSession.selectList("mapper.product.listBySlrId", slr_id);
+			List<ProductDTO> searchList = sqlSession.selectList("mapper.product.listBySlrSelf", slr_id);
 			return searchList;
 		} catch (DataAccessException e) {
 			throw new DBException("ProductDAO.pdtListBySlrId 에러! 판매자 id : '" + slr_id + "'", e);
@@ -88,12 +88,31 @@ public class ProductDAO {
 		}
 	}
 	
-	public int insertNewProduct(ProductDTO newpdt) {
+	public int insertNewProduct(ProductDTO newPdt) {
 		try {
-			int result = sqlSession.insert("mapper.product.newpdt", newpdt);
+			int result = sqlSession.insert("mapper.product.newPdt", newPdt);
 			return result;
 		} catch (DataAccessException e) {
-			throw new DBException("ProductDAO.insertNewProduct 에러!" + newpdt.toLogString(), e);
+			throw new DBException("ProductDAO.insertNewProduct 에러!" + newPdt.toLogString(), e);
 		}
 	}
+	
+	public int updateProduct(ProductDTO editPdt) {
+		try {
+			int result = sqlSession.update("mapper.product.editPdt", editPdt);
+			return result;
+		} catch (DataAccessException e) {
+			throw new DBException("ProductDAO.updateProduct 에러!" + editPdt.toLogString(), e);
+		}
+	}
+	
+	public int deleteProduct(int pdt_id) {
+		try {
+			int result = sqlSession.delete("mapper.product.deletePdt", pdt_id);
+			return result;
+		} catch (DataAccessException e) {
+			throw new DBException("ProductDAO.deleteProduct 에러! pdt_id = " + pdt_id, e);
+		}
+	}
+	
 }

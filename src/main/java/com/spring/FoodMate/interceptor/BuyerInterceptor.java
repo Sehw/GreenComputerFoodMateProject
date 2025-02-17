@@ -11,7 +11,7 @@ import com.spring.FoodMate.common.SessionDTO;
 import com.spring.FoodMate.common.UtilMethod;
 import com.spring.FoodMate.common.exception.UnauthorizedException;
 
-public class CartInterceptor implements HandlerInterceptor {
+public class BuyerInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
@@ -38,12 +38,7 @@ public class CartInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        if (modelAndView != null) {
-            modelAndView.setViewName("common/layout");
-            modelAndView.addObject("showNavbar", true);
-            modelAndView.addObject("title", "장바구니");
-            modelAndView.addObject("body", "/WEB-INF/views" + UtilMethod.getViewName(request) + ".jsp");
-        }
+        
     }
 
     @Override

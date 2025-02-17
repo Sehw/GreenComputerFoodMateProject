@@ -72,7 +72,7 @@ $(document).ready(function() {
         return lastCategoryId;
     }
 
-    // 폼 제출 이벤트
+    // 폼 제출 이벤트(공개)
     $('#submit_public').on('click', function(event) {
         event.preventDefault();
 
@@ -99,6 +99,35 @@ $(document).ready(function() {
         // 폼 제출
         $("form").submit();
     });
+    
+ 	// 폼 제출 이벤트(비공개)
+    $('#submit_hide').on('click', function(event) {
+
+        var isValid = true;
+        var requiredFields = ['#pdt_Name', '#pdt_Price', '#pdt_Dscrpt', '#pdt_Weight', '#unit', '#stock', '#pdt_img'];
+
+        requiredFields.forEach(function(field) {
+            if ($(field).val().trim() === '') {
+                isValid = false;
+                $(field).css('border', '1px solid red');
+            } else {
+                $(field).css('border', '');
+            }
+        });
+
+        if (!isValid) {
+            alert('모든 필수 항목을 입력해주세요.');
+            return;
+        }
+
+        // 마지막 카테고리 ID를 hidden input에 설정
+        $('#category_id').val(getLastCategoryId());
+        $('#status').val('N');
+
+        // 폼 제출
+        $("form").submit();
+    });
+    
 });
 </script>
 

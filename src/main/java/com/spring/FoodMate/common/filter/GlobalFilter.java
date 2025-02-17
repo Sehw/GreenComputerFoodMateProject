@@ -15,11 +15,9 @@ public class GlobalFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
-    	System.out.print("UTF-8 설정");
         request.setCharacterEncoding("UTF-8");  // 요청 인코딩 설정
         response.setCharacterEncoding("UTF-8");  // 응답 인코딩 설정
         chain.doFilter(request, response);  // 필터 체인 계속 진행
-        
         // 지금은 utf-8 설정만 하고있으나 다른 기능 필요하면 필터 이름 바꾸고 추가할것
     }
 
