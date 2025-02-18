@@ -18,22 +18,7 @@
         }
 </style>
 <script>
-	
-	document.addEventListener('DOMContentLoaded', function () {
-		function toggleCustomInput() {
-		    const select = document.getElementById('mail2');
-		    const customInput = document.getElementById('customMail');
-		    
-		    if (select.value === 'custom') {
-		        customInput.style.display = 'block';
-		        customInput.focus();
-		    } else {
-		        customInput.style.display = 'none';
-		        customInput.value = ''; // 입력 필드 초기화
-		    }
-		}
-		window.toggleCustomInput = toggleCustomInput;
-		});
+
 </script>
 </head>
 <body>
@@ -49,7 +34,7 @@
 				                <div class="mb-3 row">
 				                    <label class="col-sm-3 col-form-label text-end">아이디</label>
 				                    <div class="col-sm-5">
-				                        <input name="id" type="text" class="form-control" placeholder="id" disabled>
+				                        <input name="id" type="text" class="form-control" placeholder="id" value=${buyerInfo.getByr_id()} disabled>
 				                    </div>
 				                </div>
 				                <div class="mb-3 row">
@@ -67,7 +52,7 @@
 				                <div class="mb-3 row">
 				                    <label class="col-sm-3 col-form-label text-end">성명</label>
 				                    <div class="col-sm-5">
-				                        <input name="name" type="text" class="form-control" placeholder="name">
+				                        <input name="name" type="text" class="form-control" placeholder="name" value=${buyerInfo.getName()} >
 				                    </div>
 				                </div>
 				                <div class="mb-3 row">
@@ -126,7 +111,7 @@
 				                <div class="mb-3 row">
 				                    <label class="col-sm-3 col-form-label text-end">전화번호</label>
 				                    <div class="col-sm-5">
-				                        <input name="phone" type="text" class="form-control" placeholder="phone">
+				                        <input name="phone" type="text" class="form-control" placeholder="phone" value=${buyerInfo.getPhone_num()}>
 				                    </div>
 				                </div>
 									<div class="mb-3 row">

@@ -53,7 +53,7 @@ nav {
         <li><a class="active" href="${contextPath}/main">메인</a></li>
         <li><a href="${contextPath}/recipe/recipe_list">레시피</a></li>
         <li><a href="${contextPath}/product/pdtlist">식재료</a></li>
-        <li><a href="${contextPath}/support/Q&A">고객센터</a></li>
+        <li><a href="${contextPath}/support/inquiryLists">고객센터</a></li>
     </ul>
 </nav>
 </body>

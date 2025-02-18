@@ -140,21 +140,11 @@ public class UtilMethod {
 	        dir.mkdirs(); 
 	    }
 	    // 파일명 생성 (기존 파일명 유지)
-	    String profileImageFilename = id + "profileImage";
+	    String extension = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+	    String profileImageFilename = id + "profileImage" + extension;
 	    String filePath = uploadDir + File.separator + profileImageFilename;
 
-	    // 파일이 이미 존재하는지 확인하여 중복 방지 처리
 	    File dest = new File(filePath);
-	    int count = 1;
-	    while (dest.exists()) {
-	        // 중복된 파일명이 있을 경우, 뒤에 'a', 'b', ... 를 붙여서 변경
-	        String fileNameWithoutExtension = profileImageFilename.substring(0, profileImageFilename.lastIndexOf('.'));
-	        String extension = profileImageFilename.substring(profileImageFilename.lastIndexOf('.'));
-	        String newFileName = fileNameWithoutExtension + "_" + count + extension;
-	        filePath = uploadDir + File.separator + newFileName;
-	        dest = new File(filePath);
-	        count++;
-	    }
 
 	    // 파일을 서버에 저장
 	    file.transferTo(dest);

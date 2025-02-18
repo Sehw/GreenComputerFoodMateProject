@@ -47,9 +47,17 @@
 	        // **AJAX 요청으로 서버에 제출**
 	        fetch(form.action, {
 	            method: "POST",
-	            body: formData
+	            body: formData,
+	            headers: {
+	                "Accept": "application/json"  // 서버 응답을 JSON으로 받기 위해 설정
+	            }
 	        })
-	        .then(response => response.json())
+	        .then(response => {
+		        if (!response.ok) {
+		            throw new Error("서버 응답 오류: " + response.status);
+		        }
+		        return response.json(); // JSON으로 변환
+		    })
 	        .then(data => {
 	            if (data.success) {
 	                alert("프로필이 성공적으로 업데이트되었습니다!");

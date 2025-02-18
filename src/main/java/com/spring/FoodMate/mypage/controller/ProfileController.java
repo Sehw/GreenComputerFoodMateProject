@@ -1,11 +1,8 @@
 package com.spring.FoodMate.mypage.controller;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,28 +11,20 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.FoodMate.common.UtilMethod;
 import com.spring.FoodMate.member.dto.BuyerDTO;
 import com.spring.FoodMate.mypage.dto.ProfileDTO;
-import com.spring.FoodMate.mypage.service.MypageService;
 import com.spring.FoodMate.mypage.service.ProfileService;
-import com.spring.FoodMate.order.dto.OrderDTO;
-import com.spring.FoodMate.recipe.service.RecipeService;
 
 
 @Controller
@@ -53,39 +42,26 @@ public class ProfileController {
 		HttpSession session = request.getSession();
 		BuyerDTO buyerInfo = (BuyerDTO) session.getAttribute("buyerInfo"); // 세션에서 buyerInfo 가져오기
 		String byr_id = null;
-
+		String message = null;
+		ResponseEntity resEntity = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		
 		if (buyerInfo != null) {
 		    byr_id = buyerInfo.getByr_id(); // byr_id 값 추출
 		    _profileDTO.setByr_id(byr_id);
 		}
 		try {
-            String fileUrl = null;
-            String uploadDir = "C:/FoodMate/users/";
             MultipartFile file = _profileDTO.getProfileImageInput();
 
             if (file != null && !file.isEmpty()) {
                 // 새로운 이미지 저장
-                Path userDir = Paths.get(uploadDir, byr_id);
-                if (!Files.exists(userDir)) {
-                    Files.createDirectories(userDir);
-                }
-
-                // 기존 이미지 삭제
-                Files.walk(userDir).filter(Files::isRegularFile).forEach(f -> {
-                    try { Files.delete(f); } catch (IOException ignored) {}
-                });
-
-                // 새 이미지 저장
-                String fileName = "profile.jpg";
-                Path filePath = userDir.resolve(fileName);
-                file.transferTo(filePath.toFile());
-
-                fileUrl = "/users/" + byr_id + "/" + fileName;
-                _profileDTO.setImg_path(fileUrl);
+            	String imagePath = UtilMethod.saveProfileImage(_profileDTO.getProfileImageInput(), byr_id);
+                _profileDTO.setImg_path(imagePath);
             } else {
                 // 기존 이미지 유지
             	ProfileDTO profileDTO = profileService.getBuyerProfile(byr_id);
-                fileUrl = profileDTO.getImg_path();
+                String fileUrl = profileDTO.getImg_path();
                 _profileDTO.setImg_path(fileUrl);
             }
 
@@ -93,13 +69,24 @@ public class ProfileController {
             boolean updateSuccess = profileService.updateUserProfile(_profileDTO);
 
             if (updateSuccess) {
-                return ResponseEntity.ok().body("{\"success\": true}");
+            	message  = "<script>";
+    		    message +=" alert('정상적으로 프로필이 수정되었습니다.');";
+    		    message += " location.href='"+request.getContextPath()+"/mypage/myInfoManage/profileEditForm.do';";
+    		    message += " </script>";
             } else {
-                return ResponseEntity.status(500).body("{\"success\": false}");
+            	message  = "<script>";
+    		    message +=" alert('오류가 발생했습니다. 다시 시도해주십시오.');";
+    		    message += " location.href='"+request.getContextPath()+"/mypage/myInfoManage/profileEditForm.do';";
+    		    message += " </script>";
             }
         } catch (IOException e) {
-            return ResponseEntity.status(500).body("{\"success\": false, \"error\": \"파일 저장 실패\"}");
+        	message  = "<script>";
+		    message +=" alert('프로필 사진 저장에 실패했습니다. 다시 시도해주십시오.');";
+		    message += " location.href='"+request.getContextPath()+"/mypage/myInfoManage/profileEditForm.do';";
+		    message += " </script>";
         }
+		resEntity = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
+		return resEntity;
     }
 	        
 

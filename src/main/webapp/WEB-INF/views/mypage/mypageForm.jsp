@@ -68,7 +68,7 @@
 				<div class="mainbox">
 					<div class="name_icon_btn">
 						<a href="${contextPath}/mypage/myInfoManage/profileEditForm">
-							<img src="${contextPath}/resources/images/users/${sessionScope.buyerInfo.byr_id}/${profile.img_path}" alt="" />
+							<img src="${contextPath}/resources/images/${profile.img_path}" alt="" />
 						</a>
 						<p> ${sessionScope.buyerInfo.name} 회원님 </p>
 						<p> 보유포인트 </p>
@@ -82,13 +82,13 @@
 			<h5><strong>내 레시피</strong></h5>
     			<div class="myrecipy">
 					<c:forEach var="recipe" items="${myrecipeList}">
-			    		<a href="${contextPath}/recipe/recipe_Detail?rcp_Id=${recipe.rcp_Id}">
+			    		<a href="${contextPath}/recipe/recipe_Detail?rcp_id=${recipe.rcp_id}">
 						    <div class="item-img position-relative">
-						        <img src="${contextPath}/resources/images/${recipe.mainImg_Path}" alt="Recipe Image" class="img-fluid">
+						        <img src="${contextPath}/resources/images/${recipe.mainimg_path}" alt="Recipe Image" class="img-fluid">
 						        <div class="item-title d-flex flex-column justify-content-center align-items-center">
 						            <h5><strong>${recipe.title}</strong></h5>
 						            <div class="item_etc">
-					                	<p><span>${recipe.create_Date}</span>  리뷰 <span>0</span>개  조회수: <span>0</span></p>
+					                	<p><span>${recipe.create_date}</span>  리뷰 <span>0</span>개  조회수: <span>0</span></p>
 					                </div>
 					               	<div class="item_review_star">
 					                	<p><span>⭐⭐⭐⭐⭐</span></p>

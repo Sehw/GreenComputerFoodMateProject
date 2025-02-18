@@ -59,14 +59,14 @@ public class MemberService {
 	
 	public void addBuyer(BuyerDTO buyerVO) throws Exception{
 		
-		String ssn1 = buyerVO.getSsn1();
-		if (ssn1 != null && (ssn1.equals("1") || ssn1.equals("3"))) {
-			buyerVO.setSex("M");
-        } else if (ssn1 != null && (ssn1.equals("2") || ssn1.equals("4"))) {
-        	buyerVO.setSex("F");
-        } else {
-        	buyerVO.setSex("N");
-        }
+//		String ssn1 = buyerVO.getSsn1();
+//		if (ssn1 != null && (ssn1.equals("1") || ssn1.equals("3"))) {
+//			buyerVO.setSex("M");
+//        } else if (ssn1 != null && (ssn1.equals("2") || ssn1.equals("4"))) {
+//        	buyerVO.setSex("F");
+//        } else {
+//        	buyerVO.setSex("N");
+//        }
 		
 		if(buyerVO.getEmail_domain().equals("custom")) {
 			buyerVO.setEmail_domain(buyerVO.getCustomMail());

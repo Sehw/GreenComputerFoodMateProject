@@ -27,7 +27,7 @@
 		
 	<select id="login" resultType="buyerDTO"  parameterType="java.util.Map"  >
 	    <![CDATA[
-			select byr_id, name from foodmate_buyer 
+			select * from foodmate_buyer 
 			 where byr_id=#{byr_id}
 			 and pw=#{password}
 		]]>

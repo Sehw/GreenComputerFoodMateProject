@@ -83,21 +83,28 @@ public class MypageController {
 	@RequestMapping(value="/mypage/mateManage/*Form", method=RequestMethod.GET)
 	private ModelAndView mateManageform(@RequestParam(value="result", required=false) String result, @RequestParam(value="action",required=false) String action, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
-		session.setAttribute("action", action); // 이거 왜있는거죠? 필요없는건가?
 		return new ModelAndView();
 	}
 	
 	@RequestMapping(value="/mypage/myInfoManage/*Form", method=RequestMethod.GET)
 	private ModelAndView myInfoManageform(@RequestParam(value="result", required=false) String result, @RequestParam(value="action",required=false) String action, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
-		session.setAttribute("action", action); // 이거 왜있는거죠? 필요없는건가? 
 		return new ModelAndView();
+	}
+	
+	@RequestMapping(value="/mypage/myInfoManage/memberEditForm", method=RequestMethod.GET)
+	private ModelAndView myInfoManageMemberEditform(@RequestParam(value="result", required=false) String result, @RequestParam(value="action",required=false) String action, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		HttpSession session = request.getSession();
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("buyerInfo", (BuyerDTO) session.getAttribute("buyerInfo"));
+		BuyerDTO buyerInfo = (BuyerDTO) session.getAttribute("buyerInfo");
+		System.out.println(buyerInfo.getPhone_num());
+		return mav;
 	}
 	
 	@RequestMapping(value="/mypage/myInfoManage/profileEditForm", method=RequestMethod.GET)
 	private ModelAndView profileEditform(@RequestParam(value="result", required=false) String result, @RequestParam(value="action",required=false) String action, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
-		session.setAttribute("action", action);
 		
 		BuyerDTO buyerInfo = (BuyerDTO) session.getAttribute("buyerInfo"); // 세션에서 buyerInfo 가져오기
 		String byr_id = null;
