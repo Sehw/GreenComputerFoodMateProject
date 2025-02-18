@@ -59,13 +59,13 @@
 	<h5 class="title"><strong>&#x1F44D 베스트 레시피</strong></h5>
     <div class="mainslide">
     	<c:forEach var="recipe" items="${recipeList}">
-    		<a href="${contextPath}/recipe/recipe_Detail?rcp_Id=${recipe.rcp_Id}">
+    		<a href="${contextPath}/recipe/recipe_Detail?rcp_id=${recipe.rcp_id}">
 			    <div class="item-img position-relative">
-			        <img src="${contextPath}/resources/images/${recipe.mainImg_Path}" alt="Recipe Image" class="img-fluid">
+			        <img src="${contextPath}/resources/images/${recipe.mainimg_path}" alt="Recipe Image" class="img-fluid">
 			        <div class="item-title d-flex flex-column justify-content-center align-items-center">
 			            <h5><strong>${recipe.title}</strong></h5>
 			            <div class="item_etc">
-		                	<p><span>${recipe.create_Date}</span>  리뷰 <span>0</span>개  조회수: <span>0</span></p>
+		                	<p><span>${recipe.create_date}</span>  리뷰 <span>0</span>개  조회수: <span>0</span></p>
 		                </div>
 		               	<div class="item_review_star">
 		                	<p><span>⭐⭐⭐⭐⭐</span></p>
@@ -83,13 +83,13 @@
     <h5 class="mt-2 title"><strong>&#x1F550 최신 레시피</strong></h5>
     <div class="mainslide">
 	    <c:forEach var="recipe" items="${recipeList}">
-	    	<a href="${contextPath}/recipe/recipe_Detail?rcp_Id=${recipe.rcp_Id}">
+	    	<a href="${contextPath}/recipe/recipe_Detail?rcp_id=${recipe.rcp_id}">
 			    <div class="item-img position-relative">
-			        <img src="${contextPath}/resources/images/${recipe.mainImg_Path}" alt="Recipe Image" class="img-fluid">
+			        <img src="${contextPath}/resources/images/${recipe.mainimg_path}" alt="Recipe Image" class="img-fluid">
 			        <div class="item-title d-flex flex-column justify-content-center align-items-center">
 			            <h5><strong>${recipe.title}</strong></h5>
 			            <div class="item_etc">
-		                	<p><span>${recipe.create_Date}</span>  리뷰 <span>0</span>개  조회수: <span>0</span></p>
+		                	<p><span>${recipe.create_date}</span>  리뷰 <span>0</span>개  조회수: <span>0</span></p>
 		                </div>
 		                <div class="item_review_star">
 		                	<p><span>⭐⭐⭐⭐⭐</span></p>

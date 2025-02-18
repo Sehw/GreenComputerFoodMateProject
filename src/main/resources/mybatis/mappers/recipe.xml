@@ -3,82 +3,51 @@
 
 <mapper namespace="mapper.recipe">
 
-    <!-- 레시피 정보 -->
-    <resultMap id="recipeResult" type="RecipeVO">
-        <result property="rcp_Id" column="RCP_ID"/>
-        <result property="byr_Id" column="BYR_ID"/>
-        <result property="nickname" column="NICKNAME"/>
-        <result property="category_Id" column="CATEGORY_ID"/>
-        <result property="title" column="TITLE"/>
-        <result property="mainImg_Path" column="MAINIMG_PATH"/>
-        <result property="food_Name" column="FOOD_NAME"/>
-        <result property="req_Time" column="REQ_TIME"/>
-        <result property="description" column="DESCRIPTION"/>
-        <result property="status" column="STATUS"/>
-        <result property="create_Date" column="CREATE_DATE"/>
-    </resultMap>
-    
-    <!-- 레시피 재료 -->
-    <resultMap id="recipeIngredienteResult" type="RecipeIngredientVO">
-        <result property="rcp_Id" column="RCP_ID"/>
-        <result property="ingrd_Name" column="INGRD_NAME"/>
-        <result property="category_Id" column="CATEGORY_ID"/>
-        <result property="ingrd_Qty" column="INGRD_QTY"/>
-        <result property="unit" column="UNIT"/>
-	</resultMap>
-	
-    <!-- 레시피 단계 -->
-    <resultMap id="recipeStepResult" type="RecipeStepVO">
-        <result property="rcp_Id" column="RCP_ID"/>
-        <result property="rcp_Step" column="RCP_STEP"/>
-        <result property="step_Desc" column="STEP_DESC"/>
-        <result property="stepImg_Path" column="STEPIMG_PATH"/>
-    </resultMap>
-    
-
-
     <!-- 레시피 추가 -->
-    <insert id="insertRecipe" parameterType="RecipeVO">
+    <insert id="insertRecipe" parameterType="recipeDTO">
         INSERT INTO FOODMATE_RECIPE (
             RCP_ID, 
             BYR_ID, 
             TITLE, 
             MAINIMG_PATH, 
-            FOOD_NAME, 
+            FOOD_NAME,
+            <!-- 여기에 카테고리 id 넣어야함 --> 
             REQ_TIME, 
             DESCRIPTION
         ) 
         VALUES (
             FOODMATE_RECIPE_SEQ.NEXTVAL,  <!-- 시퀀스를 사용하여 RCP_ID 값 자동 생성 -->
-            #{byr_Id},                    <!-- 사용자 ID -->
+            #{byr_id},                    <!-- 사용자 ID -->
             #{title},                     <!-- 레시피 제목 -->
-            #{mainImg_Path},              <!-- 레시피 이미지 경로 -->
-            #{food_Name},                 <!-- 음식 이름 -->
-            #{req_Time},                  <!-- 조리 시간 -->
+            #{mainimg_path},              <!-- 레시피 이미지 경로 -->
+            #{food_name},                 <!-- 음식 이름 -->
+            <!-- 여기에 카테고리 id 넣어야함 -->
+            #{req_time},                  <!-- 조리 시간 -->
             #{description}                <!-- 레시피 설명 -->
         )
     </insert>
 
     <!-- 생성된 RCP_ID 값을 반환하는 SELECT 쿼리 -->
+    <!-- 이건 왜 쓰는거지? -->
     <select id="selectLastInsertedRecipeId" resultType="int">
         SELECT FOODMATE_RECIPE_SEQ.CURRVAL FROM DUAL
     </select>
 
     <!-- 재료 배치 삽입 -->
-	<insert id="insertRecipeIngredients" parameterType="RecipeIngredientVO">
+	<insert id="insertRecipeIngredients" parameterType="recipeIngredientDTO">
 	    INSERT INTO FOODMATE_RECIPE_INGREDIENT (RCP_ID, INGRD_NAME, INGRD_QTY, UNIT)
-	    VALUES (#{rcp_Id}, #{ingrd_Name}, #{ingrd_Qty}, #{unit})
+	    VALUES (#{rcp_id}, #{ingrd_name}, #{ingrd_qty}, #{unit})
 	</insert>
 	
 	<!-- 단계별 조리법 배치 삽입 -->
-	<insert id="insertRecipeSteps" parameterType="RecipeStepVO">
+	<insert id="insertRecipeSteps" parameterType="recipeStepDTO">
 	    INSERT INTO FOODMATE_RECIPE_STEP (RCP_ID, RCP_STEP, STEP_DESC, STEPIMG_PATH)
-	    VALUES (#{rcp_Id}, #{rcp_Step}, #{step_Desc}, #{stepImg_Path})
+	    VALUES (#{rcp_id}, #{rcp_step}, #{step_desc}, #{stepimg_path})
 	</insert>
 	
 	
 	 <!-- 레시피 조회 -->
-    <select id="selectRecipeList" resultMap="recipeResult"> <!-- View가 확정되면 view로변경할것 그냥 이대로 조인해서 쓰세요 -->
+    <select id="selectRecipeList" resultType="recipeDTO"> <!-- View가 확정되면 view로변경할것 그냥 이대로 조인해서 쓰세요 -->
 	    SELECT 
 	        R.RCP_ID, 
 	        R.BYR_ID, 
@@ -97,7 +66,7 @@
 	</select>
 	
 	<!-- 레시피, 재료, 조리법 상세 조회 -->
-		<select id="selectRecipeListByrID" resultMap="recipeResult" parameterType="String">
+		<select id="selectRecipeListByrID" resultType="recipeDTO" parameterType="String">
 		        SELECT 
 		        R.RCP_ID, 
 		        R.BYR_ID, 
@@ -112,33 +81,27 @@
 		        R.CREATE_DATE
 		    FROM FOODMATE_RECIPE R
 		    JOIN FOODMATE_BUYER_PROFILE BP ON R.BYR_ID = BP.BYR_ID  <!-- JOIN 조건 -->
-		    WHERE R.BYR_ID = #{byr_Id}
+		    WHERE R.BYR_ID = #{byr_id}
 		</select>
     
 	<!-- 레시피, 재료, 조리법 상세 조회 -->
-		<select id="selectRecipeDetail" resultMap="recipeResult" parameterType="String">
-		    <![CDATA[
-		        SELECT * 
-		        FROM FOODMATE_RECIPE
-		        WHERE RCP_ID = #{rcp_Id}
-		    ]]>
+		<select id="selectRecipeDetail" resultType="recipeDTO" parameterType="String">
+	        SELECT * 
+	        FROM FOODMATE_RECIPE
+	        WHERE RCP_ID = #{rcp_id}
 		</select>
 	    
-	   	<select id="selectIngredientDetail" resultMap="recipeIngredienteResult" parameterType="String">
-		    <![CDATA[
-		        SELECT * 
-		        FROM FOODMATE_RECIPE_INGREDIENT
-		        WHERE RCP_ID = #{rcp_Id}
-		    ]]>
+	   	<select id="selectIngredientDetail" resultType="recipeIngredientDTO" parameterType="String">
+	        SELECT * 
+	        FROM FOODMATE_RECIPE_INGREDIENT
+	        WHERE RCP_ID = #{rcp_id}
 		</select>
 	    
-		<select id="selectStepDetail" resultMap="recipeStepResult" parameterType="String">
-		    <![CDATA[
-		        SELECT * 
-		        FROM FOODMATE_RECIPE_STEP
-		        WHERE RCP_ID = #{rcp_Id}
-		        ORDER BY RCP_STEP ASC
-		    ]]>
+		<select id="selectStepDetail" resultType="recipeStepDTO" parameterType="String">
+	        SELECT * 
+	        FROM FOODMATE_RECIPE_STEP
+	        WHERE RCP_ID = #{rcp_id}
+	        ORDER BY RCP_STEP ASC
 		</select>
 
 </mapper>

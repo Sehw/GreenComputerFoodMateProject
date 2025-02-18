@@ -1,0 +1,15 @@
+1. 디스코드 공유폴더에서 env 파일을 다운받아 앞에 " . " 을 붙인다.
+2. 그 파일을 src/main/resources 폴더에 넣는다.
+(이클립스에서 찾아서 알트+엔터 한 다음 경로 오른쪽에 있는 경로 열기로 열면 쉬움)
+
+3. src\main\webapp\WEB-INF\config\jdbc 폴더의 jdbc.properties 파일을 연다.
+4. 자신의 오라클 유저네임과 패스워드에 맞게 바꾼다.
+
+5. FoodMate/common의 UtilMethod 클래스를 연다.
+6. "private static final String" imagePath# 에 자신의 이미지가 들어가는 resources 절대경로를 입력하거나
+자신의 경로가 있는지 확인한다.
+7. 자신이 쓰는 경로를 psfS imagePath에 등록한다.
+
+8. 자신이 사용하는 톰캣 서버롤 우클릭 후 Add and Remove... 를 선택해 프로젝트가 서버에 들어있는지 확인한다.
+9. 이클립스 상단 메뉴의 Project 탭에서 Clean... 으로 프로젝트를 클린한다.
+10. 이클립스 프로젝트 탐색기에서 빨간 X가 사라지는거 확인하고 작업 시작 
