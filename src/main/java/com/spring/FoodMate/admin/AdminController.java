@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.spring.FoodMate.common.UtilMethod;
 
 
-@Controller
+@Controller 
 public class AdminController {
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 	

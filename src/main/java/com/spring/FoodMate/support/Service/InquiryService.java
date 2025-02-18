@@ -14,8 +14,8 @@ public class InquiryService {
     @Autowired
     public InquiryService(InquiryDAO inquiryDAO) {
         this.inquiryDAO = inquiryDAO;
-    }
-
+    } //asdasda/asdasdasdasdasdasdas
+ 
     // 사용자 문의 내역 조회
     public List<InquiryDTO> getUserInquiriesWithResponses(String buyerId) {
         // buyerId가 서비스로 잘 전달되었는지 확인
