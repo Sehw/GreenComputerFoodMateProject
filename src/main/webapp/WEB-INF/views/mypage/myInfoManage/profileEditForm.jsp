@@ -97,7 +97,7 @@
 					    <!-- 프로필 사진 -->
 					    <div class="name_icon_btn mb-3">
 					    	<input type="file" id="profileImageInput" name="profileImageInput" style="display: none;" accept="image/*">
-					        <img id="profileImage" src="${profile.img_path}" alt="프로필 사진" />
+					        <img id="profileImage" src="${contextPath}/resources/images/${profile.img_path}" alt="프로필 사진" />
 					    </div>
 					    <!-- 닉네임 입력 -->
 					    <div class="text-center" style="width: 100%; max-width: 300px;">

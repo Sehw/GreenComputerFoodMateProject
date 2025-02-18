@@ -56,6 +56,8 @@ public class UtilMethod {
 	// 그린컴퓨터학원 - 송태호. 아마 다른사람도 깃허브로하면 다 이 경로 쓸듯?
 	private static String imagePath2 = "C:/Users/confl/git/GreenComputerFoodMateProject/src/main/webapp/resources/images";
 	// 송태호 자택의 경로.
+	private static String imagePath3 = "C:/Web/FoodMate/src/main/webapp/resources/images";
+	// 그린컴퓨터학원 - 강규진.
 	
 	public static String savePdtImage(HttpServletRequest request, MultipartFile file) throws Exception {
 	    // 저장할 디렉토리 경로 설정
@@ -123,6 +125,39 @@ public class UtilMethod {
 
 	    // 저장된 파일 경로 반환 (웹에서 접근할 수 있는 경로)
 	    return "recipe/" + dest.getName();
+	}
+	
+	public static String saveProfileImage(MultipartFile file, String id) throws Exception {
+	    // 저장할 디렉토리 경로 설정
+		String uploadDir = imagePath3 + "/profile";
+
+	    File dir = new File(uploadDir);
+	    // 디렉토리가 존재하지 않으면 생성
+	    if (!dir.exists()) {
+	        dir.mkdirs(); 
+	    }
+	    // 파일명 생성 (기존 파일명 유지)
+	    String profileImageFilename = id + "profileImage";
+	    String filePath = uploadDir + File.separator + profileImageFilename;
+
+	    // 파일이 이미 존재하는지 확인하여 중복 방지 처리
+	    File dest = new File(filePath);
+	    int count = 1;
+	    while (dest.exists()) {
+	        // 중복된 파일명이 있을 경우, 뒤에 'a', 'b', ... 를 붙여서 변경
+	        String fileNameWithoutExtension = profileImageFilename.substring(0, profileImageFilename.lastIndexOf('.'));
+	        String extension = profileImageFilename.substring(profileImageFilename.lastIndexOf('.'));
+	        String newFileName = fileNameWithoutExtension + "_" + count + extension;
+	        filePath = uploadDir + File.separator + newFileName;
+	        dest = new File(filePath);
+	        count++;
+	    }
+
+	    // 파일을 서버에 저장
+	    file.transferTo(dest);
+
+	    // 저장된 파일 경로 반환 (웹에서 접근할 수 있는 경로)
+	    return "profile/" + dest.getName();
 	}
 	
 	public static String getTopLevelPath(HttpServletRequest request) throws Exception {

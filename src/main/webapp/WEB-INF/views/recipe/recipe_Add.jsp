@@ -196,7 +196,7 @@
 			<%
 			    BuyerDTO buyerDTO = (BuyerDTO) session.getAttribute("buyerInfo");
 			    if (buyerDTO != null) {
-			        String byr_Id = buyerDTO.getByr_Id(); // 예시로 getId() 사용
+			        String byr_Id = buyerDTO.getByr_id(); // 예시로 getId() 사용
 			%>
 			    <label for="byr_Id">작성자:</label>
 			    <input type="text" id="byr_Id" name="byr_Id" value="<%= byr_Id %>" readonly>

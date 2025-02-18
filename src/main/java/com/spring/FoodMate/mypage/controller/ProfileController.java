@@ -101,27 +101,6 @@ public class ProfileController {
             return ResponseEntity.status(500).body("{\"success\": false, \"error\": \"파일 저장 실패\"}");
         }
     }
-	
-
-	    
-	    @RequestMapping("/users")
-	    public ResponseEntity getProfileImage(@PathVariable String userId) {
-	    	String uploadDir = "C:/FoodMate/users/";
-	    	try {
-	            Path imagePath = Paths.get(uploadDir, userId, "profile.jpg");
-	            Resource resource = new UrlResource(imagePath.toUri());
-
-	            if (!resource.exists() || !resource.isReadable()) {
-	                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-	            }
-
-	            return ResponseEntity.ok()
-	                    .header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
-	                    .body(resource);
-	        } catch (Exception e) {
-	            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-	        }
-	    }
 	        
 
 }
