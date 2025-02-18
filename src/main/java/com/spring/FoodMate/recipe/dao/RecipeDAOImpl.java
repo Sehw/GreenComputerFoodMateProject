@@ -1,8 +1,5 @@
 package com.spring.FoodMate.recipe.dao;
 
-
-
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -10,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
-import com.spring.FoodMate.recipe.vo.RecipeIngredientVO;
-import com.spring.FoodMate.recipe.vo.RecipeStepVO;
-import com.spring.FoodMate.recipe.vo.RecipeVO;
+import com.spring.FoodMate.recipe.dto.RecipeDTO;
+import com.spring.FoodMate.recipe.dto.RecipeIngredientDTO;
+import com.spring.FoodMate.recipe.dto.RecipeStepDTO;
 
 @Repository
 public class RecipeDAOImpl implements RecipeDAO {
@@ -22,7 +19,7 @@ public class RecipeDAOImpl implements RecipeDAO {
 
     // 레시피 등록
     @Override
-    public void insertRecipe(RecipeVO recipe) throws Exception {
+    public void insertRecipe(RecipeDTO recipe) throws Exception {
         sqlSession.insert("mapper.recipe.insertRecipe", recipe);  // 레시피 삽입
     }
 
@@ -34,44 +31,44 @@ public class RecipeDAOImpl implements RecipeDAO {
 
     // 재료 삽입
     @Override
-    public void insertRecipeIngredients(RecipeIngredientVO ingredient) throws Exception {
+    public void insertRecipeIngredients(RecipeIngredientDTO ingredient) throws Exception {
         sqlSession.insert("mapper.recipe.insertRecipeIngredients", ingredient);  // 재료 삽입
     }
 
     // 단계 삽입
     @Override
-    public void insertRecipeSteps(RecipeStepVO step) throws Exception {
+    public void insertRecipeSteps(RecipeStepDTO step) throws Exception {
         sqlSession.insert("mapper.recipe.insertRecipeSteps", step);  // 단계 삽입
     }
 
     // 레시피 목록 조회
     @Override
-    public List<RecipeVO> selectRecipeList() throws Exception {
+    public List<RecipeDTO> selectRecipeList() throws Exception {
         return sqlSession.selectList("mapper.recipe.selectRecipeList");  // 레시피 목록 조회
     }
     
     @Override
     // 레시피 목록 조회 회원ID로
-    public List<RecipeVO> selectRecipeListByrID(String byr_Id) throws Exception {
+    public List<RecipeDTO> selectRecipeListByrID(String byr_Id) throws Exception {
         return sqlSession.selectList("mapper.recipe.selectRecipeListByrID", byr_Id);  // 레시피 목록 조회
     }
     
     // 레시피 상세 조회
     @Override
-    public RecipeVO selectRecipeDetail(String rcp_Id) throws Exception {   
-    	RecipeVO recipeVO=(RecipeVO)sqlSession.selectOne("mapper.recipe.selectRecipeDetail",rcp_Id);
+    public RecipeDTO selectRecipeDetail(int rcp_Id) throws Exception {   
+    	RecipeDTO recipeVO=(RecipeDTO)sqlSession.selectOne("mapper.recipe.selectRecipeDetail",rcp_Id);
     	return recipeVO;
     }
 	
 	@Override
-	public List<RecipeIngredientVO> selectIngredientDetail(String rcp_Id) throws DataAccessException {
-		List<RecipeIngredientVO> ingredientVO =(ArrayList)sqlSession.selectList("mapper.recipe.selectIngredientDetail",rcp_Id);
+	public List<RecipeIngredientDTO> selectIngredientDetail(int rcp_id) throws DataAccessException {
+		List<RecipeIngredientDTO> ingredientVO = sqlSession.selectList("mapper.recipe.selectIngredientDetail",rcp_id);
 		return ingredientVO;
 	}
 	
 	@Override
-	public List<RecipeStepVO> selectStepDetail(String rcp_Id) throws DataAccessException {
-		List<RecipeStepVO> stepVO =(ArrayList)sqlSession.selectList("mapper.recipe.selectStepDetail",rcp_Id);
+	public List<RecipeStepDTO> selectStepDetail(int rcp_id) throws DataAccessException {
+		List<RecipeStepDTO> stepVO = sqlSession.selectList("mapper.recipe.selectStepDetail",rcp_id);
 		return stepVO;
 	}
     

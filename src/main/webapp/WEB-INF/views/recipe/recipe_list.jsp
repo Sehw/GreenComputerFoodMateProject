@@ -363,20 +363,20 @@
        
         <c:forEach var="recipe" items="${recipeList}">
             <div class="col-md-3 col-sm-6">
-                <a href="${contextPath}/recipe/recipe_Detail?rcp_Id=${recipe.rcp_Id}" class="text-decoration-none">
+                <a href="${contextPath}/recipe/recipe_Detail?rcp_id=${recipe.rcp_id}" class="text-decoration-none">
                     <div class="card recipe-card">
                         <div class="recipe-image">
                             
-                            <img src="${contextPath}/resources/images/${recipe.mainImg_Path}" alt="Recipe Image" class="img-fluid">
+                            <img src="${contextPath}/resources/images/${recipe.mainimg_path}" alt="Recipe Image" class="img-fluid">
                         </div>
                         <div class="card-body">
                             
                             <h5 class="recipe-title">${recipe.title}</h5>
                             <p class="recipe-info">
                                 <!-- 작성자는 byrId로 수정 -->
-                                작성자: ${recipe.byr_Id} <br>                                
+                                작성자: ${recipe.byr_id} <br>                                
                                <!--  평점: 4.7 (참여: 16명) 추후테이블 생기고 반영--> <br> 
-                                조리시간: ${recipe.req_Time}
+                                조리시간: ${recipe.req_time}
                             </p>
                         </div>
                     </div>
@@ -393,6 +393,9 @@
         <a href="#">4</a> 
         <a href="#">5</a>
     </div>
+</div>
+
+
 
 <div class="mt-5">
     <strong>🏷️최근 본 레시피</strong>   
@@ -403,10 +406,10 @@
                 <c:forEach var="recipe" items="${recentRecipeList}">
                     <div class="swiper-slide">
                         <div class="recipe-item">
-                            <a href="${contextPath}/recipe/recipe_Detail?rcp_Id=${recipe.rcp_Id}" class="text-decoration-none">
+                            <a href="${contextPath}/recipe/recipe_Detail?rcp_id=${recipe.rcp_id}" class="text-decoration-none">
                                 <div class="recipe-image">
 								    <div class="image-wrapper">
-								        <img src="${contextPath}/resources/images/${recipe.mainImg_Path}" alt="Recipe Image">
+								        <img src="${contextPath}/resources/images/${recipe.mainimg_path}" alt="Recipe Image">
 								    </div>
 								</div>
                                 <h6 class="recipe-title">${recipe.title}</h6>

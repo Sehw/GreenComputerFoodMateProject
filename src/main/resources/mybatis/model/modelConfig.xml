@@ -17,9 +17,9 @@
 		<typeAlias type="com.spring.FoodMate.product.dto.CategoryDTO" alias="categoryDTO"/>
 		<typeAlias type="com.spring.FoodMate.cart.dto.CartDTO" alias="cartDTO"/>
 		<typeAlias type="com.spring.FoodMate.order.dto.OrderDTO" alias="orderDTO"/>
-		<typeAlias type="com.spring.FoodMate.recipe.vo.RecipeVO" alias="RecipeVO"/>
-        <typeAlias type="com.spring.FoodMate.recipe.vo.RecipeIngredientVO" alias="RecipeIngredientVO"/>
-        <typeAlias type="com.spring.FoodMate.recipe.vo.RecipeStepVO" alias="RecipeStepVO"/>
+		<typeAlias type="com.spring.FoodMate.recipe.dto.RecipeDTO" alias="recipeDTO"/>
+        <typeAlias type="com.spring.FoodMate.recipe.dto.RecipeIngredientDTO" alias="recipeIngredientDTO"/>
+        <typeAlias type="com.spring.FoodMate.recipe.dto.RecipeStepDTO" alias="recipeStepDTO"/>
 	</typeAliases>
 	
 </configuration>

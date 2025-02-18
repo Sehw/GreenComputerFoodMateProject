@@ -52,14 +52,17 @@ public class UtilMethod {
 	
 	// 저장할 경로를 saveXXImage 메서드들에 뿌려줌
 	// 배포할 때는 배포환경에 맞게 바꿔주면 됨
-	private static String imagePath1 = "C:/Users/Administrator/git/GreenComputerFoodMateProject/src/main/webapp/resources/images";
+	private static final String imagePath = "C:/Users/Administrator/git/GreenComputerFoodMateProject/src/main/webapp/resources/images";
+	
+	
+	private static final String imagePath1 = "C:/Users/Administrator/git/GreenComputerFoodMateProject/src/main/webapp/resources/images";
 	// 그린컴퓨터학원 - 송태호. 아마 다른사람도 깃허브로하면 다 이 경로 쓸듯?
-	private static String imagePath2 = "C:/Users/confl/git/GreenComputerFoodMateProject/src/main/webapp/resources/images";
+	private static final String imagePath2 = "C:/Users/confl/git/GreenComputerFoodMateProject/src/main/webapp/resources/images";
 	// 송태호 자택의 경로.
 	
 	public static String savePdtImage(HttpServletRequest request, MultipartFile file) throws Exception {
 	    // 저장할 디렉토리 경로 설정
-	    String uploadDir = imagePath2 + "/pdt";
+	    String uploadDir = imagePath + "/pdt";
 
 	    File dir = new File(uploadDir);
 
@@ -94,7 +97,7 @@ public class UtilMethod {
 	
 	public static String saveRecipeImage(MultipartFile file) throws Exception {
 	    // 저장할 디렉토리 경로 설정
-		String uploadDir = imagePath2 + "/recipe";
+		String uploadDir = imagePath + "/recipe";
 
 	    File dir = new File(uploadDir);
 	    // 디렉토리가 존재하지 않으면 생성
@@ -125,36 +128,4 @@ public class UtilMethod {
 	    return "recipe/" + dest.getName();
 	}
 	
-	public static String getTopLevelPath(HttpServletRequest request) throws Exception {
-	    String contextPath = request.getContextPath();
-	    String uri = (String) request.getAttribute("javax.servlet.include.request_uri");
-
-	    if (uri == null || uri.trim().equals("")) {
-	        uri = request.getRequestURI();
-	    }
-
-	    int begin = 0;
-	    if (contextPath != null && !contextPath.equals("")) {
-	        begin = contextPath.length();
-	    }
-
-	    int end = uri.length();
-	    if (uri.indexOf(";") != -1) {
-	        end = uri.indexOf(";");
-	    } else if (uri.indexOf("?") != -1) {
-	        end = uri.indexOf("?");
-	    }
-
-	    // 최상위 경로 추출
-	    String path = uri.substring(begin, end);
-	    String[] pathParts = path.split("/");
-	    
-	    if (pathParts.length > 1) {
-	        return pathParts[1]; // 최상위 경로만 반환
-	    } else {
-	        return ""; // 최상위 경로가 없으면 빈 문자열 반환
-	    }
-	}
-
-
 }

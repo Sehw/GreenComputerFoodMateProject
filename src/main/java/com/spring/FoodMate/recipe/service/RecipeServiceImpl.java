@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.FoodMate.recipe.dao.RecipeDAO;
-import com.spring.FoodMate.recipe.vo.RecipeIngredientVO;
-import com.spring.FoodMate.recipe.vo.RecipeStepVO;
-import com.spring.FoodMate.recipe.vo.RecipeVO;
+import com.spring.FoodMate.recipe.dto.RecipeDTO;
+import com.spring.FoodMate.recipe.dto.RecipeIngredientDTO;
+import com.spring.FoodMate.recipe.dto.RecipeStepDTO;
 
 @Service
 @Transactional
@@ -23,7 +23,7 @@ public class RecipeServiceImpl implements RecipeService {
 
     // 레시피 등록 후 recipeId 반환
     @Override
-    public int addRecipe(RecipeVO recipe, String byrId) throws Exception {
+    public int addRecipe(RecipeDTO recipe, String byrId) throws Exception {
         // 레시피 등록
         recipeDAO.insertRecipe(recipe);
 
@@ -33,48 +33,46 @@ public class RecipeServiceImpl implements RecipeService {
 
     // 재료 삽입
     @Override
-    public void insertRecipeIngredients(List<RecipeIngredientVO> ingredients) throws Exception {
-        for (RecipeIngredientVO ingredient : ingredients) {
+    public void insertRecipeIngredients(List<RecipeIngredientDTO> ingredients) throws Exception {
+        for (RecipeIngredientDTO ingredient : ingredients) {
             recipeDAO.insertRecipeIngredients(ingredient);  // 재료 삽입
         }
     }
 
     // 단계 삽입
     @Override
-    public void insertRecipeSteps(List<RecipeStepVO> steps) throws Exception {
-        for (RecipeStepVO step : steps) {
+    public void insertRecipeSteps(List<RecipeStepDTO> steps) throws Exception {
+        for (RecipeStepDTO step : steps) {
             recipeDAO.insertRecipeSteps(step);  // 단계 삽입
         }
     }
 
     // 레시피 목록 조회
     @Override
-    public List<RecipeVO> selectRecipeList() throws Exception {
+    public List<RecipeDTO> selectRecipeList() throws Exception {
         return recipeDAO.selectRecipeList();  // 레시피 목록 조회
     }
     
     @Override
-    public List<RecipeVO> selectRecipeListByrID(String byr_Id) throws Exception {
+    public List<RecipeDTO> selectRecipeListByrID(String byr_Id) throws Exception {
         return recipeDAO.selectRecipeListByrID(byr_Id);  // 레시피 목록 조회
     }
     
  
     // 레시피 상세 조회
     @Override
-    public Map selectRecipeDetail(String rcp_Id) throws Exception {
-    	Map recipeMap = new HashMap();
-    	
-    	RecipeVO recipeVO = recipeDAO.selectRecipeDetail(rcp_Id);
-    	recipeMap.put("recipeVO", recipeVO);
-    	
-    	List<RecipeIngredientVO> ingredientVO =recipeDAO.selectIngredientDetail(rcp_Id);
-    	recipeMap.put("ingredientVO", ingredientVO);
-    	
-    	List<RecipeStepVO> stepVO =recipeDAO.selectStepDetail(rcp_Id);
-    	recipeMap.put("stepVO", stepVO);
-    	System.out.println(recipeMap);
-    	return recipeMap;
-    	
+    public Map<String, Object> selectRecipeDetail(int rcp_id) throws Exception {
+        Map<String, Object> recipeDetail = new HashMap<>();
+
+        RecipeDTO recipe = recipeDAO.selectRecipeDetail(rcp_id);
+        recipeDetail.put("recipe", recipe);
+
+        List<RecipeIngredientDTO> ingredientList = recipeDAO.selectIngredientDetail(rcp_id);
+        recipeDetail.put("ingredients", ingredientList);
+
+        List<RecipeStepDTO> stepList = recipeDAO.selectStepDetail(rcp_id);
+        recipeDetail.put("steps", stepList);
+
+        return recipeDetail;
     }
-    
 }

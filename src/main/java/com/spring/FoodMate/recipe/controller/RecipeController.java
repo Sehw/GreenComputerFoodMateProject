@@ -16,7 +16,7 @@ public interface RecipeController {
 
  
     // 레시피 작성 폼
-    ModelAndView addRecipeForm(String result, String action, HttpServletRequest request, HttpServletResponse response) throws Exception;
+    ModelAndView addRecipeForm(HttpServletRequest request) throws Exception;
 
     // 레시피 등록
     ResponseEntity<Map<String, Object>> addNewRecipe(
@@ -31,7 +31,7 @@ public interface RecipeController {
     ModelAndView selectRecipeList(HttpServletRequest request) throws Exception;
     
      // 레시피 상세 조회
-    ModelAndView selectRecipeDetail(String rcp_Id, HttpServletRequest request) throws Exception;
+    ModelAndView selectRecipeDetail(int rcp_Id, HttpServletRequest request) throws Exception;
     
     //레시피 수정
     ModelAndView RecipeEditForm(HttpServletRequest request) throws Exception;

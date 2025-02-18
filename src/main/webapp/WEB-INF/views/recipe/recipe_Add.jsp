@@ -196,15 +196,15 @@
 			<%
 			    BuyerDTO buyerDTO = (BuyerDTO) session.getAttribute("buyerInfo");
 			    if (buyerDTO != null) {
-			        String byr_Id = buyerDTO.getByr_Id(); // 예시로 getId() 사용
+			        String byr_id = buyerDTO.getByr_id(); // 예시로 getId() 사용
 			%>
-			    <label for="byr_Id">작성자:</label>
-			    <input type="text" id="byr_Id" name="byr_Id" value="<%= byr_Id %>" readonly>
+			    <label for="byr_id">작성자:</label>
+			    <input type="text" id="byr_id" name="byr_id" value="<%= byr_id %>" readonly>
 			<%
 			    } else {
 			%>
-			    <label for="byr_Id">작성자:</label>
-			    <input type="text" id="byr_Id" name="byr_Id" value="작성자 정보가 없습니다. 로그인 상태를 확인하세요" disabled style="color: red;">
+			    <label for="byr_id">작성자:</label>
+			    <input type="text" id="byr_id" name="byr_id" value="작성자 정보가 없습니다. 로그인 상태를 확인하세요" disabled style="color: red;">
 			<%
 			    }
 			%>
@@ -215,13 +215,13 @@
 		    </div>
 		    
 		    <div>
-		        <label for="food_Name">음식 이름:</label>
-		        <input type="text" id="food_Name" name="food_Name" required placeholder="음식 이름 입력">
+		        <label for="food_name">음식 이름:</label>
+		        <input type="text" id="food_name" name="food_name" required placeholder="음식 이름 입력">
 		    </div>
 		    
 		    <div>
-		        <label for="req_Time">조리 시간:</label>
-		        <input type="text" id="req_Time" name="req_Time" required placeholder="조리 시간 입력">
+		        <label for="req_time">조리 시간:</label>
+		        <input type="text" id="req_time" name="req_time" required placeholder="조리 시간 입력">
 		    </div>
 		    
 		    <div>
@@ -230,8 +230,8 @@
 		    </div>
 		
 		    <div>
-		        <label for="mainImg_Path">레시피 이미지:</label>
-		        <input type="file" id="mainImg_Path" name="mainImg_Path">
+		        <label for="mainimg_path">레시피 이미지:</label>
+		        <input type="file" id="mainimg_path" name="mainimg_path">
 		    </div>
 		
 		    <!-- 재료 목록 -->
@@ -240,10 +240,10 @@
 		    <br>
 		    <div id="ingredients">
 		        <div>
-		            <label for="ingrd_Name">재료 이름:</label>
-		            <input type="text" name="ingrd_Name" placeholder="재료 이름 입력" required>
-		            <label for="ingrd_Qty">재료 수량:</label>
-		            <input type="number" name="ingrd_Qty" placeholder="재료 수량 입력" required>
+		            <label for="ingrd_name">재료 이름:</label>
+		            <input type="text" name="ingrd_name" placeholder="재료 이름 입력" required>
+		            <label for="ingrd_qty">재료 수량:</label>
+		            <input type="number" name="ingrd_qty" placeholder="재료 수량 입력" required>
 		            <label for="unit">단위:</label>
 		            <input type="text" name="unit" placeholder="단위 입력" required>
 		            <button type="button" class="delete-btn" onclick="removeIngredient(this)">삭제</button> <!-- 삭제 버튼 추가 -->
@@ -256,12 +256,12 @@
 		    <br>
 		    <div id="steps">
 		        <div>
-		            <label for="rcp_Step">단계 번호:</label>
-		            <input type="number" name="rcp_Step" placeholder="단계 번호" required>
-		            <label for="step_Desc">단계 설명:</label>
-		            <textarea name="step_Desc" placeholder="단계 설명 입력" required></textarea>
-		            <label for="stepImg_Path">단계 이미지:</label>
-		            <input type="file" name="stepImg_Path">
+		            <label for="rcp_step">단계 번호:</label>
+		            <input type="number" name="rcp_step" placeholder="단계 번호" required>
+		            <label for="step_desc">단계 설명:</label>
+		            <textarea name="step_desc" placeholder="단계 설명 입력" required></textarea>
+		            <label for="stepimg_path">단계 이미지:</label>
+		            <input type="file" name="stepimg_path">
 		            <button type="button" class="delete-btn" onclick="removeStep(this)">삭제</button> <!-- 삭제 버튼 추가 -->
 		        </div>
 		    </div>
@@ -280,10 +280,10 @@
         var newIngredientDiv = document.createElement('div');
         
         newIngredientDiv.innerHTML = `
-            <label for="ingrd_Name">재료 이름:</label>
-            <input type="text" name="ingrd_Name" placeholder="재료 이름 입력" required>
-            <label for="ingrd_Qty">재료 수량:</label>
-            <input type="number" name="ingrd_Qty" placeholder="재료 수량 입력" required>
+            <label for="ingrd_name">재료 이름:</label>
+            <input type="text" name="ingrd_name" placeholder="재료 이름 입력" required>
+            <label for="ingrd_qty">재료 수량:</label>
+            <input type="number" name="ingrd_qty" placeholder="재료 수량 입력" required>
             <label for="unit">단위:</label>
             <input type="text" name="unit" placeholder="단위 입력" required>
             <button type="button" onclick="removeIngredient(this)">삭제</button> <!-- 삭제 버튼 추가 -->
@@ -303,12 +303,12 @@
         var newStepDiv = document.createElement('div');
         
         newStepDiv.innerHTML = `
-            <label for="rcp_Step">단계 번호:</label>
-            <input type="number" name="rcp_Step" placeholder="단계 번호" required>
-            <label for="step_Desc">단계 설명:</label>
-            <textarea name="step_Desc" placeholder="단계 설명 입력" required></textarea>
-            <label for="stepImg_Path">단계 이미지:</label>
-            <input type="file" name="stepImg_Path">
+            <label for="rcp_step">단계 번호:</label>
+            <input type="number" name="rcp_step" placeholder="단계 번호" required>
+            <label for="step_desc">단계 설명:</label>
+            <textarea name="step_desc" placeholder="단계 설명 입력" required></textarea>
+            <label for="stepimg_path">단계 이미지:</label>
+            <input type="file" name="stepimg_path">
             <button type="button" onclick="removeStep(this)">삭제</button> <!-- 삭제 버튼 추가 -->
         `;
         stepsDiv.appendChild(newStepDiv);
@@ -329,27 +329,27 @@
         // 재료 목록 처리
         var ingredientsDivs = document.querySelectorAll('#ingredients > div');
         ingredientsDivs.forEach(function(div) {
-            var name = div.querySelector('input[name="ingrd_Name"]').value;
-            var qty = div.querySelector('input[name="ingrd_Qty"]').value;
+            var name = div.querySelector('input[name="ingrd_name"]').value;
+            var qty = div.querySelector('input[name="ingrd_qty"]').value;
             var unit = div.querySelector('input[name="unit"]').value;
 
             // 기존 name 그대로 사용하면서 FormData에 추가
-            formData.append('ingrd_Name', name);
-            formData.append('ingrd_Qty', qty);
+            formData.append('ingrd_name', name);
+            formData.append('ingrd_qty', qty);
             formData.append('unit', unit);
         });
 
         // 단계 목록 처리
         var stepsDivs = document.querySelectorAll('#steps > div');
         stepsDivs.forEach(function(div) {
-            var stepNumber = div.querySelector('input[name="rcp_Step"]').value;
-            var description = div.querySelector('textarea[name="step_Desc"]').value;
-            var image = div.querySelector('input[name="stepImg_Path"]').files[0];
+            var stepNumber = div.querySelector('input[name="rcp_step"]').value;
+            var description = div.querySelector('textarea[name="step_desc"]').value;
+            var image = div.querySelector('input[name="stepimg_path"]').files[0];
 
             // 기존 name 그대로 사용하면서 FormData에 추가
-            formData.append('rcp_Step', stepNumber);
-            formData.append('step_Desc', description);
-            if (image) formData.append('stepImg_Path', image);
+            formData.append('rcp_step', stepNumber);
+            formData.append('step_desc', description);
+            if (image) formData.append('stepimg_path', image);
         });
 
         // 서버로 전송
