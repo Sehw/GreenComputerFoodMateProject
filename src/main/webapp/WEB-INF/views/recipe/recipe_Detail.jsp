@@ -2,9 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath }"/>
-<c:set var="recipe" value="${recipeMap.recipeVO}" />
-<c:set var="ingredient" value="${recipeMap.ingredientVO}" />
-<c:set var="step" value="${recipeMap.stepVO}" />
+<c:set var="recipe" value="${recipe}" />
+<c:set var="ingredient" value="${ingredients}" />
+<c:set var="step" value="${steps}" />
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -25,22 +25,22 @@
         <div class="col-md-8">
             <!-- 작성자 -->
             <div class="mb-4">
-                <span class="badge bg-info text-dark">작성자: ${recipe.byr_Id}</span>
+                <span class="badge bg-info text-dark">작성자: ${recipe.byr_id}</span>
             </div>
 
             <!-- 레시피 사진 -->
             <div class="mb-4">
-                <img  src="${pageContext.request.contextPath}/resources/images/${recipe.mainImg_Path}" alt="Recipe Image">
+                <img  src="${pageContext.request.contextPath}/resources/images/${recipe.mainimg_path}" alt="Recipe Image">
             </div>
 
             <!-- 레시피 제목 및 음식 이름 -->
             <div class="mb-4">
-                <h2>${recipe.food_Name}</h2>
+                <h2>${recipe.food_name}</h2>
             </div>
 
             <!-- 소요시간 -->
             <div class="mb-4">
-                <span class="badge bg-warning text-dark">소요시간: ${recipe.req_Time}</span>
+                <span class="badge bg-warning text-dark">소요시간: ${recipe.req_time}</span>
             </div>
 
             <!-- 레시피 소개글 -->
@@ -56,10 +56,10 @@
     <div class="mb-4">
 		<h2 class="recipe-section-title">기본재료</h2>
 			<div class="ingredients-box">
-			    <c:forEach var="ingredient" items="${recipeMap.ingredientVO}">
+			    <c:forEach var="ingredient" items="${recipeMap.ingredients}">
 			        <div class="ingredient-card">
 			            <div class="ingredient-text">
-			                ${ingredient.ingrd_Name} ${ingredient.ingrd_Qty}${ingredient.unit}
+			                ${ingredient.ingrd_name} ${ingredient.ingrd_qty}${ingredient.unit}
 			            </div>
 			        </div>
 			    </c:forEach>
@@ -70,14 +70,14 @@
 	<div class="mb-4">
 	    <h2 class="recipe-section-title">조리법</h2><br>
 	    <div class="cooking-steps-box">
-	        <c:forEach var="step" items="${recipeMap.stepVO}">
+	        <c:forEach var="step" items="${recipeMap.steps}">
 	            <div class="cooking-step-card">
 	                <div class="cooking-step-image">
-	                    <img src="${pageContext.request.contextPath}/resources/images/${step.stepImg_Path}" alt="Step ${step.rcp_Step}" class="step-image">
+	                    <img src="${pageContext.request.contextPath}/resources/images/${step.stepimg_path}" alt="Step ${step.rcp_step}" class="step-image">
 	                </div>
 	                <div class="cooking-step-text">
-	                    <h5>Step ${step.rcp_Step}</h5>                   
-	                    <p>${step.step_Desc}</p>
+	                    <h5>Step ${step.rcp_step}</h5>                   
+	                    <p>${step.step_desc}</p>
 	                </div>
 	            </div>
 	        </c:forEach>
@@ -185,8 +185,7 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
+
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script>
         // Swiper 초기화
