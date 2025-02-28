@@ -88,6 +88,17 @@
         <h4>후기 작성</h4>
         <textarea id="reviewText" placeholder="상품에 대한 후기를 작성해 주세요."></textarea>
         <button id="submitReview">후기 작성</button>
+        
+        <h4>기존 상품 후기</h4>
+        <ul>
+            <!-- 기존 후기 리스트 출력 -->
+            <c:forEach var="rating" items="${ratingList}">
+                <li>
+                    <p>평점: ${rating.rating} / 5</p>
+                    <p>후기: ${rating.reviewText}</p>
+                </li>
+            </c:forEach>
+        </ul>
     </div>
 </article>
 
@@ -98,12 +109,18 @@
         <h4>상품에 대해 문의하기</h4>
         <textarea id="qnaText" placeholder="상품에 대한 질문을 작성해 주세요."></textarea>
         <button id="submitQna">문의 작성</button>
+        
+        <h4>기존 상품 문의</h4>
+        <ul>
+            <!-- 기존 문의 리스트 출력 -->
+            <c:forEach var="qna" items="${qnaList}">
+                <li>
+                    <p>문의: ${qna.question}</p>
+                    <p>답변: ${qna.answer}</p>
+                </li>
+            </c:forEach>
+        </ul>
     </div>
-</article>
-
-<article id="tabContent4" class="tab-content">
-    <h3>교환/반품 문의</h3>
-    <p>여기에는 교환/반품에 관한 내용이 들어갑니다.</p>
 </article>
 
 <script>

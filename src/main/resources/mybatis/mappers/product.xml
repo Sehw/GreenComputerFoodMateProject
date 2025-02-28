@@ -86,13 +86,13 @@
 	</delete>
 	
 <!-- 상품 후기 등록 -->
-    <insert id="insertProductRating" parameterType="com.spring.FoodMate.product.dto.ProductRatingDTO">
+    <insert id="insertProductRating" parameterType="ProductRatingDTO">
         INSERT INTO FOODMATE_PRODUCT_RATING (CMT_PDT_RATING_ID, PDT_ID, BYR_ID, RATING, COMMENTS, CREATE_DATE)
         VALUES (FOODMATE_PRODUCT_RATING_SEQ.NEXTVAL, #{pdt_id}, #{byr_id}, #{rating}, #{comments}, SYSDATE)
     </insert>
 
     <!-- 상품 후기 조회 (상품 ID에 해당하는 후기들) -->
-    <select id="getProductRatings" resultType="com.spring.FoodMate.product.dto.ProductRatingDTO" parameterType="int">
+    <select id="getProductRatings" resultType="ProductRatingDTO" parameterType="int">
         SELECT CMT_PDT_RATING_ID, PDT_ID, BYR_ID, RATING, COMMENTS, CREATE_DATE
         FROM FOODMATE_PRODUCT_RATING
         WHERE PDT_ID = #{pdt_id}
@@ -106,7 +106,7 @@
     </delete>
 
     <!-- 상품 후기 수정 -->
-    <update id="updateProductRating" parameterType="com.spring.FoodMate.product.dto.ProductRatingDTO">
+    <update id="updateProductRating" parameterType="ProductRatingDTO">
         UPDATE FOODMATE_PRODUCT_RATING
         SET RATING = #{rating}, COMMENTS = #{comments}, CREATE_DATE = SYSDATE
         WHERE CMT_PDT_RATING_ID = #{cmt_pdt_rating_id}

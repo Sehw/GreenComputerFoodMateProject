@@ -35,5 +35,41 @@ public interface ProductController {
     List<CategoryDTO> getSubCategories(int category_id) throws Exception;
 
     ModelAndView compare(HttpServletRequest request, HttpServletResponse response) throws Exception;
+    
+    // 상품 후기 리스트 조회
+    public List<ProductRatingDTO> getProductRatings(int pdtId) throws Exception;
+
+    // 상품 후기 작성 폼 조회
+    public void showAddRatingForm(int pdtId) throws Exception;
+
+    // 상품 후기 작성 처리
+    public void insertProductRating(ProductRatingDTO productRating) throws Exception;
+
+    // 상품 후기 수정 폼 조회
+    public ProductRatingDTO getProductRatingById(int ratingId) throws Exception;
+
+    // 상품 후기 수정 처리
+    public void updateProductRating(ProductRatingDTO productRating) throws Exception;
+
+    // 상품 후기 삭제
+    public void deleteProductRating(int ratingId) throws Exception;
+
+    // 상품 문의 리스트 조회
+    public List<ProductQnaDTO> getProductQna(int pdtId) throws Exception;
+
+    // 상품 문의 작성 폼 조회
+    public void showAddQnaForm(int pdtId) throws Exception;
+
+    // 상품 문의 작성 처리
+    public void insertProductQna(ProductQnaDTO productQna) throws Exception;
+
+    // 상품 문의 수정 폼 조회
+    public ProductQnaDTO getProductQnaById(int qnaId) throws Exception;
+
+    // 상품 문의 수정 처리
+    public void updateProductQna(ProductQnaDTO productQna) throws Exception;
+
+    // 상품 문의 삭제
+    public void deleteProductQna(int qnaId) throws Exception;
 
 }
