@@ -11,6 +11,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.FoodMate.product.dto.CategoryDTO;
 import com.spring.FoodMate.product.dto.ProductDTO;
+import com.spring.FoodMate.product.dto.ProductQnaDTO;
+import com.spring.FoodMate.product.dto.ProductRatingDTO;
 
 public interface ProductController {
 
@@ -33,4 +35,5 @@ public interface ProductController {
     List<CategoryDTO> getSubCategories(int category_id) throws Exception;
 
     ModelAndView compare(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
 }

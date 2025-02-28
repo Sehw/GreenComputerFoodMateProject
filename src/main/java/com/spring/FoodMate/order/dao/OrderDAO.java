@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.spring.FoodMate.cart.dto.CartDTO;
 import com.spring.FoodMate.member.dto.BuyerDTO;
 import com.spring.FoodMate.member.dto.SellerDTO;
+import com.spring.FoodMate.product.dto.ProductDTO;
 
 @Repository("orderDAO")
 public class OrderDAO {
@@ -19,5 +20,9 @@ public class OrderDAO {
 	
     public List<CartDTO> getCartItemsByIds(List<Integer> cartIdList) {
         return sqlSession.selectList("mapper.order.getCartItemsByIds", cartIdList);
+    }
+    
+    public List<ProductDTO> getOrderedProductsByBuyerId(String buyerId) {
+        return sqlSession.selectList("mapper.order.getOrderedProductsByBuyerId", buyerId);
     }
 }

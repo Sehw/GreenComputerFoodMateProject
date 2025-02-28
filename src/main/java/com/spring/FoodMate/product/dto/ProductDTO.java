@@ -13,7 +13,7 @@ public class ProductDTO {
 	private int qty;
 	private String unit;
 	private Integer category_id;
-	private int stock;
+	private int stock; 
 	private String status;
 	private String description;
 	// 여기까지 FoodMate_Product 테이블

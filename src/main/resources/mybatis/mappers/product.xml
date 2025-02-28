@@ -85,4 +85,68 @@
 	    WHERE PDT_ID = #{pdt_id}
 	</delete>
 	
+<!-- 상품 후기 등록 -->
+    <insert id="insertProductRating" parameterType="ProductRatingDTO">
+        INSERT INTO FOODMATE_PRODUCT_RATING (CMT_PDT_RATING_ID, PDT_ID, BYR_ID, RATING, COMMENTS, CREATE_DATE)
+        VALUES (FOODMATE_PRODUCT_RATING_SEQ.NEXTVAL, #{pdt_id}, #{byr_id}, #{rating}, #{comments}, SYSDATE)
+    </insert>
+
+    <!-- 상품 후기 조회 (상품 ID에 해당하는 후기들) -->
+    <select id="getProductRatings" resultType="ProductRatingDTO" parameterType="int">
+        SELECT CMT_PDT_RATING_ID, PDT_ID, BYR_ID, RATING, COMMENTS, CREATE_DATE
+        FROM FOODMATE_PRODUCT_RATING
+        WHERE PDT_ID = #{pdt_id}
+        ORDER BY CREATE_DATE DESC
+    </select>
+
+    <!-- 상품 후기 삭제 -->
+    <delete id="deleteProductRating" parameterType="int">
+        DELETE FROM FOODMATE_PRODUCT_RATING
+        WHERE CMT_PDT_RATING_ID = #{cmt_pdt_rating_id}
+    </delete>
+
+    <!-- 상품 후기 수정 -->
+    <update id="updateProductRating" parameterType="ProductRatingDTO">
+        UPDATE FOODMATE_PRODUCT_RATING
+        SET RATING = #{rating}, COMMENTS = #{comments}, CREATE_DATE = SYSDATE
+        WHERE CMT_PDT_RATING_ID = #{cmt_pdt_rating_id}
+    </update>
+
+
+<!-- 상품 문의 등록 -->
+    <insert id="insertProductQna" parameterType="ProductQnaDTO">
+        INSERT INTO FOODMATE_PRODUCT_QNA (CMT_PDT_QNA_ID, PDT_ID, USER_ID, COMMENTS, PARENT_ID, CREATE_DATE)
+        VALUES (FOODMATE_PRODUCT_QNA_SEQ.NEXTVAL, #{pdt_id}, #{user_id}, #{comments}, #{parent_id}, SYSDATE)
+    </insert>
+
+    <!-- 상품 문의 조회 (상품 ID에 해당하는 문의들) -->
+    <select id="getProductQna" resultType="ProductQnaDTO" parameterType="int">
+        SELECT CMT_PDT_QNA_ID, PDT_ID, USER_ID, COMMENTS, PARENT_ID, CREATE_DATE
+        FROM FOODMATE_PRODUCT_QNA
+        WHERE PDT_ID = #{pdt_id}
+        ORDER BY CREATE_DATE DESC
+    </select>
+    
+     <!-- 상품 문의 단일 조회 (상품 ID에 해당하는 문의들) -->
+    <!-- mapper.product.getProductQnaById 쿼리 -->
+<select id="getProductQnaById" parameterType="int" resultType="ProductQnaDTO">
+    SELECT * 
+    FROM product_qna 
+    WHERE cmt_pdt_qna_id = #{qna_id}
+</select>
+
+    <!-- 상품 문의 삭제 -->
+    <delete id="deleteProductQna" parameterType="int">
+        DELETE FROM FOODMATE_PRODUCT_QNA
+        WHERE CMT_PDT_QNA_ID = #{cmt_pdt_qna_id}
+    </delete>
+
+    <!-- 상품 문의 수정 -->
+    <update id="updateProductQna" parameterType="ProductQnaDTO">
+        UPDATE FOODMATE_PRODUCT_QNA
+        SET COMMENTS = #{comments}, CREATE_DATE = SYSDATE
+        WHERE CMT_PDT_QNA_ID = #{cmt_pdt_qna_id}
+    </update>
+
+	
 </mapper>

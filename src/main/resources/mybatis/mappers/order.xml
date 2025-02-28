@@ -54,4 +54,21 @@
 	    </foreach>
 	</select>
 	
+	    <!-- 사용자가 주문한 상품 목록을 가져오는 쿼리 -->
+    <select id="getOrderedProductsByBuyerId" parameterType="String" resultType="com.spring.FoodMate.product.dto.ProductDTO">
+        SELECT 
+            p.pdt_id, 
+            p.name AS pdt_name, 
+            p.img_path, 
+            p.price
+        FROM 
+            FOODMATE_PRODUCT p
+        JOIN 
+            FOODMATE_ORDER_DETAIL od ON p.pdt_id = od.pdt_id
+        JOIN 
+            FOODMATE_ORDER o ON od.ord_id = o.ord_id
+        WHERE 
+            o.byr_id = #{buyerId}
+    </select>
+	
 </mapper>

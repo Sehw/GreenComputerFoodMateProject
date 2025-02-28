@@ -9,6 +9,8 @@ import com.spring.FoodMate.common.exception.DBException;
 import com.spring.FoodMate.product.dao.ProductDAO;
 import com.spring.FoodMate.product.dto.CategoryDTO;
 import com.spring.FoodMate.product.dto.ProductDTO;
+import com.spring.FoodMate.product.dto.ProductQnaDTO;
+import com.spring.FoodMate.product.dto.ProductRatingDTO;
 import com.spring.FoodMate.product.exception.ProductException;
 
 @Service("productService")
@@ -118,4 +120,128 @@ public class ProductService {
 			throw new ProductException("ProductService에서 DB예외 전달.", e);
 		}
 	}
+	
+	// 상품 후기 등록
+	public boolean insertProductRating(ProductRatingDTO newProductRating) {
+	    try {
+	        int result = productDAO.insertProductRating(newProductRating);
+	        if (result <= 0) {
+	            throw new ProductException("ProductService.insertProductRating 에러!" + newProductRating.toLogString(), 206);
+	        }
+	        return result > 0;
+	    } catch (DBException e) {
+	        throw new ProductException("ProductService에서 DB예외 전달.", e);
+	    } catch (Exception e) {
+	        throw new ProductException("ProductService.insertProductRating 에러!", e);
+	    }
+	}
+
+	// 상품 후기 조회
+	public List<ProductRatingDTO> getProductRatings(int pdt_id) {
+	    try {
+	        return productDAO.getProductRatings(pdt_id);
+	    } catch (DBException e) {
+	        throw new ProductException("ProductService에서 DB예외 전달.", e);
+	    } catch (Exception e) {
+	        throw new ProductException("ProductService.getProductRatings 에러! pdt_id = '" + pdt_id + "'", e);
+	    }
+	}
+
+	// 상품 후기 삭제
+	public boolean deleteProductRating(int cmt_pdt_rating_id) {
+	    try {
+	        int result = productDAO.deleteProductRating(cmt_pdt_rating_id);
+	        if (result <= 0) {
+	            throw new ProductException("ProductService.deleteProductRating 에러! cmt_pdt_rating_id = " + cmt_pdt_rating_id, 207);
+	        }
+	        return result > 0;
+	    } catch (DBException e) {
+	        throw new ProductException("ProductService에서 DB예외 전달.", e);
+	    } catch (Exception e) {
+	        throw new ProductException("ProductService.deleteProductRating 에러!", e);
+	    }
+	}
+
+	// 상품 후기 수정
+	public boolean updateProductRating(ProductRatingDTO productRatingDTO) {
+	    try {
+	        int result = productDAO.updateProductRating(productRatingDTO);
+	        if (result <= 0) {
+	            throw new ProductException("ProductService.updateProductRating 에러!" + productRatingDTO.toLogString(), 208);
+	        }
+	        return result > 0;
+	    } catch (DBException e) {
+	        throw new ProductException("ProductService에서 DB예외 전달.", e);
+	    } catch (Exception e) {
+	        throw new ProductException("ProductService.updateProductRating 에러!", e);
+	    }
+	}
+
+ // 상품 문의 등록
+    public boolean insertProductQna(ProductQnaDTO newProductQna) {
+        try {
+            int result = productDAO.insertProductQna(newProductQna);
+            if (result <= 0) {
+                throw new ProductException("ProductService.insertProductQna 에러!" + newProductQna.toLogString(), 209);
+            }
+            return result > 0;
+        } catch (DBException e) {
+            throw new ProductException("ProductService에서 DB예외 전달.", e);
+        } catch (Exception e) {
+            throw new ProductException("ProductService.insertProductQna 에러!", e);
+        }
+    }
+
+    // 상품 문의 조회
+    public List<ProductQnaDTO> getProductQna(int pdt_id) {
+        try {
+            return productDAO.getProductQna(pdt_id);
+        } catch (DBException e) {
+            throw new ProductException("ProductService에서 DB예외 전달.", e);
+        } catch (Exception e) {
+            throw new ProductException("ProductService.getProductQna 에러! pdt_id = '" + pdt_id + "'", e);
+        }
+    }
+    
+ // 상품 문의 ID로 조회
+    public ProductQnaDTO getProductQnaById(int qna_id) {
+        try {
+            return productDAO.getProductQnaById(qna_id);  // DAO에서 단일 상품 문의 조회
+        } catch (DBException e) {
+            throw new ProductException("ProductService에서 DB예외 전달.", e);
+        } catch (Exception e) {
+            throw new ProductException("ProductService.getProductQnaById 에러! qna_id = '" + qna_id + "'", e);
+        }
+    }
+
+    // 상품 문의 삭제
+    public boolean deleteProductQna(int cmt_pdt_qna_id) {
+        try {
+            int result = productDAO.deleteProductQna(cmt_pdt_qna_id);
+            if (result <= 0) {
+                throw new ProductException("ProductService.deleteProductQna 에러! cmt_pdt_qna_id = " + cmt_pdt_qna_id, 210);
+            }
+            return result > 0;
+        } catch (DBException e) {
+            throw new ProductException("ProductService에서 DB예외 전달.", e);
+        } catch (Exception e) {
+            throw new ProductException("ProductService.deleteProductQna 에러!", e);
+        }
+    }
+
+    // 상품 문의 수정
+    public boolean updateProductQna(ProductQnaDTO productQnaDTO) {
+        try {
+            int result = productDAO.updateProductQna(productQnaDTO);
+            if (result <= 0) {
+                throw new ProductException("ProductService.updateProductQna 에러!" + productQnaDTO.toLogString(), 211);
+            }
+            return result > 0;
+        } catch (DBException e) {
+            throw new ProductException("ProductService에서 DB예외 전달.", e);
+        } catch (Exception e) {
+            throw new ProductException("ProductService.updateProductQna 에러!", e);
+        }
+    }
+    
 }
