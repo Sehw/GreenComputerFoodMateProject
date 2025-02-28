@@ -147,6 +147,14 @@ public class ProductService {
 	    }
 	}
 
+    // 상품 후기 ID로 조회하는 메소드
+    public ProductRatingDTO getProductRatingById(int rating_id) {
+        try {
+            return productDAO.getProductRatingById(rating_id);
+        } catch (Exception e) {
+            throw new ProductException("ProductService.getProductRatingById 에러!", e);
+        }
+    }
 	// 상품 후기 삭제
 	public boolean deleteProductRating(int cmt_pdt_rating_id) {
 	    try {

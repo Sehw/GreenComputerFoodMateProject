@@ -158,6 +158,15 @@ public class ProductDAO {
         }
     }
     
+    // 상품 후기 ID로 조회하는 메소드
+    public ProductRatingDTO getProductRatingById(int rating_id) {
+        try {
+            return sqlSession.selectOne("mapper.product.getProductRatingById", rating_id);
+        } catch (DataAccessException e) {
+            throw new DBException("ProductDAO.getProductRatingById 에러! rating_id = " + rating_id, e);
+        }
+    }
+    
     // 상품 문의 등록
     public int insertProductQna(ProductQnaDTO newProductQna) {
         try {

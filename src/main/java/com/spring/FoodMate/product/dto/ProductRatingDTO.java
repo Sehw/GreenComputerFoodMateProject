@@ -14,8 +14,15 @@ public class ProductRatingDTO {
     public int getCmt_pdt_rating_id() { return cmt_pdt_rating_id; }
     public void setCmt_pdt_rating_id(int cmt_pdt_rating_id) { this.cmt_pdt_rating_id = cmt_pdt_rating_id; }
 
-    public int getPdt_id() { return pdt_id; }
-    public void setPdt_id(int pdt_id) { this.pdt_id = pdt_id; }
+    public int getPdt_id() 
+    { 
+    	return pdt_id; 
+    }
+    
+    public void setPdt_id(int pdt_id) 
+    { 
+    	this.pdt_id = pdt_id;
+    }
 
     public String getByr_id() { return byr_id; }
     public void setByr_id(String byr_id) { this.byr_id = byr_id; }
@@ -28,6 +35,15 @@ public class ProductRatingDTO {
 
     public Date getCreate_date() { return create_date; }
     public void setCreate_date(Date create_date) { this.create_date = create_date; }
+
+    // 추가된 메소드들
+    public String getUserId() {
+        return byr_id;  // byr_id는 작성자 ID이므로 이를 사용하여 반환
+    }
+
+    public void setUserId(String userId) {
+        this.byr_id = userId;  // byr_id를 userId로 설정
+    }
     
     // toLogString() 메서드 추가
     public String toLogString() {

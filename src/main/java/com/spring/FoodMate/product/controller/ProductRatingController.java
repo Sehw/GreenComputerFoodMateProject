@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.spring.FoodMate.product.dto.ProductRatingDTO;
-import com.spring.FoodMate.product.service.ProductService;  // ProductRatingService 대신 ProductService로 변경
+import com.spring.FoodMate.product.service.ProductService;  
 
 @Controller
 @RequestMapping("/product/rating")
@@ -32,7 +32,7 @@ public class ProductRatingController {
         return "/product/productRatingList";  // 상품 후기 목록을 보여줄 JSP로 이동
     }
 
-    // 상품 후기 작성 폼
+    // 상품 후기 작성 폼 
     @RequestMapping(value="/add/{pdt_id}", method=RequestMethod.GET)
     public String showAddRatingForm(@PathVariable("pdt_id") int pdt_id, HttpServletRequest request) {
         request.setAttribute("pdt_id", pdt_id);
@@ -53,7 +53,7 @@ public class ProductRatingController {
         response.setContentType("text/html; charset=UTF-8");
         out.println("<script type='text/javascript'>");
         out.println("alert('상품 후기가 등록되었습니다.');");
-        out.println("window.location.href='/product/rating/list/" + productRating.getPdtId() + "';");
+        out.println("window.location.href='/product/rating/list/" + productRating.getPdt_id() + "';");
         out.println("</script>");
     }
 
@@ -74,7 +74,7 @@ public class ProductRatingController {
         response.setContentType("text/html; charset=UTF-8");
         out.println("<script type='text/javascript'>");
         out.println("alert('상품 후기가 수정되었습니다.');");
-        out.println("window.location.href='/product/rating/list/" + productRating.getPdtId() + "';");
+        out.println("window.location.href='/product/rating/list/" + productRating.getPdt_id() + "';");
         out.println("</script>");
     }
 
